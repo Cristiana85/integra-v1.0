@@ -1,0 +1,79 @@
+src/app/
+  ├── core/                      # Shared services, guards, and utilities
+  │   ├── services/
+  │   │   ├── auth.service.ts    # Authentication logic
+  │   │   ├── user.service.ts    # User profile and settings
+  │   │   ├── project.service.ts # Project management
+  │   ├── guards/
+  │   │   └── auth.guard.ts      # Protect workspace and editor routes
+  │   ├── models/
+  │   │   ├── user.model.ts
+  │   │   ├── project.model.ts
+  │   │   └── diagram.model.ts
+  ├── landing-page/              # Module for the landing page
+  │   ├── components/
+  │   │   ├── header/
+  │   │   ├── footer/
+  │   │   ├── hero-section/
+  │   │   └── features/
+  │   ├── pages/
+  │   │   └── landing-page.component.ts
+  │   └── landing-page.module.ts
+  ├── workspace/                 # Module for the workspace
+  │   ├── components/
+  │   │   ├── project-list/      # List of projects
+  │   │   ├── user-settings/     # User preferences
+  │   ├── pages/
+  │   │   └── workspace.component.ts
+  │   └── workspace.module.ts
+  ├── editor/                    # Module for the editor
+  │   ├── components/
+  │   │   ├── sidebar/           # Tools and properties panel
+  │   │   ├── toolbar/           # Editor toolbar (undo, redo, save)
+  │   │   ├── canvas/            # Diagram canvas
+  │   ├── pages/
+  │   │   └── editor.component.ts
+  │   └── editor.module.ts
+  ├── app-routing.module.ts      # Routing configuration
+  ├── app.component.ts           # Root component
+  ├── app.module.ts              # Main module
+
+
+
+src/app/editor/
+  ├── components/
+  │   ├── canvas/                   # Diagram canvas (renders JointJS)
+  │   ├── sidebar/                  # Sidebar for importing elements
+  │   ├── toolbar/                  # Toolbar for zoom, undo/redo
+  │   ├── element-properties/       # Panel for selected element's properties
+  ├── directives/
+  │   ├── pan.directive.ts          # Pan implementation
+  │   ├── zoom.directive.ts         # Zoom controls
+  ├── models/
+  │   ├── diagram.model.ts          # Diagram structure
+  │   ├── element.model.ts          # Element definitions
+  │   ├── link.model.ts             # Link definitions
+  │   └── ui.model.ts               # UI-related states
+  ├── services/
+  │   ├── diagram.service.ts        # Business logic for diagram
+  │   ├── selection.service.ts      # Selection and quadtree logic
+  │   ├── history.service.ts        # Undo/Redo stack management
+  │   ├── import.service.ts         # Import elements into diagram
+  ├── store/
+  │   ├── actions/                  # NgRx actions
+  │   │   ├── diagram.actions.ts
+  │   │   ├── element.actions.ts
+  │   │   ├── ui.actions.ts
+  │   ├── reducers/                 # NgRx reducers
+  │   │   ├── diagram.reducer.ts
+  │   │   ├── element.reducer.ts
+  │   │   ├── ui.reducer.ts
+  │   ├── selectors/                # NgRx selectors
+  │   │   ├── diagram.selectors.ts
+  │   │   ├── element.selectors.ts
+  │   ├── effects/                  # Side effects with NgRx Effects
+  │   │   ├── diagram.effects.ts
+  │   │   ├── ui.effects.ts
+  │   └── editor.state.ts           # Combined editor state
+  └── editor.module.ts              # Editor module configuration
+
