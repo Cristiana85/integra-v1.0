@@ -11,11 +11,7 @@
   },
   "private": true,
   "dependencies": {
-<<<<<<< HEAD
-    "@angular/animations": "^18.2.12",
-=======
     "@angular/animations": "^19.0.0",
->>>>>>> b9c9ce985c9c64fab1be3b17ff18fa24bada5e77
     "@angular/cdk": "^19.0.0",
     "@angular/common": "^19.0.0",
     "@angular/compiler": "^19.0.0",
@@ -35,11 +31,6 @@
     "d3-quadtree": "^3.0.1",
     "express": "^4.18.2",
     "jointjs": "^3.7.7",
-<<<<<<< HEAD
-    "jquery": "^3.7.1",
-    "jQuery": "^1.7.4",
-=======
->>>>>>> b9c9ce985c9c64fab1be3b17ff18fa24bada5e77
     "lodash": "^4.17.21",
     "primeflex": "^3.3.1",
     "primeicons": "^7.0.0",
