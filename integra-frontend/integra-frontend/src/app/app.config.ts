@@ -8,11 +8,13 @@ import { diagramReducer } from './editor/store/reducers/diagram.reducer';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { LoginComponent } from './landing-page/components/login/login.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'entrypage', pathMatch: 'full' }, // Default route
-  { path: 'entrypage', component:  EntrypageComponent },          // First page with buttons
+  { path: 'entrypage', component: EntrypageComponent },          // First page with buttons
   { path: 'landing-page', component: LandingpageComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'workspace', component: WorkspaceComponent },
   { path: 'editor', component: EditorComponent },
 ];

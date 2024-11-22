@@ -1,12 +1,10 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { DragDropModule } from 'primeNg/dragdrop';
+import { SharedModule } from '../../../shared/shared.module';
 
 @Component({
   selector: 'integra-sidebar',
   standalone: true,
-  imports: [FormsModule, CommonModule, DragDropModule],
+  imports: [SharedModule],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })

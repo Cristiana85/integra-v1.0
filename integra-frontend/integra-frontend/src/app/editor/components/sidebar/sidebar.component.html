@@ -1,12 +1,7 @@
 <div class="sidebar">
   <!-- Search Bar -->
   <div class="search-bar">
-    <input
-      type="text"
-      placeholder="Search"
-      [(ngModel)]="searchText"
-      (input)="filterItems()"
-    />
+    <input type="text" placeholder="Search" [(ngModel)]="searchText" (input)="filterItems()" />
   </div>
 
   <!-- Sections -->
@@ -18,16 +13,9 @@
     </div>
 
     <!-- Section Items -->
-    <div
-      class="section-items"
-      *ngIf="!section.collapsed"
-    >
-      <div
-        *ngFor="let item of section.items"
-        class="draggable-item"
-        draggable="true"
-        (dragstart)="onDragStart($event, item)"
-      >
+    <div class="section-items" *ngIf="!section.collapsed">
+      <div *ngFor="let item of section.items" class="draggable-item" draggable="true"
+        (dragstart)="onDragStart($event, item)">
         <i class="{{ item.icon }}"></i> {{ item.label }}
       </div>
     </div>
