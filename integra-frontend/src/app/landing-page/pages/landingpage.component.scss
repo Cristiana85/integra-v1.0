@@ -1,0 +1,64 @@
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(135deg, #007ad9, #005bb5);
+  color: #ffffff;
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.hero-section h1 {
+  font-size: 2.5rem;
+}
+
+.hero-section p {
+  font-size: 1.2rem;
+}
+
+/* Features Section */
+.features-section {
+  background-color: #f9f9f9;
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.features-section h3 {
+  margin-top: 15px;
+  font-size: 1.5rem;
+}
+
+.features-section p {
+  font-size: 1rem;
+  color: #666;
+}
+
+/* Testimonials Section */
+.testimonials-section {
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.testimonial-card {
+  border-radius: 8px;
+  text-align: center;
+}
+
+.testimonial-card p {
+  font-style: italic;
+  color: #555;
+}
+
+/* CTA Section */
+.cta-section {
+  background-color: #007ad9;
+  color: #ffffff;
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.cta-section h2 {
+  font-size: 2rem;
+}
+
+.cta-section p {
+  font-size: 1.2rem;
+}

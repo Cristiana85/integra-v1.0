@@ -15,6 +15,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "18.2.12",
+    "@angular/cdk": "^18.2.14",
     "@angular/common": "18.2.12",
     "@angular/compiler": "18.2.12",
     "@angular/core": "18.2.12",
@@ -22,13 +23,29 @@
     "@angular/platform-browser": "18.2.12",
     "@angular/platform-browser-dynamic": "18.2.12",
     "@angular/router": "18.2.12",
+    "@ngrx/effects": "^18.1.1",
+    "@ngrx/entity": "^18.1.1",
+    "@ngrx/store": "^18.1.1",
+    "@ngrx/store-devtools": "^18.1.1",
+    "backbone": "^1.6.0",
+    "chart.js": "^4.4.6",
+    "d3": "^7.9.0",
+    "jointjs": "^3.7.7",
+    "jquery": "^3.7.1",
+    "lodash": "^4.17.21",
+    "primeicons": "^7.0.0",
+    "primeng": "^17.18.12",
     "rxjs": "~7.8.0",
+    "underscore": "^1.13.7",
     "zone.js": "~0.14.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "18.2.12",
     "@angular/cli": "18.2.12",
     "@angular/compiler-cli": "18.2.12",
+    "@types/backbone": "^1.4.22",
+    "@types/d3": "^7.4.3",
+    "@types/underscore": "^1.13.0",
     "typescript": "^5.5.4"
   }
 }
