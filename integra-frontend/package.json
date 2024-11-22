@@ -1,4 +1,18 @@
 {
+  "name": "integra-angular-modules",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "build:pipeline": "ng build --configuration=pipeline",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e",
+    "create status.json": "ng build --stats-json --named-chunks",
+    "analyse status.json": "webpack-bundle-analyzer dist/octopus-frontend-service/stats.json"
+  },
+  "private": true,
   "dependencies": {
     "@angular/animations": "18.2.12",
     "@angular/common": "18.2.12",
