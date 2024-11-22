@@ -23,23 +23,16 @@
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/assets"
-            ],
+            "assets": ["src/assets"],
             "styles": [
               "src/styles.scss",
               "node_modules/jointjs/dist/joint.css",
               "node_modules/primeng/resources/themes/saga-blue/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
-<<<<<<< HEAD
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeflex/primeflex.css"
-=======
-              "node_modules/primeicons/primeicons.css"
             ],
-            "scripts": [
->>>>>>> b9c9ce985c9c64fab1be3b17ff18fa24bada5e77
-            ],
+            "scripts": [],
             "scripts": ["node_modules/jquery/dist/jquery.min.js"],
             "server": "src/main.server.ts",
             "prerender": true,
@@ -92,9 +85,7 @@
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/assets"
-            ],
+            "assets": ["src/assets"],
             "styles": [
               "src/styles.scss",
               "node_modules/jointjs/dist/joint.css",
