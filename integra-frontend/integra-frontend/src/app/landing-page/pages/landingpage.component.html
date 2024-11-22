@@ -1,10 +1,58 @@
-<div class="p-grid p-align-center p-justify-center">
-  <div class="p-col-12 p-text-center">
-    <h2> Get access to the specific page... </h2>
-  </div>
-  <div class="button-container">
-    <button pButton class="custom-button custom-color-1" [routerLink]="'/login'">
-      <span class="button-text">Landing Page<br><small>Login and Other...</small></span>
-    </button>
-  </div>
+<div class="landing-page">
+  <!-- Hero Section -->
+  <section class="hero-section p-py-6 p-text-center p-bg-primary">
+    <div class="p-text-white p-mx-3">
+      <h1 class="p-mb-3">Build Your Dream Website</h1>
+      <p class="p-mb-4">Landrick-style modern designs with PrimeBlocks & PrimeNG components.</p>
+      <button pButton type="button" label="Get Started" icon="pi pi-arrow-right"
+        class="p-button-warning p-mr-2"></button>
+      <button pButton type="button" label="Learn More" icon="pi pi-info-circle" class="p-button-secondary"></button>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section p-py-6 p-bg-light">
+    <div class="p-grid">
+      <div class="p-col-12 p-md-4 p-text-center">
+        <i class="pi pi-chart-line p-text-primary p-mb-3" style="font-size: 3rem;"></i>
+        <h3>Analytics</h3>
+        <p>Track your performance with powerful tools.</p>
+      </div>
+      <div class="p-col-12 p-md-4 p-text-center">
+        <i class="pi pi-palette p-text-primary p-mb-3" style="font-size: 3rem;"></i>
+        <h3>Design</h3>
+        <p>Create stunning designs effortlessly.</p>
+      </div>
+      <div class="p-col-12 p-md-4 p-text-center">
+        <i class="pi pi-shield p-text-primary p-mb-3" style="font-size: 3rem;"></i>
+        <h3>Security</h3>
+        <p>Protect your data with advanced security.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials-section p-py-6">
+    <h2 class="p-text-center p-mb-5">What Our Users Say</h2>
+    <p-carousel [value]="testimonials" [numVisible]="3" [numScroll]="1" [circular]="true" [autoplayInterval]="4000">
+      <ng-template let-testimonial pTemplate="item">
+        <div class="testimonial-card p-d-flex p-flex-column p-ai-center p-shadow-3 p-p-4">
+          <img [src]="testimonial.image" alt="User" class="p-mb-3" style="width: 80px; border-radius: 50%;" />
+          <p class="p-mb-3">{{ testimonial.text }}</p>
+          <h4 class="p-mb-1">{{ testimonial.name }}</h4>
+          <small>{{ testimonial.role }}</small>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </section>
+
+  <!-- Call-to-Action Section -->
+  <section class="cta-section p-py-6 p-bg-primary p-text-white">
+    <div class="p-text-center">
+      <h2 class="p-mb-3">Ready to Join Us?</h2>
+      <p class="p-mb-4">Sign up now and take your business to the next level.</p>
+      <button pButton type="button" label="Sign Up" icon="pi pi-user" class="p-button-warning"
+        [routerLink]="'/login'"></button>
+    </div>
+  </section>
 </div>

@@ -1,81 +1,34 @@
-/* Contenitore generale del login */
+/* Full Page Centered Layout */
+.login-page {
+  background-color: #f4f6f8;
+}
+
+/* Login Container */
 .login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #74b9ff, #0984e3);
-}
-
-/* Box del form di login */
-.login-box {
-  background: #ffffff;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  max-width: 900px;
   width: 100%;
-  max-width: 400px;
-  text-align: center;
+  background-color: #ffffff;
 }
 
-h2 {
-  margin-bottom: 20px;
-  color: #0984e3;
-  font-size: 24px;
+/* Illustration */
+.illustration-img {
+  max-width: 100%;
+  height: auto;
 }
 
-/* Stile dei campi di input */
-.form-group {
-  margin-bottom: 20px;
-  text-align: left;
-}
-
-label {
-  font-size: 14px;
-  font-weight: bold;
-  color: #333;
-}
-
-input {
+/* Form Section */
+.form-section {
   width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box;
 }
 
-input.is-invalid {
-  border-color: #e74c3c;
+/* Links */
+.forgot-password-link,
+.register-link {
+  color: #007ad9;
+  text-decoration: none;
 }
 
-.error-message {
-  color: #e74c3c;
-  font-size: 12px;
-  margin-top: 5px;
-}
-
-/* Pulsante di login */
-.btn {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  background: #0984e3;
-  color: #ffffff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.btn:hover {
-  background: #74b9ff;
-}
-
-/* Messaggio di errore */
-.login-error {
-  margin-top: 20px;
-  color: #e74c3c;
-  font-weight: bold;
-  font-size: 14px;
+.forgot-password-link:hover,
+.register-link:hover {
+  text-decoration: underline;
 }
