@@ -1,22 +1,31 @@
 <div class="sidebar">
-  <!-- Search Bar -->
-  <div class="search-bar">
-    <input type="text" placeholder="Search" [(ngModel)]="searchText" (input)="filterItems()" />
+  <!-- Layout Section -->
+  <div class="section">
+    <h4>Layout</h4>
+    <div class="layout-icons">
+      <div
+        *ngFor="let layout of layouts"
+        [ngClass]="{ 'selected': layout.id === selectedLayout }"
+        class="layout-icon"
+        (click)="selectLayout(layout.id)"
+      >
+        <i [class]="layout.icon"></i>
+      </div>
+    </div>
   </div>
 
-  <!-- Sections -->
-  <div *ngFor="let section of filteredSections" class="section">
-    <!-- Section Header -->
-    <div class="section-header" (click)="toggleSection(section)">
-      <i class="pi" [ngClass]="section.collapsed ? 'pi-angle-right' : 'pi-angle-down'"></i>
-      {{ section.label }}
-    </div>
-
-    <!-- Section Items -->
-    <div class="section-items" *ngIf="!section.collapsed">
-      <div *ngFor="let item of section.items" class="draggable-item" draggable="true"
-        (dragstart)="onDragStart($event, item)">
-        <i class="{{ item.icon }}"></i> {{ item.label }}
+  <!-- Theme Style Section -->
+  <div class="section">
+    <h4>Theme Style</h4>
+    <div class="theme-grid">
+      <div
+        *ngFor="let theme of themes"
+        class="theme-card"
+        [ngClass]="{ 'selected': theme.id === selectedTheme }"
+        (click)="selectTheme(theme.id)"
+      >
+        <img [src]="theme.image || 'assets/icons/placeholder.jpg'" alt="{{ theme.label }}" />
+        <span *ngIf="theme.isPro" class="badge">PRO</span>
       </div>
     </div>
   </div>

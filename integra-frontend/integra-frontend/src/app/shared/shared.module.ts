@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 import { AccordionModule } from 'primeng/accordion';
 import { ConfirmationService, MessageService as PrimengMessageService } from 'primeng/api';
 import { AutoCompleteModule } from 'primeng/autocomplete';

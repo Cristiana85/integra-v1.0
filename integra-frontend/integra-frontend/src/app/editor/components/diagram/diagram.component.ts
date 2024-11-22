@@ -1,14 +1,15 @@
-import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { DiagramService } from '../../services/diagram.service';
-import { ElementState } from '../../store/states/diagram.state';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { addElement, undo, redo } from '../../store/actions/diagram.actions';
-import { SidebarComponent } from '../sidebar/sidebar.component';
 import * as joint from 'jointjs';
+import { SharedModule } from '../../../shared/shared.module';
+import { DiagramService } from '../../services/diagram.service';
+import { addElement, redo, undo } from '../../store/actions/diagram.actions';
+import { ElementState } from '../../store/states/diagram.state';
 
 @Component({
   selector: 'integra-diagram',
   standalone: true,
+  imports: [SharedModule],
   templateUrl: './diagram.component.html',
   styleUrls: ['./diagram.component.scss']
 })

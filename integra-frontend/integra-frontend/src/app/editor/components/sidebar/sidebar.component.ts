@@ -9,69 +9,33 @@ import { SharedModule } from '../../../shared/shared.module';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent {
-  searchText: string = ''; // Bind to the search input
+  selectedLayout: string = 'layout1';
+  selectedTheme: string = 'theme1';
 
-  sections = [
-    {
-      label: 'Freestanding configurations',
-      collapsed: false,
-      items: [
-        { label: 'Zig-zag', icon: 'pi pi-shapes', type: 'zigzag' },
-        { label: 'Six sided', icon: 'pi pi-square', type: 'sixsided' },
-        { label: 'Back to Back 3', icon: 'pi pi-book', type: 'backtoback3' },
-      ],
-    },
-    {
-      label: 'Wall configurations',
-      collapsed: false,
-      items: [
-        { label: 'Zig-zag', icon: 'pi pi-columns', type: 'zigzag' },
-        { label: 'U-Wall', icon: 'pi pi-th-large', type: 'uwall' },
-        { label: '13 ft wall', icon: 'pi pi-border', type: '13ftwall' },
-      ],
-    },
-    {
-      label: 'Individual modules',
-      collapsed: false,
-      items: [
-        { label: 'Corner', icon: 'pi pi-directions', type: 'corner' },
-        { label: 'Bookcase', icon: 'pi pi-book', type: 'bookcase' },
-        { label: '30 in', icon: 'pi pi-box', type: '30in' },
-      ],
-    },
-    {
-      label: 'Miscellaneous',
-      collapsed: false,
-      items: [
-        { label: 'Custom Item', icon: 'pi pi-cog', type: 'custom' },
-      ],
-    },
+  layouts = [
+    { id: 'layout1', icon: 'pi pi-sitemap' },
+    { id: 'layout2', icon: 'pi pi-table' },
+    { id: 'layout3', icon: 'pi pi-ellipsis-h' },
+    { id: 'layout4', icon: 'pi pi-diagram' },
+    { id: 'layout5', icon: 'pi pi-flow' },
   ];
 
-  filteredSections = [...this.sections]; // For filtering
+  themes = [
+    { id: 'theme1', image: 'assets/icons/placeholder.jpg', label: 'Theme 1', isPro: false },
+    { id: 'theme2', image: 'assets/icons/placeholder.jpg', label: 'Theme 2', isPro: false },
+    { id: 'theme3', image: 'assets/icons/placeholder.jpg', label: 'Theme 3', isPro: false },
+    { id: 'theme4', image: 'assets/icons/placeholder.jpg', label: 'Theme 4', isPro: true },
+    { id: 'theme5', image: 'assets/icons/placeholder.jpg', label: 'Theme 5', isPro: true },
+  ];
 
-  toggleSection(section: any): void {
-    section.collapsed = !section.collapsed;
+  selectLayout(id: string): void {
+    this.selectedLayout = id;
   }
 
-  filterItems(): void {
-    const lowerSearch = this.searchText.toLowerCase();
-    this.filteredSections = this.sections.map((section) => ({
-      ...section,
-      items: section.items.filter((item) =>
-        item.label.toLowerCase().includes(lowerSearch)
-      ),
-    }));
+  selectTheme(id: string): void {
+    this.selectedTheme = id;
   }
-
-  dragData: any = null; // Local variable to store drag data
-
-  onDragStart(event: DragEvent, node: any): void {
-    this.dragData = node; // Save the dragged node data
-  }
-
-  getDragData(): any {
-    return this.dragData;
-  }
-
 }
+
+
+

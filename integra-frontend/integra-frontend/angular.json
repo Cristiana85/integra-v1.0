@@ -26,10 +26,7 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/assets"
             ],
             "styles": [
               "src/styles.scss",
@@ -39,7 +36,6 @@
               "node_modules/primeicons/primeicons.css"
             ],
             "scripts": [
-               "node_modules/jquery/dist/jquery.min.js"
             ],
             "server": "src/main.server.ts",
             "prerender": true,
@@ -96,10 +92,7 @@
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/assets"
             ],
             "styles": [
               "src/styles.scss",
