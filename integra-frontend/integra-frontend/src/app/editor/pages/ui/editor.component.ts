@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { DiagramService } from '../../services/diagram.service';
 import { DiagramComponent } from '../../components/diagram/diagram.component';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
-import { ToolbarComponent } from '../../components/toolbar/toolbar.component';
+import { DiagramService } from '../../services/diagram.service';
 
 @Component({
   selector: 'integra-editor',
