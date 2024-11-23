@@ -33,6 +33,7 @@
     "jointjs": "^3.7.7",
     "jquery": "^3.7.1",
     "lodash": "^4.17.21",
+    "primeflex": "^3.3.1",
     "primeicons": "^7.0.0",
     "primeng": "^17.18.12",
     "rxjs": "~7.8.0",
