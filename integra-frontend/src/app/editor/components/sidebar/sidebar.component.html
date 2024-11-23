@@ -1,32 +1,63 @@
 <div class="sidebar">
-  <!-- Layout Section -->
-  <div class="section">
-    <h4>Layout</h4>
-    <div class="layout-icons">
-      <div
-        *ngFor="let layout of layouts"
-        [ngClass]="{ 'selected': layout.id === selectedLayout }"
-        class="layout-icon"
-        (click)="selectLayout(layout.id)"
-      >
-        <i [class]="layout.icon"></i>
-      </div>
-    </div>
+
+  <!-- Tabs to be replaced with PrimeNg Tab -->
+  <div class="tabs">
+    <span
+      class="tab"
+      [ngClass]="{ active: activeTab === 'interactive' }"
+      (click)="setActiveTab('interactive')"
+    >
+      Interactive
+    </span>
+    <span
+      class="tab"
+      [ngClass]="{ active: activeTab === 'basic' }"
+      (click)="setActiveTab('basic')"
+    >
+      Basic
+    </span>
   </div>
 
-  <!-- Theme Style Section -->
-  <div class="section">
-    <h4>Theme Style</h4>
-    <div class="theme-grid">
-      <div
-        *ngFor="let theme of themes"
-        class="theme-card"
-        [ngClass]="{ 'selected': theme.id === selectedTheme }"
-        (click)="selectTheme(theme.id)"
-      >
-        <img [src]="theme.image || 'assets/icons/placeholder.jpg'" alt="{{ theme.label }}" />
-        <span *ngIf="theme.isPro" class="badge">PRO</span>
-      </div>
+  <!-- Content -->
+  <div class="content">
+    <!-- Interactive Tab -->
+    <div *ngIf="activeTab === 'interactive'">
+      <p-accordion [multiple]="true" [activeIndex]="[0, 1, 2]">
+        <!-- Line Chart Section -->
+        <p-accordionTab header="Line Chart">
+          <div class="chart-grid">
+            <div *ngFor="let chart of lineCharts" class="chart-card">
+              <img [src]="chart.image" alt="Chart Preview" />
+              <p>{{ chart.label }}</p>
+            </div>
+          </div>
+        </p-accordionTab>
+        <div><p></p></div>
+        <!-- Bar Chart Section -->
+        <p-accordionTab header="Bar Chart">
+          <div class="chart-grid">
+            <div *ngFor="let chart of barCharts" class="chart-card">
+              <img [src]="chart.image" alt="Chart Preview" />
+              <p>{{ chart.label }}</p>
+            </div>
+          </div>
+        </p-accordionTab>
+        <div><p></p></div>
+        <!-- Pie Chart Section -->
+        <p-accordionTab header="Pie Chart">
+          <div class="chart-grid">
+            <div *ngFor="let chart of pieCharts" class="chart-card">
+              <img [src]="chart.image" alt="Chart Preview" />
+              <p>{{ chart.label }}</p>
+            </div>
+          </div>
+        </p-accordionTab>
+      </p-accordion>
+    </div>
+
+    <!-- Basic Tab -->
+    <div *ngIf="activeTab === 'basic'">
+      <p>Basic tab content goes here...</p>
     </div>
   </div>
 </div>

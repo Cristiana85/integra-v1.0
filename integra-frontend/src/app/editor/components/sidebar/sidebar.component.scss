@@ -1,86 +1,105 @@
 .sidebar {
   width: 300px;
-  padding: 1rem;
   background-color: #f9f9f9;
   border-right: 1px solid #ddd;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
 
-  .section {
-    margin-bottom: 2rem;
-
-    h4 {
-      font-size: 1rem;
-      margin-bottom: 1rem;
-      color: #333;
-    }
-  }
-
-  .layout-icons {
+  .tabs {
     display: flex;
-    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    padding: 0.5rem;
 
-    .layout-icon {
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid #ddd;
-      border-radius: 4px;
+    .tab {
+      flex: 1;
+      text-align: center;
+      padding: 0.5rem 0;
       cursor: pointer;
+      font-weight: bold;
+      color: #555;
+      border-bottom: 2px solid transparent;
       transition: all 0.2s ease-in-out;
 
-      i {
-        font-size: 1.5rem;
-        color: #333;
-      }
-
-      &.selected {
-        border-color: #007ad9;
-        background-color: #eaf4fc;
-
-        i {
-          color: #007ad9;
-        }
+      &.active {
+        color: #007ad9;
+        border-bottom: 2px solid #007ad9;
       }
     }
   }
 
-  .theme-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+  .content {
+    flex: 1;
+    padding: 1rem;
 
-    .theme-card {
-      position: relative;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      padding: 8px;
-      cursor: pointer;
-      transition: all 0.2s ease-in-out;
+    p-accordion {
+      border: none;
 
-      img {
-        width: 100%;
-        height: auto;
-        border-radius: 4px;
-      }
+      p-accordionTab {
+        border-bottom: 1px solid #ddd;
 
-      .badge {
-        position: absolute;
-        top: 5px;
-        right: 5px;
-        background-color: #f39c12;
-        color: white;
-        font-size: 0.7rem;
-        font-weight: bold;
-        padding: 0.2rem 0.4rem;
-        border-radius: 3px;
-      }
+        .p-accordion.p-component .p-accordion-tab {
+          margin-bottom: 2rem; /* Add spacing between accordion sections */
+        }
 
-      &.selected {
-        border-color: #007ad9;
-        background-color: #eaf4fc;
+        /* Style for the header to make it thicker */
+        .p-accordion-header {
+          font-weight: bold;
+          /* Make the header text thicker */
+          font-size: 1.2rem;
+          /* Increase the font size */
+          padding: 1rem;
+          /* Add padding for visual appeal */
+          background-color: #f5f5f5;
+          /* Optional: light background */
+          border-bottom: 1px solid #ddd;
+          /* Optional: subtle border */
+        }
+
+        /* Add spacing between the section header and the images */
+        .chart-grid {
+          margin-top: 1rem;
+          /* Space between header and images */
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          /* Two images per row */
+          gap: 1rem;
+          /* Space between cards */
+        }
+
+        /* Style for chart cards */
+        .chart-card {
+          text-align: center;
+          padding: 1rem;
+          background-color: #fff;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          cursor: pointer;
+          transition: transform 0.2s, box-shadow 0.2s;
+
+          img {
+            width: 100%;
+            /* Ensure images scale to fit the card */
+            height: auto;
+            margin-bottom: 0.5rem;
+            /* Space between image and label */
+            border-radius: 4px;
+          }
+
+          p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: #333;
+          }
+
+          &:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          }
+        }
+
       }
     }
   }
 }
+

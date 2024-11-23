@@ -1,4 +1,4 @@
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter, Routes } from '@angular/router';
 import { LandingpageComponent } from './landing-page/pages/landingpage.component';
 import { WorkspaceComponent } from './workspace/pages/workspace.component';
@@ -9,6 +9,7 @@ import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { LoginComponent } from './landing-page/components/login/login.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes: Routes = [
   { path: '', redirectTo: 'entrypage', pathMatch: 'full' }, // Default route
@@ -21,6 +22,7 @@ const routes: Routes = [
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    importProvidersFrom(BrowserAnimationsModule), // Add this for animations
     provideRouter(routes), // Add routing here
     provideStore({ reducer: diagramReducer }), // Register the diagram reducer
     provideEffects([]), // Add effects here if needed

@@ -1,43 +1,35 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../../../shared/shared.module';
+import { AccordionModule } from 'primeng/accordion';
+import { CommonModule } from '@angular/common';
+import { TabViewModule } from 'primeng/tabview';
 
 @Component({
   selector: 'integra-sidebar',
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule, AccordionModule, CommonModule, TabViewModule],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent {
-  selectedLayout: string = 'layout1';
-  selectedTheme: string = 'theme1';
+  activeTab: string = 'interactive'; // Default active tab
 
-  layouts = [
-    { id: 'layout1', icon: 'pi pi-sitemap' },
-    { id: 'layout2', icon: 'pi pi-table' },
-    { id: 'layout3', icon: 'pi pi-ellipsis-h' },
-    { id: 'layout4', icon: 'pi pi-diagram' },
-    { id: 'layout5', icon: 'pi pi-flow' },
+  lineCharts = [
+    { label: 'Baseline Chart', image: 'assets/icons/placeholder.jpg' },
+    { label: 'Smooth Baseline Chart', image: 'assets/icons/placeholder.jpg' },
   ];
 
-  themes = [
-    { id: 'theme1', image: 'assets/icons/placeholder.jpg', label: 'Theme 1', isPro: false },
-    { id: 'theme2', image: 'assets/icons/placeholder.jpg', label: 'Theme 2', isPro: false },
-    { id: 'theme3', image: 'assets/icons/placeholder.jpg', label: 'Theme 3', isPro: false },
-    { id: 'theme4', image: 'assets/icons/placeholder.jpg', label: 'Theme 4', isPro: true },
-    { id: 'theme5', image: 'assets/icons/placeholder.jpg', label: 'Theme 5', isPro: true },
+  barCharts = [
+    { label: 'Background Color Bar', image: 'assets/icons/placeholder.jpg' },
+    { label: 'Vertical Stacked Bar', image: 'assets/icons/placeholder.jpg' },
   ];
 
-  selectLayout(id: string): void {
-    this.selectedLayout = id;
-  }
+  pieCharts = [
+    { label: 'Pie Chart with Rings', image: 'assets/icons/placeholder.jpg' },
+    { label: 'Half Pie Chart', image: 'assets/icons/placeholder.jpg' },
+  ];
 
-  selectTheme(id: string): void {
-    this.selectedTheme = id;
+  setActiveTab(tab: string): void {
+    this.activeTab = tab;
   }
 }
-
-
-
