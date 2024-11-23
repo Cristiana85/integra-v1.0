@@ -8,10 +8,10 @@
 }
 
 .diagram-container {
+  width: 100%; /* Full width */
+  height: 100vh; /* Full height of the viewport */
+  overflow: hidden; /* Prevent overflow during panning/zooming */
   position: relative;
-  width: 2000px; /* Set a larger canvas size */
-  height: 2000px;
-  background-size: 20px 20px; /* Add a grid background */
-  background-image: linear-gradient(to right, #eaeaea 1px, transparent 1px),
-                    linear-gradient(to bottom, #eaeaea 1px, transparent 1px);
+  box-sizing: border-box;
+  z-index: -100;
 }

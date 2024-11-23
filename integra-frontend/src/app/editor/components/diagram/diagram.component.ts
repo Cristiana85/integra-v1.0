@@ -1,10 +1,12 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as joint from 'jointjs';
 import { SharedModule } from '../../../shared/shared.module';
 import { DiagramService } from '../../services/diagram.service';
 import { addElement, redo, undo } from '../../store/actions/diagram.actions';
 import { ElementState } from '../../store/states/diagram.state';
+import { ZoomPanService } from '../../services/zoompan.service';
+import { debounceTime, fromEvent, Subscription } from 'rxjs';
 
 @Component({
   selector: 'integra-diagram',
@@ -13,20 +15,51 @@ import { ElementState } from '../../store/states/diagram.state';
   templateUrl: './diagram.component.html',
   styleUrls: ['./diagram.component.scss']
 })
-export class DiagramComponent implements OnInit, AfterViewInit {
+export class DiagramComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('diagramContainer', { static: true }) containerRef!: ElementRef;
 
-  constructor(private diagramService: DiagramService, private store: Store) {}
+  private resizeSubscription: Subscription;
+
+  constructor(private diagramService: DiagramService, private zoomPanService: ZoomPanService, private store: Store) {}
 
   ngOnInit(): void {
-    this.diagramService.initialize(this.containerRef.nativeElement);
   }
 
   ngAfterViewInit(): void {
+    this.diagramService.initialize(this.containerRef.nativeElement);
+    this.zoomPanService.initialize(this.diagramService);
+
+    // Listen for window resize events
+    this.resizeSubscription = fromEvent(window, 'resize')
+      .pipe(debounceTime(200)) // Debounce to avoid excessive calls
+      .subscribe(() => this.onResize());
+
+    // Perform initial sizing
+    this.onResize();
+  }
+
+  ngOnDestroy(): void {
+    // Clean up the resize subscription to avoid memory leaks
+    if (this.resizeSubscription) {
+      this.resizeSubscription.unsubscribe();
+    }
+  }
+
+  private onResize(): void {
+    const container = this.containerRef.nativeElement;
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+
+    // Update the size of the diagram
+    this.diagramService.updateDiagramSize(width, height);
+  }
+
+  resetZoom(): void {
+
   }
 
   addElementToDiagram(element: ElementState): void {
-    this.store.dispatch(addElement({ element }));
+    //this.store.dispatch(addElement({ element }));
   }
 
   undoLastAction(): void {
