@@ -1,15 +1,15 @@
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideRouter, Routes } from '@angular/router';
+import { provideEffects } from '@ngrx/effects';
+import { provideStore } from '@ngrx/store';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { EditorComponent } from './editor/pages/ui/editor.component';
+import { diagramReducer } from './editor/store/reducers/diagram.reducer';
+import { EntrypageComponent } from './entrypage/entrypage.component';
+import { LoginComponent } from './landing-page/components/login/login.component';
 import { LandingpageComponent } from './landing-page/pages/landingpage.component';
 import { WorkspaceComponent } from './workspace/pages/workspace.component';
-import { EditorComponent } from './editor/pages/ui/editor.component';
-import { EntrypageComponent } from './entrypage/entrypage.component';
-import { diagramReducer } from './editor/store/reducers/diagram.reducer';
-import { provideStore } from '@ngrx/store';
-import { provideEffects } from '@ngrx/effects';
-import { provideStoreDevtools } from '@ngrx/store-devtools';
-import { LoginComponent } from './landing-page/components/login/login.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes: Routes = [
   { path: '', redirectTo: 'entrypage', pathMatch: 'full' }, // Default route
