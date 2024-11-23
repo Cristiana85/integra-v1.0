@@ -1,34 +1,16 @@
-/* Full Page Centered Layout */
-.login-page {
-  background-color: #f4f6f8;
-}
-
-/* Login Container */
-.login-container {
-  max-width: 900px;
-  width: 100%;
-  background-color: #ffffff;
-}
-
-/* Illustration */
-.illustration-img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Form Section */
-.form-section {
-  width: 100%;
-}
-
-/* Links */
-.forgot-password-link,
-.register-link {
-  color: #007ad9;
-  text-decoration: none;
-}
-
-.forgot-password-link:hover,
-.register-link:hover {
-  text-decoration: underline;
+.center-container {
+  position: fixed;
+  /* Fixed position ensures it remains centered even on scroll */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  /* Vertical alignment */
+  justify-content: center;
+  /* Horizontal alignment */
+  /* Optional: dim background */
+  z-index: 1000;
+  /* Ensure it stays on top */
 }
