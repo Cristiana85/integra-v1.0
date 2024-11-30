@@ -1,28 +1,56 @@
-import { Component } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PrimeblocksModule } from 'src/app/shared/primeblocks.module';
+import { AuthService } from 'src/app/shared/services/auth.service.service';
 import { SharedModule } from '../../../shared/shared.module';
+import { Router } from '@angular/router';  // importa Router
 
 @Component({
   selector: 'integra-login',
   standalone: true,
   imports: [
     SharedModule,
+    FormsModule,
     PrimeblocksModule,
     ReactiveFormsModule
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
-  features: any[];
+export class LoginComponent implements OnInit {
+  public loginForm: FormGroup;
 
-  ngOnInit() {
-    this.features = [
-      { title: 'Unlimited Inbox', image: 'live-collaboration.svg', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-      { title: 'Data Security', image: 'security.svg', text: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.' },
-      { title: 'Cloud Backup Williams', image: 'subscribe.svg', text: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.' }
-    ];
+  constructor(
+    private fb: FormBuilder,  // Using FormBuilder for easier form creation
+    private authService: AuthService,
+    private router: Router
+  ) { }
+
+  ngOnInit(): void {
+    // Initialize the form with FormBuilder
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],  // Email validation
+      password: ['', [Validators.required]]  // Password validation
+    });
+  }
+
+  loginUser() {
+    if (this.loginForm.valid) {
+      console.log(this.loginForm.value);  // Optionally log the form values for debugging
+
+      this.authService.login(this.loginForm.value).subscribe(
+        (response) => {
+          alert('Login effettuato con successo');
+        },
+        (error) => {
+          alert('Credenziali non valide');
+        }
+      );
+    }
+  }
+
+  onForgotPasswordClick() {
+    this.router.navigate(['/forgot-password']);  // naviga al componente forgot-password
   }
 }
 

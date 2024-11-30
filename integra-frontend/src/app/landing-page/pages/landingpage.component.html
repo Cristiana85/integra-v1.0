@@ -55,19 +55,19 @@
         </div>
       </li>
       <li>
-        <a pRipple
+        <a (click)="scrollToSection('corporate')" pRipple
           class="flex px-0 lg:px-5 py-3 hover:text-blue-600 font-medium transition-colors transition-duration-150">
           <span>Corporate</span>
         </a>
       </li>
       <li>
-        <a pRipple
+        <a (click)="scrollToSection('resource')" pRipple
           class="flex px-0 lg:px-5 py-3 hover:text-blue-600 font-medium transition-colors transition-duration-150">
           <span>Resources</span>
         </a>
       </li>
       <li>
-        <a pRipple
+        <a (click)="scrollToSection('pricing')" pRipple
           class="flex px-0 lg:px-5 py-3 hover:text-blue-600 font-medium transition-colors transition-duration-150">
           <span>Pricing</span>
         </a>
@@ -76,7 +76,7 @@
     <div
       class="flex justify-content-between lg:block border-top-1 lg:border-top-none border-gray-800 py-3 lg:py-0 mt-3 lg:mt-0">
       <button pButton pRipple label="Login" class="p-button-text font-bold" [routerLink]="'/login'"></button>
-      <button pButton pRipple label="Register" class="ml-3 font-bold"></button>
+      <button pButton pRipple label="Register" class="ml-3 font-bold" [routerLink]="'/register'"></button>
     </div>
   </div>
 </div>
@@ -295,7 +295,7 @@
       <thead>
         <tr>
           <td class="surface-100 p-3">
-            <div class="text-3xl text-900 mb-2">Pricing</div>
+            <div id="pricing" class="section">Pricing</div>
             <span class="text-600 line-height-3">Fringilla est ullamcorper eget nulla facilisi etiam</span>
           </td>
           <td class="surface-100 p-3 text-center">
