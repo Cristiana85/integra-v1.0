@@ -7,6 +7,7 @@ import { addElement, redo, undo } from '../../store/actions/diagram.actions';
 import { ElementState } from '../../store/states/diagram.state';
 import { ZoomPanService } from '../../services/zoompan.service';
 import { debounceTime, fromEvent, Subscription } from 'rxjs';
+import { EDITOR_SETTINS } from '../../utilities/editor-constants';
 
 @Component({
   selector: 'integra-diagram',
@@ -16,9 +17,7 @@ import { debounceTime, fromEvent, Subscription } from 'rxjs';
   styleUrls: ['./diagram.component.scss']
 })
 export class DiagramComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('diagramContainer', { static: true }) containerRef!: ElementRef;
-
-  private resizeSubscription: Subscription;
+  @ViewChild('canvas', { static: true }) containerRef!: ElementRef;
 
   constructor(private diagramService: DiagramService, private zoomPanService: ZoomPanService, private store: Store) {}
 
@@ -27,31 +26,10 @@ export class DiagramComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.diagramService.initialize(this.containerRef.nativeElement);
-    this.zoomPanService.initialize(this.diagramService);
-
-    // Listen for window resize events
-    this.resizeSubscription = fromEvent(window, 'resize')
-      .pipe(debounceTime(200)) // Debounce to avoid excessive calls
-      .subscribe(() => this.onResize());
-
-    // Perform initial sizing
-    this.onResize();
+    //this.zoomPanService.initialize(this.diagramService);
   }
 
   ngOnDestroy(): void {
-    // Clean up the resize subscription to avoid memory leaks
-    if (this.resizeSubscription) {
-      this.resizeSubscription.unsubscribe();
-    }
-  }
-
-  private onResize(): void {
-    const container = this.containerRef.nativeElement;
-    const width = container.clientWidth;
-    const height = container.clientHeight;
-
-    // Update the size of the diagram
-    this.diagramService.updateDiagramSize(width, height);
   }
 
   resetZoom(): void {

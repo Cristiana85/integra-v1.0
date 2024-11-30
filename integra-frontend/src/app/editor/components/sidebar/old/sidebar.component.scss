@@ -1,0 +1,178 @@
+:host ::ng-deep {
+
+  .sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #f9f9f9;
+    border-right: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    /* Enable vertical scrolling */
+    overflow-x: hidden;
+    /* Prevent horizontal scrolling */
+    scrollbar-width: thick;
+    /* For modern browsers, thin scrollbar */
+
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid #ddd;
+      padding: 0.5rem;
+
+      .tab {
+        flex: 1;
+        text-align: center;
+        padding: 0.5rem 0;
+        cursor: pointer;
+        font-weight: bold;
+        color: #555;
+        border-bottom: 2px solid transparent;
+        transition: all 0.2s ease-in-out;
+
+        &.active {
+          color: #007ad9;
+          border-bottom: 2px solid #007ad9;
+        }
+      }
+    }
+
+    .content {
+      flex: 1;
+      //padding: 1rem;
+
+      p-accordion {
+        border: none;
+
+        .p-accordion .p-accordion-content {
+          padding: 0.0rem;
+          /* Add spacing between accordion sections */
+        }
+
+        p-accordionTab {
+          border-bottom: 1px solid #ddd;
+
+          .p-accordion.p-component .p-accordion-tab {
+            margin-bottom: 0rem;
+            /* Add spacing between accordion sections */
+          }
+
+          /* Style for the header to make it thicker */
+          .p-accordion-header {
+            font-weight: bold;
+            /* Make the header text thicker */
+            font-size: 1.2rem;
+            /* Increase the font size */
+            padding: 0rem;
+            /* Add padding for visual appeal */
+            background-color: #f5f5f5;
+            /* Optional: light background */
+            border-bottom: 0px solid #ddd;
+            /* Optional: subtle border */
+          }
+
+          /* Add spacing between the section header and the images */
+          .chart-grid {
+            margin-top: 0rem;
+            /* Space between header and images */
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            /* Two images per row */
+            gap: 0rem;
+            /* Space between cards */
+          }
+
+          /* Style for chart cards */
+          .chart-card {
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            padding: 1rem;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.1s, box-shadow 0.1s;
+
+            img {
+              width: 100%;
+              /* Ensure images scale to fit the card */
+              height: auto;
+              margin-bottom: 0.5rem;
+              /* Space between image and label */
+              border-radius: 4px;
+            }
+
+            p {
+              margin: 0;
+              font-size: 0.85rem;
+              color: #333;
+            }
+
+            &:hover {
+              transform: scale(1.01);
+              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+          }
+
+        }
+      }
+    }
+  }
+
+  /* Ensure the header text is unaffected and left-aligned */
+  .p-accordion-header-link {
+    position: relative;
+    /* Needed to position the arrow icon */
+    padding-right: 2rem;
+    /* Add space for the arrow on the right */
+  }
+
+  /* Move the arrow (toggle icon) to the far right */
+  .p-accordion-toggle-icon {
+    position: absolute;
+    /* Place it on the right without affecting text */
+    right: 1rem;
+    /* Distance from the right edge */
+    top: 50%;
+    /* Center vertically */
+    transform: translateY(-50%);
+    /* Correct vertical centering */
+    font-size: 1rem;
+    /* Adjust size if needed */
+    color: #333;
+    /* Customize the color */
+    transition: transform 0.2s ease-in-out;
+    /* Smooth rotation */
+  }
+
+  /* Rotate the arrow when the section is expanded */
+  .p-accordion-header-link[aria-expanded='true'] .p-accordion-toggle-icon {
+    transform: translateY(-50%) rotate(0deg);
+    /* Rotates arrow smoothly */
+  }
+
+  /* Optional: Customize scrollbar appearance (for WebKit browsers) */
+  .sidebar::-webkit-scrollbar {
+    width: 4px;
+    /* Width of the scrollbar */
+  }
+
+  .sidebar::-webkit-scrollbar-thumb {
+    background: #d5d0df;
+    /* Color of the scrollbar thumb */
+    border-radius: 4px;
+    /* Rounded corners for the scrollbar */
+  }
+
+  .sidebar::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    /* Darker color on hover */
+  }
+
+  /*@media (max-width: 768px) {
+    .sidebar {
+      height: 50vh;
+    }
+  }*/
+
+}

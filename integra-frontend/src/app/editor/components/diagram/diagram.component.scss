@@ -1,17 +1,8 @@
-.diagram-wrapper {
-  position: relative;
-  width: 100%; /* Full width of the diagram area */
-  height: 100%; /* Full height of the diagram area */
-  overflow: auto; /* Enable scrollbars only for this area */
-  background-color: #f9f9f9; /* Optional: Background for the diagram */
-  border: 1px solid #ccc; /* Optional: Add border for clarity */
-}
+:host ::ng-deep {
 
-.diagram-container {
-  width: 100%; /* Full width */
-  height: 100vh; /* Full height of the viewport */
-  overflow: hidden; /* Prevent overflow during panning/zooming */
-  position: relative;
-  box-sizing: border-box;
-  z-index: -100;
+  .canvas-container {
+    border-bottom-left-radius: 25px;
+    background-color: transparent;
+  }
+
 }

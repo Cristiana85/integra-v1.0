@@ -1,13 +1,110 @@
-.editor-container {
-  //display: flex;
-  //height: 500px;
-}
+:host ::ng-deep {
 
-.sidebar {
-  //flex: 0 0 250px;
-}
+  /* Container for the whole component */
+  .editor-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #f0f1f5;
+    overflow-y: hidden;
+  }
 
-.diagram-area {
-  //flex: 1;
-  overflow: hidden;
+  /* Promo banner with fixed height */
+  .editor-promo {
+    background-color: red;
+    //border-bottom: 1px solid #ddd;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  /* Header with fixed height */
+  .editor-header {
+    background-color: #f0f1f5;
+    border-bottom: 1px solid #ddd;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Main Content: fills the remaining space */
+  .editor-main-content {
+    display: flex;
+    flex-grow: 1;
+    overflow: hidden;
+    background-color: #f0f1f5;
+  }
+
+  /* Left Column: fixed width */
+  .editor-left-column {
+    height: 100%;
+    background-color: #f0f1f5;
+    //border-right: 1px solid #ccc;
+    overflow-y: hidden;
+    user-select: none;
+  }
+
+  /* Right Column: fills remaining space */
+  .editor-right-column {
+    display: flex;
+    flex-direction: column;
+    //flex-grow: 1;
+    background: #f0f1f5;
+    //user-select: none;
+  }
+
+  /* Main Editor: takes up available space */
+  .editor-diagram {
+    //flex-grow: 1;
+    //border-bottom: 1px solid #ddd;
+    border-bottom-left-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Footer: fixed height */
+  .editor-footer {
+    position: absolute;
+    background-color: #f0f1f5;
+    //border-radius: 25px;
+    z-index: 1000;
+  }
+
+  .left-popup-menu {
+    position: absolute;
+    background-color: #f0f1f5;
+    //border: 1px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    //padding: 10px 0;
+    z-index: 1000;
+    user-select: none;
+  }
+
+  .left-popup-menu-close {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    background-color: #f0f1f5;
+    border: 0px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    padding-right: 7.5px;
+    z-index: 1000;
+  }
+
+  .left-popup-menu-close:hover {
+    background-color: lightblue;
+    cursor: pointer;
+  }
+
+  .right-popup-menu {
+    position: absolute;
+    background-color: #f0f1f5;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+    z-index: 1000;
+    user-select: none;
+  }
+
 }

@@ -1,8 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/primeng.min.css";
 @import "primeflex/primeflex.css";
+@import "primeicons/primeicons.css";
+@import '~jointjs/dist/joint.css';
+
 
 html {
-  font-size: 14px;
+  font-size: 12px;
 }
 
 body {
@@ -10,46 +14,7 @@ body {
   font-weight: normal;
   background: var(--surface-ground);
   color: var(--text-color);
-  padding: 1rem;
+  margin: 0px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-.card {
-  background: var(--surface-card);
-  padding: 2rem;
-  border-radius: 10px;
-  margin-bottom: 1rem;
-}
-
-/* Ensure the header text is unaffected and left-aligned */
-.p-accordion-header-link {
-  position: relative;
-  /* Needed to position the arrow icon */
-  padding-right: 2rem;
-  /* Add space for the arrow on the right */
-}
-
-/* Move the arrow (toggle icon) to the far right */
-.p-accordion-toggle-icon {
-  position: absolute;
-  /* Place it on the right without affecting text */
-  right: 1rem;
-  /* Distance from the right edge */
-  top: 50%;
-  /* Center vertically */
-  transform: translateY(-50%);
-  /* Correct vertical centering */
-  font-size: 1rem;
-  /* Adjust size if needed */
-  color: #333;
-  /* Customize the color */
-  transition: transform 0.2s ease-in-out;
-  /* Smooth rotation */
-}
-
-/* Rotate the arrow when the section is expanded */
-.p-accordion-header-link[aria-expanded='true'] .p-accordion-toggle-icon {
-  transform: translateY(-50%) rotate(0deg);
-  /* Rotates arrow smoothly */
 }

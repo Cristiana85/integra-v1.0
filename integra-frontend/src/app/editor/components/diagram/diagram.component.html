@@ -1,5 +1,1 @@
-<div class="diagram-wrapper">
-  <div #diagramContainer class="diagram-container" (dragover)="allowDrop($event)" (drop)="onDrop($event)"></div>
-    <!-- Reset zoom button -->
-    <button (click)="resetZoom()">Reset Zoom</button>
-</div>
+<div #canvas class="canvas-container" (dragover)="allowDrop($event)" (drop)="onDrop($event)"></div>

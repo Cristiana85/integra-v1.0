@@ -1,7 +1,6 @@
 import { HostListener, Injectable } from '@angular/core';
 import * as d3 from 'd3';
 import * as joint from 'jointjs';
-import { ZoomPanService } from './zoompan.service';
 
 @Injectable({
   providedIn: 'root',
@@ -23,8 +22,8 @@ export class DiagramService {
     this.paper = new joint.dia.Paper({
       el: container,
       model: this.graph,
-      width: container.clientWidth, // Set initial width
-      height: container.clientHeight, // Set initial height
+      width: '100%',
+      height: '100%',
       freeze: true,
       async: true,
       drawGrid: true,
@@ -32,6 +31,31 @@ export class DiagramService {
       sorting: joint.dia.Paper.sorting.APPROX,
       cellViewNamespace: lib,
     } as any);
+    this.paper.unfreeze();
+    this.paper.setGrid({
+      color: 'black',
+      thickness: 2,
+      name: 'fixedDot' as
+        | 'dot'
+        | 'fixedDot'
+        | 'mesh'
+        | 'doubleMesh',
+    });
+    this.paper.options.drawGridSize = 10;
+    this.paper.options.gridSize = 10;
+    // grid css update
+    this.paper.$grid.css('opacity', 0.05);
+    this.paper.$grid.css('filter', 'blur(' + 0.5 + 'px)');
+    this.paper.$grid.css('border-bottom-left-radius', 25);
+    this.paper.$background.css('border-bottom-left-radius', 25);
+    // background update
+    this.paper.drawBackground({
+      color: 'white',
+      opacity: 1,
+    });
+    // redraw grid to update
+    this.paper.drawGrid();
+    this.addRectangle(100, 100);
   }
 
   updateDiagramSize(width: number, height: number): void {
