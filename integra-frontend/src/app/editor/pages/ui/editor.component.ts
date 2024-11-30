@@ -4,12 +4,15 @@ import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 import { DiagramService } from '../../services/diagram.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { TopbarComponent } from '../../components/topbar/topbar.component';
-import { debounceTime, fromEvent, Subject, Subscription } from 'rxjs';
+import { catchError, debounceTime, EMPTY, fromEvent, Subject, Subscription } from 'rxjs';
 import {
   EDITOR_SETTINS,
   VIEW_PANEL_SIZE,
 } from '../../utilities/editor-constants';
 import { StencilComponent } from '../../components/stencil/stencil.component';
+import { ProjectService } from '../../services/project.service';
+import { Project } from '../../models/project';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'integra-editor',
@@ -43,12 +46,18 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
   public diagram_width: number = 0;
   public diagram_height: number = 0;
 
-  constructor(private diagramService: DiagramService) {
+  projectSelected: Project;
 
+  constructor(
+    protected diagramService: DiagramService,
+    protected projectService: ProjectService,
+  ) {
   }
 
   ngOnInit(): void {
     this.updateFooterSize();
+
+    this.load();
   }
 
   ngAfterViewInit(): void {
@@ -74,6 +83,15 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
     this.updateFooterSize();
     this.updateDiagramSize();
   }
+
+  load() {
+    /*this.projectService.getProject(1)
+      .pipe(catchError((err) => this.handleError(err, 'Could not find project')))
+      .subscribe((project) => {
+        this.projectSelected = project;
+      });*/
+  }
+
 
   private updateFooterSize() {
     if (this.isLeftbarVisible) {
@@ -147,4 +165,10 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
     this.sidemenuEvents.next('leftpanel:closed');
   }
 
+  private handleError(error: HttpErrorResponse, translationMessageLabel: string) {
+    if ([404].includes(error.status)) {
+      alert(translationMessageLabel);
+    }
+    return EMPTY;
+  }
 }

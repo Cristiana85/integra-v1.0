@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PrimeblocksModule } from 'src/app/shared/primeblocks.module';
-import { AuthService } from 'src/app/shared/services/auth.service.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { SharedModule } from '../../../shared/shared.module';
 import { Router } from '@angular/router';  // importa Router
+import { ProjectService } from 'src/app/editor/services/project.service';
 
 @Component({
   selector: 'integra-login',
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,  // Using FormBuilder for easier form creation
     private authService: AuthService,
+    private projectService: ProjectService,
     private router: Router
   ) { }
 
@@ -40,6 +42,9 @@ export class LoginComponent implements OnInit {
 
       this.authService.login(this.loginForm.value).subscribe(
         (response) => {
+          this.projectService.getProject(this.authService.getToken(), 1, 1).subscribe(res => {
+            console.log(res);
+          });
           alert('Login effettuato con successo');
         },
         (error) => {

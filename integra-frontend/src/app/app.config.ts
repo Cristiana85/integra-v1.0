@@ -10,10 +10,11 @@ import { EntrypageComponent } from './entrypage/entrypage.component';
 import { LoginComponent } from './landing-page/components/login/login.component';
 import { LandingpageComponent } from './landing-page/pages/landingpage.component';
 import { WorkspaceComponent } from './workspace/pages/workspace.component';
-import { provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
 import { ForgotPasswordComponent } from './landing-page/components/forgot.password/forgot.password.component';
 import { RegisterComponent } from './landing-page/components/register/register.component';
 import { ResetPasswordComponent } from './landing-page/components/reset.password/reset.password.component';
+import { AuthInterceptor } from './editor/services/auth.interceptor';
 
 const routes: Routes = [
   { path: '', redirectTo: 'entrypage', pathMatch: 'full' }, // Default route
@@ -35,5 +36,10 @@ export const appConfig: ApplicationConfig = {
     provideEffects([]), // Add effects here if needed
     provideStoreDevtools(), // Enable Store DevTools (Optional)
     provideHttpClient(),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
 };

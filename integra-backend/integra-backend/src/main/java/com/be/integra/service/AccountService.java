@@ -2,6 +2,8 @@ package com.be.integra.service;
 
 import com.be.integra.entity.Account;
 import com.be.integra.repository.AccountRepository;
+import com.be.integra.security.jwt.JwtUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,10 +11,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class AccountService {
 
     @Autowired
@@ -21,6 +26,8 @@ public class AccountService {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private EmailService emailService;
+    @Autowired
+    private final JwtUtil jwtTokenUtil;
 
     public Optional<Account> findByEmail(String email) {
         return accountRepository.findByEmail(email);
@@ -60,7 +67,12 @@ public class AccountService {
         Optional<Account> account = accountRepository.findByEmail(email);
 
         if (account.isPresent() && verifyPassword(password, account.get().getPassword())) {
-            return ResponseEntity.ok("Login effettuato con successo");
+            String token = jwtTokenUtil.generateToken(account.get().getEmail());
+            Map<String, Object> response = new HashMap<>();
+            response.put("token", token);
+            response.put("accountId", account.get().getId());
+
+            return ResponseEntity.ok(response);
         }
 
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenziali non valide");
