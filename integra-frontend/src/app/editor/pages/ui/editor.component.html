@@ -18,17 +18,17 @@
       <!-- Left Popup Menu -->
       <div class="left-popup-menu" *ngIf="isLeftbarVisible" [style.top.px]="topbar_height + promo_height"
         [style.bottom.px]=0 [style.width.px]="leftpanel_width">
+        <button type="button" class="left-popup-menu-close" [style.left.px]="leftpanel_width" [style.top.px]="10" (click)="onLeftPanelClose()">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="m4 4 8 8m-8 0 8-8" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"></path>
+          </svg>
+        </button>
         <integra-stencil *ngIf="selectedTabName === 'dashboard'"></integra-stencil>
         <integra-stencil *ngIf="selectedTabName === 'none'"></integra-stencil>
         <integra-stencil *ngIf="selectedTabName === 'none'"></integra-stencil>
         <integra-stencil *ngIf="selectedTabName === 'none'"></integra-stencil>
         <integra-stencil *ngIf="selectedTabName === 'none'"></integra-stencil>
         <integra-stencil *ngIf="selectedTabName === 'none'"></integra-stencil>
-        <button type="button" class="left-popup-menu-close" [style.left.px]="leftpanel_width" [style.top.px]="10" (click)="onLeftPanelClose()">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="m4 4 8 8m-8 0 8-8" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"></path>
-          </svg>
-        </button>
       </div>
       <!-- Main Editor -->
       <div class="editor-diagram">
