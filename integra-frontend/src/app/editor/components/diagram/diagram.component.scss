@@ -1,17 +1,8 @@
-.diagram-wrapper {
-  position: relative;
-  width: 100%; /* Full width of the diagram area */
-  height: 100%; /* Full height of the diagram area */
-  overflow: auto; /* Enable scrollbars only for this area */
-  background-color: #f9f9f9; /* Optional: Background for the diagram */
-  border: 1px solid #ccc; /* Optional: Add border for clarity */
-}
+:host ::ng-deep {
 
-.diagram-container {
-  position: relative;
-  width: 2000px; /* Set a larger canvas size */
-  height: 2000px;
-  background-size: 20px 20px; /* Add a grid background */
-  background-image: linear-gradient(to right, #eaeaea 1px, transparent 1px),
-                    linear-gradient(to bottom, #eaeaea 1px, transparent 1px);
+  .canvas-container {
+    border-bottom-left-radius: 25px;
+    background-color: transparent;
+  }
+
 }

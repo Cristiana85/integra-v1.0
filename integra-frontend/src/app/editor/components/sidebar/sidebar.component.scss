@@ -1,105 +1,57 @@
-.sidebar {
-  width: 300px;
-  background-color: #f9f9f9;
-  border-right: 1px solid #ddd;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
+:host ::ng-deep {
 
-  .tabs {
+  .min-h-screen {
+    min-height: 0px !important;
+  }
+
+  .h-full {
+    height: calc(100vh - 90px) !important;
+  }
+
+  li:hover {
+    color: rgb(44, 44, 202);
+    transform: scale(1.05);
+  }
+
+  ul {
+    overflow: hidden;
+  }
+
+  .text-lg {
+    font-size: 1.8rem !important;
+  }
+
+  .active-selector {
+    background-color: lightgray;
+  }
+
+  .image-with-text {
     display: flex;
-    border-bottom: 1px solid #ddd;
-    padding: 0.5rem;
-
-    .tab {
-      flex: 1;
-      text-align: center;
-      padding: 0.5rem 0;
-      cursor: pointer;
-      font-weight: bold;
-      color: #555;
-      border-bottom: 2px solid transparent;
-      transition: all 0.2s ease-in-out;
-
-      &.active {
-        color: #007ad9;
-        border-bottom: 2px solid #007ad9;
-      }
-    }
+    flex-direction: column;
+    /* Stack image and text vertically */
+    align-items: center;
+    /* Center content horizontally */
+    gap: 10px;
+    /* Add spacing between the image and text */
   }
 
-  .content {
-    flex: 1;
-    padding: 1rem;
-
-    p-accordion {
-      border: none;
-
-      p-accordionTab {
-        border-bottom: 1px solid #ddd;
-
-        .p-accordion.p-component .p-accordion-tab {
-          margin-bottom: 2rem; /* Add spacing between accordion sections */
-        }
-
-        /* Style for the header to make it thicker */
-        .p-accordion-header {
-          font-weight: bold;
-          /* Make the header text thicker */
-          font-size: 1.2rem;
-          /* Increase the font size */
-          padding: 1rem;
-          /* Add padding for visual appeal */
-          background-color: #f5f5f5;
-          /* Optional: light background */
-          border-bottom: 1px solid #ddd;
-          /* Optional: subtle border */
-        }
-
-        /* Add spacing between the section header and the images */
-        .chart-grid {
-          margin-top: 1rem;
-          /* Space between header and images */
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          /* Two images per row */
-          gap: 1rem;
-          /* Space between cards */
-        }
-
-        /* Style for chart cards */
-        .chart-card {
-          text-align: center;
-          padding: 1rem;
-          background-color: #fff;
-          border: 1px solid #ddd;
-          border-radius: 4px;
-          cursor: pointer;
-          transition: transform 0.2s, box-shadow 0.2s;
-
-          img {
-            width: 100%;
-            /* Ensure images scale to fit the card */
-            height: auto;
-            margin-bottom: 0.5rem;
-            /* Space between image and label */
-            border-radius: 4px;
-          }
-
-          p {
-            margin: 0;
-            font-size: 0.85rem;
-            color: #333;
-          }
-
-          &:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          }
-        }
-
-      }
-    }
+  .image-with-text p {
+    margin: 0px;
+    /* Add some spacing between the image and text */
+    font-size: 12px;
+    /* Adjust text size as needed */
   }
+
+  /* Disabled hover styles */
+  .hover-enabled {
+    pointer-events: auto;
+    cursor: pointer;
+  }
+
+  /* Disabled hover styles */
+  .hover-disabled {
+    pointer-events: none;
+    cursor: default;
+  }
+
 }
-

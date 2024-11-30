@@ -1,10 +1,13 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as joint from 'jointjs';
 import { SharedModule } from '../../../shared/shared.module';
 import { DiagramService } from '../../services/diagram.service';
 import { addElement, redo, undo } from '../../store/actions/diagram.actions';
 import { ElementState } from '../../store/states/diagram.state';
+import { ZoomPanService } from '../../services/zoompan.service';
+import { debounceTime, fromEvent, Subscription } from 'rxjs';
+import { EDITOR_SETTINS } from '../../utilities/editor-constants';
 
 @Component({
   selector: 'integra-diagram',
@@ -13,20 +16,28 @@ import { ElementState } from '../../store/states/diagram.state';
   templateUrl: './diagram.component.html',
   styleUrls: ['./diagram.component.scss']
 })
-export class DiagramComponent implements OnInit, AfterViewInit {
-  @ViewChild('diagramContainer', { static: true }) containerRef!: ElementRef;
+export class DiagramComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild('canvas', { static: true }) containerRef!: ElementRef;
 
-  constructor(private diagramService: DiagramService, private store: Store) {}
+  constructor(private diagramService: DiagramService, private zoomPanService: ZoomPanService, private store: Store) {}
 
   ngOnInit(): void {
-    this.diagramService.initialize(this.containerRef.nativeElement);
   }
 
   ngAfterViewInit(): void {
+    this.diagramService.initialize(this.containerRef.nativeElement);
+    //this.zoomPanService.initialize(this.diagramService);
+  }
+
+  ngOnDestroy(): void {
+  }
+
+  resetZoom(): void {
+
   }
 
   addElementToDiagram(element: ElementState): void {
-    this.store.dispatch(addElement({ element }));
+    //this.store.dispatch(addElement({ element }));
   }
 
   undoLastAction(): void {

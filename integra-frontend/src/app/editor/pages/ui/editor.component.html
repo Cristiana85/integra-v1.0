@@ -1,13 +1,47 @@
 <div class="editor-container">
-  <!-- Sidebar for draggable elements -->
-  <integra-sidebar class="sidebar"></integra-sidebar>
-
-  <!-- Main area -->
-  <div class="main-area">
-    <!-- Toolbar for diagram actions -->
-    <!-- <integra-toolbar (undoAction)="undo()" (redoAction)="redo()"></integra-toolbar>  -->
-
-    <!-- Diagram canvas -->
-    <integra-diagram class="diagram"></integra-diagram>
+  <div class="editor-promo" *ngIf="isPromobarVisible" [style.height.px]="promo_height"
+    [style.minHeight.px]="promo_height">
+    Promo
+  </div>
+  <!-- Header -->
+  <div class="editor-header" [style.height.px]="topbar_height" [style.minHeight.px]="topbar_height">
+    <integra-topbar></integra-topbar>
+  </div>
+  <!-- Main Content -->
+  <div class="editor-main-content">
+    <!-- Left Column -->
+    <div class="editor-left-column" [style.width.px]="sidemenu_width" [style.minWidth.px]="sidemenu_width">
+      <integra-sidebar class="sidebar" [events]="sidemenuEvents" (action)="onSidemenuAction($event)"></integra-sidebar>
+    </div>
+    <!-- Right Column -->
+    <div class="editor-right-column">
+      <!-- Left Popup Menu -->
+      <div class="left-popup-menu" *ngIf="isLeftbarVisible" [style.top.px]="topbar_height + promo_height"
+        [style.bottom.px]=0 [style.width.px]="leftpanel_width">
+        <integra-stencil *ngIf="selectedTabName === 'dashboard'"></integra-stencil>
+        <integra-stencil *ngIf="selectedTabName === 'none'"></integra-stencil>
+        <integra-stencil *ngIf="selectedTabName === 'none'"></integra-stencil>
+        <integra-stencil *ngIf="selectedTabName === 'none'"></integra-stencil>
+        <integra-stencil *ngIf="selectedTabName === 'none'"></integra-stencil>
+        <integra-stencil *ngIf="selectedTabName === 'none'"></integra-stencil>
+        <button type="button" class="left-popup-menu-close" [style.left.px]="leftpanel_width" [style.top.px]="10" (click)="onLeftPanelClose()">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="m4 4 8 8m-8 0 8-8" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"></path>
+          </svg>
+        </button>
+      </div>
+      <!-- Main Editor -->
+      <div class="editor-diagram">
+        <integra-diagram></integra-diagram>
+      </div>
+      <!-- Footer -->
+      <div class="editor-footer" [style.left.px]="footer_left" [style.bottom.px]="footer_bottom"
+        [style.height.px]="footer_height" [style.right.px]="footer_right">
+      </div>
+      <!-- Right Popup Menu -->
+      <div class="right-popup-menu" *ngIf="isRightbarVisible" [style.top.px]="topbar_height + promo_height"
+        [style.right.px]=0 [style.bottom.px]=0 [style.width.px]="rightpanel_width">
+      </div>
+    </div>
   </div>
 </div>

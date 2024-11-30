@@ -1,0 +1,43 @@
+<div class="sidebar" [style.width.px]="sidebarWidth">
+      <!-- Search Field -->
+      <div class="search-box">
+        <input
+        class="search-input"
+          type="text"
+          placeholder="Search Components..."
+          [(ngModel)]="searchQuery"
+          (input)="filterComponents()"
+        />
+        <img src="assets/icons/download.svg" class="search-input-image">
+      </div>
+      <!-- Accordion -->
+      <p-accordion [multiple]="true" [activeIndex]="[0, 1, 2]">
+        <!-- Line Chart Section -->
+        <p-accordionTab header="Line Chart">
+          <div class="chart-grid">
+            <div *ngFor="let chart of filteredLineCharts" class="chart-card">
+              <img [src]="chart.image" alt="Chart Preview" />
+              <p>{{ chart.label }}</p>
+            </div>
+          </div>
+        </p-accordionTab>
+        <!-- Bar Chart Section -->
+        <p-accordionTab header="Bar Chart">
+          <div class="chart-grid">
+            <div *ngFor="let chart of filteredBarCharts" class="chart-card">
+              <img [src]="chart.image" alt="Chart Preview" />
+              <p>{{ chart.label }}</p>
+            </div>
+          </div>
+        </p-accordionTab>
+        <!-- Pie Chart Section -->
+        <p-accordionTab header="Pie Chart">
+          <div class="chart-grid">
+            <div *ngFor="let chart of filteredPieCharts" class="chart-card">
+              <img [src]="chart.image" alt="Chart Preview" />
+              <p>{{ chart.label }}</p>
+            </div>
+          </div>
+        </p-accordionTab>
+      </p-accordion>
+</div>
