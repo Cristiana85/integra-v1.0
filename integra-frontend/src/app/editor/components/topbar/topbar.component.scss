@@ -1,0 +1,98 @@
+/* General Styling */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to right, #81bcce, #0072ff);
+  padding: 10px 20px;
+  //background-color: #f9f9f9;
+  border-bottom: 1px solid #ddd;
+  font-family: Arial, sans-serif;
+  color: white;
+}
+
+/* Left Section */
+.left-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.menu-item {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.free-badge {
+  background-color: #e0f7fa;
+  color: #00796b;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 12px;
+}
+
+/* Middle Section */
+.middle-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.gradient-button {
+  background: linear-gradient(to right, #ff7e5f, #feb47b);
+  color: white;
+  border: none;
+  font-weight: bold;
+}
+
+/* Right Section */
+.right-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.icon-button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.icon-button i {
+  font-size: 18px;
+}
+
+.divider {
+  height: 24px;
+  width: 1px;
+  background-color: #ddd;
+  margin: 0 10px;
+}
+
+.upgrade-button {
+  background-color: #fbe9e7;
+  color: #e65100;
+  font-weight: bold;
+  border: none;
+}
+
+.p-button-black {
+  background-color: #000;
+  color: white;
+  border: none;
+}
+
+.avatar {
+  background-color: #e57373;
+  color: white;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+}

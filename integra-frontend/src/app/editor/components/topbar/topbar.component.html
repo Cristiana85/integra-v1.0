@@ -1,55 +1,57 @@
-<div class="min-h-screen flex surface-ground">
-  <div class="min-h-screen flex flex-column relative flex-auto">
-    <div
-      class="flex justify-content-between align-items-center px-5 surface-section border-bottom-1 surface-border relative lg:static"
-      style="height:60px">
-      <div class="flex">
-        <a pRipple class="cursor-pointer block lg:hidden text-700 mr-3" pStyleClass="#app-sidebar" enterFromClass="hidden"
-          enterActiveClass="fadeinleft" leaveToClass="hidden" leaveActiveClass="fadeoutleft">
-          <i class="pi pi-bars text-4xl"></i>
-        </a>
-        <span class="p-input-icon-left">
-          <i class="pi pi-search"></i>
-          <input type="text" pInputText class="border-none w-10rem sm:w-20rem" placeholder="Search">
-        </span>
-      </div>
-      <a pRipple class="cursor-pointer block lg:hidden text-700" pStyleClass="@next" enterFromClass="hidden"
-        enterActiveClass="fadein" leaveToClass="hidden" leaveActiveClass="fadeout" [hideOnOutsideClick]="true">
-        <i class="pi pi-ellipsis-v text-2xl"></i>
-      </a>
-      <ul
-        class="list-none p-0 m-0 hidden lg:flex lg:align-items-center select-none lg:flex-row
-              surface-section border-1 lg:border-none surface-border right-0 top-100 z-1 shadow-2 lg:shadow-none absolute lg:static">
-        <li>
-          <a pRipple class="flex p-3 lg:px-3 lg:py-2 align-items-center text-600 hover:text-900 hover:surface-100 font-medium border-round cursor-pointer
-                      transition-duration-150 transition-colors">
-            <i class="pi pi-inbox text-base lg:text-2xl mr-2 lg:mr-0"></i>
-            <span class="block lg:hidden font-medium">Inbox</span>
-          </a>
-        </li>
-        <li>
-          <a pRipple class="flex p-3 lg:px-3 lg:py-2 align-items-center text-600 hover:text-900 hover:surface-100 font-medium border-round cursor-pointer
-                      transition-duration-150 transition-colors">
-            <i class="pi pi-bell text-base lg:text-2xl mr-2 lg:mr-0" pBadge severity="danger"></i>
-            <span class="block lg:hidden font-medium">Notifications</span>
-          </a>
-        </li>
-        <li class="border-top-1 surface-border lg:border-top-none">
-          <a pRipple class="flex p-3 lg:px-3 lg:py-2 align-items-center hover:surface-100 font-medium border-round cursor-pointer
-                      transition-duration-150 transition-colors">
-            <img src="assets/images/blocks/avatars/circle/avatar-f-1.png" class="mr-3 lg:mr-0"
-              style="width: 32px; height: 32px" />
-            <div class="block lg:hidden">
-              <div class="text-900 font-medium">Josephine Lillard</div>
-              <span class="text-600 font-medium text-sm">Marketing Specialist</span>
-            </div>
-          </a>
-        </li>
-      </ul>
+<div class="topbar" [style.height.px]="topbar_height">
+
+    <!-- Left Section -->
+    <div class="left-section">
+      <i class="pi pi-bars menu-icon"></i>
+      <span *ngIf="!isEditing" class="menu-item" (click)="toggleInput()">test</span>
+      <input
+        *ngIf="isEditing"
+        pInputText
+        type="text"
+        [(ngModel)]="inputValue"
+        class="rounded-input"
+        (blur)="closeInput()"
+        (keyup.enter)="submitInput()"
+      />
+      <span class="badge free-badge">Free</span>
+      <div class="divider"></div>
+      <button pButton icon="pi pi-undo" class="p-button-text"></button>
+      <button pButton icon="pi pi-redo" class="p-button-text"></button>
+      <button pButton icon="pi pi-save" class="p-button-text"></button>
+      <button pButton label="AI Lab" class="gradient-button"></button>
     </div>
-    <!-- <div class="p-5 flex flex-column flex-auto">
-      <div class="border-2 border-dashed border-round surface-border surface-section flex-auto">
+
+
+    <!-- Middle Section -->
+    <div class="middle-section">
+      <div class="icon-button">
+        <i class="pi pi-th-large"></i>
+        <span>Topic</span>
       </div>
-    </div> -->
+      <div class="icon-button">
+        <i class="pi pi-sitemap"></i>
+        <span>Sub Topic</span>
+      </div>
+      <div class="divider"></div>
+      <div class="icon-button">
+        <i class="pi pi-refresh"></i>
+        <span>Relationship</span>
+      </div>
+      <div class="icon-button">
+        <i class="pi pi-comment"></i>
+        <span>Callout</span>
+      </div>
+      <div class="icon-button">
+        <i class="pi pi-plus"></i>
+        <span>Insert</span>
+      </div>
+    </div>
+
+    <!-- Right Section -->
+    <div class="right-section">
+      <button pButton label="Upgrade for Free" class="p-button-warning upgrade-button"></button>
+      <button pButton label="Export" class="p-button-outlined"></button>
+      <button pButton label="Share" class="p-button-black"></button>
+      <span class="avatar">M</span>
+    </div>
   </div>
-</div>
