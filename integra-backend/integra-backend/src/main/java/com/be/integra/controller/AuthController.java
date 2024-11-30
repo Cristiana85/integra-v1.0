@@ -1,39 +1,44 @@
 package com.be.integra.controller;
 
+import com.be.integra.entity.Account;
 import com.be.integra.security.authentication.AuthRequest;
 import com.be.integra.security.authentication.ForgotPasswordRequest;
 import com.be.integra.security.authentication.ResetPasswordRequest;
-import com.be.integra.service.UserService;
+import com.be.integra.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
+
     @Autowired
-    private UserService userService;
+    private AccountService accountService;
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody AuthRequest authRequest) {
-        userService.register(authRequest.getEmail(), authRequest.getPassword());
+        accountService.register(authRequest.getEmail(), authRequest.getPassword());
         return ResponseEntity.ok("Registrazione completata");
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody AuthRequest authRequest) {
-        return ResponseEntity.ok("Login riuscito");
+    public ResponseEntity<?> login(@RequestBody AuthRequest authRequest) {
+        return accountService.login(authRequest.getEmail(), authRequest.getPassword());
     }
 
     @PostMapping("/forgot-password")
     public ResponseEntity<String> forgotPassword(@RequestBody ForgotPasswordRequest request) {
-        userService.sendPasswordResetToken(request.getEmail());
+        accountService.sendPasswordResetToken(request.getEmail());
         return ResponseEntity.ok("Email di recupero inviata");
     }
 
     @PostMapping("/reset-password")
     public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordRequest request) {
-        userService.resetPassword(request.getToken(), request.getNewPassword());
+        accountService.resetPassword(request.getToken(), request.getNewPassword());
         return ResponseEntity.ok("Password aggiornata");
     }
 }

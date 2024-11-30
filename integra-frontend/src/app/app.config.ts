@@ -10,14 +10,21 @@ import { EntrypageComponent } from './entrypage/entrypage.component';
 import { LoginComponent } from './landing-page/components/login/login.component';
 import { LandingpageComponent } from './landing-page/pages/landingpage.component';
 import { WorkspaceComponent } from './workspace/pages/workspace.component';
+import { provideHttpClient } from '@angular/common/http';
+import { ForgotPasswordComponent } from './landing-page/components/forgot.password/forgot.password.component';
+import { RegisterComponent } from './landing-page/components/register/register.component';
+import { ResetPasswordComponent } from './landing-page/components/reset.password/reset.password.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'entrypage', pathMatch: 'full' }, // Default route
   { path: 'entrypage', component: EntrypageComponent },          // First page with buttons
   { path: 'landing-page', component: LandingpageComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'workspace', component: WorkspaceComponent },
   { path: 'editor', component: EditorComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
 ];
 
 export const appConfig: ApplicationConfig = {
@@ -27,5 +34,6 @@ export const appConfig: ApplicationConfig = {
     provideStore({ reducer: diagramReducer }), // Register the diagram reducer
     provideEffects([]), // Add effects here if needed
     provideStoreDevtools(), // Enable Store DevTools (Optional)
+    provideHttpClient(),
   ],
 };
