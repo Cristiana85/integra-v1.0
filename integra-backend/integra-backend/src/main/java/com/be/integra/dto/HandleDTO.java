@@ -13,7 +13,6 @@ public class HandleDTO implements Serializable {
 	@Serial
 	private static final long serialVersionUID = 1L;
 
-	@NonNull
 	@EqualsAndHashCode.Include
 	private Long accountId;
 	private String username;

@@ -13,6 +13,7 @@ export class AuthService {
 
   private tokenKey = 'authToken';
   private accountIdKey = 'accountId';
+  private accountNameKey = 'accountName';
 
   constructor(private http: HttpClient) { }
 
@@ -21,6 +22,7 @@ export class AuthService {
       tap((response) => {
         localStorage.setItem(this.tokenKey, response.token);
         localStorage.setItem(this.accountIdKey, response.accountId.toString());
+        localStorage.setItem(this.accountNameKey, response.accountName.toString());
       })
     );
   }

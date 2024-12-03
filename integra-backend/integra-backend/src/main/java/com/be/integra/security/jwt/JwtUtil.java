@@ -1,12 +1,17 @@
 package com.be.integra.security.jwt;
 
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.crypto.SecretKey;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Component
 public class JwtUtil {
@@ -20,21 +25,34 @@ public class JwtUtil {
         this.secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256); // Genera una chiave una volta
     }
 
-    // Genera il token con username e expiration
-    public String generateToken(String username) {
+    // Genera il token con email e expiration
+    public String generateToken(String email, Long accountId) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + validityInMilliseconds);
 
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("accountId", accountId);
+
         return Jwts.builder()
-                .setSubject(username) // Imposta lo username come "subject"
+                .setClaims(claims)
+                .setSubject(email) // Imposta lo email come "subject"
                 .setIssuedAt(now) // Data di creazione
                 .setExpiration(expiryDate) // Data di scadenza
                 .signWith(secretKey) // Firma con la chiave segreta
                 .compact();
     }
 
-    // Estrae lo username dal token
-    public String extractUsername(String token) {
+    public Long extractAccountId(String token) {
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(secretKey)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+
+        return claims.get("accountId", Long.class);
+    }
+
+    public String extractEmail(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(secretKey) // Chiave segreta per verificare il token
                 .build()
@@ -42,6 +60,7 @@ public class JwtUtil {
                 .getBody()
                 .getSubject();
     }
+
     // Valida il token
     public boolean validateToken(String token) {
         try {

@@ -1,57 +1,50 @@
 <div class="topbar" [style.height.px]="topbar_height">
 
-    <!-- Left Section -->
-    <div class="left-section">
-      <i class="pi pi-bars menu-icon"></i>
-      <span *ngIf="!isEditing" class="menu-item" (click)="toggleInput()">test</span>
-      <input
-        *ngIf="isEditing"
-        pInputText
-        type="text"
-        [(ngModel)]="inputValue"
-        class="rounded-input"
-        (blur)="closeInput()"
-        (keyup.enter)="submitInput()"
-      />
-      <span class="badge free-badge">Free</span>
-      <div class="divider"></div>
-      <button pButton icon="pi pi-undo" class="p-button-text"></button>
-      <button pButton icon="pi pi-redo" class="p-button-text"></button>
-      <button pButton icon="pi pi-save" class="p-button-text"></button>
-      <button pButton label="AI Lab" class="gradient-button"></button>
+  <!-- Left Section -->
+  <div class="left-section">
+    <i class="pi pi-bars menu-icon"></i>
+    <span *ngIf="!isEditing" class="menu-item" (click)="toggleInput()">{{projectName}}</span>
+    <input *ngIf="isEditing" pInputText type="text" [(ngModel)]="inputValue" class="rounded-input" (blur)="closeInput()"
+      (keyup.enter)="submitInput()" />
+    <span class="badge free-badge">Free</span>
+    <div class="divider"></div>
+    <button pButton icon="pi pi-undo" class="p-button-text"></button>
+    <button pButton icon="pi pi-redo" class="p-button-text"></button>
+    <button pButton icon="pi pi-save" class="p-button-text"></button>
+    <button pButton label="AI Lab" class="gradient-button"></button>
+  </div>
+
+
+  <!-- Middle Section -->
+  <div class="middle-section">
+    <div class="icon-button">
+      <i class="pi pi-th-large"></i>
+      <span>Topic</span>
     </div>
-
-
-    <!-- Middle Section -->
-    <div class="middle-section">
-      <div class="icon-button">
-        <i class="pi pi-th-large"></i>
-        <span>Topic</span>
-      </div>
-      <div class="icon-button">
-        <i class="pi pi-sitemap"></i>
-        <span>Sub Topic</span>
-      </div>
-      <div class="divider"></div>
-      <div class="icon-button">
-        <i class="pi pi-refresh"></i>
-        <span>Relationship</span>
-      </div>
-      <div class="icon-button">
-        <i class="pi pi-comment"></i>
-        <span>Callout</span>
-      </div>
-      <div class="icon-button">
-        <i class="pi pi-plus"></i>
-        <span>Insert</span>
-      </div>
+    <div class="icon-button">
+      <i class="pi pi-sitemap"></i>
+      <span>Sub Topic</span>
     </div>
-
-    <!-- Right Section -->
-    <div class="right-section">
-      <button pButton label="Upgrade for Free" class="p-button-warning upgrade-button"></button>
-      <button pButton label="Export" class="p-button-outlined"></button>
-      <button pButton label="Share" class="p-button-black"></button>
-      <span class="avatar">M</span>
+    <div class="divider"></div>
+    <div class="icon-button">
+      <i class="pi pi-refresh"></i>
+      <span>Relationship</span>
+    </div>
+    <div class="icon-button">
+      <i class="pi pi-comment"></i>
+      <span>Callout</span>
+    </div>
+    <div class="icon-button">
+      <i class="pi pi-plus"></i>
+      <span>Insert</span>
     </div>
   </div>
+
+  <!-- Right Section -->
+  <div class="right-section">
+    <button pButton label="Upgrade for Free" class="p-button-warning upgrade-button"></button>
+    <button pButton label="Export" class="p-button-outlined"></button>
+    <button pButton label="Share" class="p-button-black"></button>
+    <span class="avatar">M</span>
+  </div>
+</div>

@@ -67,7 +67,7 @@ public class AccountService {
         Optional<Account> account = accountRepository.findByEmail(email);
 
         if (account.isPresent() && verifyPassword(password, account.get().getPassword())) {
-            String token = jwtTokenUtil.generateToken(account.get().getEmail());
+            String token = jwtTokenUtil.generateToken(account.get().getEmail(), account.get().getId());
             Map<String, Object> response = new HashMap<>();
             response.put("token", token);
             response.put("accountId", account.get().getId());

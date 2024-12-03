@@ -1,18 +1,18 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { AfterViewInit, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { EMPTY, Subject } from 'rxjs';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { DiagramComponent } from '../../components/diagram/diagram.component';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
-import { DiagramService } from '../../services/diagram.service';
-import { SharedModule } from 'src/app/shared/shared.module';
-import { TopbarComponent } from '../../components/topbar/topbar.component';
-import { catchError, debounceTime, EMPTY, fromEvent, Subject, Subscription } from 'rxjs';
-import {
-  EDITOR_SETTINS,
-  VIEW_PANEL_SIZE,
-} from '../../utilities/editor-constants';
 import { StencilComponent } from '../../components/stencil/stencil.component';
-import { ProjectService } from '../../services/project.service';
+import { TopbarComponent } from '../../components/topbar/topbar.component';
 import { Project } from '../../models/project';
-import { HttpErrorResponse } from '@angular/common/http';
+import { DiagramService } from '../../services/diagram.service';
+import { ProjectService } from '../../services/project.service';
+import {
+  VIEW_PANEL_SIZE
+} from '../../utilities/editor-constants';
 
 @Component({
   selector: 'integra-editor',
@@ -47,16 +47,20 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
   public diagram_height: number = 0;
 
   projectSelected: Project;
+  projectName: string;
+  lProject: Project[];
 
   constructor(
     protected diagramService: DiagramService,
     protected projectService: ProjectService,
+    protected route: ActivatedRoute
   ) {
   }
 
   ngOnInit(): void {
     this.updateFooterSize();
 
+    this.projectName = this.route.snapshot.paramMap.get('name')!;
     this.load();
   }
 
@@ -85,11 +89,32 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   load() {
-    /*this.projectService.getProject(1)
-      .pipe(catchError((err) => this.handleError(err, 'Could not find project')))
-      .subscribe((project) => {
-        this.projectSelected = project;
-      });*/
+    this.lProject = [
+      {
+        id: 1,
+        accountId: 1,
+        name: 'Project 1',
+        creationDate: new Date(2024, 11, 3, 15, 30, 45),
+        editingDate: new Date(2024, 11, 15, 15, 30, 45),
+        metadata: null
+      },
+      {
+        id: 2,
+        accountId: 2,
+        name: 'Project 2',
+        creationDate: new Date(2024, 11, 3, 15, 30, 45),
+        editingDate: new Date(2024, 18, 3, 15, 30, 45),
+        metadata: undefined
+      },
+      {
+        id: 3,
+        accountId: 3,
+        name: 'Project 3',
+        creationDate: new Date(2024, 11, 3, 15, 30, 45),
+        editingDate: new Date(2024, 11, 24, 15, 30, 45),
+        metadata: undefined
+      },
+    ];
   }
 
 

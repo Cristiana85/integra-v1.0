@@ -17,21 +17,13 @@ export class ProjectService {
     private http: HttpClient
   ) { }
 
-  public getlProject(accountId: number): Observable<Project[]> {
-    const params = { accountId: accountId };
-    return this.http.get<Project[]>(this.apiPath, { params: params });
+  public getlProject(): Observable<Project[]> {
+    return this.http.get<Project[]>(this.apiPath);
   }
 
-  public getProject(token: string, accountId: number, projectId: number): Observable<Project> {
+  public getProject(projectId: number): Observable<Project> {
     const url = `${this.apiPath}/id`;
     const params = { projectId: projectId };
-
-
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    });
-
-    return this.http.get<Project>(url, { headers: headers, params: params });
+    return this.http.get<Project>(url, { params: params });
   }
 }

@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
 
       this.authService.login(this.loginForm.value).subscribe(
         (response) => {
-          this.projectService.getProject(this.authService.getToken(), 1, 1).subscribe(res => {
+          this.projectService.getProject(1).subscribe(res => {
             console.log(res);
           });
           alert('Login effettuato con successo');
