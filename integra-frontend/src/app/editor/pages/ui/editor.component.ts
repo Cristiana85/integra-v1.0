@@ -1,28 +1,50 @@
-import { AfterViewInit, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
-import { DiagramComponent } from '../../components/diagram/diagram.component';
-import { SidebarComponent } from '../../components/sidebar/sidebar.component';
-import { DiagramService } from '../../services/diagram.service';
-import { SharedModule } from 'src/app/shared/shared.module';
-import { TopbarComponent } from '../../components/topbar/topbar.component';
-import { debounceTime, fromEvent, Subject, Subscription } from 'rxjs';
 import {
-  EDITOR_SETTINS,
-  VIEW_PANEL_SIZE,
-} from '../../utilities/editor-constants';
+  AfterViewInit,
+  Component,
+  HostListener,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+} from '@angular/core';
+import { Subject } from 'rxjs';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { DiagramComponent } from '../../components/diagram/diagram.component';
+import { FooterComponent } from '../../components/footer/footer.component';
+import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 import { StencilComponent } from '../../components/stencil/stencil.component';
+import { TopbarComponent } from '../../components/topbar/topbar.component';
+import { DiagramService } from '../../services/diagram.service';
+import {
+  VIEW_PANEL_SIZE
+} from '../../utilities/editor-constants';
+import { RibbonmenuComponent } from '../../components/ribbonmenu/ribbonmenu.component';
 
 @Component({
   selector: 'integra-editor',
   standalone: true,
-  imports: [SharedModule, DiagramComponent, TopbarComponent, SidebarComponent, StencilComponent],
+  imports: [
+    SharedModule,
+    DiagramComponent,
+    TopbarComponent,
+    SidebarComponent,
+    StencilComponent,
+    FooterComponent,
+    RibbonmenuComponent
+  ],
   templateUrl: './editor.component.html',
   styleUrl: './editor.component.scss',
 })
 export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  public isLoading: boolean = false; // Control loading state
+
   public sidemenuEvents = new Subject<string>();
 
-  public selectedTabName: string = "";
+  public activeArea: 'diagram' | 'tool' | 'diagram-chart' = 'diagram';
+
+  public splitterOrientation: 'vertical' | 'horizontal' = 'horizontal';
+
+  public selectedTabName: string = '';
 
   public isPromobarVisible: boolean = false;
   public isLeftbarVisible: boolean = false;
@@ -43,12 +65,17 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
   public diagram_width: number = 0;
   public diagram_height: number = 0;
 
-  constructor(private diagramService: DiagramService) {
-
-  }
+  constructor(
+    private diagramService: DiagramService,
+    private renderer: Renderer2
+  ) {}
 
   ngOnInit(): void {
     this.updateFooterSize();
+    // Simulate loading state
+    setTimeout(() => {
+      this.isLoading = false; // Set to false after content is loaded
+    }, 50000); // Adjust delay as needed
   }
 
   ngAfterViewInit(): void {
@@ -56,6 +83,7 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.removeMouseMoveListener();
   }
 
   @HostListener('window:focus', ['$event'])
@@ -105,37 +133,37 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
     switch (event) {
       case 'dashboard:clicked': {
         this.isLeftbarVisible = true;
-        this.selectedTabName = event.split(":")[0];
+        this.selectedTabName = event.split(':')[0];
         this.updateFooterSize();
         break;
       }
       case 'Bookmarks:clicked': {
         this.isLeftbarVisible = true;
-        this.selectedTabName = event.split(":")[0];
+        this.selectedTabName = event.split(':')[0];
         this.updateFooterSize();
         break;
       }
       case 'People:clicked': {
         this.isLeftbarVisible = true;
-        this.selectedTabName = event.split(":")[0];
+        this.selectedTabName = event.split(':')[0];
         this.updateFooterSize();
         break;
       }
       case 'Comments:clicked': {
         this.isLeftbarVisible = true;
-        this.selectedTabName = event.split(":")[0];
+        this.selectedTabName = event.split(':')[0];
         this.updateFooterSize();
         break;
       }
       case 'Calendar:clicked': {
         this.isLeftbarVisible = true;
-        this.selectedTabName = event.split(":")[0];
+        this.selectedTabName = event.split(':')[0];
         this.updateFooterSize();
         break;
       }
       case 'Settings:clicked': {
         this.isLeftbarVisible = true;
-        this.selectedTabName = event.split(":")[0];
+        this.selectedTabName = event.split(':')[0];
         this.updateFooterSize();
         break;
       }
@@ -145,6 +173,49 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
   public onLeftPanelClose() {
     this.isLeftbarVisible = false;
     this.sidemenuEvents.next('leftpanel:closed');
+  }
+
+  public switchArea(area: 'diagram' | 'tool' | 'diagram-chart'): void {
+    this.activeArea = area;
+  }
+
+  isResizing: boolean = false;
+  sizes: number[] = []; // Store panel sizes
+  private mouseMoveListener: any;
+
+  // Triggered when resizing starts
+  public onSplitterResizeStart(): void {
+    this.isResizing = true;
+    console.log('Resize Started');
+    this.addMouseMoveListener();
+  }
+
+  // Triggered when resizing ends
+  public onSplitterResizeEnd(event: any): void {
+    this.isResizing = false;
+    this.sizes = event.sizes; // Update sizes after resizing
+    console.log('Resize Ended:', event.sizes);
+    this.removeMouseMoveListener();
+  }
+
+  // Add mousemove listener to detect resizing in real-time
+  private addMouseMoveListener(): void {
+    this.mouseMoveListener = this.renderer.listen(
+      'document',
+      'mousemove',
+      (event) => {
+        if (this.isResizing) {
+          console.log('Resizing in progress...', event.screenX); // Handle your logic here
+        }
+      }
+    );
+  }
+  // Remove the mousemove listener to clean up resources
+  private removeMouseMoveListener(): void {
+    if (this.mouseMoveListener) {
+      this.mouseMoveListener();
+      this.mouseMoveListener = null;
+    }
   }
 
 }

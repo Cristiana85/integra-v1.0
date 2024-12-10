@@ -1,98 +1,243 @@
-/* General Styling */
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: linear-gradient(to right, #81bcce, #0072ff);
-  padding: 10px 20px;
-  //background-color: #f9f9f9;
-  border-bottom: 1px solid #ddd;
-  font-family: Arial, sans-serif;
-  color: white;
-}
+:host ::ng-deep {
 
-/* Left Section */
-.left-section {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+  /* General Styling */
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    //background: linear-gradient(to right, #81bcce, #0072ff);
+    //background: linear-gradient(to right, #81bcce, #117cff);
+    //background: linear-gradient(to right, #4a6c76, #0072ff);
+    //background: rgba(247, 248, 249, 1);
+    //background-color: #f0f1f5;
+    background-color: #416ea6;
+    padding: 10px 10px;
+    border-bottom: 1px solid #ddd;
+    font-family: Arial, sans-serif;
+    color: white;
+  }
 
-.menu-item {
-  font-size: 16px;
-  font-weight: bold;
-}
+  /* Left Section */
+  .left-section {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
 
-.free-badge {
-  background-color: #e0f7fa;
-  color: #00796b;
-  font-size: 12px;
-  padding: 2px 6px;
-  border-radius: 12px;
-}
+  /* text input */
+  .project-name {
+    font-size: 16px;
+    font-weight: 100;
+    padding-left: 10px;
+    padding-right: 5px;
+  }
 
-/* Middle Section */
-.middle-section {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
+  .free-badge {
+    background-color: #e0f7fa;
+    color: #00796b;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 12px;
+  }
 
-.gradient-button {
-  background: linear-gradient(to right, #ff7e5f, #feb47b);
-  color: white;
-  border: none;
-  font-weight: bold;
-}
+  .pro-badge {
+    background-color: #620b34;
+    color: #999ceb;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 12px;
+  }
 
-/* Right Section */
-.right-section {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
+  /* Middle Section */
+  .middle-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
 
-.icon-button {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 14px;
-  cursor: pointer;
-}
+  /* Larger undo button styling */
+  .large-undoredo {
+    font-size: 20px;
+    padding: 12px 20px;
+    height: 50px;
+    width: 50px;
+  }
 
-.icon-button i {
-  font-size: 18px;
-}
+  /* Optional: Add hover effect */
+  .large-undoredo:hover {
+    border: 1px solid lightgray; // TBD
+    background-color: rgb(227, 227, 238); // TBD
+  }
 
-.divider {
-  height: 24px;
-  width: 1px;
-  background-color: #ddd;
-  margin: 0 10px;
-}
+  .pi {
+    font-size: 18px;
+  }
 
-.upgrade-button {
-  background-color: #fbe9e7;
-  color: #e65100;
-  font-weight: bold;
-  border: none;
-}
+  /*.gradient-button {
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    color: white;
+    border: none;
+    font-weight: bold;
+  }*/
 
-.p-button-black {
-  background-color: #000;
-  color: white;
-  border: none;
-}
+  /* Right Section */
+  .right-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
 
-.avatar {
-  background-color: #e57373;
-  color: white;
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 14px;
+  .icon-button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .icon-button i {
+    font-size: 18px;
+  }
+
+  .divider {
+    height: 24px;
+    width: 1px;
+    background-color: #ddd;
+    margin: 0 10px;
+  }
+
+  .upgrade-button {
+    background-color: #fbe9e7;
+    color: #e65100;
+    font-weight: bold;
+    border: none;
+  }
+
+  .p-button-black {
+    background-color: #000;
+    color: white;
+    border: none;
+  }
+
+  .avatar {
+    background-color: #e57373;
+    color: white;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  /* Manage small screens */
+  .lg-text {
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    .lg-text {
+      display: none;
+    }
+  }
+
+  /* back to workspace button*/
+  .back-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 16px 10px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+  }
+
+  .back-button i {
+    font-size: 20px;
+  }
+
+  .back-button:hover {
+    background-color: #d9d9da;
+    border-radius: 4px;
+    color: blue;
+  }
+
+  /* bars menu button*/
+  .bars-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 16px 12px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+  }
+
+  .bars-button i {
+    font-size: 20px;
+  }
+
+  .bars-button:hover {
+    background-color: #d9d9da;
+    border-radius: 4px;
+    color: blue;
+  }
+
+
+  /* main menu buttons style */
+  .labeled-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    color: white;
+  }
+
+  .labeled-button i {
+    font-size: 16px;
+  }
+
+  .labeled-button span {
+    margin-top: 10px;
+    font-weight: 500;
+    font-size: 13px;
+    //line-height: 12px;
+    //letter-spacing: 0.5px;
+    //word-spacing: 4px;
+    white-space: nowrap;
+    color: white;
+  }
+
+  .labeled-button:hover span {
+    color: blue;
+  }
+
+  .labeled-button:hover {
+    background-color: #d9d9da;
+    border-radius: 4px;
+    color: blue;
+  }
+
+  .separator {
+    width: 1px;
+    height: 40px;
+    background-color: #ccc;
+    margin: 0 15px;
+  }
+
 }

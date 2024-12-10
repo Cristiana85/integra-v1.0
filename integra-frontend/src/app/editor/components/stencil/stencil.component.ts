@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { LUMPED, DISTRIBUTED, BASIC, STENCIL_CATEGORIES } from './stencil-library';
+import { LUMPED, DISTRIBUTED, BASIC, STENCIL_CATEGORIES } from './stencil-definition';
 
 @Component({
   selector: 'integra-stencil',

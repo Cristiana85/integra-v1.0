@@ -1,0 +1,27 @@
+<div class="footer">
+
+  <!-- Left Section -->
+  <div class="footer-left">
+    <div class="footer-item">
+      <i class="pi pi-pencil"></i>
+      <span>Note</span>
+    </div>
+    <div class="footer-item">
+      <i class="pi pi-clock"></i>
+      <span>Timer</span>
+    </div>
+  </div>
+
+  <!-- Right Section -->
+  <div class="footer-right">
+    <span>Pagina 1 / 2</span>
+    <p-slider [(ngModel)]="sliderValue" [min]="0" [max]="100" (onChange)="onSliderChange($event)"
+      (onSlideEnd)="onSliderEnd($event)" styleClass="w-14rem"></p-slider>
+    <span class="slider-value">{{ sliderValue }}%</span>
+    <i class="pi pi-desktop"></i>
+    <i class="pi pi-th-large"></i>
+    <i class="pi pi-expand"></i>
+    <i class="pi pi-question-circle"></i>
+  </div>
+
+</div>
