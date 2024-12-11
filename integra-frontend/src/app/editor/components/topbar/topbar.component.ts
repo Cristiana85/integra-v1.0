@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { VIEW_PANEL_SIZE } from '../../utilities/editor-constants';
 
@@ -12,6 +12,8 @@ import { VIEW_PANEL_SIZE } from '../../utilities/editor-constants';
 export class TopbarComponent {
 
   public topbar_height: number = VIEW_PANEL_SIZE.TOPBAR_HEIGHT;
+
+  @Input() projectName: string;
 
   isEditing: boolean = false; // Tracks if the input is open
   inputValue: string = 'test'; // Holds the input value

@@ -1,0 +1,193 @@
+.menu-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.menu-item {
+  padding: 10px 15px;
+  /* Spaziatura interna per le voci */
+  cursor: pointer;
+  /* Il puntatore del mouse cambia */
+  display: flex;
+  align-items: center;
+  transition: background-color 0.2s ease;
+  /* Transizione per hover */
+  font-size: 14px;
+  /* Font più piccolo e leggibile */
+}
+
+.menu-item:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  /* Sfondo leggero su hover */
+}
+
+.menu-item i {
+  margin-right: 10px;
+  /* Distanza tra l'icona e il testo */
+  font-size: 16px;
+  /* Dimensione delle icone */
+  color: #6c757d;
+  /* Colore icona */
+}
+
+/* Stile per il separatore */
+.menu-item.separator {
+  height: 1px;
+  /* Linea sottile */
+  margin: 6px 0;
+  /* Margine sopra e sotto */
+  background-color: #e0e0e0;
+  /* Colore grigio chiaro */
+  pointer-events: none;
+  /* Non cliccabile */
+}
+
+.menu-item.separator:hover {
+  background-color: #e0e0e0;
+  /* Resta invariato su hover */
+  cursor: default;
+  /* Nessun cambiamento del puntatore */
+}
+
+p-overlayPanel {
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+p-divider {
+  margin: 8px 0;
+  /* Margine sopra e sotto */
+  border-top: 1px solid #e0e0e0;
+  /* Linea sottile */
+  opacity: 0.8;
+  /* Leggera opacità per un aspetto discreto */
+}
+
+.card-container {
+  border: 1px solid #e0e0e0;
+  /* Bordo grigio chiaro */
+  border-radius: 8px;
+  /* Angoli leggermente arrotondati */
+  overflow: hidden;
+  /* Per contenere i contenuti */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  position: relative;
+  background-color: #ffffff;
+  /* Colore di sfondo iniziale */
+}
+
+.card-container:hover {
+  transform: scale(1.05);
+  /* Ingrandimento leggero */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  /* Ombra durante l'hover */
+  background-color: #f0f0f0 !important;
+  /* Cambia il colore di sfondo */
+}
+
+/* Immagine del Progetto */
+.image-container {
+  width: 100%;
+  height: 120px;
+  /* Altezza proporzionata */
+  overflow: hidden;
+  position: relative;
+  /* Necessario per posizionare i puntini sopra */
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Ritaglia e adatta l'immagine */
+  border-radius: 6px;
+  /* Angoli arrotondati */
+}
+
+/* Puntini sopra l'immagine */
+/* Puntini sopra l'immagine */
+.ellipsis-menu {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 10px;
+  /* Posizione rispetto all'immagine */
+  right: 10px;
+  z-index: 2;
+  background-color: rgba(255, 255, 255, 0.9);
+  /* Sfondo bianco semi-trasparente */
+  border-radius: 50%;
+  padding: 5px;
+  transition: visibility 0.3s ease, opacity 0.3s ease;
+  cursor: pointer;
+  /* Mostra la manina al passaggio del mouse */
+}
+
+.card-container:hover .ellipsis-menu {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Icona dei puntini */
+.ellipsis-menu i {
+  font-size: 1.2rem;
+  color: #6c757d;
+}
+
+.nav-bar {
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 10px;
+}
+
+.tabs .tab {
+  padding: 10px 20px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  color: #6c757d;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.tabs .tab.active {
+  color: #007bff;
+  border-bottom: 3px solid #007bff;
+}
+
+.tabs .tab:hover {
+  color: #007bff;
+}
+
+.actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.actions button:hover {
+  color: #007bff;
+}
+
+.dropdown select {
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.view-toggle button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.view-toggle button:hover {
+  color: #007bff;
+}
+
+.view-toggle button.active {
+  color: #007bff;
+}

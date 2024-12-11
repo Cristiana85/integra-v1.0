@@ -1,22 +1,19 @@
-import {
-  AfterViewInit,
-  Component,
-  HostListener,
-  OnDestroy,
-  OnInit,
-  Renderer2,
-} from '@angular/core';
-import { Subject } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+import { AfterViewInit, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { EMPTY, Subject } from 'rxjs';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DiagramComponent } from '../../components/diagram/diagram.component';
-import { FooterComponent } from '../../components/footer/footer.component';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 import { StencilComponent } from '../../components/stencil/stencil.component';
 import { TopbarComponent } from '../../components/topbar/topbar.component';
+import { Project } from '../../models/project';
 import { DiagramService } from '../../services/diagram.service';
+import { ProjectService } from '../../services/project.service';
 import {
   VIEW_PANEL_SIZE
 } from '../../utilities/editor-constants';
+import { FooterComponent } from '../../components/footer/footer.component';
 import { RibbonmenuComponent } from '../../components/ribbonmenu/ribbonmenu.component';
 
 @Component({
@@ -28,8 +25,7 @@ import { RibbonmenuComponent } from '../../components/ribbonmenu/ribbonmenu.comp
     TopbarComponent,
     SidebarComponent,
     StencilComponent,
-    FooterComponent,
-    RibbonmenuComponent
+    FooterComponent
   ],
   templateUrl: './editor.component.html',
   styleUrl: './editor.component.scss',
@@ -65,17 +61,22 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
   public diagram_width: number = 0;
   public diagram_height: number = 0;
 
+  projectSelected: Project;
+  projectName: string;
+  lProject: Project[];
+
   constructor(
-    private diagramService: DiagramService,
-    private renderer: Renderer2
-  ) {}
+    protected diagramService: DiagramService,
+    protected projectService: ProjectService,
+    protected route: ActivatedRoute
+  ) {
+  }
 
   ngOnInit(): void {
     this.updateFooterSize();
-    // Simulate loading state
-    setTimeout(() => {
-      this.isLoading = false; // Set to false after content is loaded
-    }, 50000); // Adjust delay as needed
+
+    this.projectName = this.route.snapshot.paramMap.get('name')!;
+    this.load();
   }
 
   ngAfterViewInit(): void {
@@ -83,7 +84,7 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.removeMouseMoveListener();
+    //this.removeMouseMoveListener();
   }
 
   @HostListener('window:focus', ['$event'])
@@ -102,6 +103,36 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
     this.updateFooterSize();
     this.updateDiagramSize();
   }
+
+  load() {
+    this.lProject = [
+      {
+        id: 1,
+        accountId: 1,
+        name: 'Project 1',
+        creationDate: new Date(2024, 11, 3, 15, 30, 45),
+        editingDate: new Date(2024, 11, 15, 15, 30, 45),
+        metadata: null
+      },
+      {
+        id: 2,
+        accountId: 2,
+        name: 'Project 2',
+        creationDate: new Date(2024, 11, 3, 15, 30, 45),
+        editingDate: new Date(2024, 18, 3, 15, 30, 45),
+        metadata: undefined
+      },
+      {
+        id: 3,
+        accountId: 3,
+        name: 'Project 3',
+        creationDate: new Date(2024, 11, 3, 15, 30, 45),
+        editingDate: new Date(2024, 11, 24, 15, 30, 45),
+        metadata: undefined
+      },
+    ];
+  }
+
 
   private updateFooterSize() {
     if (this.isLeftbarVisible) {
@@ -175,47 +206,18 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
     this.sidemenuEvents.next('leftpanel:closed');
   }
 
-  public switchArea(area: 'diagram' | 'tool' | 'diagram-chart'): void {
-    this.activeArea = area;
-  }
-
-  isResizing: boolean = false;
-  sizes: number[] = []; // Store panel sizes
-  private mouseMoveListener: any;
-
-  // Triggered when resizing starts
-  public onSplitterResizeStart(): void {
-    this.isResizing = true;
-    console.log('Resize Started');
-    this.addMouseMoveListener();
-  }
-
-  // Triggered when resizing ends
-  public onSplitterResizeEnd(event: any): void {
-    this.isResizing = false;
-    this.sizes = event.sizes; // Update sizes after resizing
-    console.log('Resize Ended:', event.sizes);
-    this.removeMouseMoveListener();
-  }
-
-  // Add mousemove listener to detect resizing in real-time
-  private addMouseMoveListener(): void {
-    this.mouseMoveListener = this.renderer.listen(
-      'document',
-      'mousemove',
-      (event) => {
-        if (this.isResizing) {
-          console.log('Resizing in progress...', event.screenX); // Handle your logic here
-        }
-      }
-    );
-  }
-  // Remove the mousemove listener to clean up resources
-  private removeMouseMoveListener(): void {
-    if (this.mouseMoveListener) {
-      this.mouseMoveListener();
-      this.mouseMoveListener = null;
+  private handleError(error: HttpErrorResponse, translationMessageLabel: string) {
+    if ([404].includes(error.status)) {
+      alert(translationMessageLabel);
     }
+    return EMPTY;
   }
 
+  onSplitterResizeStart() {
+
+  }
+
+  onSplitterResizeEnd(event) {
+
+  }
 }

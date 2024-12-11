@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { PrimeblocksModule } from 'src/app/shared/primeblocks.module';
-import { AuthService } from 'src/app/shared/services/auth.service.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({

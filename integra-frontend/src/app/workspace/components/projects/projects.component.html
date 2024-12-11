@@ -1,0 +1,92 @@
+<div class="surface-ground">
+  <integra-search [(searchQuery)]="parentSearchQuery" (searchQueryChange)="onSearchChange($event)"></integra-search>
+  <div class="nav-bar flex justify-content-between align-items-center mb-4">
+    <!-- Tab -->
+    <div class="tabs flex">
+      <button class="tab active">My Files</button>
+      <button class="tab">Collaborate with me</button>
+      <button class="tab">My Shares</button>
+    </div>
+
+    <!-- Azioni e Dropdown -->
+    <div class="actions flex align-items-center">
+      <button pButton pRipple icon="pi pi-plus" class="p-button-text mr-2"></button>
+      <button pButton pRipple icon="pi pi-external-link" class="p-button-text mr-2"></button>
+      <button pButton pRipple icon="pi pi-folder-open" class="p-button-text mr-2"></button>
+
+      <p-divider layout="vertical"></p-divider>
+
+      <div class="view-toggle flex ml-3">
+        <button pButton pRipple icon="pi pi-th-large" class="p-button-text mr-2"></button>
+        <button pButton pRipple icon="pi pi-list" class="p-button-text"></button>
+      </div>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="col-12 md:col-6 xl:col-3 p-3" *ngFor="let project of filteredProjects">
+      <div class="surface-card shadow-2 border-round p-3">
+        <div class="flex justify-content-between align-items-center">
+          <div class="image-container">
+            <img [src]="project.image || 'https://via.placeholder.com/200x120.png?text=Project+Image'"
+              alt="{{ project.name }}" class="project-image" />
+          </div>
+
+          <!-- Tre puntini (inizialmente nascosti) -->
+          <div class="ellipsis-menu" (click)="menu.toggle($event)">
+            <i class="pi pi-ellipsis-h"></i>
+          </div>
+        </div>
+
+        <p-overlayPanel #menu [dismissable]="true">
+          <ul class="list-none p-0 m-0 menu-list">
+            <!-- Prima sezione -->
+            <li class="menu-item" (click)="onMenuItemClick('open', project.name, menu)">
+              <i class="pi pi-folder-open mr-2"></i> Open Project
+            </li>
+            <li class="menu-item" (click)="onMenuItemClick('openInNewTab', project.name, menu)">
+              <i class="pi pi-external-link mr-2"></i> Open in New Tab
+            </li>
+
+            <!-- Divisore -->
+            <p-divider></p-divider>
+
+            <!-- Seconda sezione -->
+            <li class="menu-item" (click)="inviteToCollaborate(project.name)">
+              <i class="pi pi-users mr-2"></i> Invite to Collaborate
+            </li>
+            <li class="menu-item" (click)="makeCopy(project.name)">
+              <i class="pi pi-copy mr-2"></i> Make a Copy
+            </li>
+            <li class="menu-item" (click)="rename(project.name)">
+              <i class="pi pi-pencil mr-2"></i> Rename
+            </li>
+
+            <!-- Divisore -->
+            <p-divider></p-divider>
+
+            <!-- Terza sezione -->
+            <li class="menu-item" (click)="delete(project.name)">
+              <i class="pi pi-trash mr-2"></i> Delete
+            </li>
+          </ul>
+        </p-overlayPanel>
+
+        <!-- Dettagli aggiuntivi -->
+        <ul class="list-none m-0 p-0">
+          <li class="px-0 py-2 flex justify-content-between align-items-center border-bottom-1 surface-border">
+            <span class="text-600 font-medium text-sm">Name</span>
+            <span class="text-900 font-medium text-sm">{{ project.name }}</span>
+          </li>
+          <li class="px-0 py-2 flex justify-content-between align-items-center border-bottom-1 surface-border">
+            <span class="text-600 font-medium text-sm">Creation date</span>
+            <span class="text-900 font-medium text-sm">{{ project.creationDate }}</span>
+          </li>
+          <li class="px-0 py-2 flex justify-content-between align-items-center">
+            <span class="text-600 font-medium text-sm">Editing date</span>
+            <span class="text-900 font-medium text-sm">{{ project.editingDate }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
