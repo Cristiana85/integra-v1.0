@@ -13,19 +13,34 @@ import { ProjectService } from '../../services/project.service';
 import {
   VIEW_PANEL_SIZE
 } from '../../utilities/editor-constants';
+import { FooterComponent } from '../../components/footer/footer.component';
+import { RibbonmenuComponent } from '../../components/ribbonmenu/ribbonmenu.component';
 
 @Component({
   selector: 'integra-editor',
   standalone: true,
-  imports: [SharedModule, DiagramComponent, TopbarComponent, SidebarComponent, StencilComponent],
+  imports: [
+    SharedModule,
+    DiagramComponent,
+    TopbarComponent,
+    SidebarComponent,
+    StencilComponent,
+    FooterComponent
+  ],
   templateUrl: './editor.component.html',
   styleUrl: './editor.component.scss',
 })
 export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  public isLoading: boolean = false; // Control loading state
+
   public sidemenuEvents = new Subject<string>();
 
-  public selectedTabName: string = "";
+  public activeArea: 'diagram' | 'tool' | 'diagram-chart' = 'diagram';
+
+  public splitterOrientation: 'vertical' | 'horizontal' = 'horizontal';
+
+  public selectedTabName: string = '';
 
   public isPromobarVisible: boolean = false;
   public isLeftbarVisible: boolean = false;
@@ -69,6 +84,7 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    //this.removeMouseMoveListener();
   }
 
   @HostListener('window:focus', ['$event'])
@@ -148,37 +164,37 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
     switch (event) {
       case 'dashboard:clicked': {
         this.isLeftbarVisible = true;
-        this.selectedTabName = event.split(":")[0];
+        this.selectedTabName = event.split(':')[0];
         this.updateFooterSize();
         break;
       }
       case 'Bookmarks:clicked': {
         this.isLeftbarVisible = true;
-        this.selectedTabName = event.split(":")[0];
+        this.selectedTabName = event.split(':')[0];
         this.updateFooterSize();
         break;
       }
       case 'People:clicked': {
         this.isLeftbarVisible = true;
-        this.selectedTabName = event.split(":")[0];
+        this.selectedTabName = event.split(':')[0];
         this.updateFooterSize();
         break;
       }
       case 'Comments:clicked': {
         this.isLeftbarVisible = true;
-        this.selectedTabName = event.split(":")[0];
+        this.selectedTabName = event.split(':')[0];
         this.updateFooterSize();
         break;
       }
       case 'Calendar:clicked': {
         this.isLeftbarVisible = true;
-        this.selectedTabName = event.split(":")[0];
+        this.selectedTabName = event.split(':')[0];
         this.updateFooterSize();
         break;
       }
       case 'Settings:clicked': {
         this.isLeftbarVisible = true;
-        this.selectedTabName = event.split(":")[0];
+        this.selectedTabName = event.split(':')[0];
         this.updateFooterSize();
         break;
       }
@@ -195,5 +211,13 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
       alert(translationMessageLabel);
     }
     return EMPTY;
+  }
+
+  onSplitterResizeStart() {
+
+  }
+
+  onSplitterResizeEnd(event) {
+
   }
 }
