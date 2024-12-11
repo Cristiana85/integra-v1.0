@@ -1,6 +1,6 @@
-<div class="min-h-screen flex surface-ground">
-  <div id="app-sidebar-1"
-    class="surface-section h-screen hidden lg:block flex-shrink-0 fixed lg:sticky left-0 top-0 z-1 border-right-1 surface-border select-none"
+<div class="min-h-screen flex relative lg:static surface-ground">
+  <div id="app-sidebar"
+    class="surface-section h-full lg:h-auto hidden lg:block flex-shrink-0 absolute lg:static left-0 top-0 z-1 border-right-1 surface-border select-none"
     style="width:280px">
     <div class="flex flex-column h-full">
       <div class="flex align-items-center px-5 flex-shrink-0" style="height:60px">
@@ -10,7 +10,7 @@
         <ul class="list-none p-3 m-0">
           <li>
             <div pRipple class="p-3 flex align-items-center justify-content-between text-600 cursor-pointer"
-              pStyleClass="@next" enterFormClass="hidden" enterActiveClass="slidedown" leaveToClass="hidden"
+              pStyleClass="@next" enterClass="hidden" enterActiveClass="slidedown" leaveToClass="hidden"
               leaveActiveClass="slideup">
               <span class="font-medium">FAVORITES</span>
               <i class="pi pi-chevron-down"></i>
@@ -33,7 +33,7 @@
               <li>
                 <a pRipple
                   class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors"
-                  pStyleClass="@next" enterFormClass="hidden" enterActiveClass="slidedown" leaveToClass="hidden"
+                  pStyleClass="@next" enterClass="hidden" enterActiveClass="slidedown" leaveToClass="hidden"
                   leaveActiveClass="slideup">
                   <i class="pi pi-chart-line mr-2"></i>
                   <span class="font-medium">Reports</span>
@@ -44,7 +44,7 @@
                   <li>
                     <a pRipple
                       class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors"
-                      pStyleClass="@next" enterFormClass="hidden" enterActiveClass="slidedown" leaveToClass="hidden"
+                      pStyleClass="@next" enterClass="hidden" enterActiveClass="slidedown" leaveToClass="hidden"
                       leaveActiveClass="slideup">
                       <i class="pi pi-chart-line mr-2"></i>
                       <span class="font-medium">Revenue</span>
@@ -114,14 +114,14 @@
         <ul class="list-none p-3 m-0">
           <li>
             <div pRipple class="p-3 flex align-items-center justify-content-between text-600 cursor-pointer"
-              pStyleClass="@next" enterFormClass="hidden" enterActiveClass="slidedown" leaveToClass="hidden"
+              pStyleClass="@next" enterClass="hidden" enterActiveClass="slidedown" leaveToClass="hidden"
               leaveActiveClass="slideup">
               <span class="font-medium">APPLICATION</span>
               <i class="pi pi-chevron-down"></i>
             </div>
             <ul class="list-none p-0 m-0 overflow-hidden">
               <li>
-                <a [routerLink]="['projects']" pRipple
+                <a pRipple [routerLink]="['projects']"
                   class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors">
                   <i class="pi pi-folder mr-2"></i>
                   <span class="font-medium">Projects</span>
@@ -161,9 +161,9 @@
       class="flex justify-content-between align-items-center px-5 surface-0 border-bottom-1 surface-border relative lg:static"
       style="height:60px">
       <div class="flex">
-        <a pRipple class="cursor-pointer inline-flex align-items-center justify-content-center lg:hidden text-700 mr-3"
-          pStyleClass="#app-sidebar-1" enterFormClass="hidden" enterActiveClass="fadeinleft" leaveToClass="hidden"
-          leaveActiveClass="fadeoutleft" [hideOnOutsideClick]="true">
+        <a pRipple class="cursor-pointer block lg:hidden text-700 mr-3" pStyleClass="#app-sidebar" enterClass="hidden"
+          enterActiveClass="fadeinleft" leaveToClass="hidden" leaveActiveClass="fadeoutleft"
+          [hideOnOutsideClick]="true">
           <i class="pi pi-bars text-4xl"></i>
         </a>
         <span class="p-input-icon-left">
@@ -171,30 +171,30 @@
           <input type="text" pInputText class="border-none w-10rem sm:w-20rem" placeholder="Search">
         </span>
       </div>
-      <a pRipple class="cursor-pointer block lg:hidden text-700" pStyleClass="@next" enterFormClass="hidden"
+      <a pRipple class="cursor-pointer block lg:hidden text-700" pStyleClass="@next" enterClass="hidden"
         enterActiveClass="fadein" leaveToClass="hidden" leaveActiveClass="fadeout" [hideOnOutsideClick]="true">
         <i class="pi pi-ellipsis-v text-2xl"></i>
       </a>
       <ul
         class="list-none p-0 m-0 hidden lg:flex lg:align-items-center select-none lg:flex-row
-              surface-section border-1 lg:border-none surface-border right-0 top-100 z-1 shadow-2 lg:shadow-none absolute lg:static">
+                surface-section border-1 lg:border-none surface-border right-0 top-100 z-1 shadow-2 lg:shadow-none absolute lg:static">
         <li>
           <a pRipple class="flex p-3 lg:px-3 lg:py-2 align-items-center text-600 hover:text-900 hover:surface-100 font-medium border-round cursor-pointer
-                      transition-duration-150 transition-colors">
+                        transition-duration-150 transition-colors">
             <i class="pi pi-inbox text-base lg:text-2xl mr-2 lg:mr-0"></i>
             <span class="block lg:hidden font-medium">Inbox</span>
           </a>
         </li>
         <li>
           <a pRipple class="flex p-3 lg:px-3 lg:py-2 align-items-center text-600 hover:text-900 hover:surface-100 font-medium border-round cursor-pointer
-                      transition-duration-150 transition-colors">
+                        transition-duration-150 transition-colors">
             <i class="pi pi-bell text-base lg:text-2xl mr-2 lg:mr-0" pBadge severity="danger"></i>
             <span class="block lg:hidden font-medium">Notifications</span>
           </a>
         </li>
         <li class="border-top-1 surface-border lg:border-top-none">
           <a pRipple class="flex p-3 lg:px-3 lg:py-2 align-items-center hover:surface-100 font-medium border-round cursor-pointer
-                      transition-duration-150 transition-colors">
+                        transition-duration-150 transition-colors">
             <img src="assets/images/blocks/avatars/circle/avatar-f-1.png" class="mr-3 lg:mr-0"
               style="width: 32px; height: 32px" />
             <div class="block lg:hidden">
@@ -205,10 +205,81 @@
         </li>
       </ul>
     </div>
-    <div class="p-5 flex flex-column flex-auto">
-      <div class="border-2 border-dashed surface-border border-round surface-section flex-auto">
+    <div class="flex flex-column flex-auto">
+      <div class="surface-section p-5">
         <router-outlet></router-outlet>
       </div>
+      <!--<div class="p-5">
+        <div class="grid">
+          <div class="col-12 lg:col-6 xl:col-3">
+            <div class="surface-card shadow-2 p-3 border-1 border-50 border-round">
+              <div class="flex justify-content-between mb-3">
+                <div>
+                  <span class="block text-500 font-medium mb-3">Orders</span>
+                  <div class="text-900 font-medium text-xl">152</div>
+                </div>
+                <div class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                  style="width:2.5rem;height:2.5rem">
+                  <i class="pi pi-shopping-cart text-blue-500 text-xl"></i>
+                </div>
+              </div>
+              <span class="text-green-500 font-medium">24 new </span>
+              <span class="text-500">since last visit</span>
+            </div>
+          </div>
+          <div class="col-12 lg:col-6 xl:col-3">
+            <div class="surface-card shadow-2 p-3 border-1 border-50 border-round">
+              <div class="flex justify-content-between mb-3">
+                <div>
+                  <span class="block text-500 font-medium mb-3">Revenue</span>
+                  <div class="text-900 font-medium text-xl">$2.100</div>
+                </div>
+                <div class="flex align-items-center justify-content-center bg-orange-100 border-round"
+                  style="width:2.5rem;height:2.5rem">
+                  <i class="pi pi-map-marker text-orange-500 text-xl"></i>
+                </div>
+              </div>
+              <span class="text-green-500 font-medium">%52+ </span>
+              <span class="text-500">since last week</span>
+            </div>
+          </div>
+          <div class="col-12 lg:col-6 xl:col-3">
+            <div class="surface-card shadow-2 p-3 border-1 border-50 border-round">
+              <div class="flex justify-content-between mb-3">
+                <div>
+                  <span class="block text-500 font-medium mb-3">Customers</span>
+                  <div class="text-900 font-medium text-xl">28441</div>
+                </div>
+                <div class="flex align-items-center justify-content-center bg-cyan-100 border-round"
+                  style="width:2.5rem;height:2.5rem">
+                  <i class="pi pi-inbox text-cyan-500 text-xl"></i>
+                </div>
+              </div>
+              <span class="text-green-500 font-medium">520 </span>
+              <span class="text-500">newly registered</span>
+            </div>
+          </div>
+          <div class="col-12 lg:col-6 xl:col-3">
+            <div class="surface-card shadow-2 p-3 border-1 border-50 border-round">
+              <div class="flex justify-content-between mb-3">
+                <div>
+                  <span class="block text-500 font-medium mb-3">Comments</span>
+                  <div class="text-900 font-medium text-xl">152 Unread</div>
+                </div>
+                <div class="flex align-items-center justify-content-center bg-purple-100 border-round"
+                  style="width:2.5rem;height:2.5rem">
+                  <i class="pi pi-comment text-purple-500 text-xl"></i>
+                </div>
+              </div>
+              <span class="text-green-500 font-medium">85 </span>
+              <span class="text-500">responded</span>
+            </div>
+          </div>
+          <div class="col-12 xl:col-12">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>-->
     </div>
   </div>
 </div>

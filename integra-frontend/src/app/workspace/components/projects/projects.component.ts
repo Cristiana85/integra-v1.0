@@ -5,13 +5,16 @@ import { Project } from 'src/app/editor/models/project';
 import { ProjectService } from 'src/app/editor/services/project.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SearchComponent } from "../../../shared/components/search/search.component";
+import { AddProjectsComponent } from "../add-projects/add-projects.component";
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'integra-projects',
   standalone: true,
   imports: [
     SharedModule,
-    SearchComponent
+    SearchComponent,
+    AddProjectsComponent
   ],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss'
@@ -22,11 +25,17 @@ export class ProjectsComponent implements OnInit {
   parentSearchQuery: string = ''; // Stato locale della query di ricerca
   filteredProjects: any[] = []; // Progetti filtrati (modifica in base alla tua struttura)
 
+  //Add Project
+  visiblePopUp: boolean = false;
+  projectEmpty: Project;
+
   id?: number;
   accountId?: number;
   name?: string;
   creationDate?: Date;
   editingDate?: Date;
+
+  activeTabAction: any;
 
   lProject: Project[] = [
     {
@@ -60,7 +69,8 @@ export class ProjectsComponent implements OnInit {
 
   constructor(
     protected projectService: ProjectService,
-    protected router: Router
+    protected router: Router,
+    protected authService: AuthService
   ) {
   }
 
@@ -71,25 +81,25 @@ export class ProjectsComponent implements OnInit {
     this.filteredProjects = [...this.lProject];
   }
 
-  onMenuItemClick(action: string, projectName: string, menu: OverlayPanel): void {
+  onMenuItemClick(action: string, project: Project, menu: OverlayPanel): void {
     // Nasconde il menu
     menu.hide();
 
     // Gestisce l'azione selezionata
     switch (action) {
       case 'open':
-        this.openProject(projectName);
+        this.openProject(project);
         break;
       case 'openInNewTab':
-        this.openInNewTab(projectName);
+        this.openInNewTab(project);
         break;
       default:
         console.log('Azione non riconosciuta:', action);
     }
   }
 
-  openProject(projectName: string) {
-    this.router.navigate([`/projects/${projectName}`]);
+  openProject(project: Project) {
+    this.router.navigate([`/projects/${project.name}`]);
     this.hideMenu();
   }
 
@@ -128,8 +138,8 @@ export class ProjectsComponent implements OnInit {
   downloadSource(projectName: string) {
   }
 
-  openInNewTab(projectName: string) {
-    window.open(`/projects/${projectName}`, '_blank');
+  openInNewTab(project: Project) {
+    window.open(`/projects/${project.name}`, '_blank');
     this.hideMenu();
   }
 
@@ -160,5 +170,28 @@ export class ProjectsComponent implements OnInit {
         project.name.toLowerCase().includes(this.parentSearchQuery.toLowerCase())
       );
     }
+  }
+
+  openPopup(): void {
+    this.projectEmpty = {
+      id: undefined,
+      accountId: this.authService.getAccountId(),
+      name: '',
+      image: '',
+      creationDate: new Date(2024, 11, 3, 15, 30, 45),
+      editingDate: new Date(2024, 11, 24, 15, 30, 45),
+      metadata: undefined
+    };
+    this.visiblePopUp = true;
+  }
+
+  createProject(project: any) { //FIXME
+    console.log('Project Created:', project);
+    this.filteredProjects.push(project);
+    this.closePopup();
+  }
+
+  closePopup(): void {
+    this.visiblePopUp = false;
   }
 }

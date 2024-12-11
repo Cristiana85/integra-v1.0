@@ -65,24 +65,31 @@ p-divider {
 
 .card-container {
   border: 1px solid #e0e0e0;
-  /* Bordo grigio chiaro */
   border-radius: 8px;
-  /* Angoli leggermente arrotondati */
   overflow: hidden;
-  /* Per contenere i contenuti */
   transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
   position: relative;
   background-color: #ffffff;
-  /* Colore di sfondo iniziale */
 }
 
 .card-container:hover {
-  transform: scale(1.05);
-  /* Ingrandimento leggero */
+  transform: scale(1.03);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  /* Ombra durante l'hover */
-  background-color: #f0f0f0 !important;
-  /* Cambia il colore di sfondo */
+  background-color: #eceaea6b !important;
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Ritaglia e adatta l'immagine */
+  border-radius: 4px;
+  /* Angoli arrotondati */
+}
+
+.card-container:hover .ellipsis-menu {
+  visibility: visible;
+  opacity: 1;
 }
 
 /* Immagine del Progetto */
@@ -93,45 +100,6 @@ p-divider {
   overflow: hidden;
   position: relative;
   /* Necessario per posizionare i puntini sopra */
-}
-
-.project-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  /* Ritaglia e adatta l'immagine */
-  border-radius: 6px;
-  /* Angoli arrotondati */
-}
-
-/* Puntini sopra l'immagine */
-/* Puntini sopra l'immagine */
-.ellipsis-menu {
-  visibility: hidden;
-  opacity: 0;
-  position: absolute;
-  top: 10px;
-  /* Posizione rispetto all'immagine */
-  right: 10px;
-  z-index: 2;
-  background-color: rgba(255, 255, 255, 0.9);
-  /* Sfondo bianco semi-trasparente */
-  border-radius: 50%;
-  padding: 5px;
-  transition: visibility 0.3s ease, opacity 0.3s ease;
-  cursor: pointer;
-  /* Mostra la manina al passaggio del mouse */
-}
-
-.card-container:hover .ellipsis-menu {
-  visibility: visible;
-  opacity: 1;
-}
-
-/* Icona dei puntini */
-.ellipsis-menu i {
-  font-size: 1.2rem;
-  color: #6c757d;
 }
 
 .nav-bar {
@@ -190,4 +158,39 @@ p-divider {
 
 .view-toggle button.active {
   color: #007bff;
+}
+
+.image-container {
+  position: relative;
+}
+
+.project-image {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+/* Puntini sopra l'immagine */
+/* Tre puntini sopra l'immagine */
+.ellipsis-menu {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  transition: visibility 0.3s ease, opacity 0.3s ease;
+  cursor: pointer;
+}
+
+.card-container:hover .ellipsis-menu {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Icona dei puntini */
+.ellipsis-menu i {
+  font-size: 1.2rem;
+  color: #6c757d;
 }
