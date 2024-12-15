@@ -35,9 +35,9 @@ public class Project implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Convert(converter = JsonConverter.class)
-    @Column(name = "metadata", columnDefinition = "jsonb") // Specifico per PostgreSQL
-    private Map<String, Object> metadata;
+//    @Convert(converter = JsonConverter.class)
+//    @Column(name = "metadata", columnDefinition = "jsonb") // Specifico per PostgreSQL
+//    private Map<String, Object> metadata;
 
 //    @ManyToOne(optional = false)
 //    @JoinColumn(name = "account_id", referencedColumnName = "id", insertable=false, updatable=false)

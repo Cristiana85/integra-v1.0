@@ -1,196 +1,71 @@
-.menu-list {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
-.menu-item {
-  padding: 10px 15px;
-  /* Spaziatura interna per le voci */
-  cursor: pointer;
-  /* Il puntatore del mouse cambia */
+.card-container {
+  height: 150px;
+  /* Altezza aumentata */
+  width: 180px;
+  /* Larghezza invariata */
   display: flex;
   align-items: center;
-  transition: background-color 0.2s ease;
-  /* Transizione per hover */
-  font-size: 14px;
-  /* Font più piccolo e leggibile */
-}
-
-.menu-item:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-  /* Sfondo leggero su hover */
-}
-
-.menu-item i {
-  margin-right: 10px;
-  /* Distanza tra l'icona e il testo */
-  font-size: 16px;
-  /* Dimensione delle icone */
-  color: #6c757d;
-  /* Colore icona */
-}
-
-/* Stile per il separatore */
-.menu-item.separator {
-  height: 1px;
-  /* Linea sottile */
-  margin: 6px 0;
-  /* Margine sopra e sotto */
-  background-color: #e0e0e0;
-  /* Colore grigio chiaro */
-  pointer-events: none;
-  /* Non cliccabile */
-}
-
-.menu-item.separator:hover {
-  background-color: #e0e0e0;
-  /* Resta invariato su hover */
-  cursor: default;
-  /* Nessun cambiamento del puntatore */
-}
-
-p-overlayPanel {
-  transition: opacity 0.2s ease, visibility 0.2s ease;
-}
-
-p-divider {
-  margin: 8px 0;
-  /* Margine sopra e sotto */
-  border-top: 1px solid #e0e0e0;
-  /* Linea sottile */
-  opacity: 0.8;
-  /* Leggera opacità per un aspetto discreto */
-}
-
-.card-container {
+  justify-content: center;
   border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-  position: relative;
-  background-color: #ffffff;
+  background-color: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card-container:hover {
-  transform: scale(1.03);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  background-color: #eceaea6b !important;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.project-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  /* Ritaglia e adatta l'immagine */
-  border-radius: 4px;
-  /* Angoli arrotondati */
+.card-content {
+  text-align: center;
 }
 
-.card-container:hover .ellipsis-menu {
-  visibility: visible;
-  opacity: 1;
+.icon-container {
+  width: 50px;
+  /* Icona proporzionata */
+  height: 50px;
+  background-color: #f5f5f5;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Immagine del Progetto */
-.image-container {
-  width: 100%;
-  height: 120px;
-  /* Altezza proporzionata */
-  overflow: hidden;
-  position: relative;
-  /* Necessario per posizionare i puntini sopra */
+.text-lg {
+  font-size: 0.85rem;
 }
 
-.nav-bar {
-  border-bottom: 1px solid #e0e0e0;
-  padding-bottom: 10px;
+.bg-blue-gradient {
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
 }
 
-.tabs .tab {
-  padding: 10px 20px;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: bold;
+.bg-orange-gradient {
+  background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+}
+
+.text-gray-700 {
   color: #6c757d;
-  border-bottom: 3px solid transparent;
-  transition: all 0.3s ease;
 }
 
-.tabs .tab.active {
-  color: #007bff;
-  border-bottom: 3px solid #007bff;
+.text-blue-700 {
+  color: #1e88e5;
 }
 
-.tabs .tab:hover {
-  color: #007bff;
+.text-orange-700 {
+  color: #ff9800;
 }
 
-.actions button {
-  background: none;
-  border: none;
-  cursor: pointer;
+/* Contenitore dell'icona */
+.square-icon {
+  width: 30px;
+  /* Altezza e larghezza uguali per renderlo quadrato */
+  height: 30px;
+  border-radius: 8px;
+  /* Angoli leggermente arrotondati */
 }
 
-.actions button:hover {
-  color: #007bff;
-}
-
-.dropdown select {
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
-  padding: 5px 10px;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.view-toggle button {
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.view-toggle button:hover {
-  color: #007bff;
-}
-
-.view-toggle button.active {
-  color: #007bff;
-}
-
-.image-container {
-  position: relative;
-}
-
-.project-image {
-  width: 100%;
-  height: auto;
-  border-radius: 6px;
-  object-fit: cover;
-}
-
-/* Puntini sopra l'immagine */
-/* Tre puntini sopra l'immagine */
-.ellipsis-menu {
-  visibility: hidden;
-  opacity: 0;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 2;
-  transition: visibility 0.3s ease, opacity 0.3s ease;
-  cursor: pointer;
-}
-
-.card-container:hover .ellipsis-menu {
-  visibility: visible;
-  opacity: 1;
-}
-
-/* Icona dei puntini */
-.ellipsis-menu i {
-  font-size: 1.2rem;
-  color: #6c757d;
+/* Icona leggermente più piccola */
+.icon-container i {
+  font-size: 1.5rem;
+  /* Riduce leggermente la dimensione dell'icona */
 }

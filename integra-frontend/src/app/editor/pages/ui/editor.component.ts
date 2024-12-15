@@ -109,11 +109,17 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   load() {
+<<<<<<< HEAD
     this.projectService.getProject(1).subscribe(
       res => {
         this.project = res;
       }
     )
+=======
+    this.projectService.getProject(1).subscribe(res => {
+      this.projectSelected = res;
+    })
+>>>>>>> b16b59e8051534536c93228213beb2f0a0975647
   }
 
 

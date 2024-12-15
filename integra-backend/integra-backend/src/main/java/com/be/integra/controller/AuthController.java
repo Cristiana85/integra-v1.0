@@ -1,5 +1,6 @@
 package com.be.integra.controller;
 
+import com.be.integra.dto.ResultDTO;
 import com.be.integra.entity.Account;
 import com.be.integra.security.authentication.AuthRequest;
 import com.be.integra.security.authentication.ForgotPasswordRequest;
@@ -20,14 +21,13 @@ public class AuthController {
     private AccountService accountService;
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody AuthRequest authRequest) {
-        accountService.register(authRequest.getEmail(), authRequest.getPassword());
-        return ResponseEntity.ok("Registrazione completata");
+    public ResponseEntity<ResultDTO<Account>> register(@RequestBody Account account) {
+        return new ResponseEntity<>(accountService.register(account), HttpStatus.OK);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody AuthRequest authRequest) {
-        return accountService.login(authRequest.getEmail(), authRequest.getPassword());
+    public ResponseEntity<ResultDTO<Account>> login(@RequestBody AuthRequest authRequest) {
+        return new ResponseEntity<>(accountService.login(authRequest.getEmail(), authRequest.getPassword()), HttpStatus.OK);
     }
 
     @PostMapping("/forgot-password")

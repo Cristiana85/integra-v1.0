@@ -40,6 +40,9 @@ public class Account implements Serializable {
 	@Column(name = "surname")
     private String surname;
 
+	@Column(name = "token")
+	private String token;
+
 	@Column(name = "reset_token")
 	private String resetToken;
 
