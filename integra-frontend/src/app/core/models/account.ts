@@ -6,6 +6,7 @@ export class Account {
   active?: boolean;
   name?: string;
   surname?: string;
+  subscription?: string;
 
   /*
     private String resetToken;
@@ -15,3 +16,4 @@ export class Account {
     private Integer failedAttempts;
     private Boolean mustChangePassword;*/
 }
+

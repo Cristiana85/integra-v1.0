@@ -15,6 +15,7 @@ import {
 } from '../../utilities/editor-constants';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { RibbonmenuComponent } from '../../components/ribbonmenu/ribbonmenu.component';
+import { ProjectDialogComponent } from '../dialog/project-dialog/project-dialog.component';
 
 @Component({
   selector: 'integra-editor',
@@ -25,7 +26,8 @@ import { RibbonmenuComponent } from '../../components/ribbonmenu/ribbonmenu.comp
     TopbarComponent,
     SidebarComponent,
     StencilComponent,
-    FooterComponent
+    FooterComponent,
+    ProjectDialogComponent
   ],
   templateUrl: './editor.component.html',
   styleUrl: './editor.component.scss',

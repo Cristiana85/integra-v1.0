@@ -3,18 +3,16 @@
   /* General Styling */
   .topbar {
     display: flex;
+    width: 100%;
     justify-content: space-between;
+    -webkit-box-align: center;
     align-items: center;
-    //background: linear-gradient(to right, #81bcce, #0072ff);
-    //background: linear-gradient(to right, #81bcce, #117cff);
-    //background: linear-gradient(to right, #4a6c76, #0072ff);
-    //background: rgba(247, 248, 249, 1);
-    //background-color: #f0f1f5;
-    background-color: #416ea6;
+    background: rgb(254, 254, 254);
     padding: 10px 10px;
-    border-bottom: 1px solid #ddd;
-    font-family: Arial, sans-serif;
-    color: white;
+    border-bottom: 1px solid rgb(232, 232, 232);
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
   }
 
   /* Left Section */
@@ -24,35 +22,151 @@
     gap: 5px;
   }
 
+  .icon-dashboard {
+    background: url('../../../../assets/icons/editor/wizard.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: inline-block;
+    height: 16px;
+    width: 23px;
+  }
+
+  .icon-undo {
+    background: url('../../../../assets/icons/editor/turn-left.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+  }
+
+  .icon-redo {
+    background: url('../../../../assets/icons/editor/turn-right.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+  }
+
+  .icon-cancel {
+    background: url('../../../../assets/icons/editor/wizard.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: inline-block;
+    height: 16px;
+    width: 23px;
+  }
+
   /* text input */
   .project-name {
-    font-size: 16px;
-    font-weight: 100;
     padding-left: 10px;
-    padding-right: 5px;
+    padding-right: 10px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-radius: 12px;
+    max-width: 100%;
+    overflow: hidden;
+    cursor: pointer;
+    /* text style */
+    font-family: Poppins;
+    line-height: 16px;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgb(3, 3, 3);
+    font-variant-ligatures: no-common-ligatures;
+    letter-spacing: -0.1px;
+  }
+
+  .project-name:hover {
+    background-color: rgb(232, 232, 232);
   }
 
   .free-badge {
-    background-color: #e0f7fa;
-    color: #00796b;
+    background-color: rgb(232, 232, 232);
+    cursor: pointer;
+    color: rgb(3, 3, 3);
     font-size: 12px;
-    padding: 2px 6px;
-    border-radius: 12px;
+    font-weight: 500;
+    padding: 4px 6px;
+    border-radius: 8px;
+    opacity: 0.8;
   }
 
   .pro-badge {
-    background-color: #620b34;
-    color: #999ceb;
+    background-color: rgb(164, 180, 252);
+    cursor: pointer;
+    color: rgb(255, 255, 255);
     font-size: 12px;
-    padding: 2px 6px;
+    font-weight: 500;
+    padding: 4px 6px;
+    border-radius: 8px;
+    opacity: 1;
+  }
+
+  .undo-redo-btn {
+    align-items: center;
+    justify-content: center;
+    border: none;
     border-radius: 12px;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 8px 8px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+  }
+
+  .undo-redo-btn:hover {
+    background-color: rgb(232, 232, 232);
   }
 
   /* Middle Section */
   .middle-section {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 0px;
+  }
+
+  .layout-tab-switch {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    background-color: rgb(245, 245, 245);
+    border: none;
+    border-radius: 12px;
+    color: rgb(3, 3, 3);
+    cursor: pointer;
+    padding: 5px 5px;
+    transition: background-color 0.3s ease;
+  }
+
+  .layout-tab-switch .p-button {
+    padding: 5px;
+    color: rgb(3, 3, 3);
+  }
+
+  .layout-tab-switch-btn-unselected {
+    background-color: rgb(245, 245, 245);
+    border: none;
+    border-radius: 12px;
+  }
+
+  .layout-tab-switch-btn-unselected:hover {
+    background-color: rgb(232, 232, 232);
+    border: none;
+    border-radius: 6px;
+  }
+
+  .layout-tab-switch-btn-selected {
+    background-color:  rgb(254, 254, 254);
+    box-shadow: rgba(3, 3, 3, 0.08) 0px 2px 8px;
+    border: none;
+    border-radius: 6px;
+  }
+
+  .layout-tab-switch i {
+    font-size: 14px;
+    font-weight: 500;
   }
 
   /* Larger undo button styling */
@@ -199,45 +313,49 @@
     align-items: center;
     justify-content: center;
     border: none;
+    border-radius: 12px;
     background: none;
     cursor: pointer;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 8px;
+    padding-bottom: 8px;
     text-align: center;
     transition: background-color 0.3s ease;
-    color: white;
+    color: rgb(3, 3, 3);
   }
 
   .labeled-button i {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .labeled-button span {
-    margin-top: 10px;
+    margin-top: 2px;
+    margin-left: 4px;
+    margin-right: 4px;
+    /* text style */
+    font-family: Poppins;
+    line-height: 16px;
+    font-size: 12px;
     font-weight: 500;
-    font-size: 13px;
-    //line-height: 12px;
-    //letter-spacing: 0.5px;
-    //word-spacing: 4px;
-    white-space: nowrap;
-    color: white;
+    color: rgb(3, 3, 3);
+    font-variant-ligatures: no-common-ligatures;
+    letter-spacing: -0.1px;
   }
 
   .labeled-button:hover span {
-    color: blue;
+    color: rgb(3, 3, 3);
   }
 
   .labeled-button:hover {
-    background-color: #d9d9da;
-    border-radius: 4px;
-    color: blue;
+    background-color: rgb(232, 232, 232);
+    border-radius: 12px;
+    color: rgb(3, 3, 3);
   }
 
   .separator {
     width: 1px;
     height: 40px;
     background-color: #ccc;
-    margin: 0 15px;
+    margin: 0 5px;
   }
 
 }

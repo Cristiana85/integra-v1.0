@@ -11,8 +11,6 @@ export class ProjectService {
   basePath = environment.apiRoot;
   apiPath = this.basePath + 'projects';
 
-  lProject: Project[] = [];
-
   constructor(
     private http: HttpClient
   ) { }
@@ -26,4 +24,5 @@ export class ProjectService {
     const params = { projectId: projectId };
     return this.http.get<Project>(url, { params: params });
   }
+
 }
