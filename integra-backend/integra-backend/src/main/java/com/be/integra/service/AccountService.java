@@ -96,5 +96,4 @@ public class AccountService {
 
         throw new IllegalArgumentException("Invalid email or password");
     }
-
 }
