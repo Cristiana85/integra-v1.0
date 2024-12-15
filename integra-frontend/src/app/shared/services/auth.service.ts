@@ -22,15 +22,9 @@ export class AuthService {
   login(credentials: { email: string; password: string }): Observable<Result<Account>> {
     return this.http.post<Result<Account>>(`${this.apiPath}/login`, credentials).pipe(
       tap((response) => {
-<<<<<<< HEAD
-        localStorage.setItem(this.tokenKey, response.token);
-        localStorage.setItem(this.accountIdKey, response.accountId.toString());
-        //localStorage.setItem(this.accountNameKey, response.accountName.toString());
-=======
         let account = response.content;
         localStorage.setItem(this.tokenKey, account.token);
         localStorage.setItem(this.accountIdKey, account.id.toString());
->>>>>>> b16b59e8051534536c93228213beb2f0a0975647
       })
     );
   }

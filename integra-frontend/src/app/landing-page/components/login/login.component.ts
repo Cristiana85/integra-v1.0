@@ -40,14 +40,7 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe(
         (response) => {
-<<<<<<< HEAD
-          console.log('Login successful:', response);
-          this.projectService.getProject(1).subscribe(res => {
-            console.log(res);
-          })
-=======
           this.router.navigate(['/editor']);
->>>>>>> b16b59e8051534536c93228213beb2f0a0975647
         },
         (error) => {
           console.error('Login failed:', error);
