@@ -18,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProjectServiceImpl implements ProjectService {
     private final ProjectRepository projectRepository;
+
     @PersistenceContext
     private EntityManager entityManager;
     private final IntegraModelMapper modelMapper;

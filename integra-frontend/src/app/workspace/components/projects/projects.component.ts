@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { OverlayPanel } from 'primeng/overlaypanel';
-import { Project } from 'src/app/editor/models/project';
+import { Project } from 'src/app/core/models/project';
 import { ProjectService } from 'src/app/editor/services/project.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SearchComponent } from "../../../shared/components/search/search.component";

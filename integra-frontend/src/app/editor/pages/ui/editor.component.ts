@@ -7,7 +7,7 @@ import { DiagramComponent } from '../../components/diagram/diagram.component';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 import { StencilComponent } from '../../components/stencil/stencil.component';
 import { TopbarComponent } from '../../components/topbar/topbar.component';
-import { Project } from '../../models/project';
+import { Project } from '../../../core/models/project';
 import { DiagramService } from '../../services/diagram.service';
 import { ProjectService } from '../../services/project.service';
 import {
@@ -105,32 +105,9 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   load() {
-    this.lProject = [
-      {
-        id: 1,
-        accountId: 1,
-        name: 'Project 1',
-        creationDate: new Date(2024, 11, 3, 15, 30, 45),
-        editingDate: new Date(2024, 11, 15, 15, 30, 45),
-        metadata: null
-      },
-      {
-        id: 2,
-        accountId: 2,
-        name: 'Project 2',
-        creationDate: new Date(2024, 11, 3, 15, 30, 45),
-        editingDate: new Date(2024, 18, 3, 15, 30, 45),
-        metadata: undefined
-      },
-      {
-        id: 3,
-        accountId: 3,
-        name: 'Project 3',
-        creationDate: new Date(2024, 11, 3, 15, 30, 45),
-        editingDate: new Date(2024, 11, 24, 15, 30, 45),
-        metadata: undefined
-      },
-    ];
+    this.projectService.getProject(1).subscribe(res => {
+      this.projectSelected = res;
+    })
   }
 
 

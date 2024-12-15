@@ -1,28 +1,62 @@
 <section class="surface-section px-1 py-1 md:px-6 lg:px-4">
-  <div class="flex flex-wrap gap-3 justify-content-between align-items-center">
+  <div class="flex flex-wrap gap-3 justify-content-between align-items-center mb-5">
     <div class="flex flex-column gap-2">
-      <h1 class="m-0 text-900 text-3xl font-medium line-height-3">All Files</h1>
+      <h1 class="m-0 text-900 text-3xl font-medium line-height-3">Start creating</h1>
     </div>
     <div class="flex flex-wrap align-items-center gap-3">
-      <button pButton pRipple label="Upgrade to Pro" class="p-button-text"></button>
-      <button pButton pRipple label="Save Changes"></button>
-      <button pButton pRipple icon="pi pi-ellipsis-v" class="p-button-outlined"></button>
-
-      <p-divider layout="vertical"></p-divider>
-
-      <button pButton pRipple icon="pi pi-plus" class="p-button-text mr-2" (click)="openPopup()"></button>
-      <button pButton pRipple icon="pi pi-external-link" class="p-button-text mr-2"></button>
-      <button pButton pRipple icon="pi pi-folder-open" class="p-button-text mr-2"></button>
-
-      <p-divider layout="vertical"></p-divider>
-
       <div class="view-toggle flex ml-3">
-        <button pButton pRipple icon="pi pi-th-large" class="p-button-text mr-2"></button>
-        <button pButton pRipple icon="pi pi-list" class="p-button-text"></button>
+        <a pRipple class="flex p-3 lg:px-3 lg:py-2 align-items-center text-600 hover:text-900 hover:surface-100 font-medium border-round cursor-pointer
+                        transition-duration-150 transition-colors">
+          <i class="pi pi-bell text-base lg:text-2xl mr-2 lg:mr-0" pBadge severity="danger"></i>
+          <span class="block lg:hidden font-medium">Notifications</span>
+        </a>
       </div>
     </div>
   </div>
+  <div class="grid justify-content-start">
+    <!-- Prima Card -->
+    <div class="col-12 sm:col-6 md:col-3 lg:col-3 p-2">
+      <div class="card-container flex flex-column align-items-start justify-content-start">
+        <div class="icon-container bg-gray-300 square-icon mb-2 flex align-items-center justify-content-center">
+          <i class="pi pi-plus text-xl text-700"></i>
+        </div>
+        <div class="text-container">
+          <div class="text-sm font-medium text-900">New blank project</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seconda Card -->
+    <div class="col-12 sm:col-6 md:col-3 lg:col-3 p-2">
+      <div
+        class="card-container bg-blue-gradient border-round shadow-2 flex flex-column align-items-start justify-content-start">
+        <div class="icon-container bg-blue-100 square-icon mb-2 flex align-items-center justify-content-center">
+          <i class="pi pi-camera text-xl text-blue-500"></i>
+        </div>
+        <div class="text-container">
+          <div class="text-sm font-medium text-900">Start from screenshot</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Terza Card -->
+    <div class="col-12 sm:col-6 md:col-3 lg:col-3 p-2">
+      <div
+        class="card-container bg-orange-gradient border-round shadow-2 flex flex-column align-items-start justify-content-start">
+        <div class="icon-container bg-orange-100 square-icon mb-2 flex align-items-center justify-content-center">
+          <i class="pi pi-layer-group text-xl text-orange-500"></i>
+        </div>
+        <div class="text-container">
+          <div class="text-sm font-medium text-900">Start from template</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="mt-5">
+    <div class="flex flex-column gap-2">
+      <h1 class="m-0 text-900 text-3xl font-medium line-height-3">Projects</h1>
+    </div>
     <ul class="flex align-items-center overflow-x-auto gap-3 px-2 py-3 list-none border-bottom-1 surface-border">
       <li><button pButton pRipple icon="pi pi-user" (click)="activeTabAction = 'myProjects'" label="My Projects"
           [ngClass]="{'p-button-text text-700': activeTabAction !== 'profile'}"></button></li>
@@ -34,7 +68,7 @@
     </ul>
   </div>
   <div class="grid">
-    <div class="col-12 md:col-6 xl:col-3 p-3" *ngFor="let project of filteredProjects">
+    <div class="col-6 sm:col-4 md:col-2 p-2" *ngFor="let project of filteredProjects">
       <div class="surface-card shadow-2 border-round p-3 card-container">
         <!-- Immagine con effetto hover -->
         <div class="image-container">

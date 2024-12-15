@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environment/environment';
 import { tap } from 'rxjs/operators';
+import { Account } from 'src/app/core/models/account';
+import { Result } from 'src/app/core/models/result';
 
 @Injectable({
   providedIn: 'root'
@@ -17,18 +19,24 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  login(credentials: { email: string; password: string }): Observable<any> {
-    return this.http.post(`${this.apiPath}/login`, credentials).pipe(
+  login(credentials: { email: string; password: string }): Observable<Result<Account>> {
+    return this.http.post<Result<Account>>(`${this.apiPath}/login`, credentials).pipe(
       tap((response) => {
-        localStorage.setItem(this.tokenKey, response.token);
-        localStorage.setItem(this.accountIdKey, response.accountId.toString());
-        localStorage.setItem(this.accountNameKey, response.accountName.toString());
+        let account = response.content;
+        localStorage.setItem(this.tokenKey, account.token);
+        localStorage.setItem(this.accountIdKey, account.id.toString());
       })
     );
   }
 
-  register(credentials: { email: string; password: string }): Observable<any> {
-    return this.http.post(`${this.apiPath}/register`, credentials);
+  register(account: Account): Observable<Result<Account>> {
+    return this.http.post<Result<Account>>(`${this.apiPath}/register`, account).pipe(
+      tap((response) => {
+        // localStorage.setItem(this.tokenKey, response.token);
+        // localStorage.setItem(this.accountIdKey, response.accountId.toString());
+        //localStorage.setItem(this.accountNameKey, response.accountName.toString());
+      })
+    );
   }
 
   forgotPassword(credentials: { email: string }): Observable<any> {

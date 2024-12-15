@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { PrimeblocksModule } from 'src/app/shared/primeblocks.module';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -25,13 +26,14 @@ export class RegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,  // Using FormBuilder for easier form creation
     private authService: AuthService,
+    private router: Router
   ) {
     this.registerForm = this.fb.group({
       name: ['', [Validators.required]],
       surname: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      password1: ['', [Validators.required, Validators.minLength(8)]],  // Password validation
-      password2: ['', [Validators.required]]  // Password validation
+      password: ['', [Validators.required, Validators.minLength(8)]],  // Password validation
+      confirmPassowrd: ['', [Validators.required]]  // Password validation
     },
       { validator: this.passwordMatchValidator });
   }
@@ -43,27 +45,27 @@ export class RegisterComponent implements OnInit {
   }
 
   passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
-    const password = control.get('password1')?.value;
-    const confirmPassword = control.get('password2')?.value;
+    const password = control.get('password')?.value;
+    const confirmPassword = control.get('confirmPassowrd')?.value;
     return password === confirmPassword ? null : { passwordsMismatch: true };
   }
 
   checkPasswordsMatch() {
-    const password1 = this.registerForm.get('password1')?.value;
-    const password2 = this.registerForm.get('password2')?.value;
-    this.passwordsMismatch = password1 !== password2;
+    const password = this.registerForm.get('password')?.value;
+    const confirmPassowrd = this.registerForm.get('confirmPassowrd')?.value;
+    this.passwordsMismatch = password !== confirmPassowrd;
   }
 
   registerUser() {
     if (this.registerForm.valid) {
-      console.log(this.registerForm.value);  // Optionally log the form values for debugging
+      console.log(this.registerForm.value);
 
       this.authService.register(this.registerForm.value).subscribe(
         (response) => {
-          alert('Login effettuato con successo');
+          this.router.navigate(['/login']);
         },
         (error) => {
-          alert('Credenziali non valide');
+          alert('Utente già presentre a sistema');
         }
       );
     }

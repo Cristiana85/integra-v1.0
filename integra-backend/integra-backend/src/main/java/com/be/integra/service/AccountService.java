@@ -1,18 +1,16 @@
 package com.be.integra.service;
 
+import com.be.integra.dto.ResultDTO;
 import com.be.integra.entity.Account;
 import com.be.integra.repository.AccountRepository;
 import com.be.integra.security.jwt.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -49,12 +47,33 @@ public class AccountService {
         emailService.sendPasswordResetEmail(user.getEmail(), token);
     }
 
-    public Account register(String email, String password) {
-        Account user = new Account();
-        user.setEmail(email);
-        user.setPassword(passwordEncoder.encode(password));
-        return accountRepository.save(user);
+    public ResultDTO<Account> register(Account account) {
+        Optional<Account> existingAccount = accountRepository.findByEmail(account.getEmail());
+
+        if (existingAccount.isPresent()) {
+            throw new IllegalArgumentException("An account with the provided email already exists.");
+        }
+
+        Account newAccount = new Account();
+        newAccount.setEmail(account.getEmail());
+        newAccount.setPassword(passwordEncoder.encode(account.getPassword())); // Password crittografata
+        newAccount.setName(account.getName());
+        newAccount.setSurname(account.getSurname());
+        newAccount.setActive(Boolean.TRUE);
+        newAccount.setMustChangePassword(Boolean.FALSE);
+        newAccount.setLoginDateTime(new Date().toInstant());
+
+        // Salva il nuovo account nel repository
+        accountRepository.save(newAccount);
+
+        // Recupera l'account appena salvato dal repository per sicurezza
+        Account savedAccount = accountRepository.findByEmail(account.getEmail())
+                .orElseThrow(() -> new IllegalStateException("Account could not be retrieved after saving."));
+
+        // Restituisce il risultato come DTO
+        return new ResultDTO<>(savedAccount);
     }
+
 
     public void resetPassword(String token, String newPassword) {
         Account account = accountRepository.findByResetToken(token).orElseThrow(() -> new RuntimeException("Token invalido"));
@@ -63,18 +82,19 @@ public class AccountService {
         accountRepository.save(account);
     }
 
-    public ResponseEntity<?> login(String email, String password) {
-        Optional<Account> account = accountRepository.findByEmail(email);
+    public ResultDTO<Account> login(String email, String password) {
+        Optional<Account> optionalAccount = accountRepository.findByEmail(email);
 
-        if (account.isPresent() && verifyPassword(password, account.get().getPassword())) {
-            String token = jwtTokenUtil.generateToken(account.get().getEmail(), account.get().getId());
-            Map<String, Object> response = new HashMap<>();
-            response.put("token", token);
-            response.put("accountId", account.get().getId());
+        if (optionalAccount.isPresent() && verifyPassword(password, optionalAccount.get().getPassword())) {
+            Account user = optionalAccount.get();
 
-            return ResponseEntity.ok(response);
+            String token = jwtTokenUtil.generateToken(user.getEmail(), user.getId());
+            user.setToken(token);
+
+            return new ResultDTO<>(user);
         }
 
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenziali non valide");
+        throw new IllegalArgumentException("Invalid email or password");
     }
+
 }

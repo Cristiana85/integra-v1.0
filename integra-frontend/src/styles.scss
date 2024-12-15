@@ -23,7 +23,6 @@ body {
   margin: 0px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow: hidden;
 }
 
 /* Manage tooltip here due to DOM pNG issue */
@@ -32,6 +31,7 @@ body {
   transform: translateY(4px) !important;
   font-size: 14px;
 }
+
 @media (max-width: 868px) {
   /*.cs-tooltip {
     //display: flex;

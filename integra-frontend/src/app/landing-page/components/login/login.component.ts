@@ -38,17 +38,12 @@ export class LoginComponent implements OnInit {
 
   loginUser() {
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);  // Optionally log the form values for debugging
-
       this.authService.login(this.loginForm.value).subscribe(
         (response) => {
-          this.projectService.getProject(1).subscribe(res => {
-            console.log(res);
-          });
-          alert('Login effettuato con successo');
+          this.router.navigate(['/editor']);
         },
         (error) => {
-          alert('Credenziali non valide');
+          console.error('Login failed:', error);
         }
       );
     }
