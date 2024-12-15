@@ -34,6 +34,8 @@ import { ProjectDialogComponent } from '../dialog/project-dialog/project-dialog.
 })
 export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  private project: Project;
+
   public isLoading: boolean = false; // Control loading state
 
   public sidemenuEvents = new Subject<string>();
@@ -78,7 +80,7 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
     this.updateFooterSize();
 
     this.projectName = this.route.snapshot.paramMap.get('name')!;
-    this.load();
+    //this.load();
   }
 
   ngAfterViewInit(): void {
@@ -107,32 +109,11 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   load() {
-    this.lProject = [
-      {
-        id: 1,
-        accountId: 1,
-        name: 'Project 1',
-        creationDate: new Date(2024, 11, 3, 15, 30, 45),
-        editingDate: new Date(2024, 11, 15, 15, 30, 45),
-        metadata: null
-      },
-      {
-        id: 2,
-        accountId: 2,
-        name: 'Project 2',
-        creationDate: new Date(2024, 11, 3, 15, 30, 45),
-        editingDate: new Date(2024, 18, 3, 15, 30, 45),
-        metadata: undefined
-      },
-      {
-        id: 3,
-        accountId: 3,
-        name: 'Project 3',
-        creationDate: new Date(2024, 11, 3, 15, 30, 45),
-        editingDate: new Date(2024, 11, 24, 15, 30, 45),
-        metadata: undefined
-      },
-    ];
+    this.projectService.getProject(1).subscribe(
+      res => {
+        this.project = res;
+      }
+    )
   }
 
 

@@ -22,7 +22,7 @@ export class AuthService {
       tap((response) => {
         localStorage.setItem(this.tokenKey, response.token);
         localStorage.setItem(this.accountIdKey, response.accountId.toString());
-        localStorage.setItem(this.accountNameKey, response.accountName.toString());
+        //localStorage.setItem(this.accountNameKey, response.accountName.toString());
       })
     );
   }

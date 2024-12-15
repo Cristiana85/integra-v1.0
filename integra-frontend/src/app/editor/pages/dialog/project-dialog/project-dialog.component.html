@@ -4,12 +4,13 @@
   [(visible)]="displayDialog"
   [modal]="true"
   [closable]="true"
+  [draggable]="false"
   [style]="{ width: '450px' }"
 >
   <!-- Name Field -->
   <div class="p-field">
     <label for="name">Name</label>
-    <input pInputText id="name" [(ngModel)]="projectName" disabled />
+    <input pInputText id="name" [(ngModel)]="projectName" enable />
   </div>
 
   <!-- Description Field -->
