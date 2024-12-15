@@ -1,12 +1,12 @@
 <div class="editor-container">
+  <integra-project-dialog></integra-project-dialog>
   <div class="editor-promo" *ngIf="isPromobarVisible" [style.height.px]="promo_height"
     [style.minHeight.px]="promo_height">
     Promo
   </div>
   <!-- Header -->
   <div class="editor-header" *ngIf="!isLoading; else skeletonTopbar" [style.height.px]="topbar_height" [style.minHeight.px]="topbar_height">
-    <integra-topbar></integra-topbar>
-    <!-- <integra-ribbonmenu></integra-ribbonmenu> -->
+    <integra-topbar projectName="Untitled Blank Project" subscription="Pro"></integra-topbar>
   </div>
   <!-- Main Content -->
   <div class="editor-main-content">

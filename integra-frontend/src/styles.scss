@@ -15,9 +15,15 @@ html {
   --font-mono: 'Courier New', Courier, monospace;
 }
 
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  text-rendering: optimizelegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
 body {
-  font-family: var(--font-family);
-  font-weight: normal;
   background: var(--surface-ground);
   color: var(--text-color);
   margin: 0px;
@@ -27,19 +33,22 @@ body {
 }
 
 /* Manage tooltip here due to DOM pNG issue */
-.topbar-cs-tooltip {
+
+.topbar-rigt-btn-cs-tooltip {
+  text-align: center;
+  transform: translateX(4px) !important;
+  font-size: 14px;
+}
+
+.topbar-bottom-cs-tooltip {
   text-align: center;
   transform: translateY(4px) !important;
   font-size: 14px;
 }
-@media (max-width: 868px) {
-  /*.cs-tooltip {
-    //display: flex;
-    //align-items: center;
-    display: block !important;
-    text-align: center;
-    transform: translateY(20px) !important;
-    min-width: 140px;
-    font-size: 15px;
-  }*/
+
+.topbar-layout-tab-switch-cs-tooltip {
+  text-align: center;
+  transform: translateY(10px) !important;
+  font-size: 14px;
 }
+

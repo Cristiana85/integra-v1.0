@@ -7,7 +7,7 @@ import { DiagramComponent } from '../../components/diagram/diagram.component';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 import { StencilComponent } from '../../components/stencil/stencil.component';
 import { TopbarComponent } from '../../components/topbar/topbar.component';
-import { Project } from '../../models/project';
+import { Project } from '../../../core/models/project';
 import { DiagramService } from '../../services/diagram.service';
 import { ProjectService } from '../../services/project.service';
 import {
@@ -15,6 +15,7 @@ import {
 } from '../../utilities/editor-constants';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { RibbonmenuComponent } from '../../components/ribbonmenu/ribbonmenu.component';
+import { ProjectDialogComponent } from '../dialog/project-dialog/project-dialog.component';
 
 @Component({
   selector: 'integra-editor',
@@ -25,7 +26,8 @@ import { RibbonmenuComponent } from '../../components/ribbonmenu/ribbonmenu.comp
     TopbarComponent,
     SidebarComponent,
     StencilComponent,
-    FooterComponent
+    FooterComponent,
+    ProjectDialogComponent
   ],
   templateUrl: './editor.component.html',
   styleUrl: './editor.component.scss',
