@@ -40,10 +40,11 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe(
         (response) => {
-          this.router.navigate(['/editor']);
+          this.router.navigate(['/workspace']);
         },
         (error) => {
-          console.error('Login failed:', error);
+          alert('Invalid username or password');
+          //console.error('Login failed:', error);
         }
       );
     }
