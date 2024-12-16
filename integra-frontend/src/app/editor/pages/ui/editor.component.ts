@@ -33,7 +33,7 @@ import { ProjectDialogComponent } from '../dialog/project-dialog/project-dialog.
 })
 export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  public isLoading: boolean = true; // Control loading state
+  public isLoading: boolean = false; // Control loading state
 
   public sidemenuEvents = new Subject<string>();
 
@@ -77,7 +77,7 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
     this.updateFooterSize();
 
     this.projectName = this.route.snapshot.paramMap.get('name')!;
-    this.load();
+    //this.load();
   }
 
   ngAfterViewInit(): void {
