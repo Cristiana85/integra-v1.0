@@ -36,19 +36,20 @@ body {
 .topbar-rigt-btn-cs-tooltip {
   text-align: center;
   transform: translateX(4px) !important;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .topbar-bottom-cs-tooltip {
   text-align: center;
   transform: translateY(4px) !important;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .topbar-layout-tab-switch-cs-tooltip {
   text-align: center;
   transform: translateY(10px) !important;
-  font-size: 14px;
+  font-size: 12px;
+}
 
   @media (max-width: 868px) {
     /*.cs-tooltip {
@@ -61,4 +62,3 @@ body {
     font-size: 15px;
   }*/
   }
-}

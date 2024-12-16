@@ -16,6 +16,9 @@
     <button pButton class="undo-redo-btn" pTooltip="Redo (Ctrl+Y)" tooltipPosition="bottom" tooltipStyleClass="topbar-bottom-cs-tooltip">
       <i class="icon-redo"></i>
     </button>
+    <button pButton class="undo-redo-btn" pTooltip="Delete (Canc)" tooltipPosition="bottom" tooltipStyleClass="topbar-bottom-cs-tooltip">
+      <i class="icon-delete"></i>
+    </button>
   </div>
 
   <!-- Middle Section -->
@@ -24,19 +27,19 @@
     <div class="layout-tab-switch">
       <button pButton [pTooltip]="editorTabSwitchLabel" tooltipPosition="bottom" [ngClass]="editorTabSwitch"
         tooltipStyleClass="topbar-layout-tab-switch-cs-tooltip" (click)="layoutTabSwitch(editorTabSwitchLabel)">
-        <i class="pi pi-external-link"></i>
+        <i class="icon-editor-tab"></i>
       </button>
       <button pButton [pTooltip]="chartTabSwitchLabel" tooltipPosition="bottom" [ngClass]="chartTabSwitch"
         tooltipStyleClass="topbar-layout-tab-switch-cs-tooltip" (click)="layoutTabSwitch(chartTabSwitchLabel)">
-        <i class="pi pi-comments"></i>
+        <i class="icon-chart-tab"></i>
       </button>
       <button pButton [pTooltip]="splitHorzTabSwitchLabel" tooltipPosition="bottom" [ngClass]="splitHorzTabSwitch"
         tooltipStyleClass="topbar-layout-tab-switch-cs-tooltip" (click)="layoutTabSwitch(splitHorzTabSwitchLabel)">
-        <i class="pi pi-th-large"></i>
+        <i class="icon-split-v-tab"></i>
       </button>
       <button pButton [pTooltip]="splitVertTabSwitchLabel" tooltipPosition="bottom" [ngClass]="splitVertTabSwitch"
         tooltipStyleClass="topbar-layout-tab-switch-cs-tooltip" (click)="layoutTabSwitch(splitVertTabSwitchLabel)">
-        <i class="pi pi-th-large"></i>
+        <i class="icon-split-h-tab"></i>
       </button>
     </div>
     <div class="separator"></div>
@@ -47,9 +50,20 @@
     <div class="separator"></div>
     <button pButton pTooltip="Take control (Ctrl+X)" tooltipPosition="bottom" class="labeled-button"
       tooltipStyleClass="topbar-bottom-cs-tooltip">
-      <i class="pi pi-desktop"></i>
+      <i class="icon-comment"></i>
       <span>Comments</span>
     </button>
+    <button pButton pTooltip="Take control (Ctrl+X)" tooltipPosition="bottom" class="labeled-button"
+    tooltipStyleClass="topbar-bottom-cs-tooltip">
+    <i class="icon-export"></i>
+    <span>Exports</span>
+    </button>
+    <button pButton pTooltip="Take control (Ctrl+X)" tooltipPosition="bottom" class="labeled-button"
+    tooltipStyleClass="topbar-bottom-cs-tooltip">
+    <i class="icon-share"></i>
+    <span>Exports</span>
+    </button>
+    <button pButton label="Upgrade for Free" class="p-button-warning upgrade-button"></button>
     <button pButton label="Export" class="p-button-outlined"></button>
     <button pButton label="Share" class="p-button-black"></button>
     <span class="avatar">M</span>

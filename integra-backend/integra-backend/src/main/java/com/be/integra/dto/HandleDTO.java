@@ -1,11 +1,10 @@
 package com.be.integra.dto;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NonNull;
-
 import java.io.Serial;
 import java.io.Serializable;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)

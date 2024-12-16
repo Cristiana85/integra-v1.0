@@ -14,7 +14,6 @@ import {
   VIEW_PANEL_SIZE
 } from '../../utilities/editor-constants';
 import { FooterComponent } from '../../components/footer/footer.component';
-import { RibbonmenuComponent } from '../../components/ribbonmenu/ribbonmenu.component';
 import { ProjectDialogComponent } from '../dialog/project-dialog/project-dialog.component';
 
 @Component({
@@ -78,7 +77,7 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
     this.updateFooterSize();
 
     this.projectName = this.route.snapshot.paramMap.get('name')!;
-    this.load();
+    //this.load();
   }
 
   ngAfterViewInit(): void {
@@ -108,8 +107,11 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
 
   load() {
     this.projectService.getProject(1).subscribe(res => {
-      this.projectSelected = res;
-    })
+      setTimeout(() => {
+        this.isLoading = false;
+        this.projectSelected = res;
+      }, 1000); // Delay of 3 seconds
+    });
   }
 
 

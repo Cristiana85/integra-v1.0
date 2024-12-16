@@ -49,13 +49,13 @@
     width: 20px;
   }
 
-  .icon-cancel {
-    background: url('../../../../assets/icons/editor/wizard.svg');
+  .icon-delete {
+    background: url('../../../../assets/icons/editor/delete-1.svg');
     background-repeat: no-repeat;
     background-size: cover;
     display: inline-block;
-    height: 16px;
-    width: 23px;
+    height: 20px;
+    width: 20px;
   }
 
   /* text input */
@@ -121,17 +121,53 @@
   }
 
   /* Middle Section */
+  .icon-editor-tab {
+    background: url('../../../../assets/icons/editor/editor.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+  }
+
+  .icon-chart-tab {
+    background: url('../../../../assets/icons/editor/chart.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+  }
+
+  .icon-split-h-tab {
+    background: url('../../../../assets/icons/editor/split-h.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+  }
+
+  .icon-split-v-tab {
+    background: url('../../../../assets/icons/editor/split-v.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+  }
+
   .middle-section {
     display: flex;
     align-items: center;
-    gap: 0px;
+    gap: 5px;
   }
 
   .layout-tab-switch {
     display: flex;
     align-items: center;
-    gap: 2px;
-    background-color: rgb(245, 245, 245);
+    gap: 8px;
+    background-color: rgb(240, 240, 240);
     border: none;
     border-radius: 12px;
     color: rgb(3, 3, 3);
@@ -146,13 +182,13 @@
   }
 
   .layout-tab-switch-btn-unselected {
-    background-color: rgb(245, 245, 245);
+    background-color: rgb(240, 240, 240);
     border: none;
     border-radius: 12px;
   }
 
   .layout-tab-switch-btn-unselected:hover {
-    background-color: rgb(232, 232, 232);
+    background-color: rgb(222, 222, 222);
     border: none;
     border-radius: 6px;
   }
@@ -177,24 +213,34 @@
     width: 50px;
   }
 
-  /* Optional: Add hover effect */
-  .large-undoredo:hover {
-    border: 1px solid lightgray; // TBD
-    background-color: rgb(227, 227, 238); // TBD
-  }
-
-  .pi {
-    font-size: 18px;
-  }
-
-  /*.gradient-button {
-    background: linear-gradient(to right, #ff7e5f, #feb47b);
-    color: white;
-    border: none;
-    font-weight: bold;
-  }*/
-
   /* Right Section */
+  .icon-comment {
+    background: url('../../../../assets/icons/editor/comment.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+  }
+
+  .icon-export {
+    background: url('../../../../assets/icons/editor/download-1.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+  }
+
+  .icon-share {
+    background: url('../../../../assets/icons/editor/share-1.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+  }
+
   .right-section {
     display: flex;
     align-items: center;
@@ -353,8 +399,8 @@
 
   .separator {
     width: 1px;
-    height: 40px;
-    background-color: #ccc;
+    height: 30px;
+    background-color: #e4e4e4;
     margin: 0 5px;
   }
 
