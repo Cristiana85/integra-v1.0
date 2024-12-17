@@ -19,7 +19,7 @@ import { WorkspaceComponent } from './workspace/pages/workspace.component';
 import { AuthGuard } from './shared/services/auth.guard';
 
 const routes: Routes = [
-  { path: '**', redirectTo: 'entrypage', pathMatch: 'full' }, // Default route
+  { path: '', redirectTo: 'entrypage', pathMatch: 'full' }, // Default route
   { path: 'entrypage', component: EntrypageComponent },          // First page with buttons
   { path: 'landing-page', component: LandingpageComponent },
   { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
