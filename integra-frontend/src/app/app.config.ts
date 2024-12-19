@@ -16,12 +16,13 @@ import { LandingpageComponent } from './landing-page/pages/landingpage.component
 import { AuthInterceptor } from './shared/services/auth.interceptor';
 import { ProjectsComponent } from './workspace/components/projects/projects.component';
 import { WorkspaceComponent } from './workspace/pages/workspace.component';
+import { AuthGuard } from './shared/services/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'entrypage', pathMatch: 'full' }, // Default route
   { path: 'entrypage', component: EntrypageComponent },          // First page with buttons
   { path: 'landing-page', component: LandingpageComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
   {
     path: 'workspace', component: WorkspaceComponent,

@@ -76,7 +76,7 @@ public class AccountService {
 
 
     public void resetPassword(String token, String newPassword) {
-        Account account = accountRepository.findByResetToken(token).orElseThrow(() -> new RuntimeException("Token invalido"));
+        Account account = accountRepository.findByResetToken(token).orElseThrow(() -> new RuntimeException("Invalid token"));
         account.setPassword(passwordEncoder.encode(newPassword));
         account.setResetToken(null);
         accountRepository.save(account);

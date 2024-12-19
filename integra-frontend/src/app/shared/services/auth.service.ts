@@ -60,4 +60,8 @@ export class AuthService {
     localStorage.removeItem(this.tokenKey);
     localStorage.removeItem(this.accountIdKey);
   }
+
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('authToken');
+  }
 }

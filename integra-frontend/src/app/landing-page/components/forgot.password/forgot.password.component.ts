@@ -40,7 +40,7 @@ export class ForgotPasswordComponent implements OnInit {
           alert('Link forgot passowrd inviato');
         },
         (error) => {
-          alert('Utente non trovato');
+          alert('User not found');
         }
       );
     }

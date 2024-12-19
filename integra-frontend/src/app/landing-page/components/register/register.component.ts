@@ -65,7 +65,7 @@ export class RegisterComponent implements OnInit {
           this.router.navigate(['/login']);
         },
         (error) => {
-          alert('Utente già presentre a sistema');
+          alert('Username already existing');
         }
       );
     }
