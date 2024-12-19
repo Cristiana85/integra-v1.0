@@ -157,6 +157,24 @@
     width: 22px;
   }
 
+  .icon-play {
+    background: url('../../../../assets/icons/editor/play_1.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: inline-block;
+    height: 28px;
+    width: 28px;
+  }
+
+  .icon-validate {
+    background: url('../../../../assets/icons/editor/check_1.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: inline-block;
+    height: 28px;
+    width: 28px;
+  }
+
   .middle-section {
     display: flex;
     align-items: center;
