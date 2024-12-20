@@ -50,7 +50,7 @@ export class DiagramService {
     this.paper.$background.css('border-bottom-left-radius', 25);
     // background update
     this.paper.drawBackground({
-      color: 'white',
+      //color: 'white',
       opacity: 1,
     });
     // redraw grid to update

@@ -71,6 +71,7 @@ import { TreeTableModule } from 'primeng/treetable';
 import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
 import { SplitterModule } from 'primeng/splitter';
 import { SkeletonModule } from 'primeng/skeleton';
+import { SidebarModule } from 'primeng/sidebar';
 
 @NgModule({
   imports: [
@@ -144,7 +145,8 @@ import { SkeletonModule } from 'primeng/skeleton';
     TreeTableModule,
     TriStateCheckboxModule,
     SplitterModule,
-    SkeletonModule
+    SkeletonModule,
+    SidebarModule
   ],
   exports: [
     CommonModule,
@@ -217,7 +219,8 @@ import { SkeletonModule } from 'primeng/skeleton';
     TreeTableModule,
     TriStateCheckboxModule,
     SplitterModule,
-    SkeletonModule
+    SkeletonModule,
+    SidebarModule
   ],
 })
 export class SharedModule {

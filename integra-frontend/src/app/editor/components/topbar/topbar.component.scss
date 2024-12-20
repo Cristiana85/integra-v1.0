@@ -157,6 +157,24 @@
     width: 22px;
   }
 
+  .icon-play {
+    background: url('../../../../assets/icons/editor/play_1.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+  }
+
+  .icon-validate {
+    background: url('../../../../assets/icons/editor/check_1.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+  }
+
   .middle-section {
     display: flex;
     align-items: center;
@@ -203,6 +221,39 @@
   .layout-tab-switch i {
     font-size: 14px;
     font-weight: 500;
+  }
+
+  .line-btn {
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 12px;
+    //background-color: transparent;
+    background-color: rgb(245, 245, 245);
+    cursor: pointer;
+    padding: 8px 8px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    color: black;
+    gap: 4px;
+  }
+
+  .line-btn:hover {
+    background-color: rgb(232, 232, 232);
+  }
+
+  .line-btn span {
+    margin-top: 2px;
+    margin-left: 4px;
+    margin-right: 4px;
+    /* text style */
+    font-family: Poppins;
+    line-height: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgb(3, 3, 3);
+    font-variant-ligatures: no-common-ligatures;
+    letter-spacing: -0.1px;
   }
 
   /* Larger undo button styling */

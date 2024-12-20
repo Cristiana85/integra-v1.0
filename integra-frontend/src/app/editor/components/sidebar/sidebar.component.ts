@@ -25,6 +25,12 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy  {
 
   }
 
+  visibleSidebar: boolean = false;
+
+  toggleSidebar() {
+    this.visibleSidebar = !this.visibleSidebar;
+  }
+
   public ngAfterViewInit(): void {
     this.events.pipe(takeUntil(this.destroy$)).subscribe((event) => {
       switch (event) {
