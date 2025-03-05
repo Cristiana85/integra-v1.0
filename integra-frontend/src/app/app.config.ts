@@ -17,6 +17,7 @@ import { AuthInterceptor } from './shared/services/auth.interceptor';
 import { ProjectsComponent } from './workspace/components/projects/projects.component';
 import { WorkspaceComponent } from './workspace/pages/workspace.component';
 import { AuthGuard } from './shared/services/auth.guard';
+import { TestpageComponent } from './testpage/testpage.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'entrypage', pathMatch: 'full' }, // Default route
@@ -39,6 +40,7 @@ const routes: Routes = [
       // Puoi aggiungere altre rotte figlie qui
     ],
   },
+  { path: 'testpage', component: TestpageComponent },
   { path: 'editor', component: EditorComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },

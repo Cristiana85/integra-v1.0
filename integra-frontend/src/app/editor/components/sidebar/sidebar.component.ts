@@ -21,11 +21,11 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy  {
 
   public activeTab = -1;
 
+  visibleSidebar: boolean = true;
+
   public ngOnInit(): void {
 
   }
-
-  visibleSidebar: boolean = false;
 
   toggleSidebar() {
     this.visibleSidebar = !this.visibleSidebar;

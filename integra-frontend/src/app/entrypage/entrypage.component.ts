@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
 
 @Component({
   selector: 'app-entrypage',
   standalone: true,
-  imports: [RouterModule],
+  imports: [SharedModule],
   templateUrl: './entrypage.component.html',
   styleUrl: './entrypage.component.scss'
 })
 export class EntrypageComponent {
 
 }
+
+

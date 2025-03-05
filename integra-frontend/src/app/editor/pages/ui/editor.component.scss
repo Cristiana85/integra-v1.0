@@ -20,6 +20,7 @@
 
   /* Header with fixed height */
   .editor-header {
+    background: rgb(254, 254, 254);
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -30,13 +31,13 @@
     display: flex;
     flex-grow: 1;
     overflow: hidden;
-    background-color: #f0f1f5;
+    background: rgb(254, 254, 254);
   }
 
   /* Left Column: fixed width */
   .editor-left-column {
     height: 100%;
-    background-color: #f0f1f5;
+    background: rgb(254, 254, 254);
     //border-right: 1px solid #ccc;
     overflow-y: hidden;
     user-select: none;
@@ -47,7 +48,7 @@
     display: flex;
     flex-direction: column;
     //flex-grow: 1;
-    background-color: #f0f1f5;
+    background: rgb(254, 254, 254);
     //user-select: none;
   }
 
@@ -64,7 +65,7 @@
   /* Footer: fixed height */
   .editor-footer {
     position: absolute;
-    background-color: #f0f1f5;
+    background: rgb(254, 254, 254);
     //border-radius: 25px;
     z-index: 1000;
   }

@@ -10,15 +10,15 @@ import { SharedModule } from 'src/app/shared/shared.module';
   styleUrl: './footer.component.scss',
 })
 export class FooterComponent {
-  sliderValue: number = 8; // Initial percentage for the slider
+  public sliderValue: number = 8; // Initial percentage for the slider
 
   // Triggered when the slider value changes
-  onSliderChange(event: any): void {
-    console.log('Slider Value Changed:', event.value);
+  public onSliderChange(event: any): void {
+    //console.log('Slider Value Changed:', event.value);
   }
 
   // Triggered when the user releases the slider handle
-  onSliderEnd(event: any): void {
-    console.log('Slider Value Change Finished:', event.value);
+  public onSliderEnd(event: any): void {
+    //console.log('Slider Value Change Finished:', event.value);
   }
 }

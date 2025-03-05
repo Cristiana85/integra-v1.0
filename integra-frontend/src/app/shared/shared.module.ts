@@ -72,6 +72,7 @@ import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
 import { SplitterModule } from 'primeng/splitter';
 import { SkeletonModule } from 'primeng/skeleton';
 import { SidebarModule } from 'primeng/sidebar';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 @NgModule({
   imports: [
@@ -146,7 +147,10 @@ import { SidebarModule } from 'primeng/sidebar';
     TriStateCheckboxModule,
     SplitterModule,
     SkeletonModule,
-    SidebarModule
+    SidebarModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    })
   ],
   exports: [
     CommonModule,

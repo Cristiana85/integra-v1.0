@@ -1,0 +1,60 @@
+<p-panel header="RF Simulator GUI" styleClass="p-mb-3">
+  <div class="p-grid">
+    <!-- Left Side - File Import Section -->
+    <div class="p-col-4">
+      <!-- Touchstone File Import -->
+      <p-panel header="Touchstone File">
+        <p-fileUpload mode="basic" chooseLabel="Select File" (onSelect)="onFileSelect($event)"></p-fileUpload>
+        <input pInputText [(ngModel)]="touchstonePath" placeholder="Selected file path" style="width: 100%;" disabled>
+        <button pButton label="Import" (click)="importFile('touchstone')" class="p-mt-2"></button>
+        <textarea [(ngModel)]="touchstoneLog" rows="3" placeholder="Logs" style="width: 100%;" autoResize="true"></textarea>
+      </p-panel>
+
+      <p-panel header="Touchstone JSON Export">
+        <textarea [(ngModel)]="jsonData" rows="5" placeholder="Parsed JSON" style="width: 100%;" autoResize="true"></textarea>
+        <button pButton label="Export JSON" (click)="exportJson()"></button>
+      </p-panel>
+
+      <!-- Netlist File Import -->
+      <p-panel header="Netlist File" class="p-mt-3">
+        <p-fileUpload mode="basic" chooseLabel="Select File" (onSelect)="onFileSelect($event)"></p-fileUpload>
+        <input pInputText [(ngModel)]="netlistPath" placeholder="Selected file path" style="width: 100%;" disabled>
+        <button pButton label="Import" (click)="importFile('netlist')" class="p-mt-2"></button>
+        <textarea [(ngModel)]="netlistLog" rows="3" placeholder="Logs" style="width: 100%;" autoResize="true"></textarea>
+      </p-panel>
+    </div>
+
+    <!-- Right Side - Chart -->
+    <div class="p-col-8">
+      <p-panel header="Select S-Parameter & Visualization">
+        <p-dropdown [options]="availableSParams" [(ngModel)]="selectedSParam" (onChange)="plotSelectedSParam()"></p-dropdown>
+        <p-dropdown [options]="visualizationModes" [(ngModel)]="selectedVisualization" (onChange)="plotSelectedSParam()"></p-dropdown>
+      </p-panel>
+      <p-panel header="S-Parameter Visualization">
+        <div *ngIf="selectedVisualization === 'Line Chart'">
+          <div echarts [options]="chartOptions" (chartInit)="onChartInit($event)" class="chart-container"></div>
+        </div>
+
+        <div *ngIf="selectedVisualization === 'Smith Chart'">
+          <div echarts [options]="smithChartOptions" (chartInit)="onChartInit($event)" class="chart-container"></div>
+        </div>
+
+        <div *ngIf="selectedVisualization === 'Heatmap'">
+          <div echarts [options]="heatmapOptions" (chartInit)="onChartInit($event)" class="chart-container"></div>
+        </div>
+        <div class="export-buttons">
+          <button pButton label="Export Chart as Image" (click)="exportChartAsImage()"></button>
+          <button pButton label="Export Data as CSV" (click)="exportDataAsCSV()"></button>
+        </div>
+      </p-panel>
+    </div>
+  </div>
+
+  <!-- Bottom - Run Simulation -->
+  <div class="p-grid p-mt-3">
+    <div class="p-col-12">
+      <button pButton label="Run Simulation" (click)="runSimulation()" class="p-mb-2"></button>
+      <textarea [(ngModel)]="simulationLog" rows="3" placeholder="Simulation Logs" style="width: 100%;" autoResize="true"></textarea>
+    </div>
+  </div>
+</p-panel>

@@ -19,10 +19,6 @@
     <button pButton class="undo-redo-btn" pTooltip="Delete (Canc)" tooltipPosition="bottom" tooltipStyleClass="topbar-bottom-cs-tooltip">
       <i class="icon-delete"></i>
     </button>
-  </div>
-
-  <!-- Middle Section -->
-  <div class="middle-section">
     <div class="separator"></div>
     <div class="layout-tab-switch">
       <button pButton [pTooltip]="editorTabSwitchLabel" tooltipPosition="bottom" [ngClass]="editorTabSwitch"
@@ -42,6 +38,10 @@
         <i class="icon-split-h-tab"></i>
       </button>
     </div>
+  </div>
+
+  <!-- Middle Section -->
+  <div class="middle-section">
     <div class="separator"></div>
     <button pButton pTooltip="Take control (Ctrl+X)" tooltipPosition="bottom" class="line-btn"
     tooltipStyleClass="topbar-bottom-cs-tooltip">
@@ -51,8 +51,9 @@
     <button pButton pTooltip="Take control (Ctrl+X)" tooltipPosition="bottom" class="line-btn"
     tooltipStyleClass="topbar-bottom-cs-tooltip">
     <i class="icon-play"></i>
-    <span>Analyse</span>
+    <span>Run Simulation</span>
     </button>
+    <div class="separator"></div>
   </div>
 
   <!-- Right Section -->

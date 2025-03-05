@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
-import { DiagramComponent } from './editor/components/diagram/diagram.component';
 
 @Component({
   selector: 'app-root',

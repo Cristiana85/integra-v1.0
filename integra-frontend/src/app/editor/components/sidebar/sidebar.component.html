@@ -1,81 +1,71 @@
 <div id="app-sidebar"
-class="h-screen lg:block flex-shrink-0 fixed left-0 top-0 z-1 surface-border w-full md:w-auto"
-style="padding-top: 0px; padding-bottom: 0px; overflow: hidden; position: sticky !important;background: rgb(254, 254, 254);border-right: 1px solid rgb(232, 232, 232);">
-<div class="flex h-full">
-  <div class="flex flex-column h-full flex-shrink-0 select-none">
-    <div class="mt-4">
-      <!--
-      px-4 -> width of lateral menu
-      mb-2 -> spacing between menu buttons
-       -->
-      <ul class="list-none py-1 px-0 m-0">
-        <li class="mb-3" [ngClass]="{'hover-enabled': activeTab != 0, 'hover-disabled': activeTab === 0}">
-          <a pRipple
-            class="flex align-items-center cursor-pointer p-3 border-round transition-duration-150 transition-colors"
-            style="justify-content: center !important;"
-            (click)="activeTab = 0; onTabClick()" [ngClass]="{'active-selector': activeTab === 0,'hover-enabled': activeTab != 0, 'hover-disabled': activeTab === 0}">
-            <div class="image-with-text">
-              <i class="pi pi-home text-lg hover"></i>
-              <p>Dashboard</p>
-            </div>
-          </a>
-        </li>
-        <li class="mb-3" [ngClass]="{'hover-enabled': activeTab != 1, 'hover-disabled': activeTab === 1}">
-          <a pRipple
-            class="flex align-items-center cursor-pointer p-3 border-round transition-duration-150 transition-colors"
-            style="justify-content: center !important;"
-            (click)="activeTab = 1; onTabClick()" [ngClass]="{'active-selector': activeTab === 1}">
-            <div class="image-with-text">
-              <i class="pi pi-bookmark text-lg"></i>
-              <p>Bookmarks</p>
-            </div>
-          </a>
-        </li>
-        <li class="mb-3" [ngClass]="{'hover-enabled': activeTab != 2, 'hover-disabled': activeTab === 2}">
-          <a pRipple
-            class="flex align-items-center cursor-pointer p-3 border-round transition-duration-150 transition-colors"
-            style="justify-content: center !important;"
-            (click)="activeTab = 2; onTabClick()" [ngClass]="{'active-selector': activeTab === 2}">
-            <div class="image-with-text">
-              <i class="pi pi-users text-lg"></i>
-              <p>People</p>
-            </div>
-          </a>
-        </li>
-        <li class="mb-3" [ngClass]="{'hover-enabled': activeTab != 3, 'hover-disabled': activeTab === 3}">
-          <a pRipple
-            class="flex align-items-center cursor-pointer p-3 border-round transition-duration-150 transition-colors"
-            style="justify-content: center !important;"
-            (click)="activeTab = 3; onTabClick()" [ngClass]="{'active-selector': activeTab === 3}">
-            <div class="image-with-text">
-              <i class="pi pi-comments text-lg"></i>
-              <p>Comments</p>
-            </div>
-          </a>
-        </li>
-        <li class="mb-3" [ngClass]="{'hover-enabled': activeTab != 4, 'hover-disabled': activeTab === 4}">
-          <a pRipple
-            class="flex align-items-center cursor-pointer p-3 border-round transition-duration-150 transition-colors"
-            style="justify-content: center !important;"
-            (click)="activeTab = 4; onTabClick()" [ngClass]="{'active-selector': activeTab === 4}">
-            <div class="image-with-text">
-              <i class="pi pi-calendar text-lg"></i>
-              <p>Calendar</p>
-            </div>
-          </a>
-        </li>
-        <li  class="mb-3" [ngClass]="{'hover-enabled': activeTab != 5, 'hover-disabled': activeTab === 5}">
-          <a pRipple
-            class="flex align-items-center cursor-pointer p-3 border-round transition-duration-150 transition-colors"
-            style="justify-content: center !important;"
-            (click)="activeTab = 5; onTabClick()" [ngClass]="{'active-selector': activeTab === 5}">
-            <div class="image-with-text">
-              <i class="pi pi-cog text-lg"></i>
-              <p>Settings</p>
-            </div>
-          </a>
-        </li>
-      </ul>
-    </div>
-</div>
+  style="padding-top: 0px; padding-bottom: 0px; overflow: hidden; position: sticky !important;background: rgb(254, 254, 254);border-right: 1px solid rgb(232, 232, 232);">
+  <ul class="menu">
+    <li class="mb-3" [ngClass]="{'hover-enabled': activeTab != 0, 'hover-disabled': activeTab === 0}">
+      <a pRipple
+        class="flex align-items-center cursor-pointer p-3 border-round transition-duration-150 transition-colors"
+        style="justify-content: center !important;" (click)="activeTab = 0; onTabClick()"
+        [ngClass]="{'active-selector': activeTab === 0,'hover-enabled': activeTab != 0, 'hover-disabled': activeTab === 0}">
+        <div class="add-btn">
+          <i class="icon-add"></i>
+          <p>Add</p>
+        </div>
+      </a>
+    </li>
+    <li class="mb-3" [ngClass]="{'hover-enabled': activeTab != 1, 'hover-disabled': activeTab === 1}">
+      <a pRipple
+        class="flex align-items-center cursor-pointer p-3 border-round transition-duration-150 transition-colors"
+        style="justify-content: center !important;" (click)="activeTab = 1; onTabClick()"
+        [ngClass]="{'active-selector': activeTab === 1}">
+        <div class="image-with-text">
+          <i class="pi pi-bookmark text-lg"></i>
+          <p>Bookmarks</p>
+        </div>
+      </a>
+    </li>
+    <li class="mb-3" [ngClass]="{'hover-enabled': activeTab != 2, 'hover-disabled': activeTab === 2}">
+      <a pRipple
+        class="flex align-items-center cursor-pointer p-3 border-round transition-duration-150 transition-colors"
+        style="justify-content: center !important;" (click)="activeTab = 2; onTabClick()"
+        [ngClass]="{'active-selector': activeTab === 2}">
+        <div class="image-with-text">
+          <i class="pi pi-users text-lg"></i>
+          <p>People</p>
+        </div>
+      </a>
+    </li>
+    <li class="mb-3" [ngClass]="{'hover-enabled': activeTab != 3, 'hover-disabled': activeTab === 3}">
+      <a pRipple
+        class="flex align-items-center cursor-pointer p-3 border-round transition-duration-150 transition-colors"
+        style="justify-content: center !important;" (click)="activeTab = 3; onTabClick()"
+        [ngClass]="{'active-selector': activeTab === 3}">
+        <div class="image-with-text">
+          <i class="pi pi-comments text-lg"></i>
+          <p>Comments</p>
+        </div>
+      </a>
+    </li>
+    <li class="mb-3" [ngClass]="{'hover-enabled': activeTab != 4, 'hover-disabled': activeTab === 4}">
+      <a pRipple
+        class="flex align-items-center cursor-pointer p-3 border-round transition-duration-150 transition-colors"
+        style="justify-content: center !important;" (click)="activeTab = 4; onTabClick()"
+        [ngClass]="{'active-selector': activeTab === 4}">
+        <div class="image-with-text">
+          <i class="pi pi-calendar text-lg"></i>
+          <p>Calendar</p>
+        </div>
+      </a>
+    </li>
+    <li class="mb-3" [ngClass]="{'hover-enabled': activeTab != 5, 'hover-disabled': activeTab === 5}">
+      <a pRipple
+        class="flex align-items-center cursor-pointer p-3 border-round transition-duration-150 transition-colors"
+        style="justify-content: center !important;" (click)="activeTab = 5; onTabClick()"
+        [ngClass]="{'active-selector': activeTab === 5}">
+        <div class="image-with-text">
+          <i class="pi pi-cog text-lg"></i>
+          <p>Settings</p>
+        </div>
+      </a>
+    </li>
+  </ul>
 </div>

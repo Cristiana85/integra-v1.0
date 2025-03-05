@@ -7,7 +7,7 @@
     justify-content: space-between;
     -webkit-box-align: center;
     align-items: center;
-    background: rgb(254, 254, 254);
+    background-color: transparent;
     padding: 10px 10px;
     border-bottom: 1px solid rgb(232, 232, 232);
     -webkit-user-select: none; /* Safari */
@@ -126,8 +126,8 @@
     background-repeat: no-repeat;
     background-size: cover;
     display: inline-block;
-    height: 22px;
-    width: 22px;
+    height: 16px;
+    width: 16px;
   }
 
   .icon-chart-tab {
@@ -135,8 +135,8 @@
     background-repeat: no-repeat;
     background-size: cover;
     display: inline-block;
-    height: 22px;
-    width: 22px;
+    height: 16px;
+    width: 16px;
   }
 
   .icon-split-h-tab {
@@ -144,8 +144,8 @@
     background-repeat: no-repeat;
     background-size: cover;
     display: inline-block;
-    height: 22px;
-    width: 22px;
+    height: 16px;
+    width: 16px;
   }
 
   .icon-split-v-tab {
@@ -153,8 +153,8 @@
     background-repeat: no-repeat;
     background-size: cover;
     display: inline-block;
-    height: 22px;
-    width: 22px;
+    height: 16px;
+    width: 16px;
   }
 
   .icon-play {
@@ -162,8 +162,8 @@
     background-repeat: no-repeat;
     background-size: cover;
     display: inline-block;
-    height: 22px;
-    width: 22px;
+    height: 18px;
+    width: 18px;
   }
 
   .icon-validate {
@@ -171,8 +171,8 @@
     background-repeat: no-repeat;
     background-size: cover;
     display: inline-block;
-    height: 22px;
-    width: 22px;
+    height: 18px;
+    width: 18px;
   }
 
   .middle-section {
@@ -228,8 +228,7 @@
     justify-content: center;
     border: none;
     border-radius: 12px;
-    //background-color: transparent;
-    background-color: rgb(245, 245, 245);
+    background-color: rgb(240, 240, 240);
     cursor: pointer;
     padding: 8px 8px;
     text-align: center;
@@ -239,17 +238,22 @@
   }
 
   .line-btn:hover {
-    background-color: rgb(232, 232, 232);
+    background-color: rgb(218, 218, 218);
   }
 
+  /*.line-btn:hover.line-btn span {
+    display: block;
+  }*/
+
   .line-btn span {
+    display: block;
     margin-top: 2px;
     margin-left: 4px;
     margin-right: 4px;
     /* text style */
     font-family: Poppins;
     line-height: 16px;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 500;
     color: rgb(3, 3, 3);
     font-variant-ligatures: no-common-ligatures;
