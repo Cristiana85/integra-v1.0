@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ECharts, EChartsOption } from 'echarts';
 import { SharedModule } from '../shared/shared.module';
@@ -7,6 +7,7 @@ import { TouchstoneValidator } from './core/touchstone-validator';
 import { MessageService } from 'primeng/api';
 import { saveAs } from 'file-saver';
 import { TouchstoneParser } from './core/touchstone-parser';
+import { async } from 'rxjs';
 
 @Component({
   selector: 'integra-testpage',
@@ -16,7 +17,7 @@ import { TouchstoneParser } from './core/touchstone-parser';
   styleUrl: './testpage.component.scss',
   providers: [MessageService],
 })
-export class TestpageComponent implements OnInit {
+export class TestpageComponent implements OnInit, AfterViewInit{
   private echartInstance?: ECharts; // ✅ Store ECharts instance
   touchstonePath: string = '';
   netlistPath: string = '';
@@ -35,6 +36,21 @@ export class TestpageComponent implements OnInit {
   jsonData: string = '';
 
   constructor(private messageService: MessageService) {}
+  ngAfterViewInit(): void {
+    //this.processText();
+  }
+
+  inputText = 'cazzo';
+  outputText = '';
+
+  async processText() {
+    if ((window as any).wasm) {
+      this.outputText = (window as any).wasm.process_text(this.inputText);
+      console.log(this.outputText);
+    } else {
+      console.error("WASM module not loaded");
+    }
+  }
 
   ngOnInit(): void {
     this.loadChartData();
@@ -45,6 +61,8 @@ export class TestpageComponent implements OnInit {
   }
 
   onFileSelect(event: any) {
+    console.log('fdfdf')
+    this.processText();
     const MAX_TOTAL_SIZE_MB = 500; // Total import limit (across all files)
     const MAX_SINGLE_FILE_MB = 100; // Limit for a single file
     let totalUploadedSizeMB = 0; // Tracks total uploaded file size
