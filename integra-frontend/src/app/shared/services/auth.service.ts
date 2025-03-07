@@ -7,7 +7,7 @@ import { Account } from 'src/app/core/models/account';
 import { Result } from 'src/app/core/models/result';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   basePath = environment.apiRoot;
@@ -17,33 +17,43 @@ export class AuthService {
   private accountIdKey = 'accountId';
   private accountNameKey = 'accountName';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  login(credentials: { email: string; password: string }): Observable<Result<Account>> {
-    return this.http.post<Result<Account>>(`${this.apiPath}/login`, credentials).pipe(
-      tap((response) => {
-        let account = response.content;
-        localStorage.setItem(this.tokenKey, account.token);
-        localStorage.setItem(this.accountIdKey, account.id.toString());
-      })
-    );
+  login(credentials: {
+    email: string;
+    password: string;
+  }): Observable<Result<Account>> {
+    return this.http
+      .post<Result<Account>>(`${this.apiPath}/login`, credentials)
+      .pipe(
+        tap((response) => {
+          let account = response.content;
+          localStorage.setItem(this.tokenKey, account.token);
+          localStorage.setItem(this.accountIdKey, account.id.toString());
+        })
+      );
   }
 
   register(account: Account): Observable<Result<Account>> {
-    return this.http.post<Result<Account>>(`${this.apiPath}/register`, account).pipe(
-      tap((response) => {
-        // localStorage.setItem(this.tokenKey, response.token);
-        // localStorage.setItem(this.accountIdKey, response.accountId.toString());
-        //localStorage.setItem(this.accountNameKey, response.accountName.toString());
-      })
-    );
+    return this.http
+      .post<Result<Account>>(`${this.apiPath}/register`, account)
+      .pipe(
+        tap((response) => {
+          // localStorage.setItem(this.tokenKey, response.token);
+          // localStorage.setItem(this.accountIdKey, response.accountId.toString());
+          //localStorage.setItem(this.accountNameKey, response.accountName.toString());
+        })
+      );
   }
 
   forgotPassword(credentials: { email: string }): Observable<any> {
     return this.http.post(`${this.apiPath}/forgot-password`, credentials);
   }
 
-  resetPassword(credentials: { token: string, newPassword: string }): Observable<any> {
+  resetPassword(credentials: {
+    token: string;
+    newPassword: string;
+  }): Observable<any> {
     return this.http.post(`${this.apiPath}/reset-password`, credentials);
   }
 

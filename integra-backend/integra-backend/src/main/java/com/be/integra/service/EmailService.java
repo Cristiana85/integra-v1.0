@@ -16,6 +16,7 @@ public class EmailService {
         message.setSubject("Recupero Password");
         message.setText("Per resettare la tua password, clicca su questo link: " +
                 "http://localhost:4200/reset-password?token=" + token);
-        mailSender.send(message);
+        System.out.println("http://localhost:4200/reset-password?token=" + token);
+        //mailSender.send(message);
     }
 }

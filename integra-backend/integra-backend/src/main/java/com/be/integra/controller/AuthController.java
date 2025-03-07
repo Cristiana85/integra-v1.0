@@ -37,7 +37,7 @@ public class AuthController {
     }
 
     @PostMapping("/reset-password")
-    public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordRequest request) {
+    public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordRequest request) throws Exception {
         accountService.resetPassword(request.getToken(), request.getNewPassword());
         return ResponseEntity.ok("Password aggiornata");
     }

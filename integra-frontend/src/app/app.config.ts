@@ -1,4 +1,8 @@
-import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideRouter, Routes } from '@angular/router';
@@ -21,12 +25,14 @@ import { TestpageComponent } from './testpage/testpage.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'entrypage', pathMatch: 'full' }, // Default route
-  { path: 'entrypage', component: EntrypageComponent },          // First page with buttons
+  { path: 'entrypage', component: EntrypageComponent }, // First page with buttons
   { path: 'landing-page', component: LandingpageComponent },
-  { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent, canActivate: [AuthGuard] }, //canActivate: [AuthGuard]
   { path: 'register', component: RegisterComponent },
+  { path: 'home', component: LandingpageComponent },
   {
-    path: 'workspace', component: WorkspaceComponent,
+    path: 'workspace',
+    component: WorkspaceComponent,
     children: [
       {
         path: '',
@@ -59,7 +65,7 @@ export const appConfig: ApplicationConfig = {
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true
-    }
+      multi: true,
+    },
   ],
 };
