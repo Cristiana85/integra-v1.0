@@ -8,6 +8,7 @@ import { MessageService } from 'primeng/api';
 import { saveAs } from 'file-saver';
 import { TouchstoneParser } from './core/touchstone-parser';
 import { async } from 'rxjs';
+import { WasmService } from '../editor/services/wasm/libavoid.wasm.service';
 
 @Component({
   selector: 'integra-testpage',
@@ -35,21 +36,8 @@ export class TestpageComponent implements OnInit, AfterViewInit{
   visualizationModes = ['Line Chart', 'Smith Chart', 'Heatmap'];
   jsonData: string = '';
 
-  constructor(private messageService: MessageService) {}
+  constructor(private messageService: MessageService, private wasmService: WasmService) {}
   ngAfterViewInit(): void {
-    //this.processText();
-  }
-
-  inputText = 'cazzo';
-  outputText = '';
-
-  async processText() {
-    if ((window as any).wasm) {
-      this.outputText = (window as any).wasm.process_text(this.inputText);
-      console.log(this.outputText);
-    } else {
-      console.error("WASM module not loaded");
-    }
   }
 
   ngOnInit(): void {
@@ -61,8 +49,9 @@ export class TestpageComponent implements OnInit, AfterViewInit{
   }
 
   onFileSelect(event: any) {
-    console.log('fdfdf')
-    this.processText();
+
+    const buffer = this.wasmService.allocateMemory(10, 2);
+
     const MAX_TOTAL_SIZE_MB = 500; // Total import limit (across all files)
     const MAX_SINGLE_FILE_MB = 100; // Limit for a single file
     let totalUploadedSizeMB = 0; // Tracks total uploaded file size
