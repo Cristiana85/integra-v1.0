@@ -1,1 +1,0 @@
-C:\Workspace\integra-v1.0\integra-wasm\sp_solver\target\debug\touchstone_exe.exe: C:\Workspace\integra-v1.0\integra-wasm\sp_solver\src\lib.rs C:\Workspace\integra-v1.0\integra-wasm\sp_solver\src\main.rs

@@ -1,4 +1,13 @@
 cargo build --target wasm32-unknown-unknown --release
 cargo build --release
 
+
+
+
+rustc --version
+rustup update
+cargo build
+cargo clean
 cargo run
+cargo run --bin sp_solver_exe
+
