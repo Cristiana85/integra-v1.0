@@ -1,57 +1,56 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { PrimeblocksModule } from 'src/app/shared/primeblocks.module';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { SharedModule } from '../../../shared/shared.module';
-import { Router } from '@angular/router';  // importa Router
+import { Router } from '@angular/router'; // importa Router
 import { ProjectService } from 'src/app/editor/services/project.service';
 
 @Component({
   selector: 'integra-login',
   standalone: true,
-  imports: [
-    SharedModule,
-    FormsModule,
-    PrimeblocksModule,
-    ReactiveFormsModule
-  ],
+  imports: [SharedModule, FormsModule, PrimeblocksModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  public loginForm: FormGroup;
+  email: string = ''; // Nuova variabile per l'email
+  password: string = ''; // Nuova variabile per la password
 
-  constructor(
-    private fb: FormBuilder,  // Using FormBuilder for easier form creation
-    private authService: AuthService,
-    private projectService: ProjectService,
-    private router: Router
-  ) { }
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    // Initialize the form with FormBuilder
-    this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],  // Email validation
-      password: ['', [Validators.required]]  // Password validation
-    });
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/workspace']); // ✅ Se già loggato, vai in homepage
+    }
   }
 
   loginUser() {
-    if (this.loginForm.valid) {
-      this.authService.login(this.loginForm.value).subscribe(
+    if (this.email && this.password) {
+      // Controllo che i campi non siano vuoti
+      const loginData = { email: this.email, password: this.password };
+
+      this.authService.login(loginData).subscribe(
         (response) => {
           this.router.navigate(['/workspace']);
         },
         (error) => {
           alert('Invalid username or password');
-          //console.error('Login failed:', error);
         }
       );
+    } else {
+      alert('Please enter both email and password.');
     }
   }
 
   onForgotPasswordClick() {
-    this.router.navigate(['/forgot-password']);  // naviga al componente forgot-password
+    this.router.navigate(['/forgot-password']);
   }
 }
-
