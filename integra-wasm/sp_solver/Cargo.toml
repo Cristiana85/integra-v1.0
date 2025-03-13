@@ -9,12 +9,17 @@ crate-type = ["cdylib", "rlib"]  # Required for WebAssembly (cdylib) and Rust li
 
 [dependencies]
 wasm-bindgen = "0.2"
+serde = { version = "1.0", features = ["derive"] }
 serde-wasm-bindgen = "0.5"
-serde = { version = "1.0", features = ["derive"] }  # Serialization support
-serde_json = "1.0"  # JSON parsing for input/output
+serde_json = "1.0"
+nalgebra = { version = "0.32", features = ["serde"] }  # ✅ `serde` attivato!
+js-sys = "0.3"        # ✅ Aggiungi js-sys separatamente
+log = "0.4"
+env_logger = "0.11"
+wasm-logger = "0.2"
+web-sys = { version = "0.3", features = ["console", "Window"] }
+
 thiserror = "1.0"  # For custom error handling
-nalgebra = "0.32"  # For matrix calculations in S-parameter analysis
-log = "0.4"  # Logging framework
 console_error_panic_hook = "0.1"  # Better panic messages in WASM
 
 [dev-dependencies]

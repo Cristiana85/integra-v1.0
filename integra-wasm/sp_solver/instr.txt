@@ -1,7 +1,7 @@
 cargo build --target wasm32-unknown-unknown --release
 cargo build --release
 
-
+wasm-pack build --target web --release
 
 
 rustc --version

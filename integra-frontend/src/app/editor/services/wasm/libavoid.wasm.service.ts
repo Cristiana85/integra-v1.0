@@ -1,54 +1,45 @@
 import { Injectable } from '@angular/core';
-import init, { Calculator } from 'src/assets/wasm/sp_solver.js';
+import init, { WasmSpAnalyzer } from 'src/assets/wasm/sp_solver_wasm.js';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WasmService {
-  private wasmModule: any;
+  private spAnalyzer: WasmSpAnalyzer;
 
   constructor() {
-    this.loadWasm(); // ✅ Chiamata corretta al metodo asincrono
+    this.loadWasm();
   }
 
-  // ✅ Metodo asincrono corretto
-  private async loadWasm(): Promise<void> {
-    try {
-      await init('/assets/wasm/sp_solver_bg.wasm');
-      //this.wasmModule = wasmModule;
-      //console.log('✅ WASM Module Loaded!', this.wasmModule);
-      console.log(Calculator.add(10, 5));
-      //let a = wasmModule.add(10, 5);
-      //console.log('✅ WASM Module Loaded!', this.wasmModule);
-    } catch (err) {
-      console.error('❌ Failed to load WASM:', err);
+  async loadWasm() {
+    await init('/assets/wasm/sp_solver_wasm_bg.wasm');
+    this.spAnalyzer = new WasmSpAnalyzer();
+  }
+
+  add(jsonData: string): boolean {
+    return this.spAnalyzer.add(0, jsonData);
+  }
+
+  get() {
+    /*if (!this.spAnalyzer) {
+      console.error('❌ WASM non ancora caricato!');
+      return null;
     }
+
+    const result = this.spAnalyzer.get(0);
+    console.log('✅ Lista Touchstone:', result);
+    return result;*/
+  }
+  //}
+
+  delete(filename: string): boolean {
+    return this.spAnalyzer.delete(0, filename); // 0 = Touchstone
   }
 
-  allocateMemory(numFreqs: number, numPorts: number): Float64Array {
-    if (!this.wasmModule) throw new Error('WASM module not loaded');
-    const ptr = this.wasmModule.allocate_memory(numFreqs, numPorts);
-    return new Float64Array(
-      this.wasmModule.memory.buffer,
-      ptr,
-      numFreqs * (1 + numPorts * numPorts * 2)
-    );
-  }
-
-  importData(
-    filename: string,
-    buffer: Float64Array,
-    numFreqs: number,
-    numPorts: number
-  ) {
-    if (!this.wasmModule) throw new Error('WASM module not loaded');
-    this.wasmModule.import_data(filename, buffer, numFreqs, numPorts);
-  }
-
-  getData(filename: string): Float64Array | null {
-    if (!this.wasmModule) throw new Error('WASM module not loaded');
-    const ptr = this.wasmModule.get_data(filename);
-    if (!ptr) return null;
-    return new Float64Array(this.wasmModule.memory.buffer, ptr);
+  progressOperation(callback: (progress: number) => void) {
+    this.spAnalyzer.progress_operation((progress: number) => {
+      console.log(`🔹 Progresso: ${progress}%`);
+      callback(progress);
+    });
   }
 }

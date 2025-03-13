@@ -1,0 +1,70 @@
+// Main interface for Angular integration
+pub mod sp_analyzer {
+    use crate::modules::sp_touchstone::sp_touchstone::SPTouchstone;
+    use crate::modules::sp_netlist::sp_netlist::SPNetlist;
+    use crate::modules::sp_analysis::sp_analysis::SPAnalysis;    
+
+    pub struct SPAnalyzer {
+        touchstones: Vec<SPTouchstone>,
+        netlist: SPNetlist,
+        analysis: SPAnalysis,
+    }
+
+    impl SPAnalyzer {
+        pub fn new() -> Self {
+            SPAnalyzer {
+                touchstones: Vec::new(),
+                netlist: SPNetlist::new(),
+                analysis: SPAnalysis::new(),
+            }
+        }
+
+        pub fn delete_touchstone(&mut self, index: usize) {
+            if index < self.touchstones.len() {
+                self.touchstones.remove(index);
+            }
+        }
+
+        pub fn modify_touchstone(&mut self, index: usize, new_touchstone: SPTouchstone) {
+            if index < self.touchstones.len() {
+                self.touchstones[index] = new_touchstone;
+            }
+        }
+
+        pub fn read_touchstone(&self, name: &str) -> Option<&SPTouchstone> {
+            self.touchstones.iter().find(|t| t.get_name() == name)
+        }
+
+        pub fn load_netlist(&mut self, netlist_data: &str) {
+            self.netlist.parse(netlist_data);
+        }
+
+        pub fn read_netlist(&self) -> &SPNetlist {
+            &self.netlist
+        }
+
+        pub fn load_analysis(&mut self, analysis_data: &str) {
+            self.analysis.load(analysis_data);
+        }
+
+        pub fn read_analysis(&self) -> &SPAnalysis {
+            &self.analysis
+        }
+
+        pub fn solve_netlist(&mut self) {
+            self.analysis.run();
+        }
+
+        pub fn reset_solver(&mut self) {
+            self.analysis.reset();
+        }
+
+        pub fn load_dataset(&mut self) {
+            // Placeholder for loading dataset logic
+        }
+
+        pub fn read_dataset(&self) {
+            // Placeholder for reading dataset logic
+        }
+    }
+}

@@ -18,7 +18,7 @@ import { WasmService } from '../editor/services/wasm/libavoid.wasm.service';
   styleUrl: './testpage.component.scss',
   providers: [MessageService],
 })
-export class TestpageComponent implements OnInit, AfterViewInit{
+export class TestpageComponent implements OnInit, AfterViewInit {
   private echartInstance?: ECharts; // ✅ Store ECharts instance
   touchstonePath: string = '';
   netlistPath: string = '';
@@ -36,21 +36,67 @@ export class TestpageComponent implements OnInit, AfterViewInit{
   visualizationModes = ['Line Chart', 'Smith Chart', 'Heatmap'];
   jsonData: string = '';
 
-  constructor(private messageService: MessageService, private wasmService: WasmService) {}
-  ngAfterViewInit(): void {
-  }
+  constructor(
+    private messageService: MessageService,
+    private wasmService: WasmService
+  ) {}
+  ngAfterViewInit(): void {}
 
   ngOnInit(): void {
     this.loadChartData();
+
+    setTimeout(() => {
+      this.testWasm();
+    }, 3000);
   }
 
   onChartInit(chart: any) {
     this.echartInstance = chart as ECharts;
   }
 
-  onFileSelect(event: any) {
+  testWasm() {
+    const jsonData = JSON.stringify({
+      name: 'example.s2p',
+      frequencies: [1.0, 2.0, 3.0],
+      s_matrix: [
+        [
+          [0.1, 0.2],
+          [0.3, 0.4],
+        ],
+        [
+          [0.5, 0.6],
+          [0.7, 0.8],
+        ],
+      ],
+    });
 
-    const buffer = this.wasmService.allocateMemory(10, 2);
+    console.log(
+      '✅ Aggiunta di un Touchstone:',
+      this.wasmService.add(jsonData)
+    );
+
+    /*console.log(
+      '✅ Lista di tutti i Touchstone:',
+      this.wasmService.getTouchstones()
+    );*/
+
+    console.log(
+      '✅ Eliminazione di "example.s2p":',
+      this.wasmService.delete('example.s2p')
+    );
+
+    /*console.log(
+      '✅ Lista aggiornata di Touchstone:',
+      this.wasmService.getTouchstones()
+    );*/
+
+    this.wasmService.progressOperation((progress) => {
+      console.log(`🚀 Progresso aggiornato: ${progress}%`);
+    });
+  }
+
+  onFileSelect(event: any) {
+    /*const buffer = this.wasmService.allocateMemory(10, 2);
 
     const MAX_TOTAL_SIZE_MB = 500; // Total import limit (across all files)
     const MAX_SINGLE_FILE_MB = 100; // Limit for a single file
@@ -83,7 +129,7 @@ export class TestpageComponent implements OnInit, AfterViewInit{
       2
     )}MB)\n`;
 
-    this.readFileToArrayBuffer(file); // Process file
+    this.readFileToArrayBuffer(file); // Process file*/
   }
 
   readFileToArrayBuffer(file: File) {
@@ -126,7 +172,6 @@ export class TestpageComponent implements OnInit, AfterViewInit{
     this.wasmInstance._print_imported_files();
     this.touchstoneLog += "✅ Imported files printed in WASM console.\n";*/
   }
-
 
   processTouchstoneFile(fileContent: string, filename: string) {
     this.touchstoneLog += 'Validating file...\n';

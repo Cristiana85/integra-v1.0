@@ -28,8 +28,8 @@
               "src/assets",
               {
                 "glob": "**/*",
-                "input": "src/assets/wasm/",
-                "output": "/assets/wasm/"
+                "input": "src/assets/wasm",
+                "output": "assets/wasm"
               }
             ],
             "styles": [
@@ -96,10 +96,11 @@
               "src/assets",
               {
                 "glob": "**/*",
-                "input": "src/assets/wasm/",
-                "output": "/assets/wasm/"
+                "input": "src/assets/wasm",
+                "output": "assets/wasm"
               }
             ],
+
             "styles": [
               "node_modules/primeng/resources/themes/bootstrap4-light-blue/theme.css",
               "node_modules/primeng/resources/primeng.min.css",

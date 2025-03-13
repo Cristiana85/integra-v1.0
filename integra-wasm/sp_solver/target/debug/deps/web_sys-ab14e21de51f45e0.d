@@ -1,0 +1,9 @@
+C:\WorkspaceIntegra\integra-v1.0\integra-wasm\sp_solver\target\debug\deps\libweb_sys-ab14e21de51f45e0.rmeta: C:\Users\crist\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\web-sys-0.3.77\src\lib.rs C:\Users\crist\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\web-sys-0.3.77\src\features\mod.rs C:\Users\crist\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\web-sys-0.3.77\src\features\gen_EventTarget.rs C:\Users\crist\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\web-sys-0.3.77\src\features\gen_Window.rs C:\Users\crist\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\web-sys-0.3.77\src\features\gen_console.rs
+
+C:\WorkspaceIntegra\integra-v1.0\integra-wasm\sp_solver\target\debug\deps\web_sys-ab14e21de51f45e0.d: C:\Users\crist\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\web-sys-0.3.77\src\lib.rs C:\Users\crist\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\web-sys-0.3.77\src\features\mod.rs C:\Users\crist\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\web-sys-0.3.77\src\features\gen_EventTarget.rs C:\Users\crist\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\web-sys-0.3.77\src\features\gen_Window.rs C:\Users\crist\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\web-sys-0.3.77\src\features\gen_console.rs
+
+C:\Users\crist\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\web-sys-0.3.77\src\lib.rs:
+C:\Users\crist\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\web-sys-0.3.77\src\features\mod.rs:
+C:\Users\crist\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\web-sys-0.3.77\src\features\gen_EventTarget.rs:
+C:\Users\crist\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\web-sys-0.3.77\src\features\gen_Window.rs:
+C:\Users\crist\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\web-sys-0.3.77\src\features\gen_console.rs:
