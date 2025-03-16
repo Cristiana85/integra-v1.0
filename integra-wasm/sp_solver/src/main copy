@@ -1,0 +1,71 @@
+#[cfg(target_os = "windows")]
+fn main() {
+    use serde_json;
+    use sp_solver_wasm::modules::{
+        sp_analyzer::{DataType, SpAnalyzer},
+        sp_touchstone::SPTouchstone,
+    };
+
+    println!("🔹 Test di `SPTouchstone` attraverso `SpAnalyzer` in Windows...\n");
+
+    // ✅ Creazione dei dati di test
+    let filename1 = "file1.s2p".to_string();
+    let filename2 = "file2.s2p".to_string();
+
+    let frequencies = vec![1.0, 2.0, 3.0];
+    let s_matrix1 = vec![vec![(0.1, 0.2), (0.3, 0.4)], vec![(0.5, 0.6), (0.7, 0.8)]];
+    let s_matrix2 = vec![vec![(1.1, 1.2), (1.3, 1.4)], vec![(1.5, 1.6), (1.7, 1.8)]];
+
+    // ✅ Creiamo i due Touchstone
+    let touchstone1 = SPTouchstone::new(filename1.clone(), frequencies.clone(), s_matrix1);
+    let touchstone2 = SPTouchstone::new(filename2.clone(), frequencies.clone(), s_matrix2);
+
+    // ✅ Creiamo `SpAnalyzer`
+    let mut analyzer = SpAnalyzer::new();
+
+    // ✅ Convertiamo i Touchstone in JSON
+    let json_data1 =
+        serde_json::to_string_pretty(&touchstone1).expect("Errore nella serializzazione");
+    let json_data2 =
+        serde_json::to_string_pretty(&touchstone2).expect("Errore nella serializzazione");
+
+    // ✅ Aggiungiamo entrambi i Touchstone ad `SpAnalyzer`
+    if analyzer.add(DataType::Touchstone, &json_data1) {
+        println!("✅ Aggiunto con successo: {}", filename1);
+    } else {
+        println!("❌ Errore nell'aggiunta di {}", filename1);
+    }
+
+    if analyzer.add(DataType::Touchstone, &json_data2) {
+        println!("✅ Aggiunto con successo: {}", filename2);
+    } else {
+        println!("❌ Errore nell'aggiunta di {}", filename2);
+    }
+
+    // ✅ Stampiamo il contenuto del secondo file
+    let second_touchstone = analyzer.get(DataType::Touchstone, filename2.clone());
+    println!("✅ Contenuto di `{}`:\n{}\n", filename2, second_touchstone);
+
+    // ✅ Eliminiamo il primo file
+    let deleted = analyzer.delete(DataType::Touchstone, filename1.clone());
+    if deleted {
+        println!(
+            "✅ `delete()` ha eliminato con successo il file '{}'\n",
+            filename1
+        );
+    } else {
+        println!("❌ `delete()` non ha trovato il file '{}'\n", filename1);
+    }
+
+    // ✅ Verifichiamo se il primo file è stato rimosso
+    let first_touchstone_after_delete = analyzer.get(DataType::Touchstone, filename1.clone());
+    println!(
+        "✅ Dopo `delete()`, `get()` per `{}` restituisce:\n{}\n",
+        filename1, first_touchstone_after_delete
+    );
+}
+
+#[cfg(target_arch = "wasm32")]
+fn main() {
+    panic!("Questo programma non può essere eseguito direttamente come WebAssembly! Usa un ambiente WASM.");
+}

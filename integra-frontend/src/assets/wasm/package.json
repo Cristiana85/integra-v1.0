@@ -1,14 +1,14 @@
 {
-  "name": "sp_solver",
+  "name": "sp_solver_wasm",
   "type": "module",
   "version": "0.1.0",
   "files": [
-    "sp_solver_bg.wasm",
-    "sp_solver.js",
-    "sp_solver.d.ts"
+    "sp_solver_wasm_bg.wasm",
+    "sp_solver_wasm.js",
+    "sp_solver_wasm.d.ts"
   ],
-  "main": "sp_solver.js",
-  "types": "sp_solver.d.ts",
+  "main": "sp_solver_wasm.js",
+  "types": "sp_solver_wasm.d.ts",
   "sideEffects": [
     "./snippets/*"
   ]
