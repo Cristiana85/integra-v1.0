@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
-import init, { WasmSpAnalyzer } from 'src/assets/wasm/sp_solver_wasm.js';
+import { data } from 'jquery';
+import init, {
+  WasmAnalyzer,
+  WasmSolver,
+} from 'src/assets/wasm/sp_solver_wasm.js';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WasmService {
-  private spAnalyzer: WasmSpAnalyzer;
+  private wasmAnalyzer: WasmAnalyzer;
+  private wasmSolver: WasmSolver;
 
   constructor() {
     this.loadWasm();
@@ -13,11 +18,12 @@ export class WasmService {
 
   async loadWasm() {
     await init('/assets/wasm/sp_solver_wasm_bg.wasm');
-    this.spAnalyzer = new WasmSpAnalyzer();
+    this.wasmAnalyzer = new WasmAnalyzer();
+    this.wasmSolver = new WasmSolver();
   }
 
-  add(jsonData: string): boolean {
-    return this.spAnalyzer.add(0, jsonData);
+  add(data_type: number, jsonData: string): boolean {
+    return this.wasmAnalyzer.add(data_type, jsonData);
   }
 
   get() {
@@ -32,14 +38,46 @@ export class WasmService {
   }
   //}
 
-  delete(filename: string): boolean {
-    return this.spAnalyzer.delete(0, filename); // 0 = Touchstone
+  delete(data_type: number, filename: string): boolean {
+    return this.wasmAnalyzer.delete(data_type, filename); // 0 = Touchstone
   }
 
   progressOperation(callback: (progress: number) => void) {
-    this.spAnalyzer.progress_operation((progress: number) => {
+    this.wasmAnalyzer.progress_operation((progress: number) => {
       console.log(`🔹 Progresso: ${progress}%`);
       callback(progress);
     });
+  }
+
+  init(touchstone: any, netlist: any, dataset: any): boolean {
+    try {
+      this.wasmSolver.init(touchstone, netlist, dataset);
+      return true;
+    } catch (error) {
+      console.error("Errore durante l'inizializzazione:", error);
+      return false;
+    }
+  }
+
+  parseDataset(): boolean {
+    try {
+      this.wasmSolver.parse_dataset();
+      return true;
+    } catch (error) {
+      console.error('Errore nel parsing dataset:', error);
+      return false;
+    }
+  }
+
+  analyze(touchstone: any, netlist: any, dataset: any): void {
+    this.wasmAnalyzer.analyze(touchstone, netlist, dataset);
+  }
+
+  clear(): void {
+    this.wasmSolver.clear();
+  }
+
+  getData(): string | null {
+    return this.wasmSolver.get_data();
   }
 }

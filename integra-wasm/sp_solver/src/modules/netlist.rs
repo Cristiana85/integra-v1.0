@@ -20,8 +20,6 @@ pub struct NetlistLink {
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Netlist {
     pub cells: Vec<NetlistCell>,
-    #[serde(default)]
-    pub links: Vec<NetlistLink>,
 }
 
 impl Netlist {
@@ -56,14 +54,6 @@ impl Netlist {
             }
 
             debug!("    📍 Posizione: {}", cell.position);
-        }
-
-        info!("📌 Collegamenti trovati:");
-        for link in &parsed.links {
-            info!(
-                "  - ID: {}, Sorgente: {}, Destinazione: {}",
-                link.id, link.source, link.target
-            );
         }
 
         Ok(parsed)

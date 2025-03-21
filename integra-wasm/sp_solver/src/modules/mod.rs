@@ -5,6 +5,6 @@ pub mod dataset;
 pub mod model;
 pub mod netlist;
 pub mod node;
-pub mod sp_solver;
+pub mod solver;
 pub mod touchstone;
 pub mod util;

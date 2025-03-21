@@ -13,26 +13,26 @@ pub mod sp_analyzer {
     impl SPAnalyzer {
         pub fn new() -> Self {
             SPAnalyzer {
-                touchstones: Vec::new(),
+                touchstone: Vec::new(),
                 netlist: SPNetlist::new(),
                 analysis: SPAnalysis::new(),
             }
         }
 
         pub fn delete_touchstone(&mut self, index: usize) {
-            if index < self.touchstones.len() {
-                self.touchstones.remove(index);
+            if index < self.touchstone.len() {
+                self.touchstone.remove(index);
             }
         }
 
         pub fn modify_touchstone(&mut self, index: usize, new_touchstone: SPTouchstone) {
-            if index < self.touchstones.len() {
-                self.touchstones[index] = new_touchstone;
+            if index < self.touchstone.len() {
+                self.touchstone[index] = new_touchstone;
             }
         }
 
         pub fn read_touchstone(&self, name: &str) -> Option<&SPTouchstone> {
-            self.touchstones.iter().find(|t| t.get_name() == name)
+            self.touchstone.iter().find(|t| t.get_name() == name)
         }
 
         pub fn load_netlist(&mut self, netlist_data: &str) {
