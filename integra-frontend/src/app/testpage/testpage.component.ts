@@ -46,7 +46,7 @@ export class TestpageComponent implements OnInit, AfterViewInit {
     this.loadChartData();
 
     setTimeout(() => {
-      this.testWasm();
+      this.test2Wasm();
     }, 3000);
   }
 
@@ -72,7 +72,7 @@ export class TestpageComponent implements OnInit, AfterViewInit {
 
     console.log(
       '✅ Aggiunta di un Touchstone:',
-      this.wasmService.add(jsonData)
+      this.wasmService.add(0, jsonData)
     );
 
     /*console.log(
@@ -82,7 +82,7 @@ export class TestpageComponent implements OnInit, AfterViewInit {
 
     console.log(
       '✅ Eliminazione di "example.s2p":',
-      this.wasmService.delete('example.s2p')
+      this.wasmService.delete(0, 'example.s2p')
     );
 
     /*console.log(
@@ -90,9 +90,66 @@ export class TestpageComponent implements OnInit, AfterViewInit {
       this.wasmService.getTouchstones()
     );*/
 
-    this.wasmService.progressOperation((progress) => {
+    /*this.wasmService.progressOperation((progress) => {
       console.log(`🚀 Progresso aggiornato: ${progress}%`);
-    });
+    });*/
+  }
+
+  test2Wasm() {
+    const touchstone = {
+      name: 'example.s2p',
+      frequencies: [1.0, 2.0, 3.0],
+      s_matrix: [
+        [
+          [0.1, 0.2],
+          [0.3, 0.4],
+        ],
+        [
+          [0.5, 0.6],
+          [0.7, 0.8],
+        ],
+      ],
+    };
+
+    console.log(
+      '✅ Aggiunta di un Touchstone:',
+      this.wasmService.add(0, JSON.stringify(touchstone))
+    );
+
+    // ✅ Creiamo un Netlist di test (OGGETTO, NON STRINGA!)
+    const netlist = {
+      cells: [
+        {
+          id: 'r1',
+          type: 'resistor',
+          attrs: { resistance: 1000, inductance: 5 },
+          position: { x: 10, y: 10 },
+        },
+        {
+          id: 'c1',
+          type: 'capacitor',
+          attrs: { capacitance: 10 },
+          position: { x: 20, y: 30 },
+        },
+      ],
+    };
+
+    console.log(
+      '✅ Aggiunta di un Netlist:',
+      this.wasmService.add(1, JSON.stringify(netlist))
+    );
+
+    // ✅ Creiamo un Dataset di test (OGGETTO, NON STRINGA!)
+    const dataset = {
+      traces: [],
+    };
+
+    console.log(
+      '✅ Aggiunta di un Dataset:',
+      this.wasmService.add(3, JSON.stringify(dataset))
+    );
+
+    this.wasmService.analyze(touchstone, netlist, dataset);
   }
 
   onFileSelect(event: any) {

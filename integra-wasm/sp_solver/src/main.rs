@@ -2,71 +2,93 @@ use sp_solver_wasm::modules::analyzer::{Analyzer, JSType};
 
 fn main() {
     let mut analyzer = Analyzer::new();
-    println!("✅ Analyzer creato!");
 
-    // 🔹 Aggiunta di una Netlist
-    let json_netlist = r#"
+    // ✅ 1. Creare un nuovo Dataset
+    let json_dataset = r#"
     {
-        "cells": [
-            { "id": "r1", "type": "resistor", "attrs": { "resistance": 1000, "inductance": 5 }, "position": { "x": 10, "y": 10 } },
-            { "id": "c1", "type": "capacitor", "attrs": { "capacitance": 10 }, "position": { "x": 20, "y": 30 } }
-        ]
+        "traces": []
     }"#;
-
-    if analyzer.add(JSType::Netlist, json_netlist) {
-        println!("✅ Netlist aggiunta con successo!");
-    }
-
-    // 🔹 Aggiunta di un NetlistEl
-    let json_netlist_element = r#"
-    {
-        "cells": [
-            { "id": "c2", "type": "capacitor", "attrs": { "capacitance": 20 }, "position": { "x": 30, "y": 40 } }
-        ]
-    }"#;
-
-    if analyzer.add(JSType::NetlistEl, json_netlist_element) {
-        println!("✅ Netlist aggiornata con nuovi elementi!");
-    }
-
-    // 🔹 3. Stampa della Netlist aggiornata
-    let netlist_json = analyzer.get(JSType::Netlist);
-    println!("📄 Stato attuale della Netlist:\n{}", netlist_json);
-
-    // 🔹 2. Modifica della cella "r1"
-    let json_modifica = r#"
-    {
-        "attrs": { "resistance": 500, "inductance": 2.5 }
-    }"#;
-
-    println!("🔹 Modifica della cella 'r1'...");
-    if analyzer.modify(JSType::NetlistEl, "r1", json_modifica) {
-        println!("✅ Cella 'r1' modificata con successo!");
-    } else {
-        println!("❌ Errore nella modifica della cella!");
-    }
-
-    // 🔹 3. Stampa della Netlist aggiornata
-    let netlist_json = analyzer.get(JSType::Netlist);
-    println!("📄 Stato attuale della Netlist:\n{}", netlist_json);
-
-    // 🔹 Elimina un NetlistEl (ad esempio "c2")
-    if analyzer.delete(JSType::NetlistEl, "c2".to_string()) {
-        println!("✅ NetlistEl eliminato con successo!");
-    } else {
-        println!("❌ Errore nell'eliminazione di NetlistEl!");
-    }
-
-    // 🔹 Elimina l'intera Netlist
-    if analyzer.delete(JSType::Netlist, "".to_string()) {
-        println!("✅ Netlist eliminata completamente!");
-    } else {
-        println!("❌ Nessuna Netlist da eliminare!");
-    }
-
-    // 🔹 Controlla che sia vuota
+    analyzer.add(JSType::Dataset, json_dataset);
     println!(
-        "📄 Stato attuale dopo eliminazione:\n{}",
-        analyzer.get(JSType::Netlist)
+        "📄 Stato iniziale del Dataset:\n{}",
+        analyzer.get(JSType::Dataset)
+    );
+
+    // ✅ 2. Aggiungere il primo Trace
+    let json_trace1 = r#"
+    {
+        "tracename": "Trace1",
+        "sweep": "freq",
+        "solver": "simulatorA",
+        "domain": "time",
+        "data": "1.0,2.0,3.0",
+        "format": "csv"
+    }"#;
+    analyzer.add(JSType::DatasetEl, json_trace1);
+    println!(
+        "📄 Dopo aggiunta di Trace1:\n{}",
+        analyzer.get(JSType::DatasetEl)
+    );
+
+    // ✅ 3. Aggiungere un secondo Trace
+    let json_trace2 = r#"
+    {
+        "tracename": "Trace2",
+        "sweep": "voltage",
+        "solver": "simulatorB",
+        "domain": "frequency",
+        "data": "4.0,5.0,6.0",
+        "format": "json"
+    }"#;
+    analyzer.add(JSType::DatasetEl, json_trace2);
+    println!(
+        "📄 Dopo aggiunta di Trace2:\n{}",
+        analyzer.get(JSType::DatasetEl)
+    );
+
+    // ✅ 4. Modificare il primo Trace
+    let json_trace1_mod = r#"
+    {
+        "tracename": "Trace1",
+        "sweep": "freq",
+        "solver": "simulatorX",
+        "domain": "time",
+        "data": "10.0,20.0,30.0",
+        "format": "csv"
+    }"#;
+    analyzer.modify(JSType::DatasetEl, "Trace1", json_trace1_mod);
+    println!(
+        "📄 Dopo modifica di Trace1:\n{}",
+        analyzer.get(JSType::DatasetEl)
+    );
+
+    // ✅ 5. Eliminare Trace2
+    analyzer.delete(JSType::DatasetEl, "Trace2".to_string());
+    println!(
+        "📄 Dopo eliminazione di Trace2:\n{}",
+        analyzer.get(JSType::DatasetEl)
+    );
+
+    // ✅ 6. Aggiungere un nuovo Trace dopo la modifica
+    let json_trace3 = r#"
+    {
+        "tracename": "Trace3",
+        "sweep": "current",
+        "solver": "simulatorC",
+        "domain": "time",
+        "data": "7.0,8.0,9.0",
+        "format": "xml"
+    }"#;
+    analyzer.add(JSType::DatasetEl, json_trace3);
+    println!(
+        "📄 Dopo aggiunta di Trace3:\n{}",
+        analyzer.get(JSType::DatasetEl)
+    );
+
+    // ✅ 7. Eliminare il Dataset intero
+    analyzer.delete(JSType::Dataset, "".to_string());
+    println!(
+        "📄 Dopo eliminazione dell'intero Dataset:\n{}",
+        analyzer.get(JSType::Dataset)
     );
 }
