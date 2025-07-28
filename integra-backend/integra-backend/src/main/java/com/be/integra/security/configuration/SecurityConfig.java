@@ -29,7 +29,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
+        /*http
                 .csrf(AbstractHttpConfigurer::disable) // Disabilita CSRF
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
@@ -43,7 +43,10 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults()) // Usa la configurazione CORS
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); // Aggiungi il filtro JWT
 
-        return http.build();
+        return http.build();*/
+        return http.csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/**").permitAll()).build();
     }
 
     @Bean

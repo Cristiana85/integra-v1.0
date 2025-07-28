@@ -1,5 +1,6 @@
 package com.be.integra.entity;
 
+import com.be.integra.enums.AccountType;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -39,6 +40,10 @@ public class Account implements Serializable {
 	
 	@Column(name = "surname")
     private String surname;
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "type")
+	private AccountType type;
 
 	@Column(name = "token")
 	private String token;

@@ -2,6 +2,7 @@ package com.be.integra.controller;
 
 import com.be.integra.dto.HandleDTO;
 import com.be.integra.dto.ProjectDTO;
+import com.be.integra.dto.SimulationJobDTO;
 import com.be.integra.service.ProjectService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,5 +31,23 @@ public class ProjectController {
             @RequestParam("projectId") Long projectId
     ) {
         return ResponseEntity.ok(this.projectService.getProjectById(handle.getAccountId(), projectId));
+    }
+
+    /*@PostMapping(EndPoint.Project.RUN)
+    public ResponseEntity<String> runSimulation(
+            @AuthenticationPrincipal HandleDTO handle,
+            @PathVariable("projectId") Long projectId
+    ) {
+        String jobId = this.projectService.runSimulation(handle.getAccountId(), projectId);
+        return ResponseEntity.ok(jobId);
+    }*/
+
+    @PostMapping(EndPoint.Project.CREATE_SIMULATION)
+    public ResponseEntity<String> createSimulation(
+            @RequestParam("accountId") Long accountId,
+            @PathVariable("projectId") Long projectId
+    ) {
+        SimulationJobDTO simulationJobDTO = this.projectService.createSimulationJob(accountId, projectId);
+        return ResponseEntity.ok(simulationJobDTO.getId());
     }
 }

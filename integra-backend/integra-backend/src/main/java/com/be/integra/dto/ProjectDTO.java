@@ -18,4 +18,6 @@ public class ProjectDTO implements Serializable {
     private Long accountId;
     private String name;
     //private Map<String, Object> metadata;
+
+    //private AccountDTO account;
 }
