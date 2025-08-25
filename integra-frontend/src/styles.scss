@@ -1,64 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
-@import "primeng/resources/primeng.min.css";
-@import "primeflex/primeflex.css";
+//@import "primeng/resources/primeng.min.css";
+//@import "primeflex/primeflex.css";
+//@import "primeicons/primeicons.css";
+//@import '~jointjs/dist/joint.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import PrimeNG theme + core */
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
 @import "primeicons/primeicons.css";
-@import '~jointjs/dist/joint.css';
 
-
-html {
-  font-size: 12px;
-}
-
-:root {
-  --font-sans: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-  --font-serif: 'Georgia', 'Times New Roman', Times, serif;
-  --font-mono: 'Courier New', Courier, monospace;
-}
-
-*,
-::before,
-::after {
-  box-sizing: border-box;
-  text-rendering: optimizelegibility;
-  -webkit-font-smoothing: antialiased;
-}
-
-body {
-  background: var(--surface-ground);
-  color: var(--text-color);
-  margin: 0px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Manage tooltip here due to DOM pNG issue */
-
-.topbar-rigt-btn-cs-tooltip {
-  text-align: center;
-  transform: translateX(4px) !important;
-  font-size: 12px;
-}
-
-.topbar-bottom-cs-tooltip {
-  text-align: center;
-  transform: translateY(4px) !important;
-  font-size: 12px;
-}
-
-.topbar-layout-tab-switch-cs-tooltip {
-  text-align: center;
-  transform: translateY(10px) !important;
-  font-size: 12px;
-}
-
-  @media (max-width: 868px) {
-    /*.cs-tooltip {
-    //display: flex;
-    //align-items: center;
-    display: block !important;
-    text-align: center;
-    transform: translateY(20px) !important;
-    min-width: 140px;
-    font-size: 15px;
-  }*/
-  }

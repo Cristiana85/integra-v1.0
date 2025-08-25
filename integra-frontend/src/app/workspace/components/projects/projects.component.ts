@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { Project } from 'src/app/core/models/project';
-import { ProjectService } from 'src/app/editor/services/project.service';
+//import { ProjectService } from 'src/app/editor/services/project.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SearchComponent } from "../../../shared/components/search/search.component";
 import { AddProjectsComponent } from "../add-projects/add-projects.component";
@@ -68,16 +68,16 @@ export class ProjectsComponent implements OnInit {
   ];
 
   constructor(
-    protected projectService: ProjectService,
+    //protected projectService: ProjectService,
     protected router: Router,
     protected authService: AuthService
   ) {
   }
 
   ngOnInit(): void {
-    this.projectService.getlProject().subscribe(res => {
+    /*this.projectService.getlProject().subscribe(res => {
       this.lProject = res;
-    })
+    })*/
     this.filteredProjects = [...this.lProject];
   }
 

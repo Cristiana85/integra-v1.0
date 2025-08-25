@@ -8,7 +8,7 @@ import { MessageService } from 'primeng/api';
 import { saveAs } from 'file-saver';
 import { TouchstoneParser } from './core/touchstone-parser';
 import { async } from 'rxjs';
-import { WasmService } from '../editor/services/wasm/libavoid.wasm.service';
+//import { WasmService } from '../editor/services/wasm/libavoid.wasm.service';
 
 @Component({
   selector: 'integra-testpage',
@@ -38,7 +38,7 @@ export class TestpageComponent implements OnInit, AfterViewInit {
 
   constructor(
     private messageService: MessageService,
-    private wasmService: WasmService
+    //private wasmService: WasmService
   ) {}
   ngAfterViewInit(): void {}
 
@@ -72,7 +72,7 @@ export class TestpageComponent implements OnInit, AfterViewInit {
 
     console.log(
       '✅ Aggiunta di un Touchstone:',
-      this.wasmService.add(0, jsonData)
+      //this.wasmService.add(0, jsonData)
     );
 
     /*console.log(
@@ -82,7 +82,7 @@ export class TestpageComponent implements OnInit, AfterViewInit {
 
     console.log(
       '✅ Eliminazione di "example.s2p":',
-      this.wasmService.delete(0, 'example.s2p')
+      //this.wasmService.delete(0, 'example.s2p')
     );
 
     /*console.log(
@@ -113,7 +113,7 @@ export class TestpageComponent implements OnInit, AfterViewInit {
 
     console.log(
       '✅ Aggiunta di un Touchstone:',
-      this.wasmService.add(0, JSON.stringify(touchstone))
+      //this.wasmService.add(0, JSON.stringify(touchstone))
     );
 
     // ✅ Creiamo un Netlist di test (OGGETTO, NON STRINGA!)
@@ -136,7 +136,7 @@ export class TestpageComponent implements OnInit, AfterViewInit {
 
     console.log(
       '✅ Aggiunta di un Netlist:',
-      this.wasmService.add(1, JSON.stringify(netlist))
+      //this.wasmService.add(1, JSON.stringify(netlist))
     );
 
     // ✅ Creiamo un Dataset di test (OGGETTO, NON STRINGA!)
@@ -146,10 +146,10 @@ export class TestpageComponent implements OnInit, AfterViewInit {
 
     console.log(
       '✅ Aggiunta di un Dataset:',
-      this.wasmService.add(3, JSON.stringify(dataset))
+      //this.wasmService.add(3, JSON.stringify(dataset))
     );
 
-    this.wasmService.analyze(touchstone, netlist, dataset);
+    //this.wasmService.analyze(touchstone, netlist, dataset);
   }
 
   onFileSelect(event: any) {

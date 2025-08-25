@@ -9,8 +9,6 @@ import { provideRouter, Routes } from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import { EditorComponent } from './editor/pages/ui/editor.component';
-import { diagramReducer } from './editor/store/reducers/diagram.reducer';
 import { EntrypageComponent } from './entrypage/entrypage.component';
 import { ForgotPasswordComponent } from './landing-page/components/forgot.password/forgot.password.component';
 import { LoginComponent } from './landing-page/components/login/login.component';
@@ -22,6 +20,7 @@ import { ProjectsComponent } from './workspace/components/projects/projects.comp
 import { WorkspaceComponent } from './workspace/pages/workspace.component';
 import { AuthGuard } from './shared/services/auth.guard';
 import { TestpageComponent } from './testpage/testpage.component';
+import { AppComponent } from './integra/app.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'entrypage', pathMatch: 'full' }, // Default route
@@ -47,18 +46,18 @@ const routes: Routes = [
     ],
   },
   { path: 'testpage', component: TestpageComponent },
-  { path: 'editor', component: EditorComponent },
+  { path: 'editor', component: AppComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'projects', component: ProjectsComponent },
-  { path: 'projects/:name', component: EditorComponent },
+  { path: 'projects/:name', component: AppComponent },
 ];
 
 export const appConfig: ApplicationConfig = {
   providers: [
     importProvidersFrom(BrowserAnimationsModule), // Add this for animations
     provideRouter(routes), // Add routing here
-    provideStore({ reducer: diagramReducer }), // Register the diagram reducer
+    provideStore({ reducer: null }), // Register the diagram reducer
     provideEffects([]), // Add effects here if needed
     provideStoreDevtools(), // Enable Store DevTools (Optional)
     provideHttpClient(withInterceptorsFromDi()), // Abilita gli interceptor DI
