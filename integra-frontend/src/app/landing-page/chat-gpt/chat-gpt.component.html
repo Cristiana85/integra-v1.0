@@ -1,0 +1,223 @@
+<div class="app-wrapper surface-ground" style="--brand: #7c3aed">
+  <aside class="nav-sidebar surface-card border-right-1 border-200" [class.collapsed]="collapsed">
+    <!-- HEADER sticky -->
+    <div class="nav-header">
+      <!-- BRAND: in collapsed, on-hover mostra la layout icon; click => expand -->
+      <button
+        type="button"
+        class="brand"
+        pRipple
+        [pTooltip]="collapsed ? 'Espandi' : 'Home'"
+        tooltipPosition="right"
+        (click)="collapsed && toggleCollapse()"
+        aria-label="Brand / Expand"
+      >
+        <i class="pi pi-sparkles brand-icon" aria-hidden="true"></i>
+        <span class="layout-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24">
+            <rect
+              x="3"
+              y="4"
+              width="18"
+              height="16"
+              rx="3"
+              ry="3"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <line
+              x1="14.5"
+              y1="4"
+              x2="14.5"
+              y2="20"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+        </span>
+      </button>
+
+      <span class="logo-text" *ngIf="!collapsed">Codex</span>
+
+      <!-- Toggle classico visibile SOLO quando è aperta -->
+      <button
+        *ngIf="!collapsed"
+        class="toggle"
+        type="button"
+        pRipple
+        (click)="toggleCollapse()"
+        pTooltip="Comprimi"
+        tooltipPosition="right"
+        aria-label="Collapse sidebar"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+          <rect
+            x="3"
+            y="4"
+            width="18"
+            height="16"
+            rx="3"
+            ry="3"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          />
+          <line
+            x1="9.5"
+            y1="4"
+            x2="9.5"
+            y2="20"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
+    </div>
+
+    <!-- BODY scrollabile -->
+    <div class="nav-scroll">
+      <small class="nav-section" *ngIf="!collapsed">Navigation</small>
+
+      <nav class="nav-list">
+        <a
+          class="nav-item"
+          routerLink="chat"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          [pTooltip]="collapsed ? 'Nuova chat' : null"
+          tooltipPosition="right"
+        >
+          <i class="pi pi-pencil"></i>
+          <span class="label" *ngIf="!collapsed">Nuova chat</span>
+          <i class="pi pi-ellipsis-h kebab" *ngIf="!collapsed"></i>
+        </a>
+
+        <a
+          class="nav-item"
+          routerLink="search"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          [pTooltip]="collapsed ? 'Cerca' : null"
+          tooltipPosition="right"
+        >
+          <i class="pi pi-search"></i>
+          <span class="label" *ngIf="!collapsed">Cerca chat</span>
+          <i class="pi pi-ellipsis-h kebab" *ngIf="!collapsed"></i>
+        </a>
+
+        <a
+          class="nav-item"
+          routerLink="gpts"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          [pTooltip]="collapsed ? 'GPT' : null"
+          tooltipPosition="right"
+        >
+          <i class="pi pi-sparkles"></i>
+          <span class="label" *ngIf="!collapsed">GPT</span>
+          <i class="pi pi-ellipsis-h kebab" *ngIf="!collapsed"></i>
+        </a>
+
+        <a
+          class="nav-item"
+          routerLink="library"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          [pTooltip]="collapsed ? 'Libreria' : null"
+          tooltipPosition="right"
+        >
+          <i class="pi pi-folder"></i>
+          <span class="label" *ngIf="!collapsed">Libreria</span>
+          <i class="pi pi-ellipsis-h kebab" *ngIf="!collapsed"></i>
+        </a>
+
+        <a
+          class="nav-item"
+          routerLink="codex"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          [pTooltip]="collapsed ? 'Codex' : null"
+          tooltipPosition="right"
+        >
+          <i class="pi pi-book"></i>
+          <span class="label" *ngIf="!collapsed">Codex</span>
+          <i class="pi pi-ellipsis-h kebab" *ngIf="!collapsed"></i>
+        </a>
+
+        <a
+          class="nav-item"
+          routerLink="sora"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          [pTooltip]="collapsed ? 'Sora' : null"
+          tooltipPosition="right"
+        >
+          <i class="pi pi-video"></i>
+          <span class="label" *ngIf="!collapsed">Sora</span>
+          <i class="pi pi-ellipsis-h kebab" *ngIf="!collapsed"></i>
+        </a>
+      </nav>
+
+      <ng-container *ngIf="!collapsed">
+        <p-divider class="my-2"></p-divider>
+        <small class="nav-section">Your teams</small>
+      </ng-container>
+
+      <nav class="nav-list">
+        <a
+          class="nav-item team"
+          [pTooltip]="collapsed ? 'Planetaria' : null"
+          tooltipPosition="right"
+        >
+          <p-avatar label="P" shape="square" styleClass="team-avatar"></p-avatar>
+          <span class="label" *ngIf="!collapsed">Planetaria</span>
+          <i class="pi pi-ellipsis-h kebab" *ngIf="!collapsed"></i>
+        </a>
+        <a class="nav-item team" [pTooltip]="collapsed ? 'Protocol' : null" tooltipPosition="right">
+          <p-avatar label="P" shape="square" styleClass="team-avatar"></p-avatar>
+          <span class="label" *ngIf="!collapsed">Protocol</span>
+          <i class="pi pi-ellipsis-h kebab" *ngIf="!collapsed"></i>
+        </a>
+        <a
+          class="nav-item team"
+          [pTooltip]="collapsed ? 'Tailwind Labs' : null"
+          tooltipPosition="right"
+        >
+          <p-avatar label="T" shape="square" styleClass="team-avatar"></p-avatar>
+          <span class="label" *ngIf="!collapsed">Tailwind Labs</span>
+          <i class="pi pi-ellipsis-h kebab" *ngIf="!collapsed"></i>
+        </a>
+      </nav>
+    </div>
+
+    <!-- FOOTER (solo open) -->
+    <div class="nav-footer border-top-1 border-200" *ngIf="!collapsed">
+      <p-avatar image="assets/avatar.png" label="B" shape="circle"></p-avatar>
+      <div class="meta">
+        <div class="name">
+          Benjamin Button
+          <i class="pi pi-verified text-primary"></i>
+        </div>
+        <small class="handle text-600">&#64;benjbutt</small>
+      </div>
+      <button pButton icon="pi pi-ellipsis-h" class="p-button-text p-button-sm"></button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <section class="main">
+    <div
+      class="surface-card border-bottom-1 border-200 flex align-items-center justify-content-between p-3"
+    >
+      <div class="flex align-items-center gap-2">
+        <span class="font-medium">App</span>
+      </div>
+    </div>
+    <div class="chat-scroll">
+      <router-outlet></router-outlet>
+    </div>
+  </section>
+</div>

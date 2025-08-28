@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { PrimeblocksModule } from 'src/app/shared/primeblocks.module';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -7,33 +14,28 @@ import { SharedModule } from 'src/app/shared/shared.module';
 @Component({
   selector: 'integra-forgot.password',
   standalone: true,
-  imports: [
-    SharedModule,
-    FormsModule,
-    PrimeblocksModule,
-    ReactiveFormsModule
-  ],
+  imports: [SharedModule, FormsModule, RouterModule, PrimeblocksModule, ReactiveFormsModule],
   templateUrl: './forgot.password.component.html',
-  styleUrl: './forgot.password.component.scss'
+  styleUrl: './forgot.password.component.scss',
 })
 export class ForgotPasswordComponent implements OnInit {
   public forgotPasswordForm: FormGroup;
 
   constructor(
-    private fb: FormBuilder,  // Using FormBuilder for easier form creation
-    private loginService: AuthService
-  ) { }
+    private fb: FormBuilder, // Using FormBuilder for easier form creation
+    private loginService: AuthService,
+  ) {}
 
   ngOnInit(): void {
     // Initialize the form with FormBuilder
     this.forgotPasswordForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],  // Email validation
+      email: ['', [Validators.required, Validators.email]], // Email validation
     });
   }
 
   forgotPassword() {
     if (this.forgotPasswordForm.valid) {
-      console.log(this.forgotPasswordForm.value);  // Optionally log the form values for debugging
+      console.log(this.forgotPasswordForm.value); // Optionally log the form values for debugging
 
       this.loginService.forgotPassword(this.forgotPasswordForm.value).subscribe(
         (response) => {
@@ -41,7 +43,7 @@ export class ForgotPasswordComponent implements OnInit {
         },
         (error) => {
           alert('User not found');
-        }
+        },
       );
     }
   }

@@ -149,8 +149,8 @@ import { NgxEchartsModule } from 'ngx-echarts';
     SkeletonModule,
     SidebarModule,
     NgxEchartsModule.forRoot({
-      echarts: () => import('echarts')
-    })
+      echarts: () => import('echarts'),
+    }),
   ],
   exports: [
     CommonModule,
@@ -224,17 +224,14 @@ import { NgxEchartsModule } from 'ngx-echarts';
     TriStateCheckboxModule,
     SplitterModule,
     SkeletonModule,
-    SidebarModule
+    SidebarModule,
   ],
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders<SharedModule> {
     return {
       ngModule: SharedModule,
-      providers: [
-        PrimengMessageService,
-        ConfirmationService,
-      ],
+      providers: [PrimengMessageService, ConfirmationService],
     };
   }
 }

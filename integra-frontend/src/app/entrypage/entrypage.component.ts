@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
-import { SharedModule } from '../shared/shared.module';
+
+import { RouterModule } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
+import { RippleModule } from 'primeng/ripple';
 
 @Component({
-  selector: 'app-entrypage',
   standalone: true,
-  imports: [SharedModule],
+  selector: 'app-entrypage',
+  imports: [RouterModule, ButtonModule, RippleModule], // <-- QUI
   templateUrl: './entrypage.component.html',
-  styleUrl: './entrypage.component.scss'
+  styleUrls: ['./entrypage.component.scss'],
 })
-export class EntrypageComponent {
-
-}
-
-
+export class EntrypageComponent {}
