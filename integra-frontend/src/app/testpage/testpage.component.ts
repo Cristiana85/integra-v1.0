@@ -8,7 +8,7 @@ import { MessageService } from 'primeng/api';
 import { saveAs } from 'file-saver';
 import { TouchstoneParser } from './core/touchstone-parser';
 import { async } from 'rxjs';
-import { WasmService } from '../editor/services/wasm/libavoid.wasm.service';
+import { WasmService } from '../integra/editor/services/wasm/libavoid.wasm.service';
 
 @Component({
   selector: 'integra-testpage',
