@@ -17,9 +17,9 @@ import { WorkspaceComponent } from './workspace/pages/workspace.component';
 import { ProjectsComponent } from './workspace/components/projects/projects.component';
 
 // Chat area (layout + children)
-import { ChatLayoutComponent } from './landing-page/chat-gpt/chat-gpt.component';
-import { ChatemptyComponent } from './landing-page/chat-gpt/components/chatempty/chatempty.component';
-import { GptexplorerComponent } from './landing-page/chat-gpt/components/gptexplorer/gptexplorer.component';
+import { DashboardComponent } from './integra/dashboard/dashboard.component';
+import { BoardEmptyComponent } from './integra/dashboard/components/boardempty/boardempty.component';
+import { BoardExplorerComponent } from './integra/dashboard/components/boardexplorer/boardexplorer.component';
 
 // Misc
 import { TestpageComponent } from './testpage/testpage.component';
@@ -46,12 +46,12 @@ export const routes: Routes = [
   },
 
   {
-    path: 'chat-gpt',
-    component: ChatLayoutComponent,
+    path: 'dashboard',
+    component: DashboardComponent,
     children: [
       { path: '', redirectTo: 'chat', pathMatch: 'full' },
-      { path: 'chat', component: ChatemptyComponent },
-      { path: 'gpts', component: GptexplorerComponent },
+      { path: 'board', component: BoardEmptyComponent },
+      { path: 'explorer', component: BoardExplorerComponent },
     ],
   },
 

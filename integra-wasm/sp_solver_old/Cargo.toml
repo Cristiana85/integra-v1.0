@@ -1,0 +1,38 @@
+[package]
+name = "sp_solver_wasm"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "sp_solver_wasm"  # The library target (for WebAssembly)
+crate-type = ["cdylib", "rlib"]  # Required for WebAssembly (cdylib) and Rust library (rlib)
+
+[dependencies]
+wasm-bindgen = "0.2"
+serde = { version = "1.0", features = ["derive"] }
+serde-wasm-bindgen = "0.5"
+serde_json = "1.0"
+nalgebra = { version = "0.32", features = ["serde"] }  # ✅ `serde` attivato!
+js-sys = "0.3"        # ✅ Aggiungi js-sys separatamente
+log = "0.4"
+env_logger = "0.11"
+wasm-logger = "0.2"
+web-sys = { version = "0.3", features = ["console", "Window"] }
+
+thiserror = "1.0"  # For custom error handling
+console_error_panic_hook = "0.1"  # Better panic messages in WASM
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3"  # Unit testing for WebAssembly
+
+[features]
+default = []  # Default feature set
+wasm = []  # Enable WebAssembly-specific features
+
+[profile.release]
+lto = true  # Link Time Optimization for smaller WASM size
+opt-level = "s"  # Optimize for size
+
+[[bin]]
+name = "sp_solver_exe"  # Rename the binary target to avoid filename conflict
+path = "src/main.rs"

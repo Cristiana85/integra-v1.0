@@ -1,6 +1,9 @@
 {
   "name": "sp_solver_wasm",
   "type": "module",
+  "collaborators": [
+    "{{MdP}}"
+  ],
   "version": "0.1.0",
   "files": [
     "sp_solver_wasm_bg.wasm",

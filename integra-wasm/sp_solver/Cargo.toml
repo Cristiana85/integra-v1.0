@@ -1,11 +1,16 @@
 [package]
 name = "sp_solver_wasm"
 version = "0.1.0"
+authors = ["{{MdP}}"]
 edition = "2021"
 
 [lib]
 name = "sp_solver_wasm"  # The library target (for WebAssembly)
-crate-type = ["cdylib", "rlib"]  # Required for WebAssembly (cdylib) and Rust library (rlib)
+crate-type = ["cdylib", "rlib"]
+
+[features]
+default = ["console_error_panic_hook"] # Default feature set
+wasm = []  # Enable WebAssembly-specific features
 
 [dependencies]
 wasm-bindgen = "0.2"
@@ -19,20 +24,19 @@ env_logger = "0.11"
 wasm-logger = "0.2"
 web-sys = { version = "0.3", features = ["console", "Window"] }
 
-thiserror = "1.0"  # For custom error handling
-console_error_panic_hook = "0.1"  # Better panic messages in WASM
+# The `console_error_panic_hook` crate provides better debugging of panics by
+# logging them with `console.error`. This is great for development, but requires
+# all the `std::fmt` and `std::panicking` infrastructure, so isn't great for
+# code size when deploying.
+console_error_panic_hook = { version = "0.1.0", optional = true }
 
 [dev-dependencies]
-wasm-bindgen-test = "0.3"  # Unit testing for WebAssembly
-
-[features]
-default = []  # Default feature set
-wasm = []  # Enable WebAssembly-specific features
+wasm-bindgen-test = "0.3.34"
 
 [profile.release]
 lto = true  # Link Time Optimization for smaller WASM size
 opt-level = "s"  # Optimize for size
 
-[[bin]]
-name = "sp_solver_exe"  # Rename the binary target to avoid filename conflict
-path = "src/main.rs"
+# [[bin]]
+# name = "sp_solver_exe"  # Rename the binary target to avoid filename conflict
+# path = "src/main.rs"
