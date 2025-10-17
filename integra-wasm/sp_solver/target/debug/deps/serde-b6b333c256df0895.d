@@ -1,0 +1,14 @@
+C:\Workspace\integra-v1.0\integra-wasm\sp_solver\target\debug\deps\libserde-b6b333c256df0895.rmeta: C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\lib.rs C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\integer128.rs C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\mod.rs C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\de.rs C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\ser.rs C:\Workspace\integra-v1.0\integra-wasm\sp_solver\target\debug\build\serde-b1595d812e57e816\out/private.rs
+
+C:\Workspace\integra-v1.0\integra-wasm\sp_solver\target\debug\deps\libserde-b6b333c256df0895.rlib: C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\lib.rs C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\integer128.rs C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\mod.rs C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\de.rs C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\ser.rs C:\Workspace\integra-v1.0\integra-wasm\sp_solver\target\debug\build\serde-b1595d812e57e816\out/private.rs
+
+C:\Workspace\integra-v1.0\integra-wasm\sp_solver\target\debug\deps\serde-b6b333c256df0895.d: C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\lib.rs C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\integer128.rs C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\mod.rs C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\de.rs C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\ser.rs C:\Workspace\integra-v1.0\integra-wasm\sp_solver\target\debug\build\serde-b1595d812e57e816\out/private.rs
+
+C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\lib.rs:
+C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\integer128.rs:
+C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\mod.rs:
+C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\de.rs:
+C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\ser.rs:
+C:\Workspace\integra-v1.0\integra-wasm\sp_solver\target\debug\build\serde-b1595d812e57e816\out/private.rs:
+
+# env-dep:OUT_DIR=C:\\Workspace\\integra-v1.0\\integra-wasm\\sp_solver\\target\\debug\\build\\serde-b1595d812e57e816\\out

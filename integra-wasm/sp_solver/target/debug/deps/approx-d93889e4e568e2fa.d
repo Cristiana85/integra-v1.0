@@ -1,0 +1,11 @@
+C:\Workspace\integra-v1.0\integra-wasm\sp_solver\target\debug\deps\libapprox-d93889e4e568e2fa.rmeta: C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\approx-0.5.1\src\lib.rs C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\approx-0.5.1\src\abs_diff_eq.rs C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\approx-0.5.1\src\relative_eq.rs C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\approx-0.5.1\src\ulps_eq.rs C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\approx-0.5.1\src\macros.rs
+
+C:\Workspace\integra-v1.0\integra-wasm\sp_solver\target\debug\deps\libapprox-d93889e4e568e2fa.rlib: C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\approx-0.5.1\src\lib.rs C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\approx-0.5.1\src\abs_diff_eq.rs C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\approx-0.5.1\src\relative_eq.rs C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\approx-0.5.1\src\ulps_eq.rs C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\approx-0.5.1\src\macros.rs
+
+C:\Workspace\integra-v1.0\integra-wasm\sp_solver\target\debug\deps\approx-d93889e4e568e2fa.d: C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\approx-0.5.1\src\lib.rs C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\approx-0.5.1\src\abs_diff_eq.rs C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\approx-0.5.1\src\relative_eq.rs C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\approx-0.5.1\src\ulps_eq.rs C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\approx-0.5.1\src\macros.rs
+
+C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\approx-0.5.1\src\lib.rs:
+C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\approx-0.5.1\src\abs_diff_eq.rs:
+C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\approx-0.5.1\src\relative_eq.rs:
+C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\approx-0.5.1\src\ulps_eq.rs:
+C:\Users\massi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\approx-0.5.1\src\macros.rs:
