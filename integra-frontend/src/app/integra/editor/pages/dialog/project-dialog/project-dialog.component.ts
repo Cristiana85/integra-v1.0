@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DialogService } from 'src/app/editor/services/dialog.service';
+import { DialogService } from 'src/app/integra/editor/services/dialog.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({

@@ -73,6 +73,7 @@ import { SplitterModule } from 'primeng/splitter';
 import { SkeletonModule } from 'primeng/skeleton';
 import { SidebarModule } from 'primeng/sidebar';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { ProjectDialogComponent } from '../integra/editor/pages/dialog/project-dialog/project-dialog.component';
 
 @NgModule({
   imports: [
@@ -148,6 +149,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
     SplitterModule,
     SkeletonModule,
     SidebarModule,
+    ProjectDialogComponent,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'),
     }),
@@ -225,6 +227,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
     SplitterModule,
     SkeletonModule,
     SidebarModule,
+    ProjectDialogComponent,
   ],
 })
 export class SharedModule {

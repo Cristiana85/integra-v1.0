@@ -7,7 +7,7 @@ import { DiagramComponent } from '../../components/diagram/diagram.component';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 import { StencilComponent } from '../../components/stencil/stencil.component';
 import { TopbarComponent } from '../../components/topbar/topbar.component';
-import { Project } from '../../../core/models/project';
+import { Project } from '../../../../core/models/project';
 import { DiagramService } from '../../services/diagram.service';
 import { ProjectService } from '../../services/project.service';
 import {
@@ -26,7 +26,6 @@ import { ProjectDialogComponent } from '../dialog/project-dialog/project-dialog.
     SidebarComponent,
     StencilComponent,
     FooterComponent,
-    ProjectDialogComponent
   ],
   templateUrl: './editor.component.html',
   styleUrl: './editor.component.scss',
