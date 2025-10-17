@@ -22,7 +22,6 @@ import { BoardEmptyComponent } from './integra/dashboard/components/boardempty/b
 import { BoardExplorerComponent } from './integra/dashboard/components/boardexplorer/boardexplorer.component';
 
 // Misc
-import { TestpageComponent } from './testpage/testpage.component';
 import { DiagramComponent } from './integra/editor/components/diagram/diagram.component';
 import { EditorComponent } from './integra/editor/pages/ui/editor.component';
 
@@ -57,7 +56,6 @@ export const routes: Routes = [
     ],
   },
 
-  { path: 'testpage', component: TestpageComponent },
   { path: 'editor', component: EditorComponent },
   { path: '**', redirectTo: 'entrypage' },
 ];

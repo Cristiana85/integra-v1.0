@@ -3,7 +3,7 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/c
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
-@Injectable()
+/*@Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Recupera il token dal localStorage o da un servizio dedicato
@@ -23,4 +23,12 @@ export class AuthInterceptor implements HttpInterceptor {
     // Se non c'è token, passa la richiesta originale
     return next.handle(req);
   }
-}
+}*/
+import { HttpInterceptorFn } from '@angular/common/http';
+
+export const authInterceptor: HttpInterceptorFn = (req, next) => {
+  const token = localStorage.getItem('authToken');
+  const cloned = token ? req.clone({ setHeaders: { Authorization: `Bearer ${token}` } }) : req;
+  return next(cloned);
+};
+
