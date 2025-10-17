@@ -1,0 +1,37 @@
+<div class="stencil">
+  <!-- Search Field -->
+  <integra-search [(searchQuery)]="parentSearchQuery" (searchQueryChange)="onSearchChange($event)"></integra-search>
+  <div class="category-grid">
+    <button *ngFor="let category of categories" pButton [label]="category"
+      [class.p-button-secondary]="category !== activeCategory" [class.p-button-primary]="category === activeCategory"
+      [rounded]="true" [ngClass]="{'active-bold': category === activeCategory}" (click)="setActiveCategory(category)">
+    </button>
+  </div>
+  <p-accordion [multiple]="true" [activeIndex]="[0, 1, 2]" [expandIcon]="'pi pi-sort-down-fill'"
+    [collapseIcon]="'pi pi-sort-up-fill'">
+    <p-accordionTab [header]="categories[0]">
+      <div class="chart-grid">
+        <div *ngFor="let chart of filteredBasicList" class="chart-card">
+          <img [src]="chart.image" alt="Chart Preview" />
+          <p>{{ chart.label }}</p>
+        </div>
+      </div>
+    </p-accordionTab>
+    <p-accordionTab [header]="categories[1]">
+      <div class="chart-grid">
+        <div *ngFor="let chart of filteredLumpedList" class="chart-card">
+          <img [src]="chart.image" alt="Chart Preview" />
+          <p>{{ chart.label }}</p>
+        </div>
+      </div>
+    </p-accordionTab>
+    <p-accordionTab [header]="categories[2]">
+      <div class="chart-grid">
+        <div *ngFor="let chart of filteredDistributedList" class="chart-card">
+          <img [src]="chart.image" alt="Chart Preview" />
+          <p>{{ chart.label }}</p>
+        </div>
+      </div>
+    </p-accordionTab>
+  </p-accordion>
+</div>

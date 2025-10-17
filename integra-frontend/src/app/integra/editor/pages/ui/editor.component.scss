@@ -1,0 +1,161 @@
+:host ::ng-deep {
+
+  /* Container for the whole component */
+  .editor-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #f9f9f9;
+    overflow: hidden;
+  }
+
+  /* Promo banner with fixed height */
+  .editor-promo {
+    background-color: red;
+    //border-bottom: 1px solid #ddd;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Header with fixed height */
+  .editor-header {
+    background: rgb(254, 254, 254);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Main Content: fills the remaining space */
+  .editor-main-content {
+    display: flex;
+    flex-grow: 1;
+    overflow: hidden;
+    background: rgb(254, 254, 254);
+  }
+
+  /* Left Column: fixed width */
+  .editor-left-column {
+    height: 100%;
+    background: rgb(254, 254, 254);
+    //border-right: 1px solid #ccc;
+    overflow-y: hidden;
+    user-select: none;
+  }
+
+  /* Right Column: fills remaining space */
+  .editor-right-column {
+    display: flex;
+    flex-direction: column;
+    //flex-grow: 1;
+    background: rgb(254, 254, 254);
+    //user-select: none;
+  }
+
+  /* Main Editor: takes up available space */
+  .editor-diagram {
+    //flex-grow: 1;
+    //border-bottom: 1px solid #ddd;
+    border-bottom-left-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Footer: fixed height */
+  .editor-footer {
+    position: absolute;
+    background: rgb(254, 254, 254);
+    //border-radius: 25px;
+    z-index: 1000;
+  }
+
+  .left-popup-menu {
+    position: absolute;
+    background-color: #f0f1f5;
+    //border: 1px solid #ddd;
+    //box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    //padding: 10px 0;
+    z-index: 1000;
+    user-select: none;
+  }
+
+  .left-popup-menu-close {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: #f0f1f5;
+    border: 0px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-top: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding-right: 7.5px;
+    z-index: 1000;
+  }
+
+  .left-popup-menu-close:hover {
+    background-color: lightblue;
+    cursor: pointer;
+  }
+
+  .right-popup-menu {
+    position: absolute;
+    background-color: #f0f1f5;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+    z-index: 1000;
+    user-select: none;
+  }
+
+  /* Tool Area */
+  .tool-area {
+    height: 100%;
+    //box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Diagram Area */
+  .diagram-area {
+    height: 100%;
+    //box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Chart Area */
+  .chart-area {
+    height: 100%;
+    //box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Split Panel */
+  .p-splitter {
+    height: 100%;
+  }
+
+  .p-splitter-panel {
+    overflow: hidden;
+    /* Enable scrolling if content overflows */
+  }
+
+  .p-splitter .p-splitter-gutter:hover {
+    background-color: #007bff;
+    /* Highlight the splitter handle */
+    cursor: col-resize;
+    /* Change the cursor to resizing mode */
+  }
+
+  /* Skeleton Loader Container */
+  .skeleton-container {
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Skeleton for Buttons */
+  .p-skeleton {
+    border-radius: 5px;
+  }
+
+}

@@ -1,0 +1,83 @@
+<div class="editor-container">
+  <integra-project-dialog></integra-project-dialog>
+  <div class="editor-promo" *ngIf="isPromobarVisible" [style.height.px]="promo_height"
+    [style.minHeight.px]="promo_height">
+    Promo
+  </div>
+  <!-- Header -->
+  <div class="editor-header" *ngIf="!isLoading; else skeletonTopbar" [style.height.px]="topbar_height" [style.minHeight.px]="topbar_height">
+    <integra-topbar projectName="Untitled Project" subscription="Pro"></integra-topbar>
+  </div>
+  <!-- Main Content -->
+  <div class="editor-main-content">
+    <!-- Left Column -->
+    <div class="editor-left-column" [style.width.px]="sidemenu_width" [style.minWidth.px]="sidemenu_width">
+      <integra-sidebar class="sidebar" [events]="sidemenuEvents" (action)="onSidemenuAction($event)"></integra-sidebar>
+    </div>
+    <!-- Right Column -->
+    <div class="editor-right-column">
+      <!-- Left Popup Menu -->
+      <div class="left-popup-menu" *ngIf="isLeftbarVisible" [style.top.px]="topbar_height + promo_height"
+        [style.bottom.px]=0 [style.width.px]="leftpanel_width">
+        <button type="button" class="left-popup-menu-close" [style.left.px]="leftpanel_width" [style.top.px]="10"
+          (click)="onLeftPanelClose()">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="m4 4 8 8m-8 0 8-8" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"></path>
+          </svg>
+        </button>
+        <integra-stencil *ngIf="selectedTabName === 'dashboard'"></integra-stencil>
+        <integra-stencil *ngIf="selectedTabName === 'none'"></integra-stencil>
+        <integra-stencil *ngIf="selectedTabName === 'none'"></integra-stencil>
+        <integra-stencil *ngIf="selectedTabName === 'none'"></integra-stencil>
+        <integra-stencil *ngIf="selectedTabName === 'none'"></integra-stencil>
+        <integra-stencil *ngIf="selectedTabName === 'none'"></integra-stencil>
+      </div>
+      <!-- Main Editor -->
+      <div class="editor-diagram">
+        <!-- Tool Area -->
+        <ng-container *ngIf="activeArea === 'tool'">
+          <div class="tool-area">
+            <!-- Add your tool content here -->
+          </div>
+        </ng-container>
+        <!-- Diagram Area Only -->
+        <ng-container *ngIf="activeArea === 'diagram'">
+          <div class="diagram-area">
+            <!-- Add your diagram content here -->
+            <integra-diagram></integra-diagram>
+          </div>
+        </ng-container>
+        <!-- Diagram Area + Chart Area -->
+        <ng-container *ngIf="activeArea === 'diagram-chart'">
+          <!-- Vertical Split Panel -->
+          <p-splitter [style]="{height: '100%'}" [layout] ="splitterOrientation" (onResizeStart)="onSplitterResizeStart()" (onResizeEnd)="onSplitterResizeEnd($event)">
+            <ng-template pTemplate>
+              <div class="diagram-area">
+                <!-- <integra-diagram></integra-diagram> -->
+                <integra-diagram></integra-diagram>
+              </div>
+            </ng-template>
+            <ng-template pTemplate>
+              <p>nfdinfdi</p>
+            </ng-template>
+          </p-splitter>
+        </ng-container>
+      </div>
+      <!-- Footer -->
+      <div class="editor-footer" [style.left.px]="footer_left" [style.bottom.px]="footer_bottom"
+        [style.height.px]="footer_height" [style.right.px]="footer_right">
+        <integra-footer></integra-footer>
+      </div>
+      <!-- Right Popup Menu -->
+      <div class="right-popup-menu" *ngIf="isRightbarVisible" [style.top.px]="topbar_height + promo_height"
+        [style.right.px]=0 [style.bottom.px]=0 [style.width.px]="rightpanel_width">
+      </div>
+    </div>
+  </div>
+  <!-- Skeleton Loader -->
+  <ng-template #skeletonTopbar>
+    <div class="skeleton-container" [style.height.px]="topbar_height">
+      <p-skeleton  width="100%" height="5rem" />
+    </div>
+  </ng-template>
+</div>

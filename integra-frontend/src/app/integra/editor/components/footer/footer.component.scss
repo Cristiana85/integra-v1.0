@@ -1,0 +1,99 @@
+:host ::ng-deep {
+
+  /* Footer Container */
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: transparent;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  /* Left Section */
+  .footer-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .footer-left i {
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .footer-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+  }
+
+  .footer-item span {
+    font-size: 14px;
+  }
+
+  /* Slider Styling */
+  .p-slider {
+    height: 4px;
+  }
+
+  .p-slider .p-slider-handle {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* Right Section */
+  .footer-right {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .footer-right i {
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .footer-right span.slider-value {
+    width: 30px;
+    /* Adjust based on the largest possible value */
+    text-align: right;
+    /* Align the number to the right for better appearance */
+  }
+
+  /* Customize the unused slider track */
+  .p-slider {
+    background-color: #5e5d5d;
+    height: 4px;
+    border-radius: 10px;
+  }
+
+  /* Customize the used portion of the slider */
+  .p-slider .p-slider-range {
+    background-color: #007bff !important;
+    height: 5px;
+    border-radius: 10px;
+  }
+
+  /* Customize the slider handle */
+  .p-slider .p-slider-handle {
+    width: 16px;
+    height: 16px;
+    background-color: #5e5d5d;
+    border: 2px solid #cccccc;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  /* Optional: Hover effect on the slider handle */
+  .p-slider .p-slider-handle:hover {
+    background-color: #007bff;
+    border-color: #cccccc;
+    border: 2px solid #cccccc;
+  }
+
+
+}
