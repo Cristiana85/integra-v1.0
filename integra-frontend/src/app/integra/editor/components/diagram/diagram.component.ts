@@ -19,7 +19,7 @@ import { EDITOR_SETTINS } from '../../utilities/editor-constants';
 export class DiagramComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('canvas', { static: true }) containerRef!: ElementRef;
 
-  constructor(private diagramService: DiagramService, private zoomPanService: ZoomPanService, private store: Store) {}
+  constructor(private diagramService: DiagramService, private zoomPanService: ZoomPanService) {}
 
   ngOnInit(): void {
   }
@@ -41,11 +41,11 @@ export class DiagramComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   undoLastAction(): void {
-    this.store.dispatch(undo());
+    //this.store.dispatch(undo());
   }
 
   redoLastAction(): void {
-    this.store.dispatch(redo());
+    //this.store.dispatch(redo());
   }
 
   allowDrop(event: DragEvent): void {

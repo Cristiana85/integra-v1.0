@@ -5,7 +5,7 @@
 @import "primeicons/primeicons.css";
 @import '~jointjs/dist/joint.css';
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
-html,
+
 body {
   font-family:
     Inter,
@@ -21,13 +21,6 @@ body {
     'Segoe UI Emoji',
     'Segoe UI Symbol',
     'Noto Color Emoji';
-}
-
-/*
-
-
-html {
-  font-size: 12px;
 }
 
 :root {
@@ -52,7 +45,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Manage tooltip here due to DOM pNG issue
+// Manage tooltip here due to DOM PNG issue
 
 .topbar-rigt-btn-cs-tooltip {
   text-align: center;
@@ -72,8 +65,8 @@ body {
   font-size: 12px;
 }
 
-  @media (max-width: 868px) {
-    /*.cs-tooltip {
+@media (max-width: 868px) {
+  .cs-tooltip {
     //display: flex;
     //align-items: center;
     display: block !important;
@@ -82,8 +75,4 @@ body {
     min-width: 140px;
     font-size: 15px;
   }
-  }
-
-
-
-*/
+}
