@@ -28,8 +28,8 @@
               "src/assets",
               {
                 "glob": "**/*",
-                "input": "src/assets/wasm",
-                "output": "assets/wasm"
+                "input": "wasm/integra_solver",
+                "output": "/wasm/integra_solver"
               }
             ],
             "styles": [

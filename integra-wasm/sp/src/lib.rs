@@ -3,7 +3,22 @@ extern crate wasm_bindgen;
 
 mod utils;
 
-use cfg_if::cfg_if;
+pub mod core;
+
+#[cfg(target_arch = "wasm32")]
+pub use core::integra_wasm_interface;
+
+use wasm_bindgen::prelude::*;
+
+#[wasm_bindgen]
+pub fn greet() {
+    web_sys::console::log_1(&"SP Solver WASM Loaded".into());
+}
+
+//pub use spsolver::sp_interface::SPInterface;
+
+
+/*use cfg_if::cfg_if;
 use wasm_bindgen::prelude::*;
 
 cfg_if! {
@@ -24,4 +39,4 @@ extern {
 #[wasm_bindgen]
 pub fn greet() {
     alert("Hello, wasm-game-of-life!");
-}
+}*/

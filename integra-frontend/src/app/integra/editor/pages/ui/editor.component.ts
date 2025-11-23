@@ -15,6 +15,7 @@ import {
 } from '../../utilities/editor-constants';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { ProjectDialogComponent } from '../dialog/project-dialog/project-dialog.component';
+import { SolverService } from '../../services/solver.service';
 
 @Component({
   selector: 'integra-editor',
@@ -69,15 +70,17 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     protected diagramService: DiagramService,
     protected projectService: ProjectService,
-    protected route: ActivatedRoute
+    protected route: ActivatedRoute,
+    protected solver: SolverService
   ) {
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.updateFooterSize();
-
     this.projectName = this.route.snapshot.paramMap.get('name')!;
     //this.load();
+    await this.solver.initWasm();
+    console.log(this.solver);
   }
 
   ngAfterViewInit(): void {
