@@ -1,1 +1,45 @@
-/.metadata/
+# ====================================
+# 1. ARTIFACTS DI BUILD E OUTPUT
+# ====================================
+
+# Ignora la cartella principale di output del progetto
+/build/
+/out/
+/target/
+/bin/
+
+# Gradle
+# Ignora la cache e l'ambiente di runtime di Gradle
+.gradle/
+# Manteniamo i file wrapper necessari per eseguire il build (gradlew, gradlew.bat, ecc.)
+# ma ignoriamo la cache scaricata.
+
+# ====================================
+# 2. METADATI E CONFIGURAZIONE IDE
+# ====================================
+
+### IntelliJ IDEA ###
+# Cartella di configurazione principale (più importante)
+.idea/
+# File di configurazione di modulo e workspace
+*.iml
+*.iws
+*.ipr
+
+### Eclipse / Spring Tool Suite (STS) ###
+.apt_generated/
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache/
+
+### VS Code ###
+.vscode/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
