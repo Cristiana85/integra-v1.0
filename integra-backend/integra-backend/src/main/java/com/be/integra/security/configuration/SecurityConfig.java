@@ -29,36 +29,32 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        /*http
-                .csrf(AbstractHttpConfigurer::disable) // Disabilita CSRF
+        return http
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/api/auth/login",
                                 "/api/auth/register",
                                 "/api/auth/forgot-password",
                                 "/api/auth/reset-password"
-                        ).permitAll() // Consenti accesso pubblico a questi endpoint
-                        .anyRequest().authenticated() // Tutti gli altri endpoint richiedono autenticazione
+                        ).permitAll()
+                        .anyRequest().authenticated()
                 )
-                .cors(Customizer.withDefaults()) // Usa la configurazione CORS
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); // Aggiungi il filtro JWT
-
-        return http.build();*/
-        return http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/**").permitAll()).build();
+                .cors(Customizer.withDefaults())
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
     }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:4200")); // Consenti richieste da Angular
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // Metodi consentiti
-        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type")); // Header consentiti
-        configuration.setAllowCredentials(true); // Consenti l'invio di cookie/credenziali
+        configuration.setAllowedOrigins(List.of("http://localhost:4200"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+        configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration); // Applica la configurazione a tutti gli endpoint
+        source.registerCorsConfiguration("/**", configuration);
         return source;
     }
 

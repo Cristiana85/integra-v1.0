@@ -252,4 +252,18 @@ public class ResultDTO<E> implements Serializable {
 		}
 	}
 
+    public static ResultDTO<Void> success() {
+        return new ResultDTO<>(true);
+    }
+
+    public static <E> ResultDTO<E> success(E content) {
+        return new ResultDTO<>(content);
+    }
+
+    public static ResultDTO<Void> error(String message) {
+        ResultDTO<Void> ret = new ResultDTO<>(false);
+        ret.append(message);
+        return ret;
+    }
+
 }

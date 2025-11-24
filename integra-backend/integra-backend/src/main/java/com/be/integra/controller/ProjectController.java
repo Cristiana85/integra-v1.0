@@ -28,26 +28,17 @@ public class ProjectController {
     @GetMapping(EndPoint.Project.ID)
     public ResponseEntity<ProjectDTO> getProjectById(
             @AuthenticationPrincipal HandleDTO handle,
-            @RequestParam("projectId") Long projectId
+            @PathVariable("projectId") Long projectId
     ) {
         return ResponseEntity.ok(this.projectService.getProjectById(handle.getAccountId(), projectId));
     }
 
-    /*@PostMapping(EndPoint.Project.RUN)
-    public ResponseEntity<String> runSimulation(
+    @GetMapping(EndPoint.Project.CREATE_SIMULATION)
+    public ResponseEntity<String> createSimulation(
             @AuthenticationPrincipal HandleDTO handle,
             @PathVariable("projectId") Long projectId
     ) {
-        String jobId = this.projectService.runSimulation(handle.getAccountId(), projectId);
-        return ResponseEntity.ok(jobId);
-    }*/
-
-    @PostMapping(EndPoint.Project.CREATE_SIMULATION)
-    public ResponseEntity<String> createSimulation(
-            @RequestParam("accountId") Long accountId,
-            @PathVariable("projectId") Long projectId
-    ) {
-        SimulationJobDTO simulationJobDTO = this.projectService.createSimulationJob(accountId, projectId);
+        SimulationJobDTO simulationJobDTO = this.projectService.createSimulationJob(handle.getAccountId(), projectId);
         return ResponseEntity.ok(simulationJobDTO.getId());
     }
 }

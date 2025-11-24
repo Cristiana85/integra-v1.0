@@ -9,9 +9,10 @@ import com.be.integra.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -37,8 +38,8 @@ public class AuthController {
     }
 
     @PostMapping("/reset-password")
-    public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordRequest request) throws Exception {
+    public ResponseEntity<ResultDTO<Void>> resetPassword(@RequestBody ResetPasswordRequest request) throws Exception {
         accountService.resetPassword(request.getToken(), request.getNewPassword());
-        return ResponseEntity.ok("Password aggiornata");
+        return new ResponseEntity<>(ResultDTO.success(), HttpStatus.OK);
     }
 }

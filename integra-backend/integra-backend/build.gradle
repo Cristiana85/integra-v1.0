@@ -47,7 +47,7 @@ dependencies {
 	// Spring DevTools for Development Convenience
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-	//WebSocket
+	//WebrojeSocket
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 
 	// PostgreSQL Database Driver
