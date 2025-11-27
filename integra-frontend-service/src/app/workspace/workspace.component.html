@@ -1,0 +1,66 @@
+<div class="workspace-layout">
+  <aside class="workspace-sidebar">
+    <div class="workspace-header">
+      <h2>Workspace</h2>
+      <button type="button" (click)="newWorkspace()">+ Nuovo</button>
+    </div>
+
+    <ul class="workspace-list">
+      <li
+        *ngFor="let ws of workspaces"
+        (click)="selectWorkspace(ws)"
+        [class.selected]="ws === selected"
+      >
+        <div class="ws-name">{{ ws.name }}</div>
+        <div class="ws-meta">
+          <span class="ws-type">{{ ws.type }}</span>
+          <span class="ws-date">{{ ws.updatedAt }}</span>
+        </div>
+        <div class="ws-description" *ngIf="ws.description">
+          {{ ws.description }}
+        </div>
+      </li>
+    </ul>
+  </aside>
+
+  <section class="workspace-detail" *ngIf="selected; else emptyState">
+    <header class="detail-header">
+      <h3>{{ selected?.name }}</h3>
+      <div class="detail-meta">
+        <span class="pill pill-type">{{ selected?.type }}</span>
+        <span class="pill">Last update: {{ selected?.updatedAt }}</span>
+      </div>
+    </header>
+
+    <div class="detail-body">
+      <p class="detail-description">
+        {{ selected?.description || "Nessuna descrizione disponibile." }}
+      </p>
+
+      <div class="detail-grid">
+        <div class="detail-card">
+          <h4>Simulatori collegati</h4>
+          <ul>
+            <li>↳ S-param solver (futuro hook al tuo modulo WebGPU/WASM)</li>
+            <li>↳ Transient/Time-domain</li>
+            <li>↳ EM 2.5D / Axiem-like</li>
+          </ul>
+        </div>
+
+        <div class="detail-card">
+          <h4>Azioni rapide</h4>
+          <button type="button">Apri in Editor</button>
+          <button type="button" disabled>
+            Esporta risultati (coming soon)
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ng-template #emptyState>
+    <section class="workspace-detail empty">
+      <p>Seleziona o crea un workspace dalla lista a sinistra.</p>
+    </section>
+  </ng-template>
+</div>
