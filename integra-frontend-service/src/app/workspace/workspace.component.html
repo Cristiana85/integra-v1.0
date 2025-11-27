@@ -1,75 +1,126 @@
-<div class="workspace-layout">
-  <aside class="workspace-sidebar">
-    <div class="workspace-header">
-      <h2>Workspace</h2>
+<div class="workspace-container">
+  <header class="workspace-topbar">
+    <div class="topbar-left">
+      <h2 class="topbar-title">Integra Workspace</h2>
+    </div>
+
+    <div class="topbar-right">
       <button
+        class="integra-btn integra-btn-ghost"
         type="button"
-        class="integra-btn integra-btn-primary"
-        (click)="newWorkspace()"
+        routerLink="/account"
       >
-        + Nuovo
+        Profilo
       </button>
     </div>
-
-    <ul class="workspace-list">
-      <li
-        *ngFor="let ws of workspaces"
-        (click)="selectWorkspace(ws)"
-        [class.selected]="ws === selected"
-      >
-        <div class="ws-name">{{ ws.name }}</div>
-        <div class="ws-meta">
-          <span class="ws-type">{{ ws.type }}</span>
-          <span class="ws-date">{{ ws.updatedAt }}</span>
-        </div>
-        <div class="ws-description" *ngIf="ws.description">
-          {{ ws.description }}
-        </div>
-      </li>
-    </ul>
-  </aside>
-
-  <section
-    class="workspace-detail"
-    *ngIf="selected as current; else emptyState"
-  >
-    <header class="detail-header">
-      <h3>{{ current.name }}</h3>
-      <div class="detail-meta">
-        <span class="integra-pill integra-pill-type">{{ current.type }}</span>
-        <span class="integra-pill">Last update: {{ current.updatedAt }}</span>
+  </header>
+  <div class="workspace-layout">
+    <aside class="workspace-sidebar">
+      <div class="workspace-header">
+        <h2>Workspace</h2>
+        <button
+          type="button"
+          class="integra-btn integra-btn-primary"
+          (click)="newWorkspace()"
+        >
+          + Nuovo
+        </button>
       </div>
-    </header>
 
-    <div class="detail-body">
-      <p class="detail-description">
-        {{ current.description || "Nessuna descrizione disponibile." }}
-      </p>
+      <ul class="workspace-list">
+        <li
+          *ngFor="let ws of workspaces"
+          (click)="selectWorkspace(ws)"
+          [class.selected]="ws === selected"
+        >
+          <div class="ws-header">
+            <div class="ws-name" *ngIf="renamingId !== ws.id">
+              {{ ws.name }}
+            </div>
+            <input
+              *ngIf="renamingId === ws.id"
+              class="ws-rename-input"
+              [(ngModel)]="renameValue"
+              (click)="$event.stopPropagation()"
+              (keyup.enter)="confirmRename(ws)"
+              (blur)="confirmRename(ws)"
+            />
 
-      <div class="detail-grid">
-        <div class="detail-card">
-          <h4>Simulatori collegati</h4>
-          <ul>
-            <li>↳ S-param solver (futuro hook al tuo modulo WebGPU/WASM)</li>
-            <li>↳ Transient/Time-domain</li>
-            <li>↳ EM 2.5D / Axiem-like</li>
-          </ul>
+            <div class="ws-actions" (click)="$event.stopPropagation()">
+              <button
+                class="integra-btn integra-btn-ghost ws-action-btn"
+                type="button"
+                (click)="startRename(ws)"
+              >
+                ✏️
+              </button>
+              <button
+                class="integra-btn integra-btn-ghost ws-action-btn"
+                type="button"
+                (click)="deleteWorkspace(ws)"
+              >
+                🗑
+              </button>
+            </div>
+          </div>
+
+          <div class="ws-meta">
+            <span class="ws-type">{{ ws.type }}</span>
+            <span class="ws-date">{{
+              ws.updatedAt | date : "yyyy-MM-dd HH:mm"
+            }}</span>
+          </div>
+          <div class="ws-description" *ngIf="ws.description">
+            {{ ws.description }}
+          </div>
+        </li>
+      </ul>
+    </aside>
+
+    <section
+      class="workspace-detail"
+      *ngIf="selected as current; else emptyState"
+    >
+      <header class="detail-header">
+        <h3>{{ current.name }}</h3>
+        <div class="detail-meta">
+          <span class="integra-pill integra-pill-type">{{ current.type }}</span>
+          <span class="integra-pill">Last update: {{ current.updatedAt }}</span>
         </div>
+      </header>
 
-        <div class="detail-card">
-          <h4>Azioni rapide</h4>
-          <button class="integra-btn integra-btn-ghost">Apri in Editor</button>
-          <button class="integra-btn integra-btn-ghost" disabled>
-            Esporta risultati (coming soon)
-          </button>
+      <div class="detail-body">
+        <p class="detail-description">
+          {{ current.description || "Nessuna descrizione disponibile." }}
+        </p>
+
+        <div class="detail-grid">
+          <div class="detail-card">
+            <h4>Simulatori collegati</h4>
+            <ul>
+              <li>↳ S-param solver (futuro hook al tuo modulo WebGPU/WASM)</li>
+              <li>↳ Transient/Time-domain</li>
+              <li>↳ EM 2.5D / Axiem-like</li>
+            </ul>
+          </div>
+
+          <div class="detail-card">
+            <h4>Azioni rapide</h4>
+            <button class="integra-btn integra-btn-ghost">
+              Apri in Editor
+            </button>
+            <button class="integra-btn integra-btn-ghost" disabled>
+              Esporta risultati (coming soon)
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <ng-template #emptyState>
-    <section class="workspace-detail empty">
-      <p>Seleziona o crea un workspace dalla lista a sinistra.</p>
     </section>
-  </ng-template>
+
+    <ng-template #emptyState>
+      <section class="workspace-detail empty">
+        <p>Seleziona o crea un workspace dalla lista a sinistra.</p>
+      </section>
+    </ng-template>
+  </div>
 </div>

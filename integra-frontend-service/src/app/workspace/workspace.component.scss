@@ -1,37 +1,88 @@
 :host {
   display: block;
-  min-height: 100vh;
+  height: 100vh;
   width: 100%;
   background: radial-gradient(circle at top, #020617 0, #020617 50%, #000 100%);
-  color: var(--app-fg);
-  font-family: var(--app-font-family);
+  color: var(--integra-fg);
+  font-family: var(--integra-font-family);
+  overflow: hidden;
 }
 
-/* Layout a schermo intero */
+/* CONTENITORE PRINCIPALE (TOPBAR + LAYOUT) */
 
-.workspace-layout {
+.workspace-container {
   height: 100%;
   width: 100%;
-  padding: 1.25rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* TOPBAR */
+
+.workspace-topbar {
+  height: 56px;
+  padding: 0 1.5rem;
+  box-sizing: border-box;
+
+  background: rgba(15, 23, 42, 0.85);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+  backdrop-filter: blur(10px);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.topbar-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* LAYOUT PRINCIPALE (SIDEBAR + DETTAGLIO) */
+
+.workspace-layout {
+  flex: 1;
+  height: 100%;
+  width: 100%;
+  padding: 1.1rem 1.75rem 1.5rem;
   box-sizing: border-box;
 
   display: grid;
   grid-template-columns: 300px minmax(0, 1fr);
   gap: 1.5rem;
+
+  overflow: hidden; /* niente scroll globale, solo interno alle colonne */
 }
 
 /* SIDEBAR */
 
 .workspace-sidebar {
   background: rgba(15, 23, 42, 0.96);
-  border-radius: var(--app-radius-lg);
+  border-radius: var(--integra-radius-lg);
   padding: 1rem;
-  box-shadow: var(--app-shadow-soft);
+  box-shadow: var(--integra-shadow-soft);
   border: 1px solid rgba(148, 163, 184, 0.4);
 
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.9rem;
+
+  min-height: 0;
+  overflow: hidden;
 }
 
 .workspace-header {
@@ -44,10 +95,9 @@
     margin: 0;
     font-size: 0.95rem;
     font-weight: 600;
-    color: var(--app-fg);
+    color: var(--integra-fg);
   }
 
-  /* i pulsanti qui hanno già class="integra-btn integra-btn-primary" */
   button {
     font-size: 0.78rem;
     padding: 0.35rem 0.9rem;
@@ -59,7 +109,11 @@
   list-style: none;
   padding: 0;
   margin: 0;
+
+  flex: 1;
+  min-height: 0;
   overflow-y: auto;
+
   display: flex;
   flex-direction: column;
   gap: 0.45rem;
@@ -83,12 +137,44 @@
 .workspace-list li.selected {
   background: radial-gradient(
     circle at top left,
-    rgba(56, 189, 248, 0.28),
+    rgba(56, 189, 248, 0.24),
     rgba(15, 23, 42, 0.98)
   );
-  border-color: var(--app-primary);
-  box-shadow: 0 16px 40px rgba(56, 189, 248, 0.45);
+  border-color: var(--integra-primary);
+  box-shadow: 0 16px 40px rgba(56, 189, 248, 0.35);
 }
+
+/* HEADER ELEMENTO LISTA */
+
+.ws-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+}
+
+.ws-actions {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.ws-action-btn {
+  padding: 0.2rem 0.4rem;
+  font-size: 0.75rem;
+  border-radius: 999px;
+}
+
+.ws-rename-input {
+  flex: 1;
+  border-radius: 6px;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  padding: 0.25rem 0.4rem;
+  background: rgba(15, 23, 42, 0.9);
+  color: var(--integra-fg);
+  font-size: 0.85rem;
+}
+
+/* TESTI LISTA */
 
 .ws-name {
   font-weight: 600;
@@ -100,7 +186,7 @@
   display: flex;
   justify-content: space-between;
   font-size: 0.68rem;
-  color: var(--app-fg-muted);
+  color: var(--integra-fg-muted);
   margin-bottom: 0.1rem;
 }
 
@@ -109,29 +195,37 @@
   letter-spacing: 0.08em;
 }
 
+.ws-date {
+  opacity: 0.9;
+}
+
 .ws-description {
   font-size: 0.78rem;
   color: #e5e7eb;
 }
 
-/* DETAIL */
+/* DETTAGLIO (COLONNA DESTRA) */
 
 .workspace-detail {
   background: rgba(15, 23, 42, 0.95);
-  border-radius: var(--app-radius-lg);
+  border-radius: var(--integra-radius-lg);
   padding: 1.25rem 1.5rem;
-  box-shadow: var(--app-shadow-soft);
+  box-shadow: var(--integra-shadow-soft);
   border: 1px solid rgba(148, 163, 184, 0.45);
 
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .workspace-detail.empty {
   align-items: center;
   justify-content: center;
-  color: var(--app-fg-muted);
+  color: var(--integra-fg-muted);
 }
 
 .detail-header {
@@ -160,7 +254,12 @@
   letter-spacing: 0.08em;
 }
 
+/* BODY DETTAGLIO CON SCROLL INTERNO */
+
 .detail-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -169,8 +268,10 @@
 .detail-description {
   margin: 0;
   font-size: 0.88rem;
-  color: var(--app-fg-muted);
+  color: var(--integra-fg-muted);
 }
+
+/* GRID INTERNA DEL DETTAGLIO */
 
 .detail-grid {
   display: grid;
@@ -201,12 +302,11 @@
 
     li {
       font-size: 0.82rem;
-      color: var(--app-fg-muted);
+      color: var(--integra-fg-muted);
       margin-bottom: 0.2rem;
     }
   }
 
-  /* i bottoni qui hanno class="integra-btn integra-btn-ghost" */
   button {
     margin-right: 0.4rem;
     margin-top: 0.6rem;
@@ -224,11 +324,16 @@
 @media (max-width: 900px) {
   .workspace-layout {
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
-    padding: 1rem;
+    grid-template-rows: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    padding: 0.8rem 1rem 1rem;
   }
 
-  :host {
-    min-height: 100vh;
+  .workspace-sidebar,
+  .workspace-detail {
+    min-height: 0;
+  }
+
+  .workspace-topbar {
+    padding: 0 1rem;
   }
 }
