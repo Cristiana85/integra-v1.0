@@ -17,7 +17,6 @@ interface WorkspaceItem {
   styleUrl: './workspace.component.scss',
 })
 export class WorkspaceComponent {
-  // mock iniziale: poi li caricherai da backend / localStorage
   workspaces: WorkspaceItem[] = [
     {
       id: 'ws-1',

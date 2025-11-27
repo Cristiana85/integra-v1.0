@@ -1,10 +1,141 @@
-<div class="landing-container">
-  <h1>integra v1 – GPU Simulators</h1>
-  <p>Seleziona l'ambiente con cui vuoi iniziare.</p>
+<div class="landing-wrapper">
+  <div class="landing-left">
+    <h1 class="landing-title">integra v1 – GPU Solvers</h1>
+    <p class="landing-subtitle">
+      Simulazioni RF, EM e SI 100% client-side con WebGPU + WASM.
+    </p>
 
-  <div class="landing-buttons">
-    <button type="button" routerLink="/editor">Apri Editor</button>
+    <div class="landing-actions">
+      <button class="integra-btn integra-btn-primary" routerLink="/editor">
+        Apri Editor
+      </button>
 
-    <button type="button" routerLink="/workspace">Apri Workspace</button>
+      <button class="integra-btn integra-btn-ghost" routerLink="/workspace">
+        Workspace
+      </button>
+    </div>
+  </div>
+
+  <div class="landing-right">
+    <!-- LOGIN BOX -->
+    <div class="login-card" *ngIf="mode === 'login'">
+      <h2>Accedi</h2>
+
+      <form (ngSubmit)="login()" class="login-form">
+        <label>
+          <span>Email</span>
+          <input
+            type="email"
+            [(ngModel)]="email"
+            name="email"
+            placeholder="you@example.com"
+            required
+          />
+        </label>
+
+        <label>
+          <span>Password</span>
+          <input
+            type="password"
+            [(ngModel)]="password"
+            name="password"
+            placeholder="••••••••"
+            required
+          />
+        </label>
+
+        <button class="integra-btn integra-btn-primary login-btn" type="submit">
+          Entra
+        </button>
+      </form>
+
+      <p class="login-note">
+        Non hai un account?
+        <a
+          href="#"
+          class="integra-link integra-link-white"
+          (click)="mode = 'register'; $event.preventDefault()"
+        >
+          Registrati
+        </a>
+      </p>
+    </div>
+
+    <!-- REGISTER BOX -->
+    <div class="login-card" *ngIf="mode === 'register'">
+      <h2>Registrati</h2>
+
+      <form (ngSubmit)="register()" class="login-form">
+        <label>
+          <span>Nome</span>
+          <input
+            type="text"
+            [(ngModel)]="registerName"
+            name="registerName"
+            placeholder="Mario"
+            required
+          />
+        </label>
+
+        <label>
+          <span>Cognome</span>
+          <input
+            type="text"
+            [(ngModel)]="registerSurname"
+            name="registerSurname"
+            placeholder="Rossi"
+            required
+          />
+        </label>
+
+        <label>
+          <span>Email</span>
+          <input
+            type="email"
+            [(ngModel)]="registerEmail"
+            name="registerEmail"
+            placeholder="you@example.com"
+            required
+          />
+        </label>
+
+        <label>
+          <span>Password</span>
+          <input
+            type="password"
+            [(ngModel)]="registerPassword"
+            name="registerPassword"
+            placeholder="••••••••"
+            required
+          />
+        </label>
+
+        <label>
+          <span>Conferma password</span>
+          <input
+            type="password"
+            [(ngModel)]="registerPassword2"
+            name="registerPassword2"
+            placeholder="••••••••"
+            required
+          />
+        </label>
+
+        <button class="integra-btn integra-btn-primary login-btn" type="submit">
+          Crea account
+        </button>
+      </form>
+
+      <p class="login-note">
+        Hai già un account?
+        <a
+          href="#"
+          class="integra-link integra-link-white"
+          (click)="mode = 'login'; $event.preventDefault()"
+        >
+          Accedi
+        </a>
+      </p>
+    </div>
   </div>
 </div>

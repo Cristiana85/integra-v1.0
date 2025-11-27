@@ -1,34 +1,169 @@
-.landing-container {
+:host {
+  display: block;
   min-height: 100vh;
+  background: radial-gradient(circle at top, #0b1120 0, #020617 60%, #000 100%);
+  padding: 2rem;
+  box-sizing: border-box;
+  color: var(--integra-fg);
+  font-family: var(--integra-font-family);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.landing-wrapper {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 4rem;
+  width: 100%;
+  max-width: 1200px;
+  align-items: center;
+}
+
+/* LEFT SIDE (TITLE + BUTTONS) */
+
+.landing-left {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 2rem;
 }
 
-.landing-buttons {
+.landing-title {
+  margin: 0;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.2;
+
+  background: linear-gradient(
+    135deg,
+    var(--integra-primary-strong),
+    var(--integra-primary)
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.landing-subtitle {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--integra-fg-muted);
+}
+
+.landing-actions {
+  margin-top: 0.5rem;
   display: flex;
   gap: 1rem;
-  flex-wrap: wrap;
 }
 
-button {
-  padding: 0.8rem 1.6rem;
-  border-radius: 999px;
-  border: none;
-  font-size: 1rem;
-  cursor: pointer;
-  font-weight: 500;
+/* RIGHT SIDE (LOGIN BOX) */
+
+.landing-right {
+  display: flex;
+  justify-content: center;
 }
 
-button:first-child {
-  background: #1976d2;
-  color: #fff;
+.login-card {
+  background: rgba(15, 23, 42, 0.97);
+  border-radius: var(--integra-radius-lg);
+  padding: 2rem;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  box-shadow: var(--integra-shadow-subtle);
+
+  width: 100%;
+  max-width: 380px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-button:last-child {
-  background: #eee;
+.login-card h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+
+    span {
+      font-size: 0.9rem;
+      color: var(--integra-fg-muted);
+    }
+
+    input {
+      padding: 0.55rem 0.8rem;
+      border-radius: var(--integra-radius-md);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      background: rgba(2, 6, 23, 0.5);
+      color: var(--integra-fg);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.15s ease;
+
+      &:focus {
+        border-color: var(--integra-primary);
+      }
+    }
+  }
+}
+
+.login-btn {
+  width: 100%;
+}
+
+.login-note {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--integra-fg-muted);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+  :host {
+    padding: 1.5rem;
+  }
+
+  .landing-wrapper {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    text-align: center;
+  }
+
+  .landing-actions {
+    justify-content: center;
+  }
+
+  /* Stile base per link Integra */
+  .integra-link {
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: underline;
+    transition: color 0.2s ease, background 0.2s ease;
+    padding: 2px 4px;
+    border-radius: 4px;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  /* Variante bianca */
+  .integra-link-white {
+    color: white;
+
+    &:hover {
+      color: white;
+      background: rgba(255, 255, 255, 0.14);
+    }
+  }
 }

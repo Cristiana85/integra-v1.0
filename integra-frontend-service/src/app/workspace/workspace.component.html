@@ -2,7 +2,13 @@
   <aside class="workspace-sidebar">
     <div class="workspace-header">
       <h2>Workspace</h2>
-      <button type="button" (click)="newWorkspace()">+ Nuovo</button>
+      <button
+        type="button"
+        class="integra-btn integra-btn-primary"
+        (click)="newWorkspace()"
+      >
+        + Nuovo
+      </button>
     </div>
 
     <ul class="workspace-list">
@@ -23,18 +29,21 @@
     </ul>
   </aside>
 
-  <section class="workspace-detail" *ngIf="selected; else emptyState">
+  <section
+    class="workspace-detail"
+    *ngIf="selected as current; else emptyState"
+  >
     <header class="detail-header">
-      <h3>{{ selected?.name }}</h3>
+      <h3>{{ current.name }}</h3>
       <div class="detail-meta">
-        <span class="pill pill-type">{{ selected?.type }}</span>
-        <span class="pill">Last update: {{ selected?.updatedAt }}</span>
+        <span class="integra-pill integra-pill-type">{{ current.type }}</span>
+        <span class="integra-pill">Last update: {{ current.updatedAt }}</span>
       </div>
     </header>
 
     <div class="detail-body">
       <p class="detail-description">
-        {{ selected?.description || "Nessuna descrizione disponibile." }}
+        {{ current.description || "Nessuna descrizione disponibile." }}
       </p>
 
       <div class="detail-grid">
@@ -49,8 +58,8 @@
 
         <div class="detail-card">
           <h4>Azioni rapide</h4>
-          <button type="button">Apri in Editor</button>
-          <button type="button" disabled>
+          <button class="integra-btn integra-btn-ghost">Apri in Editor</button>
+          <button class="integra-btn integra-btn-ghost" disabled>
             Esporta risultati (coming soon)
           </button>
         </div>
