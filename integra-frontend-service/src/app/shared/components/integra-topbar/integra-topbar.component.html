@@ -1,0 +1,123 @@
+<header class="topbar">
+  <div class="topbar-inner">
+    <!-- SINISTRA -->
+    <div class="topbar-left">
+      <a routerLink="/" class="topbar-brand">
+        <span class="topbar-logo">✏️</span>
+        <span class="topbar-title">IntegraDraw</span>
+      </a>
+
+      <nav class="topbar-nav" aria-label="Main navigation">
+        <!-- Scroll interno alla landing -->
+        <button
+          type="button"
+          class="topbar-link-btn"
+          (click)="scrollToSection('hero')"
+        >
+          Home
+        </button>
+
+        <button
+          type="button"
+          class="topbar-link-btn"
+          (click)="scrollToSection('features')"
+        >
+          Features
+        </button>
+
+        <button
+          type="button"
+          class="topbar-link-btn"
+          (click)="scrollToSection('roadmap')"
+        >
+          Roadmap
+        </button>
+
+        <!-- Pagina pricing (stesso stile) -->
+        <a
+          routerLink="/pricing"
+          class="topbar-link-btn"
+          routerLinkActive="topbar-link-btn--active"
+        >
+          Pricing
+        </a>
+      </nav>
+    </div>
+
+    <!-- DESTRA -->
+    <div class="topbar-right">
+      <!-- tema -->
+      <button
+        type="button"
+        class="topbar-icon-btn"
+        (click)="toggleTheme()"
+        aria-label="Toggle theme"
+      >
+        <i class="pi" [ngClass]="isLight ? 'pi-sun' : 'pi-moon'"></i>
+      </button>
+
+      <!-- auth desktop -->
+      <div class="topbar-auth">
+        <button type="button" class="topbar-ghost-btn" routerLink="/login">
+          Sign in
+        </button>
+
+        <button type="button" class="topbar-primary-btn" routerLink="/register">
+          Create workspace
+        </button>
+      </div>
+
+      <!-- hamburger mobile -->
+      <button
+        type="button"
+        class="topbar-menu-toggle"
+        (click)="toggleMobileMenu()"
+        aria-label="Toggle navigation"
+      >
+        <i class="pi" [ngClass]="mobileMenuOpen ? 'pi-times' : 'pi-bars'"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- MENU MOBILE -->
+  <div class="topbar-mobile-menu" *ngIf="mobileMenuOpen">
+    <nav class="topbar-mobile-nav">
+      <button type="button" (click)="goToSectionAndClose('hero')">Home</button>
+      <button type="button" (click)="goToSectionAndClose('features')">
+        Features
+      </button>
+      <button type="button" (click)="goToSectionAndClose('roadmap')">
+        Roadmap
+      </button>
+
+      <!-- Pricing come link router -->
+      <a
+        class="topbar-mobile-link"
+        routerLink="/pricing"
+        (click)="closeMobileMenu()"
+      >
+        Pricing
+      </a>
+
+      <hr class="topbar-mobile-divider" />
+
+      <button
+        type="button"
+        class="topbar-mobile-auth-btn"
+        routerLink="/login"
+        (click)="closeMobileMenu()"
+      >
+        Sign in
+      </button>
+
+      <button
+        type="button"
+        class="topbar-mobile-auth-btn topbar-mobile-auth-btn--primary"
+        routerLink="/register"
+        (click)="closeMobileMenu()"
+      >
+        Create workspace
+      </button>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,294 @@
+<integra-topbar></integra-topbar>
+
+<div class="landing-wrapper">
+  <!-- ===================== -->
+  <!-- 1) IL TUO PRICING ORIGINALE -->
+  <!-- ===================== -->
+  <section id="pricing" class="landing-pricing">
+    <div class="pricing-header">
+      <p class="pricing-tag">PRICING MADE SIMPLE</p>
+
+      <h2 class="pricing-title">
+        Piani <span class="pricing-title-highlight">chiari</span>
+        per i tuoi schemi RF
+      </h2>
+
+      <p class="pricing-subtitle">
+        Inizia gratis, scala quando il tuo workflow RF diventa più complesso.
+      </p>
+
+      <!-- Toggle Monthly / Yearly -->
+      <div class="pricing-toggle">
+        <button
+          type="button"
+          class="pricing-toggle-option"
+          [class.pricing-toggle-option--active]="billingMode === 'monthly'"
+          (click)="setBillingMode('monthly')"
+        >
+          Monthly
+        </button>
+        <button
+          type="button"
+          class="pricing-toggle-option"
+          [class.pricing-toggle-option--active]="billingMode === 'yearly'"
+          (click)="setBillingMode('yearly')"
+        >
+          Yearly
+        </button>
+      </div>
+
+      <p class="pricing-toggle-hint" *ngIf="billingMode === 'yearly'">
+        <span>Risparmia fino al 20% con il piano annuale.</span>
+      </p>
+    </div>
+
+    <div class="pricing-cards">
+      <!-- FREE -->
+      <article class="pricing-card pricing-card--free">
+        <div class="pricing-card-header">
+          <span class="pricing-badge">Free solo</span>
+          <h3 class="pricing-plan-name">Free</h3>
+          <p class="pricing-price">
+            €0
+            <span class="pricing-price-period">/forever</span>
+          </p>
+          <p class="pricing-text">Tutto quello che ti serve per iniziare.</p>
+
+          <button type="button" class="pricing-cta pricing-cta--secondary">
+            Draw now
+          </button>
+        </div>
+
+        <ul class="pricing-features">
+          <li>Funzioni complete dell'editor</li>
+          <li>1 scena infinita</li>
+          <li>Collaboratori illimitati</li>
+          <li>Export PNG / SVG / file</li>
+          <li>Integrazioni base</li>
+          <li>E2EE nel browser</li>
+        </ul>
+      </article>
+
+      <!-- PLUS -->
+      <article class="pricing-card pricing-card--plus">
+        <div class="pricing-card-header">
+          <div class="pricing-top-row">
+            <span class="pricing-badge pricing-badge--accent">Plus</span>
+            <span class="pricing-most-popular">Most popular</span>
+          </div>
+
+          <h3 class="pricing-plan-name">Plus</h3>
+
+          <p class="pricing-price">
+            €{{ billingMode === "monthly" ? "6" : "60" }}
+            <span class="pricing-price-period">
+              /{{
+                billingMode === "monthly" ? "month per user" : "year per user"
+              }}
+            </span>
+          </p>
+
+          <p class="pricing-text">
+            Tutto del piano Free + strumenti avanzati per team RF.
+          </p>
+
+          <button type="button" class="pricing-cta">Try for free</button>
+
+          <p class="pricing-trial-note">14 giorni di prova gratis</p>
+        </div>
+
+        <ul class="pricing-features">
+          <li>Scene e folder illimitati</li>
+          <li>Salvataggio sicuro su cloud</li>
+          <li>Gestione accessi e permessi</li>
+          <li>Link di sola lettura ed embed</li>
+          <li>Presentazioni e live demo</li>
+          <li>Gestione team e collaboratori</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===================== -->
+  <!-- 2) NUOVA TABELLA SOTTO -->
+  <!-- ===================== -->
+  <section class="pricing-compare">
+    <h2 class="pricing-compare-title">
+      Integra Free <span>vs.</span> Integra Plus
+    </h2>
+
+    <p class="pricing-compare-subtitle">
+      Una panoramica veloce di cosa è incluso nel piano gratuito e cosa sblocchi
+      passando a Plus.
+    </p>
+
+    <div class="pricing-compare-table-wrapper">
+      <table class="pricing-compare-table">
+        <thead>
+          <tr>
+            <th class="col-feature"></th>
+            <th class="col-plan">
+              <div class="plan-heading">
+                <div class="plan-name">Free</div>
+                <div class="plan-tag">Gratis per sempre</div>
+              </div>
+            </th>
+            <th class="col-plan">
+              <div class="plan-heading">
+                <div class="plan-name">Plus</div>
+                <div class="plan-tag">
+                  €{{ billingMode === "monthly" ? "6/mese" : "60/anno" }} per
+                  utente
+                </div>
+              </div>
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <!-- CREA -->
+          <tr class="section-row">
+            <td colspan="3">Crea</td>
+          </tr>
+          <tr>
+            <td>Lavagna infinita</td>
+            <td class="status-cell">
+              <i class="pi pi-check pricing-icon--check"></i>
+            </td>
+            <td class="status-cell">
+              <i class="pi pi-check pricing-icon--check"></i>
+            </td>
+          </tr>
+          <tr>
+            <td>Funzioni complete dell’editor</td>
+            <td class="status-cell">
+              <i class="pi pi-check pricing-icon--check"></i>
+            </td>
+            <td class="status-cell">
+              <i class="pi pi-check pricing-icon--check"></i>
+            </td>
+          </tr>
+          <tr>
+            <td>Scene illimitate</td>
+            <td class="status-cell">
+              <i class="pi pi-times pricing-icon--x"></i>
+            </td>
+            <td class="status-cell">
+              <i class="pi pi-check pricing-icon--check"></i>
+            </td>
+          </tr>
+          <tr>
+            <td>Sync cloud</td>
+            <td class="status-cell">
+              <i class="pi pi-times pricing-icon--x"></i>
+            </td>
+            <td class="status-cell">
+              <i class="pi pi-check pricing-icon--check"></i>
+            </td>
+          </tr>
+
+          <!-- COLLABORA -->
+          <tr class="section-row">
+            <td colspan="3">Collabora</td>
+          </tr>
+          <tr>
+            <td>Invita collaboratori via link</td>
+            <td class="status-cell">
+              <i class="pi pi-check pricing-icon--check"></i>
+            </td>
+            <td class="status-cell">
+              <i class="pi pi-check pricing-icon--check"></i>
+            </td>
+          </tr>
+          <tr>
+            <td>Accesso sola lettura</td>
+            <td class="status-cell">
+              <i class="pi pi-times pricing-icon--x"></i>
+            </td>
+            <td class="status-cell">
+              <i class="pi pi-check pricing-icon--check"></i>
+            </td>
+          </tr>
+          <tr>
+            <td>Presentazioni live</td>
+            <td class="status-cell">
+              <i class="pi pi-times pricing-icon--x"></i>
+            </td>
+            <td class="status-cell">
+              <i class="pi pi-check pricing-icon--check"></i>
+            </td>
+          </tr>
+
+          <!-- TEAM -->
+          <tr class="section-row">
+            <td colspan="3">Team & organizzazione</td>
+          </tr>
+          <tr>
+            <td>Folder + board illimitati</td>
+            <td class="status-cell">
+              <span class="pricing-chip">Limitato</span>
+            </td>
+            <td class="status-cell">
+              <span class="pricing-chip pricing-chip--accent">Illimitato</span>
+            </td>
+          </tr>
+          <tr>
+            <td>Gestione permessi</td>
+            <td class="status-cell">
+              <i class="pi pi-times pricing-icon--x"></i>
+            </td>
+            <td class="status-cell">
+              <i class="pi pi-check pricing-icon--check"></i>
+            </td>
+          </tr>
+
+          <!-- RF / SI -->
+          <tr class="section-row">
+            <td colspan="3">Simulazione RF / SI</td>
+          </tr>
+          <tr>
+            <td>Solver S-param base</td>
+            <td class="status-cell">
+              <span class="pricing-chip">Limitato</span>
+            </td>
+            <td class="status-cell">
+              <span class="pricing-chip pricing-chip--accent">Completo</span>
+            </td>
+          </tr>
+          <tr>
+            <td>DC • Transient • IBIS • EM 2.5D</td>
+            <td class="status-cell">
+              <i class="pi pi-times pricing-icon--x"></i>
+            </td>
+            <td class="status-cell">
+              <i class="pi pi-check pricing-icon--check"></i>
+            </td>
+          </tr>
+
+          <!-- EXPORT -->
+          <tr class="section-row">
+            <td colspan="3">Export & share</td>
+          </tr>
+          <tr>
+            <td>Export PNG / SVG / JSON</td>
+            <td class="status-cell">
+              <i class="pi pi-check pricing-icon--check"></i>
+            </td>
+            <td class="status-cell">
+              <i class="pi pi-check pricing-icon--check"></i>
+            </td>
+          </tr>
+          <tr>
+            <td>Embed + link Read-only</td>
+            <td class="status-cell">
+              <i class="pi pi-times pricing-icon--x"></i>
+            </td>
+            <td class="status-cell">
+              <i class="pi pi-check pricing-icon--check"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>

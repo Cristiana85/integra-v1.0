@@ -1,0 +1,104 @@
+<integra-topbar></integra-topbar>
+
+<div class="auth-page">
+  <div class="auth-layout">
+    <!-- COLONNA SINISTRA: teaser / info -->
+    <section class="auth-left">
+      <div class="auth-panel">
+        <p class="auth-pill">Live presentations</p>
+        <h2 class="auth-title">Presenta i tuoi schemi RF in tempo reale</h2>
+        <p class="auth-text">
+          Trasforma i tuoi diagrammi in board pronte per review e demo live, con
+          simulazioni integrate e condivisione istantanea.
+        </p>
+
+        <ul class="auth-list">
+          <li>Workspace multi-board per i tuoi progetti RF</li>
+          <li>Simulazioni S-param, transient e DC in un click</li>
+          <li>Condivisione sicura con il tuo team</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- COLONNA DESTRA: LOGIN CARD -->
+    <section class="auth-right">
+      <div class="login-card">
+        <div class="login-header">
+          <div class="login-logo-circle">
+            <span>✏️</span>
+          </div>
+          <h1>Accedi al tuo workspace</h1>
+          <p class="login-subtitle">
+            Non hai un account?
+            <a routerLink="/register" class="login-link">Registrati</a>
+          </p>
+        </div>
+
+        <form class="login-form">
+          <label>
+            <span>Email</span>
+            <input
+              type="text"
+              pInputText
+              placeholder="you@example.com"
+              class="w-full"
+            />
+          </label>
+
+          <label>
+            <span>Password</span>
+            <input
+              type="password"
+              pInputText
+              placeholder="********"
+              class="w-full"
+            />
+          </label>
+
+          <div class="login-row-between">
+            <div class="login-remember">
+              <p-checkbox
+                inputId="rememberme1"
+                [binary]="true"
+                styleClass="mr-2"
+              ></p-checkbox>
+              <label for="rememberme1">Ricordami</label>
+            </div>
+
+            <button type="button" class="login-link login-link-btn">
+              Password dimenticata?
+            </button>
+          </div>
+
+          <button
+            type="submit"
+            pButton
+            pRipple
+            class="login-primary-btn w-full"
+          >
+            <span>Accedi</span>
+          </button>
+        </form>
+
+        <div class="login-divider">
+          <span></span>
+          <p>oppure</p>
+          <span></span>
+        </div>
+
+        <!-- SOLO ICONE SOCIAL -->
+        <div class="login-social-icons">
+          <button type="button" class="social-icon-btn">
+            <i class="pi pi-facebook"></i>
+          </button>
+          <button type="button" class="social-icon-btn">
+            <i class="pi pi-twitter"></i>
+          </button>
+          <button type="button" class="social-icon-btn">
+            <i class="pi pi-linkedin"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

@@ -1,141 +1,92 @@
+<integra-topbar></integra-topbar>
+
 <div class="landing-wrapper">
-  <div class="landing-left">
-    <h1 class="landing-title">integra v1 – GPU Solvers</h1>
-    <p class="landing-subtitle">
-      Simulazioni RF, EM e SI 100% client-side con WebGPU + WASM.
-    </p>
-
-    <div class="landing-actions">
-      <button class="integra-btn integra-btn-primary" routerLink="/editor">
-        Apri Editor
-      </button>
-
-      <button class="integra-btn integra-btn-ghost" routerLink="/workspace">
-        Workspace
-      </button>
-    </div>
-  </div>
-
-  <div class="landing-right">
-    <!-- LOGIN BOX -->
-    <div class="login-card" *ngIf="mode === 'login'">
-      <h2>Accedi</h2>
-
-      <form (ngSubmit)="login()" class="login-form">
-        <label>
-          <span>Email</span>
-          <input
-            type="email"
-            [(ngModel)]="email"
-            name="email"
-            placeholder="you@example.com"
-            required
-          />
-        </label>
-
-        <label>
-          <span>Password</span>
-          <input
-            type="password"
-            [(ngModel)]="password"
-            name="password"
-            placeholder="••••••••"
-            required
-          />
-        </label>
-
-        <button class="integra-btn integra-btn-primary login-btn" type="submit">
-          Entra
-        </button>
-      </form>
-
-      <p class="login-note">
-        Non hai un account?
-        <a
-          href="#"
-          class="integra-link integra-link-white"
-          (click)="mode = 'register'; $event.preventDefault()"
-        >
-          Registrati
-        </a>
+  <!-- HERO -->
+  <section id="hero" class="landing-hero">
+    <div class="landing-left">
+      <p class="landing-pill integra-pill">
+        RF whiteboard • circuit simulators • SI tools
       </p>
-    </div>
 
-    <!-- REGISTER BOX -->
-    <div class="login-card" *ngIf="mode === 'register'">
-      <h2>Registrati</h2>
+      <h1 class="landing-title">
+        Disegna, simula e presenta i tuoi circuiti RF in un’unica web-app.
+      </h1>
 
-      <form (ngSubmit)="register()" class="login-form">
-        <label>
-          <span>Nome</span>
-          <input
-            type="text"
-            [(ngModel)]="registerName"
-            name="registerName"
-            placeholder="Mario"
-            required
-          />
-        </label>
-
-        <label>
-          <span>Cognome</span>
-          <input
-            type="text"
-            [(ngModel)]="registerSurname"
-            name="registerSurname"
-            placeholder="Rossi"
-            required
-          />
-        </label>
-
-        <label>
-          <span>Email</span>
-          <input
-            type="email"
-            [(ngModel)]="registerEmail"
-            name="registerEmail"
-            placeholder="you@example.com"
-            required
-          />
-        </label>
-
-        <label>
-          <span>Password</span>
-          <input
-            type="password"
-            [(ngModel)]="registerPassword"
-            name="registerPassword"
-            placeholder="••••••••"
-            required
-          />
-        </label>
-
-        <label>
-          <span>Conferma password</span>
-          <input
-            type="password"
-            [(ngModel)]="registerPassword2"
-            name="registerPassword2"
-            placeholder="••••••••"
-            required
-          />
-        </label>
-
-        <button class="integra-btn integra-btn-primary login-btn" type="submit">
-          Crea account
-        </button>
-      </form>
-
-      <p class="login-note">
-        Hai già un account?
-        <a
-          href="#"
-          class="integra-link integra-link-white"
-          (click)="mode = 'login'; $event.preventDefault()"
-        >
-          Accedi
-        </a>
+      <p class="landing-subtitle">
+        Una lavagna infinita per schemi RF, IBIS, EM 2.5D e S-parametri, pensata
+        per chi fa davvero hardware e vuole lavorare come su Excalidraw, ma con
+        la potenza di un simulatore.
       </p>
+
+      <div class="landing-actions">
+        <button class="integra-btn integra-btn-primary">
+          Apri whiteboard gratuita
+        </button>
+
+        <button class="integra-btn integra-btn-ghost">Guarda un esempio</button>
+      </div>
+
+      <div class="landing-meta">
+        <div class="landing-tag">
+          <span class="landing-chip">100% client-side</span>
+          <span class="landing-chip">Angular + WebGPU</span>
+          <span class="landing-chip">JointJS schematics</span>
+        </div>
+
+        <div class="landing-trust">
+          <span class="landing-trust-label"> Pensato per: </span>
+          <div class="landing-trust-logos">
+            <span class="logo-pill">RF engineers</span>
+            <span class="logo-pill">Signal Integrity</span>
+            <span class="logo-pill">PCB designers</span>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+
+    <!-- DESTRA: niente login, solo visual/placeholder -->
+    <div class="landing-visual">
+      <div class="landing-visual-card">
+        <p class="landing-visual-title">Infinite board</p>
+        <p class="landing-visual-subtitle">
+          Diagrammi, layer, annotazioni e preset di simulazione in un’unica
+          vista.
+        </p>
+        <div class="landing-visual-preview">
+          <!-- qui poi metterai uno screenshot / mini mock -->
+          <span class="landing-visual-tag">Preview placeholder</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" class="landing-features">
+    <header>
+      <h2 class="section-title">Perché usare Integra?</h2>
+      <p class="section-subtitle">
+        Non è solo una whiteboard: è il punto di incontro tra schematics,
+        simulazione e documentazione.
+      </p>
+    </header>
+
+    <div class="landing-feature-grid">
+      <article class="feature-card">
+        <h3>Whiteboard RF-first</h3>
+        <p>
+          Componenti RF, layer, board e preset pronti per schematici complessi.
+        </p>
+      </article>
+
+      <article class="feature-card">
+        <h3>Simulatore embedded</h3>
+        <p>Solver S-param, DC, transient, EM 2.5D integrati nella stessa UI.</p>
+      </article>
+
+      <article class="feature-card">
+        <h3>Condivisione immediata</h3>
+        <p>Link, esportazioni e snapshot per review rapide con il team.</p>
+      </article>
+    </div>
+  </section>
 </div>

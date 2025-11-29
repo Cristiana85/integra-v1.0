@@ -1,0 +1,167 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--integra-bg);
+  color: var(--integra-fg);
+  font-family: var(--integra-font-family);
+}
+
+/* wrapper sotto la topbar */
+.auth-page {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  padding: 2.5rem 2rem;
+  box-sizing: border-box;
+}
+
+.auth-page-inner {
+  width: 100%;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 3.5rem;
+  align-items: center;
+}
+
+/* SINISTRA: illustrazione placeholder */
+
+.auth-left {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.auth-illustration {
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.auth-illustration-card {
+  background: var(--integra-surface-1);
+  border-radius: 1.5rem;
+  padding: 1.5rem 1.7rem;
+  border: 1px solid var(--integra-border-subtle);
+  box-shadow: var(--integra-shadow-soft);
+}
+
+.auth-illus-title {
+  margin: 0 0 0.4rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.auth-illus-subtitle {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--integra-fg-muted);
+}
+
+.auth-illus-dots {
+  display: flex;
+  gap: 0.25rem;
+  padding-left: 0.15rem;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--integra-border-subtle);
+}
+
+.dot--active {
+  width: 18px;
+  border-radius: 999px;
+  background: var(--integra-primary);
+}
+
+/* DESTRA */
+
+.auth-right {
+  display: flex;
+  justify-content: center;
+}
+
+/* 🔹 SOCIAL BUTTONS SOTTO LA LOGIN CARD */
+
+.login-social {
+  margin-top: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.login-social-btn {
+  width: 100%;
+  border-radius: 999px;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--integra-border-subtle);
+  background: var(--integra-surface-2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+}
+
+.login-social-btn:hover {
+  background: color-mix(
+    in srgb,
+    var(--integra-primary) 8%,
+    var(--integra-surface-2)
+  );
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.4);
+  transform: translateY(-1px);
+}
+
+.login-social-icon {
+  font-size: 1.1rem;
+}
+
+/* Colori leggermente diversi per provider (opzionale) */
+.login-social-facebook {
+  border-color: #1877f2;
+}
+
+.login-social-twitter {
+  border-color: #1da1f2;
+}
+
+.login-social-linkedin {
+  border-color: #0a66c2;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 992px) {
+  .auth-page {
+    padding: 2rem 1.4rem;
+  }
+
+  .auth-page-inner {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .auth-left {
+    order: 2;
+    justify-content: center;
+  }
+
+  .auth-right {
+    order: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  .login-card {
+    max-width: 100%;
+  }
+}

@@ -2,6 +2,7 @@ import { Component, OnInit, inject, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { ThemeService } from '../shared/services/theme.service';
 
 interface WorkspaceItem {
   id: string;
@@ -29,6 +30,8 @@ export class WorkspaceComponent implements OnInit {
   renamingId: string | null = null;
   renameValue = '';
 
+  constructor(private theme: ThemeService) {}
+
   ngOnInit(): void {
     this.loadFromStorage();
 
@@ -38,6 +41,14 @@ export class WorkspaceComponent implements OnInit {
     }
 
     this.selected = this.workspaces[0] ?? null;
+  }
+
+  isDarkTheme(): boolean {
+    return !this.theme.isLight;
+  }
+
+  toggleTheme(): void {
+    this.theme.toggleTheme();
   }
 
   private loadFromStorage(): void {

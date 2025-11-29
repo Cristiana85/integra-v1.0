@@ -1,0 +1,77 @@
+<integra-topbar></integra-topbar>
+
+<div class="auth-page">
+  <div class="auth-page-inner">
+    <!-- SINISTRA: futura immagine / illustrazione -->
+    <section class="auth-left">
+      <div class="auth-illustration">
+        <!-- Placeholder, poi ci metti una vera immagine -->
+        <div class="auth-illustration-card">
+          <p class="auth-illus-title">Live presentations</p>
+          <p class="auth-illus-subtitle">
+            Turn your RF diagrams into beautiful, live-ready boards.
+          </p>
+        </div>
+
+        <div class="auth-illus-dots">
+          <span class="dot dot--active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- DESTRA: stessa login-card della landing -->
+    <section class="auth-right">
+      <div class="login-card">
+        <h2>Accedi al tuo workspace</h2>
+
+        <form class="login-form">
+          <label>
+            <span>Email</span>
+            <input type="email" placeholder="you@example.com" />
+          </label>
+
+          <label>
+            <span>Password</span>
+            <input type="password" placeholder="********" />
+          </label>
+
+          <!-- BOTTONE PRINCIPALE: stesso stile della landing -->
+          <button
+            type="submit"
+            class="integra-btn integra-btn-primary login-btn"
+          >
+            Accedi
+          </button>
+        </form>
+
+        <!-- SOCIAL LOGIN -->
+        <div class="login-social">
+          <button type="button" class="login-social-btn login-social-facebook">
+            <span class="login-social-icon">📘</span>
+            <span>Continua con Facebook</span>
+          </button>
+
+          <button type="button" class="login-social-btn login-social-x">
+            <span class="login-social-icon">🐦</span>
+            <span>Continua con X</span>
+          </button>
+
+          <button type="button" class="login-social-btn login-social-linkedin">
+            <span class="login-social-icon">💼</span>
+            <span>Continua con LinkedIn</span>
+          </button>
+        </div>
+
+        <p class="login-note">
+          Non hai un account?
+          <a routerLink="/register" class="integra-link integra-link-white">
+            Registrati
+          </a>
+        </p>
+      </div>
+    </section>
+  </div>
+</div>

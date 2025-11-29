@@ -1,0 +1,131 @@
+<integra-topbar></integra-topbar>
+
+<div class="auth-page">
+  <div class="auth-layout">
+    <!-- SINISTRA: stesso pannello della login -->
+    <section class="auth-left">
+      <div class="auth-panel">
+        <p class="auth-pill">Create your workspace</p>
+        <h2 class="auth-title">Organizza i tuoi progetti RF in board</h2>
+        <p class="auth-text">
+          Crea un workspace per gestire schemi, simulazioni e review in un unico
+          posto, condiviso con il tuo team.
+        </p>
+
+        <ul class="auth-list">
+          <li>Board per ogni circuito e sotto-progetto</li>
+          <li>Storico simulazioni e versioni sempre accessibile</li>
+          <li>Collabora con colleghi e clienti</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- DESTRA: REGISTER CARD -->
+    <section class="auth-right">
+      <div class="login-card">
+        <div class="login-header">
+          <div class="login-logo-circle">
+            <span>✏️</span>
+          </div>
+          <h1>Crea il tuo workspace</h1>
+          <p class="login-subtitle">
+            Hai già un account?
+            <a routerLink="/login" class="login-link">Accedi</a>
+          </p>
+        </div>
+
+        <form class="login-form">
+          <div class="register-name-row">
+            <label>
+              <span>Nome</span>
+              <input
+                type="text"
+                pInputText
+                placeholder="Mario"
+                class="w-full"
+              />
+            </label>
+
+            <label>
+              <span>Cognome</span>
+              <input
+                type="text"
+                pInputText
+                placeholder="Rossi"
+                class="w-full"
+              />
+            </label>
+          </div>
+
+          <label>
+            <span>Email</span>
+            <input
+              type="text"
+              pInputText
+              placeholder="you@example.com"
+              class="w-full"
+            />
+          </label>
+
+          <label>
+            <span>Password</span>
+            <input
+              type="password"
+              pInputText
+              placeholder="********"
+              class="w-full"
+            />
+          </label>
+
+          <label>
+            <span>Conferma password</span>
+            <input
+              type="password"
+              pInputText
+              placeholder="********"
+              class="w-full"
+            />
+          </label>
+
+          <div class="login-row-between register-terms">
+            <div class="login-remember">
+              <p-checkbox
+                inputId="terms"
+                [binary]="true"
+                styleClass="mr-2"
+              ></p-checkbox>
+              <label for="terms"> Accetto i termini e le condizioni </label>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            pButton
+            pRipple
+            class="login-primary-btn w-full"
+          >
+            <span>Registrati</span>
+          </button>
+        </form>
+
+        <div class="login-divider">
+          <span></span>
+          <p>oppure</p>
+          <span></span>
+        </div>
+
+        <div class="login-social-icons">
+          <button type="button" class="social-icon-btn">
+            <i class="pi pi-facebook"></i>
+          </button>
+          <button type="button" class="social-icon-btn">
+            <i class="pi pi-twitter"></i>
+          </button>
+          <button type="button" class="social-icon-btn">
+            <i class="pi pi-linkedin"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

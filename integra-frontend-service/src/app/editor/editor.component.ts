@@ -1,59 +1,86 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  Inject,
-  PLATFORM_ID,
-  ViewChild,
-} from '@angular/core';
-import { isPlatformBrowser, CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import * as joint from 'jointjs';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+interface EditorFile {
+  id: string;
+  name: string;
+  type: 'm' | 'json' | 'netlist' | 'ts';
+  content: string;
+}
 
 @Component({
   selector: 'app-editor',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './editor.component.html',
   styleUrl: './editor.component.scss',
 })
-export class EditorComponent implements AfterViewInit {
-  @ViewChild('paper', { static: false }) paperRef!: ElementRef<HTMLDivElement>;
+export class EditorComponent {
+  files: EditorFile[] = [
+    {
+      id: 'f1',
+      name: 'rf_solver.m',
+      type: 'm',
+      content: `% RF solver demo
+freq = linspace(1e6, 6e9, 1001);
+s11 = complex(rand(1, numel(freq)) - 0.5, rand(1, numel(freq)) - 0.5);
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+plot(freq, 20*log10(abs(s11)));
+grid on;
+title('S11 vs frequency');`,
+    },
+    {
+      id: 'f2',
+      name: 'project.json',
+      type: 'json',
+      content: `{
+  "name": "RF 4-band ADRV9044",
+  "type": "s-parameter",
+  "solver": "webgpu-wasm",
+  "updatedAt": "2025-11-27T10:00:00"
+}`,
+    },
+    {
+      id: 'f3',
+      name: 'netlist.sp',
+      type: 'netlist',
+      content: `* Simple RLC netlist
+R1 in n1 50
+L1 n1 n2 10n
+C1 n2 0 1p
+.ac dec 201 1e6 6e9
+.end`,
+    },
+  ];
 
-  ngAfterViewInit(): void {
-    if (!isPlatformBrowser(this.platformId)) {
-      return;
-    }
+  selectedFile: EditorFile = this.files[0];
+  consoleLines: string[] = [
+    '[INFO] Editor pronto. Nessuna simulazione in esecuzione.',
+    '[HINT] Collega questo editor al tuo motore WebGPU/WASM.',
+  ];
 
-    const element = this.paperRef.nativeElement;
+  selectFile(file: EditorFile): void {
+    this.selectedFile = file;
+  }
 
-    const graph = new joint.dia.Graph();
+  run(): void {
+    this.consoleLines = [
+      `[RUN] Eseguo "${this.selectedFile.name}" con backend GPU…`,
+      '[OK] (simulazione mock) risultati disponibili in futuro 😄',
+    ];
+  }
 
-    const paper = new joint.dia.Paper({
-      el: element,
-      model: graph,
-      width: element.clientWidth || 1000,
-      height: element.clientHeight || 600,
-      gridSize: 10,
-    });
+  stop(): void {
+    this.consoleLines = ['[STOP] Simulazione interrotta.'];
+  }
 
-    const rect = new joint.shapes.standard.Rectangle();
-    rect.position(100, 100);
-    rect.resize(140, 50);
-    rect.attr('label/text', 'Hello JointJS');
-    rect.addTo(graph);
+  clearConsole(): void {
+    this.consoleLines = [];
+  }
 
-    const rect2 = new joint.shapes.standard.Rectangle();
-    rect2.position(350, 200);
-    rect2.resize(160, 60);
-    rect2.attr('label/text', 'Block 2');
-    rect2.addTo(graph);
-
-    const link = new joint.shapes.standard.Link();
-    link.source(rect);
-    link.target(rect2);
-    link.addTo(graph);
+  get lineNumbers(): number[] {
+    const lines = this.selectedFile.content.split('\n').length;
+    return Array.from({ length: lines }, (_, i) => i + 1);
   }
 }

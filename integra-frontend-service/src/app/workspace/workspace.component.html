@@ -5,12 +5,27 @@
     </div>
 
     <div class="topbar-right">
+      <!-- Icona tema -->
       <button
-        class="integra-btn integra-btn-ghost"
+        class="integra-icon-btn topbar-icon"
+        type="button"
+        (click)="toggleTheme()"
+        [attr.aria-label]="
+          isDarkTheme() ? 'Passa al tema chiaro' : 'Passa al tema scuro'
+        "
+      >
+        <span *ngIf="isDarkTheme(); else lightIcon">☀️</span>
+        <ng-template #lightIcon>🌙</ng-template>
+      </button>
+
+      <!-- Icona profilo -->
+      <button
+        class="integra-icon-btn topbar-icon"
         type="button"
         routerLink="/account"
+        aria-label="Profilo utente"
       >
-        Profilo
+        👤
       </button>
     </div>
   </header>
@@ -46,22 +61,22 @@
               (blur)="confirmRename(ws)"
             />
 
-            <div class="ws-actions" (click)="$event.stopPropagation()">
-              <button
-                class="integra-btn integra-btn-ghost ws-action-btn"
-                type="button"
-                (click)="startRename(ws)"
-              >
-                ✏️
-              </button>
-              <button
-                class="integra-btn integra-btn-ghost ws-action-btn"
-                type="button"
-                (click)="deleteWorkspace(ws)"
-              >
-                🗑
-              </button>
-            </div>
+            <button
+              class="integra-icon-btn ws-action-btn"
+              type="button"
+              (click)="startRename(ws)"
+              aria-label="Rinomina workspace"
+            >
+              ✏️
+            </button>
+            <button
+              class="integra-icon-btn ws-action-btn"
+              type="button"
+              (click)="deleteWorkspace(ws)"
+              aria-label="Elimina workspace"
+            >
+              🗑
+            </button>
           </div>
 
           <div class="ws-meta">

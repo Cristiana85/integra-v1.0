@@ -1,0 +1,310 @@
+:host {
+  display: block;
+}
+
+/* BAR FISSA IN ALTO */
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  width: 100vw;
+  box-sizing: border-box;
+  background: rgba(2, 6, 23, 0.94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+.topbar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.7rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+/* SINISTRA: LOGO + NAV */
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.topbar-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: var(--integra-fg);
+}
+
+.topbar-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  background: radial-gradient(circle at top, #38bdf8, #0369a1);
+  color: #0b1120;
+  font-size: 1.1rem;
+}
+
+.topbar-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.03em;
+}
+
+/* NAV DESKTOP */
+.topbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* stile condiviso per button + link */
+.topbar-link-btn,
+.topbar-nav a.topbar-link-btn {
+  background: transparent;
+  border: none;
+  padding: 0.2rem 0;
+  font-size: 0.9rem;
+  color: var(--integra-fg-muted);
+  cursor: pointer;
+  position: relative;
+  transition: color 0.15s ease;
+  text-decoration: none;
+}
+
+.topbar-link-btn::after,
+.topbar-nav a.topbar-link-btn::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.2rem;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--integra-primary-strong),
+    var(--integra-primary)
+  );
+  transition: width 0.2s ease-out;
+}
+
+.topbar-link-btn:hover,
+.topbar-nav a.topbar-link-btn:hover {
+  color: var(--integra-fg);
+}
+
+.topbar-link-btn:hover::after,
+.topbar-nav a.topbar-link-btn:hover::after {
+  width: 100%;
+}
+
+/* stato attivo (routerLinkActive) */
+.topbar-link-btn--active,
+.topbar-nav a.topbar-link-btn.topbar-link-btn--active {
+  color: var(--integra-fg);
+}
+
+.topbar-link-btn--active::after,
+.topbar-nav a.topbar-link-btn.topbar-link-btn--active::after {
+  width: 100%;
+}
+
+/* DESTRA: TEMA + AUTH + HAMBURGER */
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* icona tema */
+.topbar-icon-btn {
+  border-radius: 999px;
+  padding: 0.28rem 0.4rem;
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  background: transparent;
+  color: var(--integra-fg-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.08s ease,
+    border-color 0.15s ease;
+}
+
+.topbar-icon-btn:hover {
+  background: rgba(15, 23, 42, 0.95);
+  color: var(--integra-fg);
+  border-color: var(--integra-primary);
+}
+
+/* blocco Sign in / Create */
+.topbar-auth {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.topbar-ghost-btn {
+  border-radius: 999px;
+  padding: 0.35rem 0.95rem;
+  border: 1px solid rgba(148, 163, 184, 0.55);
+  background: transparent;
+  color: var(--integra-fg-muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.topbar-ghost-btn:hover {
+  background: rgba(15, 23, 42, 0.95);
+  color: var(--integra-fg);
+  border-color: var(--integra-primary);
+}
+
+.topbar-primary-btn {
+  border-radius: 999px;
+  padding: 0.4rem 1.25rem;
+  border: none;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: linear-gradient(
+    135deg,
+    var(--integra-primary-strong),
+    var(--integra-primary)
+  );
+  color: #0b1120;
+  box-shadow: 0 12px 30px rgba(56, 189, 248, 0.35);
+  transition: filter 0.15s ease, transform 0.08s ease;
+}
+
+.topbar-primary-btn:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+
+/* HAMBURGER (MOBILE) */
+.topbar-menu-toggle {
+  display: none;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  background: rgba(15, 23, 42, 0.9);
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  color: var(--integra-fg-muted);
+  font-size: 1rem;
+}
+
+/* MENU MOBILE */
+.topbar-mobile-menu {
+  display: none;
+}
+
+.topbar-mobile-link {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.35rem 0;
+  font-size: 0.95rem;
+  color: var(--integra-fg-muted);
+  text-decoration: none;
+}
+
+.topbar-mobile-link:hover {
+  color: var(--integra-fg);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .topbar-inner {
+    padding-inline: 1.2rem;
+    gap: 1rem;
+  }
+
+  .topbar-nav {
+    display: none; /* menu desktop */
+  }
+
+  .topbar-auth {
+    display: none; /* bottoni desktop */
+  }
+
+  .topbar-menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .topbar-right {
+    gap: 0.5rem;
+  }
+
+  .topbar-mobile-menu {
+    display: block;
+    position: fixed;
+    top: 3.2rem;
+    left: 0;
+    right: 0;
+    z-index: 90;
+    background: rgba(2, 6, 23, 0.98);
+    border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+    padding: 0.8rem 1.2rem 1.2rem;
+  }
+
+  .topbar-mobile-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .topbar-mobile-nav button {
+    background: transparent;
+    border: none;
+    text-align: left;
+    padding: 0.35rem 0;
+    font-size: 0.95rem;
+    color: var(--integra-fg-muted);
+    cursor: pointer;
+  }
+
+  .topbar-mobile-nav button:hover {
+    color: var(--integra-fg);
+  }
+
+  .topbar-mobile-divider {
+    margin: 0.6rem 0;
+    border: none;
+    border-top: 1px solid rgba(148, 163, 184, 0.25);
+  }
+
+  .topbar-mobile-auth-btn {
+    width: 100%;
+    border-radius: 999px;
+    padding: 0.55rem 0.9rem;
+    border: 1px solid rgba(148, 163, 184, 0.55);
+    background: transparent;
+    color: var(--integra-fg-muted);
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+
+  .topbar-mobile-auth-btn--primary {
+    margin-top: 0.4rem;
+    border: none;
+    background: linear-gradient(
+      135deg,
+      var(--integra-primary-strong),
+      var(--integra-primary)
+    );
+    color: #0b1120;
+  }
+}

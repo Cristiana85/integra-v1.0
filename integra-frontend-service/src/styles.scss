@@ -1,1 +1,556 @@
-/* You can add global styles to this file, and also import other style files */
+@import "primeicons/primeicons.css";
+@import "primeflex/primeflex.css";
+
+/* DARK THEME (default) */
+:root {
+  /* Background + superfici */
+  --integra-bg: #020617; /* sfondo pagina */
+  --integra-surface-1: #0b1120; /* card principali, topbar */
+  --integra-surface-2: #020617; /* sidebar / superfici secondarie */
+  --integra-surface-3: #020617; /* superfici ancora più scure */
+
+  /* Testo */
+  --integra-fg: #e5e7eb;
+  --integra-fg-muted: #9ca3af;
+
+  /* Bordo / separatori */
+  --integra-border-subtle: rgba(148, 163, 184, 0.3);
+
+  /* Primary */
+  --integra-primary: #38bdf8;
+  --integra-primary-strong: #0ea5e9;
+
+  /* Raggi / ombre / font */
+  --integra-radius-lg: 1rem;
+  --integra-radius-pill: 999px;
+  --integra-shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.9);
+  --integra-font-family: system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
+}
+
+/* LIGHT THEME (stile ChatGPT chiaro) */
+.theme-light {
+  --integra-bg: #f4f4f5; /* grigino chiaro come sfondo generale */
+  --integra-surface-1: #ffffff; /* card e topbar bianche */
+  --integra-surface-2: #f9fafb; /* sidebar / superfici secondarie */
+  --integra-surface-3: #e5e7eb; /* pannelli più “piatti” */
+
+  --integra-fg: #020617;
+  --integra-fg-muted: #6b7280;
+
+  --integra-border-subtle: rgba(148, 163, 184, 0.45);
+
+  --integra-primary: #2563eb;
+  --integra-primary-strong: #1d4ed8;
+
+  --integra-shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.08);
+
+  --integra-radius-lg: 1rem;
+  --integra-radius-pill: 999px;
+}
+
+/* ===========================
+   BASE ELEMENTS
+   =========================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--integra-font-family);
+  background: radial-gradient(
+    circle at top,
+    #0b1120 0,
+    #020617 55%,
+    #020617 100%
+  );
+  color: var(--integra-fg);
+}
+
+/* ===========================
+   BUTTONS & PILL
+   =========================== */
+
+/* Classe base pulsante */
+.integra-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+
+  padding: 0.45rem 1.1rem;
+  border-radius: var(--integra-radius-pill);
+  border: 1px solid transparent;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+
+  transition: background-color 0.15s ease, border-color 0.15s ease,
+    color 0.15s ease, transform 0.08s ease;
+}
+
+/* Icon button */
+.integra-icon-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 999px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--integra-fg-muted);
+  transition: background 0.15s ease, color 0.15s ease, transform 0.05s ease;
+}
+
+.integra-icon-btn:hover {
+  background: color-mix(in srgb, var(--integra-primary) 10%, transparent);
+  color: var(--integra-fg);
+}
+
+.integra-icon-btn:active {
+  transform: scale(0.96);
+}
+
+.integra-icon-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* Variante primaria */
+.integra-btn-primary {
+  background: linear-gradient(
+    135deg,
+    var(--integra-primary-strong),
+    var(--integra-primary)
+  );
+  color: #0b1120;
+  border-color: transparent;
+  box-shadow: 0 14px 30px rgba(56, 189, 248, 0.35);
+}
+
+.integra-btn-primary:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+.integra-btn-primary:active {
+  transform: translateY(0);
+  filter: brightness(0.98);
+}
+
+/* Variante ghost */
+.integra-btn-ghost {
+  background: rgba(15, 23, 42, 0.8);
+  color: var(--integra-fg-muted);
+  border-color: rgba(148, 163, 184, 0.4);
+}
+
+.integra-btn-ghost:hover {
+  border-color: var(--integra-primary);
+  color: var(--integra-primary);
+}
+
+/* Pill generica */
+.integra-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.8rem;
+  border-radius: var(--integra-radius-pill);
+  font-size: 0.7rem;
+  background: rgba(15, 23, 42, 0.85);
+  color: var(--integra-fg-muted);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+/* ===========================
+   SCROLLBAR stile ChatGPT
+   =========================== */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(120, 120, 120, 0.35) transparent;
+}
+
+/* =========================
+   TOPBAR GLOBALE RIUTILIZZABILE
+   ========================= */
+
+.topbar {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-sizing: border-box;
+
+  /* se vuoi che abbia sempre uno sfondo solido anche sopra la landing radial */
+  background: rgba(2, 6, 23, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+.topbar__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.topbar__left {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.topbar__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--integra-fg);
+}
+
+.topbar__logo-icon {
+  font-size: 1.5rem;
+}
+
+.topbar__logo-text {
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: 0.02em;
+}
+
+.topbar__nav {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.topbar__link {
+  font-size: 0.95rem;
+  color: var(--integra-fg-soft, #e5e7eb);
+  text-decoration: none;
+  padding: 0.25rem 0;
+  position: relative;
+}
+
+.topbar__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.15rem;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #6366f1, #a855f7);
+  transition: width 0.2s ease-out;
+}
+
+.topbar__link:hover::after {
+  width: 100%;
+}
+
+/* Dropdown Resources */
+
+.topbar__dropdown {
+  position: relative;
+}
+
+.topbar__dropdown-toggle {
+  border: none;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  cursor: pointer;
+}
+
+.topbar__caret {
+  font-size: 0.7rem;
+}
+
+.topbar__dropdown-menu {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  min-width: 10rem;
+  padding: 0.4rem 0;
+  border-radius: 0.75rem;
+  background: #020617;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.6);
+  display: none; /* poi la gestisci con TS se vuoi */
+}
+
+.topbar__dropdown:hover .topbar__dropdown-menu {
+  display: block;
+}
+
+.topbar__dropdown-item {
+  display: block;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.9rem;
+  color: var(--integra-fg-soft, #e5e7eb);
+  text-decoration: none;
+}
+
+.topbar__dropdown-item:hover {
+  background: rgba(148, 163, 184, 0.15);
+}
+
+/* Right side */
+
+.topbar__right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.topbar__icon-btn {
+  border-radius: 999px;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  background: transparent;
+  color: var(--integra-fg-soft, #e5e7eb);
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  cursor: pointer;
+}
+
+.topbar__icon-btn:hover {
+  background: rgba(15, 23, 42, 0.9);
+}
+
+.topbar__ghost-btn {
+  border-radius: 999px;
+  padding: 0.45rem 1.2rem;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  background: transparent;
+  color: var(--integra-fg-soft, #e5e7eb);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.topbar__ghost-btn:hover {
+  background: rgba(15, 23, 42, 0.9);
+}
+
+.topbar__primary-btn {
+  border-radius: 999px;
+  padding: 0.5rem 1.4rem;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  color: white;
+  box-shadow: 0 12px 30px rgba(79, 70, 229, 0.5);
+}
+
+.topbar__primary-btn:hover {
+  filter: brightness(1.05);
+}
+
+/* Responsive topbar */
+@media (max-width: 900px) {
+  .topbar__inner {
+    gap: 1rem;
+  }
+
+  .topbar__nav {
+    display: none; /* per ora la nascondiamo, poi se vuoi hamburger */
+  }
+}
+
+/* =========================
+   LOGIN CARD RIUTILIZZABILE
+   ========================= */
+
+.login-card {
+  background: var(--integra-surface-1);
+  border-radius: 1.4rem;
+  padding: 2rem 2.2rem;
+  border: 1px solid var(--integra-border-subtle);
+  box-shadow: var(--integra-shadow-soft);
+  width: 100%;
+  max-width: 420px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.login-card h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* Form di login */
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.login-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.login-form label span {
+  font-size: 0.85rem;
+  color: var(--integra-fg-muted);
+}
+
+.login-form input {
+  padding: 0.6rem 0.85rem;
+  border-radius: 0.9rem;
+  border: 1px solid var(--integra-border-subtle);
+  background: var(--integra-surface-2);
+  color: var(--integra-fg);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.login-form input:focus {
+  border-color: var(--integra-primary);
+  box-shadow: 0 0 0 1px
+    color-mix(in srgb, var(--integra-primary) 40%, transparent);
+}
+
+/* bottone principale: la classe integra-btn-primary fa il gradiente */
+.login-btn {
+  width: 100%;
+  margin-top: 0.3rem;
+}
+
+/* Testo sotto */
+
+.login-note {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--integra-fg-muted);
+}
+
+/* link di toggle login/registrati riutilizzabili */
+
+.integra-link {
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: underline;
+  transition: color 0.2s ease, background 0.2s ease;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.integra-link-white {
+  color: var(--integra-fg);
+}
+
+.integra-link-white:hover {
+  background: color-mix(in srgb, var(--integra-primary) 12%, transparent);
+}
+
+/* =========================
+   SOCIAL LOGIN BUTTONS
+   ========================= */
+
+.login-social {
+  margin-top: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.login-social-btn {
+  width: 100%;
+  border-radius: 999px;
+  padding: 0.55rem 0.95rem;
+  border: 1px solid var(--integra-border-subtle);
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: var(--integra-fg-muted);
+
+  transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.08s ease,
+    border-color 0.15s ease, color 0.15s ease;
+}
+
+.login-social-btn:hover {
+  background: rgba(15, 23, 42, 0.85);
+  color: var(--integra-fg);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.5);
+  transform: translateY(-1px);
+}
+
+.login-social-icon {
+  font-size: 1.1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* colori accennati per provider (opzionali) */
+
+.login-social-facebook {
+  border-color: #1877f2;
+}
+
+.login-social-x {
+  border-color: #1da1f2;
+}
+
+.login-social-linkedin {
+  border-color: #0a66c2;
+}
+
+.login-form-row {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.login-form-row label {
+  flex: 1;
+}
