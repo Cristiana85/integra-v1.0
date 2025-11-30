@@ -1,8 +1,14 @@
 <div class="search-box">
   <span class="p-input-icon-left">
     <i class="pi pi-search"></i>
-    <input pInputText class="search-input" type="text" placeholder="Search" [(ngModel)]="searchQuery"
-      (ngModelChange)="onSearchInput()" />
+    <input
+      pInputText
+      class="search-input"
+      type="text"
+      placeholder="Search"
+      [(ngModel)]="searchQuery"
+      (ngModelChange)="onSearchInput()"
+    />
     <span *ngIf="searchQuery" class="cancel-icon" (click)="onClearSearch()">
       <i class="pi pi-times"></i>
     </span>
