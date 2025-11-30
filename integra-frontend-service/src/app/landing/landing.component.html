@@ -1,92 +1,55 @@
 <integra-topbar></integra-topbar>
 
-<div class="landing-wrapper">
-  <!-- HERO -->
-  <section id="hero" class="landing-hero">
-    <div class="landing-left">
-      <p class="landing-pill integra-pill">
-        RF whiteboard • circuit simulators • SI tools
-      </p>
+<div class="landing-page">
+  <main class="landing-wrapper">
+    <!-- HERO LIBERO, SENZA RIQUADRO -->
+    <section id="hero" class="landing-hero">
+      <div class="hero-main">
+        <p class="hero-pill">RF whiteboard • simulazione • documentazione</p>
 
-      <h1 class="landing-title">
-        Disegna, simula e presenta i tuoi circuiti RF in un’unica web-app.
-      </h1>
+        <h1 class="hero-title">
+          Say hi to <span class="hero-title-highlight">IntegraDraw</span>
+        </h1>
 
-      <p class="landing-subtitle">
-        Una lavagna infinita per schemi RF, IBIS, EM 2.5D e S-parametri, pensata
-        per chi fa davvero hardware e vuole lavorare come su Excalidraw, ma con
-        la potenza di un simulatore.
-      </p>
+        <p class="hero-sub-pill">Free &amp; 100% client-side</p>
 
-      <div class="landing-actions">
-        <button class="integra-btn integra-btn-primary">
-          Apri whiteboard gratuita
-        </button>
-
-        <button class="integra-btn integra-btn-ghost">Guarda un esempio</button>
-      </div>
-
-      <div class="landing-meta">
-        <div class="landing-tag">
-          <span class="landing-chip">100% client-side</span>
-          <span class="landing-chip">Angular + WebGPU</span>
-          <span class="landing-chip">JointJS schematics</span>
-        </div>
-
-        <div class="landing-trust">
-          <span class="landing-trust-label"> Pensato per: </span>
-          <div class="landing-trust-logos">
-            <span class="logo-pill">RF engineers</span>
-            <span class="logo-pill">Signal Integrity</span>
-            <span class="logo-pill">PCB designers</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- DESTRA: niente login, solo visual/placeholder -->
-    <div class="landing-visual">
-      <div class="landing-visual-card">
-        <p class="landing-visual-title">Infinite board</p>
-        <p class="landing-visual-subtitle">
-          Diagrammi, layer, annotazioni e preset di simulazione in un’unica
-          vista.
+        <p class="hero-subtitle">
+          Disegna schemi RF, IBIS e PCB, simula S-param, DC e transient e
+          condividi tutto in un’unica board web-based.
         </p>
-        <div class="landing-visual-preview">
-          <!-- qui poi metterai uno screenshot / mini mock -->
-          <span class="landing-visual-tag">Preview placeholder</span>
+
+        <div class="hero-ctas">
+          <button class="integra-btn integra-btn-primary">Start drawing</button>
+          <button class="integra-btn integra-btn-ghost">Try Plus</button>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- FEATURES -->
-  <section id="features" class="landing-features">
-    <header>
-      <h2 class="section-title">Perché usare Integra?</h2>
-      <p class="section-subtitle">
-        Non è solo una whiteboard: è il punto di incontro tra schematics,
-        simulazione e documentazione.
-      </p>
-    </header>
-
-    <div class="landing-feature-grid">
-      <article class="feature-card">
-        <h3>Whiteboard RF-first</h3>
-        <p>
-          Componenti RF, layer, board e preset pronti per schematici complessi.
+        <p class="hero-small-note">
+          Nessun account obbligatorio per iniziare. Apri la whiteboard e
+          comincia a disegnare.
         </p>
-      </article>
+      </div>
 
-      <article class="feature-card">
-        <h3>Simulatore embedded</h3>
-        <p>Solver S-param, DC, transient, EM 2.5D integrati nella stessa UI.</p>
-      </article>
+      <!-- doodles / badge attorno -->
+      <div class="hero-doodles">
+        <div class="hero-badge hero-badge--top-left">
+          3.7 GHz NR<br />
+          IBIS / SI<br />
+          EM 2.5D<br />
+          S-param sweep
+        </div>
 
-      <article class="feature-card">
-        <h3>Condivisione immediata</h3>
-        <p>Link, esportazioni e snapshot per review rapide con il team.</p>
-      </article>
-    </div>
-  </section>
+        <div class="hero-badge hero-badge--top-right">
+          RF whiteboard • simulazione • documentazione
+        </div>
+
+        <div class="hero-badge hero-badge--bottom-left">EM 2.5D</div>
+        <div class="hero-badge hero-badge--bottom-right">S-param sweep</div>
+
+        <div class="hero-scribble hero-scribble--1"></div>
+        <div class="hero-scribble hero-scribble--2"></div>
+        <div class="hero-scribble hero-scribble--3"></div>
+        <div class="hero-scribble hero-scribble--4"></div>
+      </div>
+    </section>
+  </main>
 </div>

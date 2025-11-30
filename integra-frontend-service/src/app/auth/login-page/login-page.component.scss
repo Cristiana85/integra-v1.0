@@ -1,36 +1,33 @@
 :host {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background: radial-gradient(
-    circle at top,
-    #0b1120 0,
-    #020617 60%,
-    #020617 100%
-  );
+  display: flex; /* o block, a seconda del layout */
+  flex-direction: column; /* se serve */
+  min-height: 100vh; /* se deve coprire pagina intera */
+  background: var(--integra-bg);
   color: var(--integra-fg);
   font-family: var(--integra-font-family);
 }
 
 /* layout generale */
 
-/* PRIMA: align-items: flex-start; */
 .auth-page {
   flex: 1;
   display: flex;
   justify-content: center;
-  align-items: center; /* ⬅️ centrato verticalmente */
-  padding: 3rem 2rem;
+  align-items: center;
+  /* top padding aumentato per lasciare spazio alla topbar fissata */
+  padding: 5rem 2rem 3rem;
   box-sizing: border-box;
+  /* centriamo nel viewport meno l’altezza della topbar (~80px) */
+  min-height: calc(100vh - 80px);
 }
 
 /* Layout più compatto e vicino */
 .auth-layout {
   width: 100%;
-  max-width: 1040px; /* ⬅️ un po' più stretto */
+  max-width: 1040px; /* un po' più stretto */
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-  gap: 2.2rem; /* ⬅️ meno spazio tra sinistra e destra */
+  gap: 2.2rem; /* meno spazio tra sinistra e destra */
   align-items: center;
 }
 
@@ -117,18 +114,6 @@
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
-}
-
-.login-logo-circle {
-  width: 40px;
-  height: 40px;
-  border-radius: 999px;
-  border: 1px solid rgba(148, 163, 184, 0.4);
-  background: rgba(15, 23, 42, 0.95);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 0.4rem;
 }
 
 .login-header h1 {
@@ -232,7 +217,7 @@
   color: #0b1120 !important;
   box-shadow: 0 14px 30px rgba(56, 189, 248, 0.35);
 
-  padding-block: 0.7rem !important; /* ⬅️ altezza maggiore */
+  padding-block: 0.7rem !important; /* altezza maggiore */
   font-size: 0.95rem !important;
   font-weight: 600 !important;
 }
@@ -287,7 +272,8 @@
 
 @media (max-width: 992px) {
   .auth-page {
-    padding: 2.4rem 1.6rem;
+    padding: 4.2rem 1.6rem 2.4rem;
+    min-height: calc(100vh - 72px); /* leggermente meno per schermi piccoli */
   }
 
   .auth-layout {

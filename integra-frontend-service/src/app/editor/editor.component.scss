@@ -1,8 +1,8 @@
 :host {
-  display: block;
-  height: 100vh;
-  width: 100%;
-  background: var(--integra-bg); /* 👈 niente più gradient fisso */
+  display: flex; /* o block, a seconda del layout */
+  flex-direction: column; /* se serve */
+  min-height: 100vh; /* se deve coprire pagina intera */
+  background: var(--integra-bg);
   color: var(--integra-fg);
   font-family: var(--integra-font-family);
 }

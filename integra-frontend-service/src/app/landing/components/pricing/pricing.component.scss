@@ -1,0 +1,451 @@
+/* =========================================================
+   LAYOUT PAGINA
+   ========================================================= */
+
+:host {
+  display: block;
+}
+
+.landing-wrapper {
+  padding-top: 6rem; /* sotto la topbar fixed */
+  padding-bottom: 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  color: var(--integra-fg);
+}
+
+/* ====== STILE CARD UNIFICATO (pricing cards, tabella, FAQ) ====== */
+
+.pricing-card,
+.pricing-compare-table-wrapper,
+.faq-list {
+  background: var(--integra-surface-elevated);
+  border: 1px solid var(--integra-border-subtle);
+  border-radius: 1.4rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+/* padding specifico per i vari elementi */
+.pricing-card {
+  padding: 1.8rem 1.6rem;
+}
+
+.pricing-compare-table-wrapper {
+  padding: 0; /* la tabella gestisce i suoi padding */
+  overflow-x: auto;
+}
+
+.faq-list {
+  padding: 0;
+}
+
+/* =========================================================
+   1) SEZIONE PRICING INTRO + CARDS
+   ========================================================= */
+
+.landing-pricing {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.pricing-header {
+  margin-bottom: 2.5rem;
+}
+
+.pricing-tag {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--integra-fg-muted);
+}
+
+.pricing-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0.6rem 0 0.3rem;
+}
+
+.pricing-title-highlight {
+  color: var(--integra-primary);
+}
+
+.pricing-subtitle {
+  font-size: 0.95rem;
+  color: var(--integra-fg-muted);
+}
+
+/* Toggle monthly / yearly */
+
+.pricing-toggle {
+  margin: 1.6rem auto 0.5rem;
+  display: inline-flex;
+  border-radius: 999px;
+  padding: 0.25rem;
+  background: var(--integra-surface-1);
+  border: 1px solid var(--integra-border-subtle);
+}
+
+.pricing-toggle-option {
+  border: none;
+  background: transparent;
+  padding: 0.45rem 1rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border-radius: 999px;
+  color: var(--integra-fg-muted);
+  transition: 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.pricing-toggle-option--active {
+  background: linear-gradient(
+    135deg,
+    var(--integra-primary-strong),
+    var(--integra-primary)
+  );
+  color: #0b1120;
+}
+
+.pricing-toggle-save {
+  font-size: 0.7rem;
+  color: var(--integra-fg-muted);
+}
+
+.pricing-toggle-hint {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--integra-fg-muted);
+}
+
+/* Pricing cards tipo “Free / Plus” sopra la tabella */
+
+.pricing-cards {
+  margin-top: 2rem;
+  display: grid;
+  gap: 1.8rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.pricing-card--plus {
+  border-color: var(--integra-primary);
+  box-shadow: 0 4px 18px rgba(56, 189, 248, 0.25);
+}
+
+.pricing-card-header {
+  margin-bottom: 1.2rem;
+}
+
+.pricing-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pricing-badge {
+  background: var(--integra-surface-2);
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--integra-fg-muted);
+}
+
+.pricing-badge--accent {
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--integra-primary);
+}
+
+.pricing-most-popular {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  background: rgba(56, 189, 248, 0.12);
+  border-radius: 999px;
+  color: var(--integra-primary);
+}
+
+.pricing-plan-name {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0.5rem 0 0.2rem;
+}
+
+.pricing-price {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.pricing-price-period {
+  font-size: 0.8rem;
+  color: var(--integra-fg-muted);
+}
+
+.pricing-text {
+  font-size: 0.9rem;
+  margin-top: 0.6rem;
+  color: var(--integra-fg-muted);
+}
+
+.pricing-cta {
+  margin-top: 1rem;
+  width: 100%;
+  padding: 0.65rem;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+  background: linear-gradient(
+    135deg,
+    var(--integra-primary-strong),
+    var(--integra-primary)
+  );
+  color: #0b1120;
+  transition: 0.15s ease;
+}
+
+.pricing-cta:hover {
+  filter: brightness(1.05);
+}
+
+.pricing-cta--secondary {
+  background: transparent;
+  border: 1px solid var(--integra-border-subtle);
+  color: var(--integra-fg);
+}
+
+.pricing-trial-note {
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--integra-fg-muted);
+}
+
+.pricing-features {
+  margin-top: 1.3rem;
+  padding: 0;
+  list-style: none;
+  font-size: 0.85rem;
+  border-top: 1px solid var(--integra-border-subtle);
+  padding-top: 1rem;
+}
+
+.pricing-features li {
+  margin: 0.4rem 0;
+}
+
+/* =========================================================
+   2) TABELLA DI CONFRONTO — FREE vs PLUS
+   ========================================================= */
+
+.pricing-compare {
+  margin-top: 5rem;
+  text-align: center;
+}
+
+.pricing-compare-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+
+.pricing-compare-title span {
+  color: var(--integra-primary);
+}
+
+.pricing-compare-subtitle {
+  font-size: 0.95rem;
+  color: var(--integra-fg-muted);
+  margin-bottom: 2rem;
+}
+
+/* wrapper = card + scroll orizzontale */
+
+.pricing-compare-table-wrapper {
+  /* stile card già sopra */
+}
+
+/* tabella interna */
+
+.pricing-compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: transparent;
+}
+
+/* HEADER STICKY (Free / Plus fissi mentre scrolli) */
+
+.pricing-compare-table thead th {
+  position: sticky;
+  top: 5rem; /* altezza approx della topbar, aggiusta se serve */
+  z-index: 5;
+  background: var(--integra-surface-1);
+  padding: 1rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-bottom: 1px solid var(--integra-border-subtle);
+}
+
+.col-feature {
+  width: 45%;
+  text-align: left;
+}
+
+.col-plan {
+  width: 27.5%;
+  text-align: center;
+}
+
+/* celle */
+
+.pricing-compare-table td {
+  padding: 0.9rem 1.2rem;
+  border-bottom: 1px solid var(--integra-border-subtle);
+  font-size: 0.9rem;
+  color: var(--integra-fg);
+}
+
+/* righe sezione (Create / Libraries / …) */
+
+.section-row td {
+  padding-top: 1.6rem;
+  padding-bottom: 0.8rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--integra-fg);
+  background: var(--integra-surface-elevated);
+  border-bottom: none;
+}
+
+.section-divider td {
+  height: 1rem;
+  border: none;
+  background: transparent;
+}
+
+/* celle con check / X */
+
+.status-cell {
+  text-align: center;
+}
+
+.pricing-icon--check {
+  font-size: 1.1rem;
+  color: var(--integra-primary);
+}
+
+.pricing-icon--x {
+  font-size: 1.1rem;
+  color: var(--integra-fg-muted);
+}
+
+/* chip tipo "new", "soon" */
+
+.pricing-chip {
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  background: var(--integra-surface-2);
+  color: var(--integra-fg-muted);
+}
+
+.pricing-chip--accent {
+  background: rgba(34, 197, 94, 0.15);
+  color: #16a34a;
+}
+
+/* =========================================================
+   3) FAQ SECTION
+   ========================================================= */
+
+.pricing-faq {
+  margin-top: 5rem;
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+.pricing-faq-title {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.pricing-faq-subtitle {
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--integra-fg-muted);
+  margin-bottom: 2rem;
+}
+
+/* faq-list ha già stile card */
+
+.faq-item {
+  border-top: 1px solid var(--integra-border-subtle);
+}
+
+.faq-item:first-child {
+  border-top: none;
+}
+
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 1.1rem 1.4rem;
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-question {
+  margin-right: 1rem;
+}
+
+.faq-toggle-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.faq-item p {
+  padding: 0 1.4rem 1.1rem;
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--integra-fg-muted);
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .pricing-title {
+    font-size: 1.6rem;
+  }
+
+  .pricing-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-compare-title {
+    font-size: 1.5rem;
+  }
+
+  .pricing-compare-table td,
+  .pricing-compare-table th {
+    padding: 0.65rem 0.6rem;
+  }
+
+  .faq-item summary {
+    padding-inline: 1rem;
+  }
+
+  .faq-item p {
+    padding-inline: 1rem;
+  }
+}

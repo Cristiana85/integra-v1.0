@@ -1,6 +1,6 @@
 <header class="topbar">
   <div class="topbar-inner">
-    <!-- SINISTRA -->
+    <!-- LEFT -->
     <div class="topbar-left">
       <a routerLink="/" class="topbar-brand">
         <span class="topbar-logo">✏️</span>
@@ -8,7 +8,6 @@
       </a>
 
       <nav class="topbar-nav" aria-label="Main navigation">
-        <!-- Scroll interno alla landing -->
         <button
           type="button"
           class="topbar-link-btn"
@@ -16,7 +15,6 @@
         >
           Home
         </button>
-
         <button
           type="button"
           class="topbar-link-btn"
@@ -24,7 +22,6 @@
         >
           Features
         </button>
-
         <button
           type="button"
           class="topbar-link-btn"
@@ -33,7 +30,6 @@
           Roadmap
         </button>
 
-        <!-- Pagina pricing (stesso stile) -->
         <a
           routerLink="/pricing"
           class="topbar-link-btn"
@@ -44,37 +40,47 @@
       </nav>
     </div>
 
-    <!-- DESTRA -->
+    <!-- RIGHT -->
     <div class="topbar-right">
-      <!-- tema -->
+      <!-- THEME TOGGLE -->
       <button
         type="button"
-        class="topbar-icon-btn"
+        class="topbar-theme-btn"
         (click)="toggleTheme()"
-        aria-label="Toggle theme"
+        [attr.aria-label]="
+          isLight ? 'Passa al tema scuro' : 'Passa al tema chiaro'
+        "
       >
-        <i class="pi" [ngClass]="isLight ? 'pi-sun' : 'pi-moon'"></i>
+        <i class="pi" [ngClass]="isLight ? 'pi-moon' : 'pi-sun'"></i>
       </button>
 
-      <!-- auth desktop -->
+      <!-- AUTH DESKTOP -->
       <div class="topbar-auth">
-        <button type="button" class="topbar-ghost-btn" routerLink="/login">
+        <button type="button" class="topbar-auth-ghost" routerLink="/login">
           Sign in
         </button>
 
-        <button type="button" class="topbar-primary-btn" routerLink="/register">
+        <button
+          type="button"
+          class="topbar-auth-primary"
+          routerLink="/register"
+        >
           Create workspace
         </button>
       </div>
 
-      <!-- hamburger mobile -->
+      <!-- BURGER MOBILE -->
       <button
         type="button"
         class="topbar-menu-toggle"
+        [ngClass]="{ 'topbar-menu-toggle--active': mobileMenuOpen }"
         (click)="toggleMobileMenu()"
         aria-label="Toggle navigation"
       >
-        <i class="pi" [ngClass]="mobileMenuOpen ? 'pi-times' : 'pi-bars'"></i>
+        <i
+          class="pi topbar-menu-toggle-icon"
+          [ngClass]="mobileMenuOpen ? 'pi-times' : 'pi-bars'"
+        ></i>
       </button>
     </div>
   </div>
@@ -82,21 +88,28 @@
   <!-- MENU MOBILE -->
   <div class="topbar-mobile-menu" *ngIf="mobileMenuOpen">
     <nav class="topbar-mobile-nav">
-      <button type="button" (click)="goToSectionAndClose('hero')">Home</button>
-      <button type="button" (click)="goToSectionAndClose('features')">
-        Features
-      </button>
-      <button type="button" (click)="goToSectionAndClose('roadmap')">
-        Roadmap
+      <button type="button" (click)="goToSectionAndClose('hero')">
+        <i class="pi pi-home"></i>
+        <span>Home</span>
       </button>
 
-      <!-- Pricing come link router -->
+      <button type="button" (click)="goToSectionAndClose('features')">
+        <i class="pi pi-sparkles"></i>
+        <span>Features</span>
+      </button>
+
+      <button type="button" (click)="goToSectionAndClose('roadmap')">
+        <i class="pi pi-compass"></i>
+        <span>Roadmap</span>
+      </button>
+
       <a
         class="topbar-mobile-link"
         routerLink="/pricing"
         (click)="closeMobileMenu()"
       >
-        Pricing
+        <i class="pi pi-credit-card"></i>
+        <span>Pricing</span>
       </a>
 
       <hr class="topbar-mobile-divider" />
@@ -107,7 +120,8 @@
         routerLink="/login"
         (click)="closeMobileMenu()"
       >
-        Sign in
+        <i class="pi pi-sign-in"></i>
+        <span>Sign in</span>
       </button>
 
       <button
@@ -116,7 +130,8 @@
         routerLink="/register"
         (click)="closeMobileMenu()"
       >
-        Create workspace
+        <i class="pi pi-user-plus"></i>
+        <span>Create workspace</span>
       </button>
     </nav>
   </div>

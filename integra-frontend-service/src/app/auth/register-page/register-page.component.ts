@@ -6,7 +6,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { IntegraTopbarComponent } from '../../shared/components/integra-topbar/integra-topbar.component';
-import { PrimengSharedModule } from '../../shared/primeng-shared/primeng-shared.module';
+import { PrimengSharedModule } from '../../shared/modules/primeng-shared.module';
 
 @Component({
   selector: 'register-page',

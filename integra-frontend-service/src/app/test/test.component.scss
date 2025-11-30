@@ -1,0 +1,52 @@
+.homepage {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttons-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  width: 320px;
+}
+
+button {
+  padding: 1rem 1rem;
+  background: var(--integra-primary-strong, #3a86ff);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+
+  &:hover {
+    background: var(--integra-primary, #2a6ad4);
+    transform: translateY(-2px);
+  }
+}
+
+.test-buttons {
+  display: flex;
+  gap: 1rem;
+  padding: 2rem;
+
+  .btn {
+    padding: 0.75rem 1.5rem;
+    background: var(--integra-primary-strong, #3a86ff);
+    color: white;
+    border-radius: 12px;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.2s ease;
+
+    &:hover {
+      background: var(--integra-primary, #2a6ad4);
+      transform: translateY(-2px);
+    }
+  }
+}

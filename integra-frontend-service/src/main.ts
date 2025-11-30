@@ -5,7 +5,7 @@ import { importProvidersFrom } from '@angular/core';
 
 import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
-import { PrimengSharedModule } from './app/shared/primeng-shared/primeng-shared.module';
+import { PrimengSharedModule } from './app/shared/modules/primeng-shared.module';
 
 bootstrapApplication(AppComponent, {
   providers: [
