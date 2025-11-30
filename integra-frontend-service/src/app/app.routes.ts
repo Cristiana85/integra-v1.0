@@ -6,6 +6,7 @@ import { LoginPageComponent } from './auth/login-page/login-page.component';
 import { RegisterPageComponent } from './auth/register-page/register-page.component';
 import { PricingComponent } from './landing/components/pricing/pricing.component';
 import { TestComponent } from './test/test.component';
+import { TestSolverComponent } from './test-solver/test-solver.component';
 
 export const routes: Routes = [
   { path: '', component: TestComponent },
@@ -15,6 +16,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
   { path: 'register', component: RegisterPageComponent },
   { path: 'pricing', component: PricingComponent },
+  { path: 'solver', component: TestSolverComponent },
 
   //TODEL
   { path: 'test', component: TestComponent },
