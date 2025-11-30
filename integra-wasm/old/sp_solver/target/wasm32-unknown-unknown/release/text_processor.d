@@ -1,1 +1,0 @@
-C:\Workspace\integra-v1.0\integra-wasm\sp_solver\target\wasm32-unknown-unknown\release\text_processor.wasm: C:\Workspace\integra-v1.0\integra-wasm\sp_solver\src\lib.rs C:\Workspace\integra-v1.0\integra-wasm\sp_solver\src\utils.rs
