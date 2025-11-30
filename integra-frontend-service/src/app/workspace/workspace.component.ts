@@ -1,74 +1,105 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { ThemeService } from '../shared/services/core/theme.service';
 
-interface WorkspaceItem {
-  id: string;
+export interface IntegraWorkspace {
+  id: number;
   name: string;
   type: string;
   description?: string;
-  updatedAt: string | Date;
+  updatedAt: Date;
 }
 
 @Component({
-  selector: 'integra-workspace',
+  selector: 'app-workspace',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './workspace.component.html',
   styleUrls: ['./workspace.component.scss'],
 })
 export class WorkspaceComponent {
-  workspaces: WorkspaceItem[] = [];
-  selected: WorkspaceItem | null = null;
+  workspaces: IntegraWorkspace[] = [
+    {
+      id: 1,
+      name: 'RF Frontend 3.7 GHz',
+      type: 'RF / S-Params',
+      description: 'Progetto di test per S-parameters + EM 2.5D',
+      updatedAt: new Date(),
+    },
+    {
+      id: 2,
+      name: 'Integra Demo Workspace',
+      type: 'Demo / UI',
+      description: 'Mock UI, netlist parser, playground WebGPU/WASM',
+      updatedAt: new Date(),
+    },
+  ];
 
-  renamingId: string | null = null;
+  selected: IntegraWorkspace | null = this.workspaces[0] ?? null;
+
+  renamingId: number | null = null;
   renameValue = '';
+  nextId = 3;
 
-  constructor(public theme: ThemeService) {
-    // TODO: popola workspaces come facevi prima
-  }
+  // mock per il tema – poi lo colleghi al tuo ThemeService
+  private _dark = true;
 
-  /* ======= THEME ======= */
-
-  // usato nel template: [attr.aria-label] e *ngIf
   isDarkTheme(): boolean {
-    return !this.theme.isLight;
+    return this._dark;
   }
 
   toggleTheme(): void {
-    this.theme.toggleTheme();
+    this._dark = !this._dark;
+    // qui eventualmente chiami il tuo themeService.toggle()
   }
-
-  /* ======= WORKSPACE LOGIC ======= */
 
   newWorkspace(): void {
-    // la tua logica
-  }
+    const ws: IntegraWorkspace = {
+      id: this.nextId++,
+      name: `Nuovo workspace ${this.nextId - 1}`,
+      type: 'RF / Generic',
+      description: '',
+      updatedAt: new Date(),
+    };
 
-  selectWorkspace(ws: WorkspaceItem): void {
+    this.workspaces = [ws, ...this.workspaces];
     this.selected = ws;
+    this.renamingId = null;
   }
 
-  startRename(ws: WorkspaceItem): void {
+  selectWorkspace(ws: IntegraWorkspace): void {
+    this.selected = ws;
+    this.renamingId = null;
+  }
+
+  startRename(ws: IntegraWorkspace): void {
     this.renamingId = ws.id;
     this.renameValue = ws.name;
   }
 
-  confirmRename(ws: WorkspaceItem): void {
-    if (!this.renameValue.trim()) {
-      this.renamingId = null;
+  confirmRename(ws: IntegraWorkspace): void {
+    if (this.renamingId !== ws.id) {
       return;
     }
-    ws.name = this.renameValue.trim();
+
+    const value = this.renameValue.trim();
+    if (value) {
+      ws.name = value;
+      ws.updatedAt = new Date();
+    }
+
     this.renamingId = null;
   }
 
-  deleteWorkspace(ws: WorkspaceItem): void {
-    this.workspaces = this.workspaces.filter((w) => w !== ws);
-    if (this.selected === ws) {
-      this.selected = null;
+  deleteWorkspace(ws: IntegraWorkspace): void {
+    this.workspaces = this.workspaces.filter((w) => w.id !== ws.id);
+
+    if (this.selected?.id === ws.id) {
+      this.selected = this.workspaces[0] ?? null;
+    }
+
+    if (this.renamingId === ws.id) {
+      this.renamingId = null;
     }
   }
 }

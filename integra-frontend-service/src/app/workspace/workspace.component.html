@@ -1,4 +1,5 @@
 <div class="workspace-container">
+  <!-- TOPBAR -->
   <header class="workspace-topbar">
     <div class="topbar-left">
       <h2 class="topbar-title">Integra Workspace</h2>
@@ -29,7 +30,10 @@
       </button>
     </div>
   </header>
+
+  <!-- LAYOUT 2 COLONNE -->
   <div class="workspace-layout">
+    <!-- SIDEBAR SINISTRA -->
     <aside class="workspace-sidebar">
       <div class="workspace-header">
         <h2>Workspace</h2>
@@ -41,6 +45,16 @@
           + Nuovo
         </button>
       </div>
+
+      <!-- (opzionale) search in futuro
+      <div class="workspace-search">
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          placeholder="Cerca workspace..."
+        />
+      </div>
+      -->
 
       <ul class="workspace-list">
         <li
@@ -61,30 +75,34 @@
               (blur)="confirmRename(ws)"
             />
 
-            <button
-              class="integra-icon-btn ws-action-btn"
-              type="button"
-              (click)="startRename(ws)"
-              aria-label="Rinomina workspace"
-            >
-              ✏️
-            </button>
-            <button
-              class="integra-icon-btn ws-action-btn"
-              type="button"
-              (click)="deleteWorkspace(ws)"
-              aria-label="Elimina workspace"
-            >
-              🗑
-            </button>
+            <div class="ws-actions">
+              <span class="ws-type">{{ ws.type }}</span>
+
+              <button
+                class="integra-icon-btn ws-action-btn"
+                type="button"
+                (click)="startRename(ws); $event.stopPropagation()"
+                aria-label="Rinomina workspace"
+              >
+                ✏️
+              </button>
+              <button
+                class="integra-icon-btn ws-action-btn"
+                type="button"
+                (click)="deleteWorkspace(ws); $event.stopPropagation()"
+                aria-label="Elimina workspace"
+              >
+                🗑
+              </button>
+            </div>
           </div>
 
           <div class="ws-meta">
-            <span class="ws-type">{{ ws.type }}</span>
-            <span class="ws-date">{{
-              ws.updatedAt | date : "yyyy-MM-dd HH:mm"
-            }}</span>
+            <span class="ws-date">
+              {{ ws.updatedAt | date : "yyyy-MM-dd HH:mm" }}
+            </span>
           </div>
+
           <div class="ws-description" *ngIf="ws.description">
             {{ ws.description }}
           </div>
@@ -92,15 +110,33 @@
       </ul>
     </aside>
 
+    <!-- DETTAGLIO DESTRA -->
     <section
       class="workspace-detail"
       *ngIf="selected as current; else emptyState"
     >
       <header class="detail-header">
-        <h3>{{ current.name }}</h3>
-        <div class="detail-meta">
-          <span class="integra-pill integra-pill-type">{{ current.type }}</span>
-          <span class="integra-pill">Last update: {{ current.updatedAt }}</span>
+        <div class="detail-title-block">
+          <h3>{{ current.name }}</h3>
+          <div class="detail-meta">
+            <span class="integra-pill integra-pill-type">
+              {{ current.type }}
+            </span>
+            <span class="integra-pill">
+              Last update:
+              {{ current.updatedAt | date : "yyyy-MM-dd HH:mm" }}
+            </span>
+          </div>
+        </div>
+
+        <div class="detail-header-actions">
+          <button class="integra-btn integra-btn-ghost">Duplica</button>
+          <button
+            class="integra-btn integra-btn-danger"
+            (click)="deleteWorkspace(current)"
+          >
+            Elimina
+          </button>
         </div>
       </header>
 
@@ -113,8 +149,8 @@
           <div class="detail-card">
             <h4>Simulatori collegati</h4>
             <ul>
-              <li>↳ S-param solver (futuro hook al tuo modulo WebGPU/WASM)</li>
-              <li>↳ Transient/Time-domain</li>
+              <li>↳ S-param solver (hook WebGPU/WASM)</li>
+              <li>↳ Transient / Time-domain</li>
               <li>↳ EM 2.5D / Axiem-like</li>
             </ul>
           </div>
