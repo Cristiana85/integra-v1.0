@@ -349,3 +349,11 @@
     padding: 0 1rem;
   }
 }
+
+.ws-header {
+  .ws-action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
