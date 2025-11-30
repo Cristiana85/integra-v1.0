@@ -1,5 +1,6 @@
-use wasm_bindgen::prelude::*;
 use crate::dispatcher::Dispatcher;
+use log::{debug, error, info, warn};
+use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
 pub struct WasmInterface {
@@ -11,6 +12,10 @@ impl WasmInterface {
     #[wasm_bindgen(constructor)]
     pub fn new() -> WasmInterface {
         console_error_panic_hook::set_once();
+        info!("Messaggio informativo");
+        debug!("Dettagli di debug");
+        warn!("Un warning!");
+        error!("Errore critico!");
         WasmInterface {
             dispatcher: Dispatcher::new(),
         }
@@ -21,7 +26,6 @@ impl WasmInterface {
         self.dispatcher.handle_message(input)
     }
 }
-
 
 /*use std::cell::RefCell;
 use std::rc::Rc;
