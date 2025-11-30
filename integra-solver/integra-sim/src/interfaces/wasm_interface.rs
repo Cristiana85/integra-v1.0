@@ -12,10 +12,10 @@ impl WasmInterface {
     #[wasm_bindgen(constructor)]
     pub fn new() -> WasmInterface {
         console_error_panic_hook::set_once();
-        info!("Messaggio informativo");
-        debug!("Dettagli di debug");
-        warn!("Un warning!");
-        error!("Errore critico!");
+        //info!("Messaggio informativo");
+        //debug!("Dettagli di debug");
+        //warn!("Un warning!");
+        //error!("Errore critico!");
         WasmInterface {
             dispatcher: Dispatcher::new(),
         }
