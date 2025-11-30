@@ -10,7 +10,10 @@ import {
 } from '@angular/core';
 import { ZoomPan } from './features/zoompan/zoompan';
 import { Selections } from './features/selection/selections';
+<<<<<<< HEAD
 import { IRectangle } from './utilities/types';
+=======
+>>>>>>> feature/diagram
 import { MVController } from './core/mv-controller';
 import * as joint from 'jointjs';
 import * as jQuery from 'jquery';
@@ -19,20 +22,34 @@ import * as $ from 'backbone';
 import { RfAmp } from './library/devices/rfbasic/rfamp';
 import { ElementProps } from './core/element-props';
 import { Node } from './library/junctions/std-node';
+<<<<<<< HEAD
+=======
+import { SolverService } from './services/solver.service';
+>>>>>>> feature/diagram
 
 @Component({
   selector: 'i-diagram',
   templateUrl: './diagram.component.html',
+<<<<<<< HEAD
   styleUrls: ['./diagram.component.scss'],
+=======
+  styleUrls: ['./diagram.component.scss']
+>>>>>>> feature/diagram
 })
 export class DiagramComponent implements OnInit, AfterViewInit {
   // Inputs
   @Input()
   diagramId: string;
   @Input()
+<<<<<<< HEAD
   container_rect: IRectangle;
   @Input()
   canvas_rect: IRectangle;
+=======
+  container_rect: any;
+  @Input()
+  canvas_rect: any;
+>>>>>>> feature/diagram
 
   // Emitters
   @Output()
@@ -46,7 +63,18 @@ export class DiagramComponent implements OnInit, AfterViewInit {
   public zoompan: ZoomPan;
   public selection: Selections;
 
+<<<<<<< HEAD
   ngOnInit(): void {
+=======
+  constructor (private solver: SolverService) {
+
+  }
+
+  async ngOnInit(): Promise<void> {
+    await this.solver.initWasm();
+    console.log(this.solver);
+    //await this.solver.importTouchstone(json);
+>>>>>>> feature/diagram
   }
 
   ngAfterViewInit(): void {

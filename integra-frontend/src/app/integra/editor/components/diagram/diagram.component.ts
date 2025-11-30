@@ -1,6 +1,17 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as joint from 'jointjs';
+<<<<<<< HEAD
+=======
+import { SharedModule } from '../../../../shared/shared.module';
+>>>>>>> feature/diagram
 import { DiagramService } from '../../services/diagram.service';
 import { addElement, redo, undo } from '../../store/actions/diagram.actions';
 import { ElementState } from '../../store/states/diagram.state';
@@ -12,46 +23,58 @@ import { SharedModule } from 'src/app/shared/shared.module';
   standalone: true,
   imports: [SharedModule],
   templateUrl: './diagram.component.html',
-  styleUrls: ['./diagram.component.scss']
+  styleUrls: ['./diagram.component.scss'],
 })
 export class DiagramComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('canvas', { static: true }) containerRef!: ElementRef;
 
+<<<<<<< HEAD
   constructor(private diagramService: DiagramService, private zoomPanService: ZoomPanService) {}
+=======
+  constructor(
+    private diagramService: DiagramService,
+    private zoomPanService: ZoomPanService,
+    private store: Store,
+  ) {}
+>>>>>>> feature/diagram
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     this.diagramService.initialize(this.containerRef.nativeElement);
     //this.zoomPanService.initialize(this.diagramService);
   }
 
-  ngOnDestroy(): void {
-  }
+  ngOnDestroy(): void {}
 
-  resetZoom(): void {
-
-  }
+  resetZoom(): void {}
 
   addElementToDiagram(element: ElementState): void {
     //this.store.dispatch(addElement({ element }));
   }
 
   undoLastAction(): void {
+<<<<<<< HEAD
   }
 
   redoLastAction(): void {
+=======
+    //this.store.dispatch(undo());
+  }
+
+  redoLastAction(): void {
+    //this.store.dispatch(redo());
+>>>>>>> feature/diagram
   }
 
   allowDrop(event: DragEvent): void {
-    console.log('allowDrop')
+    console.log('allowDrop');
     event.preventDefault(); // Allow the drop
   }
 
   onDrop(event): void {
-    console.log('onDrop')
-    const dragData = {type: 'rectangle'}; // Get the drag data
+    console.log('onDrop');
+    const dragData = { type: 'rectangle' }; // Get the drag data
     if (dragData) {
       const x = event.offsetX;
       const y = event.offsetY;
@@ -107,5 +130,4 @@ export class DiagramComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     this.diagramService.graph.addCell(hexagon);
   }
-
 }
