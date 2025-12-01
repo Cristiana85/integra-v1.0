@@ -17,6 +17,7 @@ export const routes: Routes = [
   { path: 'register', component: RegisterPageComponent },
   { path: 'pricing', component: PricingComponent },
   { path: 'solver', component: TestSolverComponent },
+  { path: 'indexDB', component: TestSolverComponent },
 
   //TODEL
   { path: 'test', component: TestComponent },

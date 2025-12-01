@@ -1,0 +1,50 @@
+<div class="rc-sim-container">
+  <h2>RC Simulation + IndexedDB test</h2>
+
+  <div class="form-grid">
+    <label>
+      R (ohm)
+      <input type="number" [(ngModel)]="r" />
+    </label>
+
+    <label>
+      C (F)
+      <input type="number" [(ngModel)]="c" />
+    </label>
+
+    <label>
+      Vin (V)
+      <input type="number" [(ngModel)]="vin" />
+    </label>
+  </div>
+
+  <div class="buttons">
+    <button (click)="runSimulation()" [disabled]="isRunning">
+      {{ isRunning ? "Simulazione in corso..." : "Esegui simulazione e salva" }}
+    </button>
+    <button (click)="loadSimulations()">Carica simulazioni salvate</button>
+    <button (click)="clearSimulations()">Svuota IndexedDB</button>
+  </div>
+
+  <p class="message">{{ message }}</p>
+
+  <section *ngIf="lastSimulation">
+    <h3>Ultima simulazione salvata (ID: {{ lastSimulation.id }})</h3>
+    <pre>{{ lastSimulation | json }}</pre>
+  </section>
+
+  <section *ngIf="savedSimulations.length">
+    <h3>Storico simulazioni ({{ savedSimulations.length }})</h3>
+    <ul>
+      <li *ngFor="let sim of savedSimulations; trackBy: trackById">
+        <strong>ID:</strong> {{ sim.id }}
+        –
+        <strong>R:</strong> {{ sim.params.R }} Ω – <strong>C:</strong>
+        {{ sim.params.C }} F – <strong>Vin:</strong> {{ sim.params.Vin }} V –
+        <strong>tau:</strong> {{ sim.tau }}
+        –
+        <strong>timestamp:</strong> {{ sim.timestamp }}
+      </li>
+    </ul>
+  </section>
+</div>

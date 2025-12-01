@@ -7,9 +7,8 @@ import { WasmLoaderService } from './wasm-loader.service';
   templateUrl: './test-solver.component.html',
   styleUrl: './test-solver.component.scss',
 })
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TestSolverComponent implements AfterViewInit {
   constructor(private wasmService: WasmLoaderService) {}
@@ -21,5 +20,4 @@ export class TestSolverComponent implements AfterViewInit {
     const res = this.wasmService.handleRequest('{"ping":1}');
     console.log('RISPOSTA WASM:', res);
   }
-
 }

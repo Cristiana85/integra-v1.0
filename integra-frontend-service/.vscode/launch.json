@@ -2,18 +2,16 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Debug Angular (Chrome)",
-      "type": "pwa-chrome",
+      "name": "Angular: Debug Chrome",
+      "type": "chrome",
       "request": "launch",
       "url": "http://localhost:4200",
       "webRoot": "${workspaceFolder}",
       "preLaunchTask": "ng serve",
-      "sourceMaps": true,
-      "sourceMapPathOverrides": {
-        "webpack:///./*": "${webRoot}/*",
-        "webpack:///*": "${webRoot}/*",
-        "webpack:///src/*": "${webRoot}/src/*"
-      }
+      "runtimeArgs": [
+        "--disable-web-security",
+        "--explicitly-allowed-ports=5060"
+      ]
     }
   ]
 }

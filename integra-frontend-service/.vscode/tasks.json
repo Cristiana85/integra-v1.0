@@ -3,18 +3,19 @@
   "tasks": [
     {
       "label": "ng serve",
-      "type": "npm",
-      "script": "start",
+      "type": "shell",
+      "command": "ng serve",
       "isBackground": true,
       "problemMatcher": {
         "owner": "typescript",
+        "fileLocation": ["relative", "${workspaceFolder}"],
         "pattern": {
-          "regexp": ""
+          "regexp": ".*"
         },
         "background": {
           "activeOnStart": true,
-          "beginsPattern": "✔️",
-          "endsPattern": "✔️"
+          "beginsPattern": ".*Compiled successfully.*",
+          "endsPattern": ".*Compiled successfully.*"
         }
       }
     }
