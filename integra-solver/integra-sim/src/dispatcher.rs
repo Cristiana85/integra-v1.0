@@ -1,97 +1,89 @@
-use serde_json::{json, Value};
-
-use crate::controller::protocol::{ErrorPayload, RequestEnvelope, ResponseEnvelope, Status};
+// src/dispatcher.rs
+use crate::protocol::*;
+use crate::core::SimulationController;
+use serde_json::json;
 
 pub struct Dispatcher;
 
 impl Dispatcher {
     pub fn new() -> Self {
-        Dispatcher
+        Self {}
     }
 
-    pub fn handle_message(&self, input: &str) -> String {
-        // Step 1: Deserializza input
-        let request: Result<RequestEnvelope, _> = serde_json::from_str(input);
-
-        let response = match request {
-            Ok(req) => self.handle_command(req),
-            Err(e) => ResponseEnvelope {
-                id: None,
-                command: "invalid".into(),
-                status: Status::Error,
-                payload: None,
+    /// Riceve il messaggio già deserializzato + controller,
+    /// decide quale metodo del controller chiamare.
+    pub fn dispatch(
+        &self,
+        req: RequestEnvelope,
+        controller: &mut SimulationController,
+    ) -> ResponseEnvelope {
+        // controlliamo la versione una volta sola qui
+        if req.version != PROTOCOL_VERSION {
+            return ResponseEnvelope {
+                id: req.id,
+                version: PROTOCOL_VERSION.into(),
+                message_type: "error".into(),
+                ok: false,
+                payload: json!(null),
                 error: Some(ErrorPayload {
-                    code: "invalid_json".into(),
-                    message: e.to_string(),
-                    details: None,
+                    code: "VERSION_MISMATCH".into(),
+                    message: format!("Unsupported protocol version: {}", req.version),
                 }),
-            },
-        };
+            };
+        }
 
-        serde_json::to_string(&response).unwrap_or_else(|e| {
-            json!({
-                "id": null,
-                "command": "internal",
-                "status": "error",
-                "error": {
-                    "code": "serialization_error",
-                    "message": e.to_string()
-                }
-            })
-            .to_string()
-        })
-    }
-
-    fn handle_command(&self, req: RequestEnvelope) -> ResponseEnvelope {
-        match req.command.as_str() {
-
-            "ping" => ResponseEnvelope {
+        match req.message_type.as_str() {
+            "ping" => self.handle_ping(req),
+            "solver_test" => self.handle_solver_test(req, controller),
+            "run_ac" => controller.run_ac(req),
+            "run_sparam" => controller.run_sparam(req),
+            // "run_hb", "run_transient", ecc. seguiranno
+            other => ResponseEnvelope {
                 id: req.id,
-                command: req.command,
-                status: Status::Ok,
-                payload: Some(req.payload),
-                error: None,
-            },
-
-            "simulate" => {
-                // Legge netlist dal payload
-                let netlist = req.payload.get("netlist").and_then(Value::as_str);
-
-                match netlist {
-                    Some(text) => ResponseEnvelope {
-                        id: req.id,
-                        command: req.command,
-                        status: Status::Ok,
-                        payload: Some(json!({
-                            "message": format!("Simulazione completata: {}", text)
-                        })),
-                        error: None,
-                    },
-                    None => ResponseEnvelope {
-                        id: req.id,
-                        command: req.command,
-                        status: Status::Error,
-                        payload: None,
-                        error: Some(ErrorPayload {
-                            code: "missing_field".into(),
-                            message: "Campo 'netlist' mancante".into(),
-                            details: Some(json!({ "expected": "netlist: string" })),
-                        }),
-                    },
-                }
-            },
-
-            _ => ResponseEnvelope {
-                id: req.id,
-                command: req.command,
-                status: Status::Error,
-                payload: None,
+                version: PROTOCOL_VERSION.into(),
+                message_type: "error".into(),
+                ok: false,
+                payload: json!(null),
                 error: Some(ErrorPayload {
-                    code: "unknown_command".into(),
-                    message: "Comando non riconosciuto".into(),
-                    details: None,
+                    code: "UNKNOWN_TYPE".into(),
+                    message: format!("Unknown message type {}", other),
                 }),
             },
         }
+    }
+
+    fn handle_ping(&self, req: RequestEnvelope) -> ResponseEnvelope {
+        ResponseEnvelope {
+            id: req.id,
+            version: PROTOCOL_VERSION.into(),
+            message_type: "pong".into(),
+            ok: true,
+            payload: json!({ "protocol_version": PROTOCOL_VERSION }),
+            error: None,
+        }
+    }
+
+    fn handle_solver_test(
+        &self,
+        req: RequestEnvelope,
+        controller: &mut SimulationController,
+    ) -> ResponseEnvelope {
+        let parsed: SolverTestRequest = match serde_json::from_value(req.payload.clone()) {
+            Ok(v) => v,
+            Err(e) => {
+                return ResponseEnvelope {
+                    id: req.id,
+                    version: PROTOCOL_VERSION.into(),
+                    message_type: "solver_test_result".into(),
+                    ok: false,
+                    payload: json!(null),
+                    error: Some(ErrorPayload {
+                        code: "BAD_PAYLOAD".into(),
+                        message: e.to_string(),
+                    }),
+                }
+            }
+        };
+        controller.handle_solver_test(req, parsed)
     }
 }
