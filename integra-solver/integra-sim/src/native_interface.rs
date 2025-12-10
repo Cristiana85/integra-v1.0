@@ -1,5 +1,5 @@
 // src/native_interface.rs
-use crate::integra_engine::IntegraEngine;
+use crate::{engine::IntegraEngine, protocol::update::WasmUpdate};
 
 /// Oggetto "facciata" per l'uso nativo dell'engine.
 /// In futuro qui puoi appendere:
@@ -13,9 +13,15 @@ pub struct NativeInterface {
 impl NativeInterface {
     /// Crea una nuova istanza dell'interfaccia nativa con un certo id logico
     pub fn new(id: impl Into<String>) -> Self {
-        Self {
-            engine: IntegraEngine::new(id),
-        }
+        let mut engine = IntegraEngine::new(id);
+        // callback che stampa su stderr
+        engine.set_update_callback(Box::new(|update: WasmUpdate| {
+            eprintln!(
+                "[PROGRESS] {}",
+                serde_json::to_string(&update).unwrap_or("{}".into())
+            );
+        }));
+        Self { engine }
     }
 
     /// Punto d'ingresso "reale": prende JSON e restituisce JSON.

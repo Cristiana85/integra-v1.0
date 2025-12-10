@@ -1,0 +1,106 @@
+@startuml
+
+title INTEGRA - Simulation Engine (WASM + Worker + Angular)
+
+package "Angular App (Main Thread)" {
+
+  package "Core Services" {
+    class SimulationFacadeService {
+      + currentJob$: Observable<SimulationJob>
+      + isSimulationRunning$: Observable<boolean>
+      + runSolverTest(message: string): Promise<ResponseEnvelope>
+      + pauseCurrentJob(): void
+      + cancelCurrentJob(): void
+    }
+
+    class IntegraEngineService {
+      - engineMode: EngineMode
+      - wasmWorker: Worker
+      - progressSubject: Subject<ProgressUpdate>
+      - responseSubjects: Map<jobId, Subject<ResponseEnvelope>>
+      + sendRequest(type, payload, idOverride?): Promise<ResponseEnvelope>
+      + getProgressStream(): Observable<ProgressUpdate>
+      + pauseJob(jobId: string): void
+      + cancelJob(jobId: string): void
+      + resumeJob(jobId: string): void
+    }
+  }
+
+  package "Editor Feature" {
+    class BoardEditorComponent {
+      - job$: Observable<SimulationJob>
+      - isRunning$: Observable<boolean>
+      + onRunClick(): void
+      + onPause(): void
+      + onCancel(): void
+    }
+
+    class SimulationProgressBarComponent {
+      + progress: number
+      + phase: string
+      + state: SimulationState
+    }
+  }
+
+  BoardEditorComponent --> SimulationFacadeService
+  BoardEditorComponent --> SimulationProgressBarComponent
+  SimulationFacadeService --> IntegraEngineService
+}
+
+package "Web Worker (integra-wasm.worker.ts)" {
+  class IntegraWasmWorker {
+    - wasmReady: Promise<WasmEngine>
+    + onmessage(event): void
+    + getEngine(): Promise<WasmEngine>
+  }
+}
+
+package "WASM Module" {
+  class WasmEngine {
+     + dispatch_json(request_json: String): String
+     + set_progress_callback(cb: Function)
+  }
+}
+
+package "Rust Core (WASM)" {
+  class IntegraEngine {
+    - id: String
+    - dispatcher: Dispatcher
+    - controller: SimulationController
+    - progress_cb: Option<ProgressCallback>
+    + dispatch_json(request_json: &str) -> String
+    + set_progress_callback(cb: ProgressCallback)
+  }
+
+  class Dispatcher {
+    + dispatch(req: RequestEnvelope, controller: &mut SimulationController) : ResponseEnvelope
+  }
+
+  class SimulationController {
+    - netlist: Netlist
+    - dataset: Dataset
+    - gpu: GpuContext
+    - progress_cb: Option<ProgressCallback>
+    + handle_solver_test(req, payload) : ResponseEnvelope
+    + run_ac(req) : ResponseEnvelope
+    + run_sparam(req) : ResponseEnvelope
+    + set_progress_callback(cb: Option<ProgressCallback>)
+  }
+
+  class Netlist
+  class Dataset
+  class GpuContext
+
+  IntegraEngine --> Dispatcher
+  IntegraEngine --> SimulationController
+  SimulationController --> Netlist
+  SimulationController --> Dataset
+  SimulationController --> GpuContext
+}
+
+' Relazioni principali inter-livello
+IntegraEngineService --> IntegraWasmWorker : postMessage()
+IntegraWasmWorker --> WasmEngine : dispatch_json(), set_progress_callback()
+WasmEngine --> IntegraEngine : dispatch_json()
+
+@enduml

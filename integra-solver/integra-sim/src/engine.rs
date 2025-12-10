@@ -1,6 +1,9 @@
+use std::sync::Arc;
+use std::sync::atomic::{AtomicBool, Ordering};
+
 // src/engine.rs
 use crate::dispatcher::Dispatcher;
-use crate::core::SimulationController;
+use crate::core::{SimulationController, UpdateCallback};
 use crate::protocol::{
     RequestEnvelope, ResponseEnvelope, ErrorPayload, PROTOCOL_VERSION,
 };
@@ -11,15 +14,30 @@ pub struct IntegraEngine {
     id: String,
     dispatcher: Dispatcher,
     controller: SimulationController,
+    update_cb: Option<UpdateCallback>,
+    // copie dei flag, per poterli toccare dall’esterno
+    paused: Arc<AtomicBool>,
+    cancelled: Arc<AtomicBool>,
 }
 
 impl IntegraEngine {
     pub fn new(id: impl Into<String>) -> Self {
+        let controller = SimulationController::new();
+        let paused = controller.paused_flag();
+        let cancelled = controller.cancelled_flag();
         Self {
             id: id.into(),
             dispatcher: Dispatcher::new(),
-            controller: SimulationController::new(),
+            controller,
+            update_cb: None,
+            paused,
+            cancelled,
         }
+    }
+
+    // Il controller è l’unico proprietario della callback
+    pub fn set_update_callback(&mut self, cb: UpdateCallback) {
+        self.controller.set_update_callback(Some(cb));
     }
 
     /// Entrypoint unico: JSON → JSON
@@ -52,4 +70,20 @@ impl IntegraEngine {
     pub fn id(&self) -> &str {
         &self.id
     }
+
+
+    // --- API di controllo esposte verso fuori ---
+
+    pub fn pause(&self) {
+        self.paused.store(true, Ordering::Relaxed);
+    }
+
+    pub fn resume(&self) {
+        self.paused.store(false, Ordering::Relaxed);
+    }
+
+    pub fn cancel(&self) {
+        self.cancelled.store(true, Ordering::Relaxed);
+    }
+
 }

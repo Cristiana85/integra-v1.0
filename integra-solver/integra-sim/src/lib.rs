@@ -5,13 +5,13 @@ pub mod gpu;
 pub mod import;
 
 pub mod dispatcher;
-pub mod integra_engine;
+pub mod engine;
 pub mod wasm_interface;
 pub mod native_interface;
 pub mod storage;
 
 // re-export comodo se vuoi usare il crate dall’esterno
-pub use integra_engine::IntegraEngine;
+pub use engine::IntegraEngine;
 pub use native_interface::NativeInterface;
 
 

@@ -6,3 +6,8 @@ pub mod analysis;
 
 // re-export comodo
 pub use controller::SimulationController;
+
+use crate::protocol::update; // ???
+pub use update::UpdateCallback;
+
+
