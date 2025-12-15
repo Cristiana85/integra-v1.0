@@ -1,99 +1,20 @@
-<div class="editor-shell">
-  <!-- TOP BAR -->
-  <header class="editor-topbar">
-    <div class="editor-topbar-left">
-      <span class="editor-title">Integra Editor</span>
-      <span class="editor-subtitle">stile MATLAB – mock UI</span>
-    </div>
-
-    <div class="editor-topbar-right">
+ <div class="editor-toolbar">
       <button
-        class="integra-btn integra-btn-ghost"
-        type="button"
-        (click)="run()"
-      >
-        ▶ Esegui
+        pButton
+        label="Run Simulation"
+        icon="pi pi-play"
+        [disabled]="(isRunning$ | async) || false"
+        (click)="onRunClick()">Run Simulation
       </button>
-      <button
-        class="integra-btn integra-btn-ghost"
-        type="button"
-        (click)="stop()"
-      >
-        ⏹ Stop
-      </button>
-      <button
-        class="integra-btn integra-btn-ghost"
-        type="button"
-        (click)="clearConsole()"
-      >
-        🧹 Pulisci console
-      </button>
+
+      <ng-container *ngIf="job$ | async as job">
+        <!-- <integra-simulation-progress-bar
+          *ngIf="job.state === SimulationState.Running || job.state === SimulationState.Completed"
+          [progress]="job.lastProgress?.percent ?? 0"
+          [phase]="job.lastProgress?.phase ?? ''"
+          [state]="job.state">
+        </integra-simulation-progress-bar> -->
+      </ng-container>
     </div>
-  </header>
 
-  <!-- MAIN AREA -->
-  <div class="editor-main">
-    <!-- SIDEBAR (FILE EXPLORER) -->
-    <aside class="editor-sidebar">
-      <div class="sidebar-header">
-        <span class="sidebar-title">File</span>
-      </div>
-
-      <ul class="file-list">
-        <li
-          *ngFor="let file of files"
-          (click)="selectFile(file)"
-          [class.selected]="file === selectedFile"
-        >
-          <div class="file-name">{{ file.name }}</div>
-          <div class="file-meta">
-            <span class="file-type">{{ file.type }}</span>
-          </div>
-        </li>
-      </ul>
-    </aside>
-
-    <!-- CENTER: TABS + CODE AREA -->
-    <section class="editor-center">
-      <!-- TABS -->
-      <div class="editor-tabs">
-        <div
-          *ngFor="let file of files"
-          class="editor-tab"
-          [class.active]="file === selectedFile"
-          (click)="selectFile(file)"
-        >
-          {{ file.name }}
-        </div>
-      </div>
-
-      <!-- CODE AREA -->
-      <div class="editor-code-area">
-        <div class="editor-gutter">
-          <div *ngFor="let n of lineNumbers" class="line-number">
-            {{ n }}
-          </div>
-        </div>
-
-        <textarea
-          class="editor-textarea"
-          [(ngModel)]="selectedFile.content"
-          spellcheck="false"
-        ></textarea>
-      </div>
-    </section>
-  </div>
-
-  <!-- BOTTOM CONSOLE -->
-  <section class="editor-console">
-    <div class="console-header">
-      <span>Console</span>
-    </div>
-    <div class="console-body">
-      <pre *ngFor="let line of consoleLines">{{ line }}</pre>
-      <div *ngIf="consoleLines.length === 0" class="console-empty">
-        Nessun output. Esegui uno script per vedere i log.
-      </div>
-    </div>
-  </section>
-</div>
+    <!-- qui sotto il tuo JointJS editor, charts, ecc. -->
