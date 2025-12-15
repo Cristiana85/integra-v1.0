@@ -1,50 +1,188 @@
-<div class="rc-sim-container">
-  <h2>RC Simulation + IndexedDB test</h2>
+<div class="editor-shell">
+  <!-- TOPBAR -->
+  <header class="editor-topbar">
+    <div class="editor-topbar-left">
+      <div class="editor-title">IndexedDB RC Simulator (test memoria)</div>
+      <div class="editor-subtitle">
+        Simulazioni RC (light / heavy) salvate in IndexedDB, con monitor
+        heap/storage.
+      </div>
+    </div>
 
-  <div class="form-grid">
-    <label>
-      R (ohm)
-      <input type="number" [(ngModel)]="r" />
-    </label>
+    <div class="editor-topbar-right">
+      <div class="topbar-inputs">
+        <label>
+          R
+          <input type="number" [(ngModel)]="r" class="topbar-input" />
+          <span class="topbar-input-unit">Ω</span>
+        </label>
+        <label>
+          C
+          <input type="number" [(ngModel)]="c" class="topbar-input" />
+          <span class="topbar-input-unit">F</span>
+        </label>
+        <label>
+          Vin
+          <input type="number" [(ngModel)]="vin" class="topbar-input" />
+          <span class="topbar-input-unit">V</span>
+        </label>
+        <label>
+          Heavy steps
+          <input type="number" [(ngModel)]="heavySteps" class="topbar-input" />
+          <span class="topbar-input-unit">punti</span>
+        </label>
+      </div>
 
-    <label>
-      C (F)
-      <input type="number" [(ngModel)]="c" />
-    </label>
+      <div class="topbar-actions">
+        <button
+          class="btn btn-primary"
+          (click)="runLightSimulation()"
+          [disabled]="isRunning"
+        >
+          {{ isRunning ? "Running..." : "Run (light)" }}
+        </button>
 
-    <label>
-      Vin (V)
-      <input type="number" [(ngModel)]="vin" />
-    </label>
-  </div>
+        <button
+          class="btn btn-primary btn-heavy"
+          (click)="runHeavySimulation()"
+          [disabled]="isRunning"
+        >
+          {{ isRunning ? "Running..." : "Run HEAVY" }}
+        </button>
 
-  <div class="buttons">
-    <button (click)="runSimulation()" [disabled]="isRunning">
-      {{ isRunning ? "Simulazione in corso..." : "Esegui simulazione e salva" }}
-    </button>
-    <button (click)="loadSimulations()">Carica simulazioni salvate</button>
-    <button (click)="clearSimulations()">Svuota IndexedDB</button>
-  </div>
+        <button
+          class="btn btn-ghost"
+          (click)="runCpuOnlyHeavy()"
+          [disabled]="isRunning"
+        >
+          {{ isRunning ? "Running..." : "CPU-only HEAVY" }}
+        </button>
 
-  <p class="message">{{ message }}</p>
+        <button class="btn btn-ghost" (click)="clearSimulations()">
+          Clear All
+        </button>
 
-  <section *ngIf="lastSimulation">
-    <h3>Ultima simulazione salvata (ID: {{ lastSimulation.id }})</h3>
-    <pre>{{ lastSimulation | json }}</pre>
-  </section>
+        <button class="btn btn-ghost" (click)="checkJsHeapOnce()">
+          Check JS Heap
+        </button>
 
-  <section *ngIf="savedSimulations.length">
-    <h3>Storico simulazioni ({{ savedSimulations.length }})</h3>
-    <ul>
-      <li *ngFor="let sim of savedSimulations; trackBy: trackById">
-        <strong>ID:</strong> {{ sim.id }}
-        –
-        <strong>R:</strong> {{ sim.params.R }} Ω – <strong>C:</strong>
-        {{ sim.params.C }} F – <strong>Vin:</strong> {{ sim.params.Vin }} V –
-        <strong>tau:</strong> {{ sim.tau }}
-        –
-        <strong>timestamp:</strong> {{ sim.timestamp }}
-      </li>
-    </ul>
-  </section>
+        <button class="btn btn-ghost" (click)="checkStorageOnce()">
+          Check Storage
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="editor-main">
+    <!-- SIDEBAR -->
+    <aside class="editor-sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-title">Info simulazioni</div>
+      </div>
+      <div class="file-list">
+        <div class="file-empty">
+          Totale simulazioni salvate: <strong>{{ totalSimulations() }}</strong>
+        </div>
+
+        <div class="file-empty" *ngIf="lastSimSummary() as last">
+          <div class="file-name">Ultima simulazione (ID {{ last.id }})</div>
+          <div class="file-meta">
+            Tipo: {{ last.heavy ? "HEAVY" : "LIGHT" }}
+          </div>
+          <div class="file-meta">
+            Punti generati: {{ last.points | number }}
+          </div>
+          <div class="file-meta">
+            ~{{ last.approxBinaryMB | number : "1.2-2" }} MB binari stimati
+          </div>
+        </div>
+
+        <div class="file-empty" *ngIf="!lastSimSummary()">
+          Nessuna simulazione eseguita in questa sessione.
+        </div>
+      </div>
+    </aside>
+
+    <!-- CENTER -->
+    <section class="editor-center">
+      <div class="editor-tabs">
+        <div class="editor-tab active">memory-monitor.log</div>
+      </div>
+
+      <div class="editor-code-area">
+        <div class="editor-gutter">
+          <div class="line-number">1</div>
+          <div class="line-number">2</div>
+          <div class="line-number">3</div>
+        </div>
+        <div class="editor-textarea" readonly>
+          // Questo componente esegue simulazioni RC e salva i risultati in
+          IndexedDB. // Le simulazioni possono essere "light" (50 punti) o
+          "heavy" (fino a 500k punti). // Vengono monitorati memoria JS (heap) e
+          storage (IndexedDB + cache).
+        </div>
+      </div>
+
+      <div class="editor-console">
+        <div class="console-header">Memory Monitor & Log</div>
+        <div class="console-body">
+          <!-- Heap -->
+          <div class="memory-panel" *ngIf="heapInfo() as heap">
+            <div class="memory-header">JS Heap</div>
+            <div class="memory-values">
+              <div>
+                Usato: <strong>{{ heap.usedMB | number : "1.2-2" }} MB</strong>
+              </div>
+              <div>Limite: {{ heap.limitMB | number : "1.2-2" }} MB</div>
+            </div>
+            <div class="memory-bar-wrapper">
+              <div class="memory-bar-bg">
+                <div
+                  class="memory-bar-fill"
+                  [style.width.%]="heap.percentOfLimit"
+                ></div>
+              </div>
+              <div class="memory-bar-label">
+                {{ heap.percentOfLimit | number : "1.2-2" }}% del limite heap
+              </div>
+            </div>
+          </div>
+
+          <!-- Storage -->
+          <div class="memory-panel" *ngIf="storageInfo() as stor">
+            <div class="memory-header">Storage (IndexedDB + cache)</div>
+            <div class="memory-values">
+              <div>
+                Usato:
+                <strong>{{ stor.usedMB | number : "1.2-2" }} MB</strong>
+              </div>
+              <div>Quota: {{ stor.quotaMB | number : "1.2-2" }} MB</div>
+            </div>
+            <div class="memory-bar-wrapper">
+              <div class="memory-bar-bg">
+                <div
+                  class="memory-bar-fill storage"
+                  [style.width.%]="stor.percentUsed"
+                ></div>
+              </div>
+              <div class="memory-bar-label">
+                {{ stor.percentUsed | number : "1.2-2" }}% quota utilizzata
+              </div>
+            </div>
+          </div>
+
+          <!-- Messaggi -->
+          <pre *ngIf="message(); else consoleEmpty">{{ message() }}</pre>
+
+          <ng-template #consoleEmpty>
+            <div class="console-empty">
+              Nessun messaggio. Esegui una simulazione o usa i pulsanti di check
+              memoria.
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </section>
+  </main>
 </div>

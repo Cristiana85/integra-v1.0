@@ -1,0 +1,17 @@
+<div class="composer">
+  <button class="integra-icon-btn pi pi-paperclip"></button>
+
+  <div class="composerInput">
+    <input
+      placeholder="Digita un messaggio"
+      [value]="value()"
+      (input)="value.set($any($event.target).value)"
+      (keydown)="onKeydown($event)"
+    />
+  </div>
+
+  <button
+    class="integra-icon-btn pi pi-send sendBtn"
+    (click)="submit()"
+  ></button>
+</div>

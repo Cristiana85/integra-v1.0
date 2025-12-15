@@ -1,0 +1,20 @@
+<div class="chatlist">
+  <div class="sectionHead">Recenti</div>
+
+  <button
+    class="chatRow"
+    *ngFor="let c of state.chats()"
+    [class.active]="c.id === state.selectedChatId()"
+    (click)="state.selectChat(c.id)"
+  >
+    <div class="avatar">{{ c.initials }}</div>
+
+    <div class="meta">
+      <div class="top">
+        <div class="name">{{ c.title }}</div>
+        <div class="date">{{ c.lastDate }}</div>
+      </div>
+      <div class="preview">{{ c.lastPreview }}</div>
+    </div>
+  </button>
+</div>

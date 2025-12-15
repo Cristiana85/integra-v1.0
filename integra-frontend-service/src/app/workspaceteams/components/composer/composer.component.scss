@@ -1,0 +1,58 @@
+:host {
+  display: block;
+}
+
+.composer {
+  height: 52px; /* ✅ compatto */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 12px;
+  border-top: 1px solid var(--integra-border-subtle);
+  background: rgba(2, 6, 23, 0.35);
+  backdrop-filter: blur(10px);
+}
+
+.composerInput {
+  flex: 1;
+  height: 36px; /* ✅ pill più bassa */
+  display: flex;
+  align-items: center;
+
+  padding: 0 12px;
+  border-radius: 999px;
+
+  border: 1px solid var(--integra-border-subtle);
+  background: rgba(15, 23, 42, 0.45);
+}
+
+.composerInput input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+
+  color: var(--integra-fg);
+  font-size: 0.82rem; /* ✅ più piccolo */
+}
+
+.composerInput:focus-within {
+  border-color: color-mix(
+    in srgb,
+    var(--integra-primary) 60%,
+    var(--integra-border-subtle)
+  );
+  box-shadow: 0 0 0 3px
+    color-mix(in srgb, var(--integra-primary) 18%, transparent);
+}
+
+.integra-icon-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+}
+
+.sendBtn {
+  background: color-mix(in srgb, var(--integra-primary) 14%, transparent);
+}

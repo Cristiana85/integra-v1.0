@@ -1,0 +1,35 @@
+:root[data-theme="light"] .paper {
+  background: #ffffff;
+}
+
+/* griglia più visibile in light */
+:root[data-theme="light"] .paper .joint-paper {
+  background: #ffffff;
+}
+
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.paper {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* ✅ QUESTO È QUELLO CHE TI MANCAVA: l’SVG deve essere 100% */
+.paper > svg {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+}
+
+.paper .joint-paper,
+.paper .joint-viewport {
+  width: 100% !important;
+  height: 100% !important;
+}

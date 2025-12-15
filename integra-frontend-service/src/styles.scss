@@ -42,24 +42,24 @@
 
 /* LIGHT THEME */
 :root[data-theme="light"] {
-  --integra-bg: #f8fafc;
-  --integra-surface-1: #ffffff;
-  --integra-surface-2: #e5e7eb;
-  --integra-surface-elevated: rgba(255, 255, 255, 0.98);
+  --integra-bg: #f6f7fb; /* non grigio sporco */
+  --integra-surface-1: #ffffff; /* sidebar */
+  --integra-surface-2: #f3f4f6; /* pannelli */
+  --integra-surface-elevated: #ffffff; /* card/pannelli elevati */
 
-  --integra-fg: #020617;
-  --integra-fg-muted: #6b7280;
+  --integra-fg: #0f172a; /* testo leggibile */
+  --integra-fg-muted: #475569;
 
-  --integra-border-subtle: rgba(148, 163, 184, 0.35);
+  --integra-border-subtle: rgba(15, 23, 42, 0.12); /* bordi più presenti */
 
-  --integra-primary: #0ea5e9;
-  --integra-primary-strong: #0284c7;
+  --integra-primary: #2563eb; /* blu più “pulito” */
+  --integra-primary-strong: #1d4ed8;
 
   --integra-topbar-bg: rgba(255, 255, 255, 0.92);
   --integra-overlay-bg: radial-gradient(
     circle at top,
     rgba(255, 255, 255, 0.98),
-    rgba(226, 232, 240, 0.98)
+    rgba(246, 247, 251, 0.98)
   );
 }
 

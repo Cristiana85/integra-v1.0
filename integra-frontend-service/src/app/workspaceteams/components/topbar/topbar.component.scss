@@ -1,0 +1,100 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.teams-topbar {
+  width: 100%;
+  height: 100%; /* prende tutta la riga header */
+  min-height: 56px; /* come Teams */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 14px;
+  background: var(--integra-topbar-bg);
+  overflow: hidden;
+}
+
+.tb-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  background: var(--integra-primary);
+  color: #020617;
+  font-weight: 700;
+  font-size: 0.75rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tabs {
+  display: flex;
+  gap: 14px;
+}
+
+.tab {
+  background: transparent;
+  border: none;
+  padding: 4px 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--integra-fg-muted);
+  cursor: pointer;
+  position: relative;
+}
+
+.tab.active {
+  color: var(--integra-primary-strong);
+  font-weight: 600;
+}
+
+.tab.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--integra-primary-strong);
+}
+
+.tb-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tb-right .integra-icon-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+}

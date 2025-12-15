@@ -1,0 +1,297 @@
+:root[data-theme="light"] .sb-wrap {
+  background: var(--integra-surface-1);
+  border-right: 1px solid var(--integra-border-subtle);
+}
+
+:root[data-theme="light"] .sb-item:hover {
+  background: rgba(37, 99, 235, 0.08);
+  border-color: rgba(37, 99, 235, 0.18);
+}
+
+:root[data-theme="light"] .sb-item.is-active {
+  background: rgba(37, 99, 235, 0.12);
+  border-color: rgba(37, 99, 235, 0.22);
+}
+
+:root[data-theme="light"] .ws-left {
+  background: #ffffff; /* pannello chatlist più “clean” */
+}
+
+/* ---------------------------
+   ROOT LAYOUT
+--------------------------- */
+
+.ws {
+  height: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr; /* sidebar width = sb-wrap */
+  overflow: hidden;
+  background: var(--integra-bg);
+  color: var(--integra-fg);
+}
+
+/* ---------------------------
+   SIDEBAR (ChatGPT-like) + ANIMATION
+--------------------------- */
+
+.sb-wrap {
+  width: 240px;
+  transition: width 180ms ease;
+  will-change: width;
+  overflow: hidden; /* nasconde label durante collapse */
+  border-right: 1px solid var(--integra-border-subtle);
+  background: var(--integra-surface-1);
+}
+
+.ws.sidebar-collapsed .sb-wrap {
+  width: 68px;
+}
+
+.ws-appbar {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.sb-top {
+  padding: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ws.sidebar-collapsed .sb-top {
+  justify-content: center;
+}
+
+.sb-toggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(15, 23, 42, 0.55);
+  color: rgba(229, 231, 235, 0.85);
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: background 140ms ease, border-color 140ms ease,
+    transform 120ms ease;
+}
+
+.sb-toggle:hover {
+  background: rgba(56, 189, 248, 0.12);
+  border-color: rgba(56, 189, 248, 0.25);
+}
+
+.sb-toggle:active {
+  transform: scale(0.98);
+}
+
+.sb-menu {
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow: auto;
+  min-height: 0;
+}
+
+.sb-bottom {
+  padding: 10px 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sb-item {
+  width: 100%;
+  border: 1px solid transparent;
+  background: transparent;
+  color: rgba(229, 231, 235, 0.88);
+  cursor: pointer;
+  text-align: left;
+
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 10px;
+  border-radius: 14px;
+
+  transition: background 140ms ease, border-color 140ms ease, padding 180ms ease;
+}
+
+.sb-item i {
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  font-size: 1.05rem;
+  color: rgba(229, 231, 235, 0.8);
+  transition: transform 180ms ease;
+}
+
+.sb-item:hover {
+  background: rgba(56, 189, 248, 0.08);
+  border-color: rgba(56, 189, 248, 0.18);
+}
+
+.sb-item.is-active {
+  background: rgba(56, 189, 248, 0.14);
+  border-color: rgba(56, 189, 248, 0.25);
+}
+
+.sb-label {
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 140ms ease, transform 180ms ease;
+  will-change: opacity, transform;
+}
+
+/* collapsed: solo icone */
+.ws.sidebar-collapsed .sb-item {
+  grid-template-columns: 1fr;
+  justify-items: center;
+  padding: 10px 0;
+}
+
+.ws.sidebar-collapsed .sb-label {
+  opacity: 0;
+  transform: translateX(-6px);
+  display: none; /* fine animazione: niente hitbox */
+}
+
+.ws.sidebar-collapsed .sb-item i {
+  transform: scale(1.02);
+}
+
+/* ---------------------------
+   MAIN
+--------------------------- */
+
+.ws-main {
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* BODY: left + divider + right */
+.ws-body {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+}
+
+/* LEFT chatlist */
+.ws-left {
+  flex: 0 0 auto; /* width via flex-basis % */
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--integra-surface-2);
+  border-right: 1px solid var(--integra-border-subtle);
+
+  min-width: 240px;
+  max-width: 520px;
+}
+
+/* divider chatlist <-> right */
+.ws-divider {
+  flex: 0 0 6px;
+  width: 6px;
+  cursor: col-resize;
+  background: transparent;
+  position: relative;
+}
+
+.ws-divider::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 2px;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.ws-divider:hover {
+  background: rgba(56, 189, 248, 0.08);
+}
+
+/* RIGHT area */
+.ws-right {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+}
+
+.ws-right > * {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+}
+
+/* ---------------------------
+   RIGHT SPLIT (JointJS top + Chart bottom)
+--------------------------- */
+
+.right-split {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.right-top {
+  flex: 0 0 auto; /* height via flex-basis % */
+  min-height: 160px;
+  overflow: hidden;
+}
+
+.right-bottom {
+  flex: 1 1 auto;
+  min-height: 140px;
+  overflow: hidden;
+}
+
+.right-divider {
+  flex: 0 0 6px;
+  height: 6px;
+  cursor: row-resize;
+  background: transparent;
+  position: relative;
+}
+
+.right-divider::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 2px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.right-divider:hover {
+  background: rgba(56, 189, 248, 0.08);
+}

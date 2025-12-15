@@ -1,3 +1,4 @@
+// src/app/shared/services/simulation-storage.service.ts
 import { Injectable } from '@angular/core';
 
 const DB_NAME = 'circuitSimDB';
@@ -10,7 +11,7 @@ export interface RcSimulationPoint {
 }
 
 export interface RcSimulationRecord {
-  id?: number; // verrà assegnato da IndexedDB
+  id?: number;
   type: 'RC';
   params: {
     R: number;
@@ -24,7 +25,17 @@ export interface RcSimulationRecord {
 
 @Injectable({ providedIn: 'root' })
 export class SimulationStorageService {
+  private get hasIndexedDb(): boolean {
+    return typeof indexedDB !== 'undefined';
+  }
+
   private openDatabase(): Promise<IDBDatabase> {
+    if (!this.hasIndexedDb) {
+      return Promise.reject(
+        new Error('IndexedDB non disponibile in questo contesto.')
+      );
+    }
+
     return new Promise((resolve, reject) => {
       const request = indexedDB.open(DB_NAME, DB_VERSION);
 
@@ -45,62 +56,68 @@ export class SimulationStorageService {
 
       request.onerror = (event: Event) => {
         const error = (event.target as IDBOpenDBRequest).error;
+        console.error('[IndexedDB] open error:', error);
         reject(error);
       };
     });
   }
 
-  saveSimulation(record: Omit<RcSimulationRecord, 'id'>): Promise<number> {
-    return this.openDatabase().then((db) => {
-      return new Promise<number>((resolve, reject) => {
-        const tx = db.transaction(STORE_NAME, 'readwrite');
-        const store = tx.objectStore(STORE_NAME);
-        const request = store.add(record);
+  async saveSimulation(
+    record: Omit<RcSimulationRecord, 'id'>
+  ): Promise<number> {
+    const db = await this.openDatabase();
 
-        request.onsuccess = () => {
-          resolve(request.result as number);
-        };
+    return new Promise<number>((resolve, reject) => {
+      const tx = db.transaction(STORE_NAME, 'readwrite');
+      const store = tx.objectStore(STORE_NAME);
+      const req = store.add(record);
 
-        request.onerror = (event: Event) => {
-          const error = (event.target as IDBRequest).error;
-          reject(error);
-        };
-      });
+      req.onsuccess = () => {
+        resolve(req.result as number);
+      };
+
+      req.onerror = (event: Event) => {
+        const error = (event.target as IDBRequest).error;
+        console.error('[IndexedDB] save error:', error);
+        reject(error);
+      };
     });
   }
 
-  getAllSimulations(): Promise<RcSimulationRecord[]> {
-    return this.openDatabase().then((db) => {
-      return new Promise<RcSimulationRecord[]>((resolve, reject) => {
-        const tx = db.transaction(STORE_NAME, 'readonly');
-        const store = tx.objectStore(STORE_NAME);
-        const request = store.getAll();
+  async getAllSimulations(): Promise<RcSimulationRecord[]> {
+    const db = await this.openDatabase();
 
-        request.onsuccess = () => {
-          resolve(request.result as RcSimulationRecord[]);
-        };
+    return new Promise<RcSimulationRecord[]>((resolve, reject) => {
+      const tx = db.transaction(STORE_NAME, 'readonly');
+      const store = tx.objectStore(STORE_NAME);
+      const req = store.getAll();
 
-        request.onerror = (event: Event) => {
-          const error = (event.target as IDBRequest).error;
-          reject(error);
-        };
-      });
+      req.onsuccess = () => {
+        resolve(req.result as RcSimulationRecord[]);
+      };
+
+      req.onerror = (event: Event) => {
+        const error = (event.target as IDBRequest).error;
+        console.error('[IndexedDB] getAll error:', error);
+        reject(error);
+      };
     });
   }
 
-  clearAllSimulations(): Promise<void> {
-    return this.openDatabase().then((db) => {
-      return new Promise<void>((resolve, reject) => {
-        const tx = db.transaction(STORE_NAME, 'readwrite');
-        const store = tx.objectStore(STORE_NAME);
-        const request = store.clear();
+  async clearAllSimulations(): Promise<void> {
+    const db = await this.openDatabase();
 
-        request.onsuccess = () => resolve();
-        request.onerror = (event: Event) => {
-          const error = (event.target as IDBRequest).error;
-          reject(error);
-        };
-      });
+    return new Promise<void>((resolve, reject) => {
+      const tx = db.transaction(STORE_NAME, 'readwrite');
+      const store = tx.objectStore(STORE_NAME);
+      const req = store.clear();
+
+      req.onsuccess = () => resolve();
+      req.onerror = (event: Event) => {
+        const error = (event.target as IDBRequest).error;
+        console.error('[IndexedDB] clear error:', error);
+        reject(error);
+      };
     });
   }
 }

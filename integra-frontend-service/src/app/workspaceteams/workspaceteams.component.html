@@ -1,0 +1,80 @@
+<div class="ws" [class.sidebar-collapsed]="sidebarCollapsed">
+  <!-- ✅ WRAPPER animabile -->
+  <div class="sb-wrap">
+    <aside class="ws-appbar">
+      <div class="sb-top">
+        <button
+          class="sb-toggle"
+          (click)="toggleSidebar()"
+          title="Toggle sidebar"
+        >
+          <i class="pi pi-bars"></i>
+        </button>
+      </div>
+
+      <nav class="sb-menu">
+        <button class="sb-item is-active" type="button">
+          <i class="pi pi-comments"></i>
+          <span class="sb-label">Chat</span>
+        </button>
+
+        <button class="sb-item" type="button">
+          <i class="pi pi-sitemap"></i>
+          <span class="sb-label">Workspace</span>
+        </button>
+
+        <button class="sb-item" type="button">
+          <i class="pi pi-chart-line"></i>
+          <span class="sb-label">Charts</span>
+        </button>
+
+        <button class="sb-item" type="button">
+          <i class="pi pi-folder"></i>
+          <span class="sb-label">Projects</span>
+        </button>
+
+        <button class="sb-item" type="button">
+          <i class="pi pi-cog"></i>
+          <span class="sb-label">Settings</span>
+        </button>
+      </nav>
+
+      <div class="sb-bottom">
+        <button class="sb-item" type="button">
+          <i class="pi pi-user"></i>
+          <span class="sb-label">Account</span>
+        </button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- MAIN -->
+  <main class="ws-main">
+    <div class="ws-body">
+      <!-- LEFT: chatlist resizable -->
+      <aside class="ws-left" [style.flexBasis.%]="leftPct">
+        <integra-chat-list></integra-chat-list>
+      </aside>
+
+      <div class="ws-divider" (pointerdown)="startResize($event)"></div>
+
+      <!-- RIGHT: split verticale -->
+      <section class="ws-right">
+        <div class="right-split">
+          <div class="right-top" [style.flexBasis.%]="rightTopPct">
+            <integra-diagram-panel></integra-diagram-panel>
+          </div>
+
+          <div
+            class="right-divider"
+            (pointerdown)="startRightResize($event)"
+          ></div>
+
+          <div class="right-bottom">
+            <integra-chart-panel></integra-chart-panel>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>

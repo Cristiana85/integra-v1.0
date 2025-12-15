@@ -7,6 +7,8 @@ import { RegisterPageComponent } from './auth/register-page/register-page.compon
 import { PricingComponent } from './landing/components/pricing/pricing.component';
 import { TestComponent } from './test/test.component';
 import { TestSolverComponent } from './test-solver/test-solver.component';
+import { IndexDbComponent } from './index-db/index-db.component';
+import { WorkspaceteamsComponent } from './workspaceteams/workspaceteams.component';
 
 export const routes: Routes = [
   { path: '', component: TestComponent },
@@ -17,7 +19,8 @@ export const routes: Routes = [
   { path: 'register', component: RegisterPageComponent },
   { path: 'pricing', component: PricingComponent },
   { path: 'solver', component: TestSolverComponent },
-  { path: 'indexDB', component: TestSolverComponent },
+  { path: 'indexDB', component: IndexDbComponent },
+  { path: 'teams', component: WorkspaceteamsComponent },
 
   //TODEL
   { path: 'test', component: TestComponent },
