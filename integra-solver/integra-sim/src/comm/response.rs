@@ -1,6 +1,6 @@
 use serde::{Serialize, Deserialize};
 use serde_json::Value;
-use crate::protocol::ErrorPayload;
+use crate::comm::ErrorPayload;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct ResponseEnvelope {

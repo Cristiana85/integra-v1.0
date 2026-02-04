@@ -1,17 +1,14 @@
-// src/lib.rs
-pub mod protocol;
+pub mod comm;
 pub mod core;
-pub mod gpu;
-pub mod import;
 
-pub mod dispatcher;
-pub mod engine;
+pub mod comm_engine;
+pub mod core_engine;
 pub mod wasm_interface;
 pub mod native_interface;
 pub mod storage;
 
 // re-export comodo se vuoi usare il crate dall’esterno
-pub use engine::IntegraEngine;
+pub use core_engine::IntegraEngine;
 pub use native_interface::NativeInterface;
 
 

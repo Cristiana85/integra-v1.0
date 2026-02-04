@@ -2,9 +2,9 @@ use std::sync::Arc;
 use std::sync::atomic::{AtomicBool, Ordering};
 
 // src/engine.rs
-use crate::dispatcher::Dispatcher;
+use crate::comm_engine::Dispatcher;
 use crate::core::{SimulationController, UpdateCallback};
-use crate::protocol::{
+use crate::comm::{
     RequestEnvelope, ResponseEnvelope, ErrorPayload, PROTOCOL_VERSION,
 };
 use serde_json::json;
@@ -23,8 +23,8 @@ pub struct IntegraEngine {
 impl IntegraEngine {
     pub fn new(id: impl Into<String>) -> Self {
         let controller = SimulationController::new();
-        let paused = controller.paused_flag();
-        let cancelled = controller.cancelled_flag();
+        let paused: Arc<AtomicBool> = controller.paused_flag();
+        let cancelled: Arc<AtomicBool> = controller.cancelled_flag();
         Self {
             id: id.into(),
             dispatcher: Dispatcher::new(),

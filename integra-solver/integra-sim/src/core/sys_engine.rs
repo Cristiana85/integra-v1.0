@@ -1,5 +1,5 @@
 // src/core/controller.rs
-use crate::protocol::{
+use crate::comm::{
     ErrorPayload, PROTOCOL_VERSION, RequestEnvelope, ResponseEnvelope, SolverTestRequest, SolverTestResponse, update::{UpdateCallback, WasmUpdate}
 };
 
@@ -103,7 +103,7 @@ impl SimulationController {
 
 
 
-    // --- somulation faking ---
+    // --- simulation faking ---
 
     pub fn handle_solver_test(
         &mut self,

@@ -1,4 +1,4 @@
-use integra_sim::protocol::update::WasmUpdate;
+use integra_sim::comm::update::WasmUpdate;
 // src/main.rs
 use integra_sim::{
     IntegraEngine

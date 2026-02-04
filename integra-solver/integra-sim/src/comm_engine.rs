@@ -1,5 +1,5 @@
 // src/dispatcher.rs
-use crate::protocol::*;
+use crate::comm::*;
 use crate::core::SimulationController;
 use serde_json::json;
 

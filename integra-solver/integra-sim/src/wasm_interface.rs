@@ -1,11 +1,11 @@
 #[cfg(target_arch = "wasm32")]
 use wasm_bindgen::prelude::*;
 
-use crate::engine::IntegraEngine;
+use crate::core_engine::IntegraEngine;
 use std::cell::RefCell;
 
 // src/core/controller.rs
-use crate::protocol::{
+use crate::comm::{
     update::{UpdateCallback, WasmUpdate}
 };
 

@@ -1,5 +1,5 @@
 // src/native_interface.rs
-use crate::{engine::IntegraEngine, protocol::update::WasmUpdate};
+use crate::{core_engine::IntegraEngine, comm::update::WasmUpdate};
 
 /// Oggetto "facciata" per l'uso nativo dell'engine.
 /// In futuro qui puoi appendere:

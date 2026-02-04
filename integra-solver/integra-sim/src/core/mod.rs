@@ -1,13 +1,9 @@
-pub mod controller;
-pub mod circuit;
-pub mod element;
-pub mod node;
-pub mod analysis;
+pub mod sys_engine;
 
 // re-export comodo
-pub use controller::SimulationController;
+pub use sys_engine::SimulationController;
 
-use crate::protocol::update; // ???
+use crate::comm::update; // ???
 pub use update::UpdateCallback;
 
 
