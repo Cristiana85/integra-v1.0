@@ -24,6 +24,7 @@ import { BoardExplorerComponent } from './integra/dashboard/components/boardexpl
 // Misc
 import { DiagramComponent } from './integra/editor/components/diagram/diagram.component';
 import { EditorComponent } from './integra/editor/pages/ui/editor.component';
+import { TestpageComponent } from './testpage/testpage.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'entrypage', pathMatch: 'full' },
@@ -55,7 +56,7 @@ export const routes: Routes = [
       { path: 'explorer', component: BoardExplorerComponent },
     ],
   },
-
+  { path: 'testpage', component: TestpageComponent },
   { path: 'editor', component: EditorComponent },
   { path: '**', redirectTo: 'entrypage' },
 ];
