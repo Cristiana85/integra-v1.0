@@ -1,0 +1,178 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+
+title INTEGRA Solver - High Level UML (WASM + Online Calculators)
+
+package "Angular UI" {
+  class "UI Components" as UI
+  class "IntegraSolverService" as NgSvc
+  class "Web Worker" as Worker
+}
+
+package "WASM (Rust)" {
+  package "wasm" {
+    class Session {
+      - session_id: String
+      - model: Option<Model>
+      - analysis: Option<Analysis>
+      - last_dataset_json: Option<String>
+      - callbacks: CallbackHub
+      --
+      + new()
+      + set_on_message(cb)
+      + set_model_json(json)
+      + set_analysis_json(json)
+      + run(run_id)
+      + get_last_dataset_envelope_json()
+    }
+
+    class CallbackHub {
+      - on_message: Option<Function>
+      --
+      + emit(json_msg)
+    }
+
+    class JsonBridge {
+      + parse_json<T>(s): Result<T>
+      + to_json<T>(v): Result<String>
+    }
+
+    class "Envelope<T>" as Envelope {
+      + type: MsgType
+      + id: String
+      + payload: T
+    }
+
+    enum MsgType {
+      run
+      progress
+      done
+      error
+      log
+    }
+  }
+
+  package "core" {
+    package "model" {
+      class Model {
+        + kind: String
+        + data: JsonValue
+      }
+    }
+    package "analysis" {
+      class Analysis {
+        + sweep: Option<Sweep>
+        + settings: JsonValue
+      }
+      class Sweep {
+        + name: String
+        + unit: String
+        + values: Vec<f64>
+      }
+    }
+    package "dataset" {
+      class Dataset {
+        + meta: DatasetMeta
+        + independent: IndependentVar
+        + dependent: Vec<DependentVar>
+      }
+      class DatasetMeta {
+        + title: String
+        + solver: String
+        + units: JsonValue
+      }
+      class IndependentVar {
+        + name: String
+        + unit: String
+        + values: Vec<f64>
+      }
+      class DependentVar {
+        + name: String
+        + unit: String
+        + values: Vec<f64>
+      }
+    }
+  }
+
+  package "solver" {
+    class SolverContext {
+      + run_id: String
+      + model: Model
+      + analysis: Analysis
+      + dataset: Option<Dataset>
+      --
+      + new(run_id, model, analysis)
+    }
+
+    package "engine" {
+      class Dispatcher {
+        + run(ctx, emit_progress): Result<()>
+      }
+    }
+
+    package "runtime" {
+      class "Runtime (per-calculator)" as Runtime {
+        + validated params
+        + derived values
+      }
+      class RuntimeValidation {
+        + validate(model, analysis): Result<Runtime>
+      }
+    }
+
+    package "calculators" {
+      package "tline" {
+        class TlineModelMap {
+          + validate(model): Result<()>
+          + map_to_runtime(model, analysis): Runtime
+        }
+        class TlineEngine {
+          + run(ctx, emit_progress): Result<()>
+        }
+      }
+
+      package "link_budget" {
+        class LinkBudgetEngine
+      }
+
+      package "thermal_pcb" {
+        class ThermalEngine
+      }
+    }
+  }
+
+  package "error" {
+    class ErrorMessage {
+      + code: String
+      + message: String
+      + path: Option<String>
+      + details: Option<JsonValue>
+    }
+    enum ErrorCode {
+      JSON_INVALID
+      MODEL_INVALID
+      ANALYSIS_INVALID
+      SOLVER_NOT_FOUND
+      INTERNAL
+    }
+  }
+
+  package "utils" {
+    class Units {
+      + conversions()
+    }
+    class Id {
+      + new_session_id(): String
+    }
+  }
+
+  package "accel" {
+    package "webgpu" {
+      class WebGpuDevice
+      class ShaderKernels
+    }
+  }
+}
+@enduml
