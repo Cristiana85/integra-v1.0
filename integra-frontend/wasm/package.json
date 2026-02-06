@@ -1,0 +1,20 @@
+{
+  "name": "integra_solver_wasm",
+  "type": "module",
+  "collaborators": [
+    ""
+  ],
+  "description": "",
+  "version": "0.1.0",
+  "license": "",
+  "files": [
+    "integra_solver_wasm_bg.wasm",
+    "integra_solver_wasm.js",
+    "integra_solver_wasm.d.ts"
+  ],
+  "main": "integra_solver_wasm.js",
+  "types": "integra_solver_wasm.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
