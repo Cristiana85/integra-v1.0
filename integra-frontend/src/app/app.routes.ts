@@ -31,7 +31,7 @@ export const routes: Routes = [
   { path: 'entrypage', component: EntrypageComponent },
   { path: 'landing-page', component: LandingpageComponent },
 
-  { path: 'login', component: LoginComponent, canActivate: [AuthGuard] }, // o togli il guard
+  //{ path: 'login', component: LoginComponent, canActivate: [AuthGuard] }, // o togli il guard
   { path: 'register', component: RegisterComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },

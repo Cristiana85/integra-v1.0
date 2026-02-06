@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "printWidth": 100,
   "tabWidth": 2,
   "singleQuote": true,
@@ -7,30 +6,4 @@
   "semi": true,
   "endOfLine": "lf",
   "htmlWhitespaceSensitivity": "ignore"
-=======
-  "$schema": "http://json.schemastore.org/prettierrc",
-  "printWidth": 100,
-  "tabWidth": 2,
-  "useTabs": false,
-  "semi": true,
-  "singleQuote": true,
-  "trailingComma": "es5",
-  "bracketSpacing": true,
-  "arrowParens": "always",
-  "endOfLine": "lf",
-  "overrides": [
-    {
-      "files": ["*.component.html", "*.html"],
-      "options": {
-        "printWidth": 100
-      }
-    },
-    {
-      "files": ["*.scss", "*.css"],
-      "options": {
-        "singleQuote": false
-      }
-    }
-  ]
->>>>>>> feature/diagram
 }
