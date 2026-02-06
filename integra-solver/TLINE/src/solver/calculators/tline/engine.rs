@@ -33,7 +33,7 @@ pub fn run(ctx: &mut SolverContext, emit_progress: impl Fn(f64, &str)) -> Result
 
     emit_progress(95.0, "TLINE: post-processing");
 
-    let ds = Dataset {
+    let ds: Dataset = Dataset {
         meta: DatasetMeta {
             title: "TLINE: Demo dataset".to_string(),
             solver: "tline".to_string(),

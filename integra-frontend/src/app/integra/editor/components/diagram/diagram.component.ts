@@ -8,15 +8,11 @@ import {
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as joint from 'jointjs';
-<<<<<<< HEAD
-=======
 import { SharedModule } from '../../../../shared/shared.module';
->>>>>>> feature/diagram
 import { DiagramService } from '../../services/diagram.service';
 import { addElement, redo, undo } from '../../store/actions/diagram.actions';
 import { ElementState } from '../../store/states/diagram.state';
 import { ZoomPanService } from '../../services/zoompan.service';
-import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({
   selector: 'integra-diagram',
@@ -28,15 +24,11 @@ import { SharedModule } from 'src/app/shared/shared.module';
 export class DiagramComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('canvas', { static: true }) containerRef!: ElementRef;
 
-<<<<<<< HEAD
-  constructor(private diagramService: DiagramService, private zoomPanService: ZoomPanService) {}
-=======
   constructor(
     private diagramService: DiagramService,
     private zoomPanService: ZoomPanService,
     private store: Store,
   ) {}
->>>>>>> feature/diagram
 
   ngOnInit(): void {}
 
@@ -54,17 +46,11 @@ export class DiagramComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   undoLastAction(): void {
-<<<<<<< HEAD
-  }
-
-  redoLastAction(): void {
-=======
     //this.store.dispatch(undo());
   }
 
   redoLastAction(): void {
     //this.store.dispatch(redo());
->>>>>>> feature/diagram
   }
 
   allowDrop(event: DragEvent): void {

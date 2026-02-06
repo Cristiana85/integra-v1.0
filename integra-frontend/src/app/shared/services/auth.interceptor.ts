@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-import { HttpInterceptorFn } from '@angular/common/http';
-
-=======
 import { Injectable } from '@angular/core';
 import {
   HttpInterceptor,
@@ -38,13 +34,8 @@ export class AuthInterceptor implements HttpInterceptor {
 }*/
 import { HttpInterceptorFn } from '@angular/common/http';
 
->>>>>>> feature/diagram
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const token = localStorage.getItem('authToken');
   const cloned = token ? req.clone({ setHeaders: { Authorization: `Bearer ${token}` } }) : req;
   return next(cloned);
 };
-<<<<<<< HEAD
-=======
-
->>>>>>> feature/diagram

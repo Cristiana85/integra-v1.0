@@ -11,11 +11,7 @@ import { PrimeblocksModule } from 'src/app/shared/primeblocks.module';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { SharedModule } from '../../../shared/shared.module';
 import { Router } from '@angular/router'; // importa Router
-<<<<<<< HEAD
-//import { ProjectService } from 'src/app/editor/services/project.service';
-=======
 import { ProjectService } from 'src/app/integra/editor/services/project.service';
->>>>>>> feature/diagram
 
 @Component({
   selector: 'integra-login',

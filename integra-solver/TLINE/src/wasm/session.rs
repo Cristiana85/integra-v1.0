@@ -12,7 +12,7 @@ pub struct Session {
     session_id: String,
     model: Option<Model>,
     analysis: Option<Analysis>,
-    last_dataset_json: Option<String>,
+    dataset: Option<String>,
     callbacks: CallbackHub,
 }
 
@@ -24,7 +24,7 @@ impl Session {
             session_id: crate::utils::ids::new_session_id(),
             model: None,
             analysis: None,
-            last_dataset_json: None,
+            dataset: None,
             callbacks: CallbackHub::default(),
         }
     }
@@ -36,15 +36,15 @@ impl Session {
     }
 
     #[wasm_bindgen]
-    pub fn set_model_json(&mut self, model_json: &str) -> Result<(), JsValue> {
-        let model: Model = parse_json(model_json).map_err(to_js)?;
+    pub fn set_model(&mut self, model: &str) -> Result<(), JsValue> {
+        let model: Model = parse_json(model).map_err(to_js)?;
         self.model = Some(model);
         Ok(())
     }
 
     #[wasm_bindgen]
-    pub fn set_analysis_json(&mut self, analysis_json: &str) -> Result<(), JsValue> {
-        let analysis: Analysis = parse_json(analysis_json).map_err(to_js)?;
+    pub fn set_analysis(&mut self, analysis: &str) -> Result<(), JsValue> {
+        let analysis: Analysis = parse_json(analysis).map_err(to_js)?;
         self.analysis = Some(analysis);
         Ok(())
     }
@@ -80,7 +80,7 @@ impl Session {
                     payload: serde_json::json!({ "dataset": dataset }),
                 };
                 let done_json = to_json(&done_env).map_err(to_js)?;
-                self.last_dataset_json = Some(done_json.clone());
+                self.dataset = Some(done_json.clone());
                 self.callbacks.emit(&done_json);
                 Ok(())
             }
@@ -99,7 +99,7 @@ impl Session {
 
     #[wasm_bindgen]
     pub fn get_last_dataset_envelope_json(&self) -> Option<String> {
-        self.last_dataset_json.clone()
+        self.dataset.clone()
     }
 
     #[wasm_bindgen(getter)]
