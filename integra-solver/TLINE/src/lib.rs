@@ -1,13 +1,10 @@
 pub mod wasm;
-pub mod analysis;
-pub mod dataset;
-pub mod engine;
-pub mod netlist;
-pub mod model;
-pub mod utils;
+pub mod core;
+pub mod solver;
 pub mod error;
+pub mod utils;
 
-pub use wasm::session::SolverSession;
+pub use wasm::session::Session;
 
 
 #[cfg(target_arch = "wasm32")]

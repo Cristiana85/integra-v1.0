@@ -1,254 +1,114 @@
-use js_sys::Function;
-use wasm_bindgen::{JsCast, JsValue};
-use wasm_bindgen::prelude::wasm_bindgen;
+use wasm_bindgen::prelude::*;
 
-use crate::analysis::types::{Analysis, AnalysisKind};
-use crate::dataset::store::DatasetStore;
-use crate::dataset::types::{Event, SessionStateView};
-use crate::engine::runtime::{Budget, EngineRuntime, SessionState};
-use crate::engine::traits::{AnalysisRunner, EngineContext};
-use crate::engine::tline::microstrip::MicrostripRunner;
-use crate::error::{codes, ErrorReport};
-use crate::wasm::bridge::{err, ok, parse};
-use crate::dataset::buffers::BufferStore;
-use crate::wasm::callback::{CallbackConfig, CallbackSink};
-
-#[derive(Default)]
-struct SessionConfig {
-    callback: CallbackConfig,
-}
+use crate::{
+    core::{analysis::Analysis, model::Model},
+    error,
+    solver::context::SolverContext,
+    wasm::{callback::CallbackHub, json_bridge::{Envelope, MsgType, parse_json, to_json}},
+};
 
 #[wasm_bindgen]
-pub struct SolverSession {
-    cfg: SessionConfig,
-
-    state: SessionState,
+pub struct Session {
+    session_id: String,
+    model: Option<Model>,
     analysis: Option<Analysis>,
-
-    runtime: EngineRuntime,
-
-    dataset: DatasetStore,
-    buffers: BufferStore,
-
-    callback: CallbackSink,
-
-    runner: Option<Box<dyn AnalysisRunner>>,
-    run_id: u32,
+    last_dataset_json: Option<String>,
+    callbacks: CallbackHub,
 }
 
 #[wasm_bindgen]
-impl SolverSession {
+impl Session {
     #[wasm_bindgen(constructor)]
-    pub fn new(config: JsValue) -> SolverSession {
-        let mut cfg = SessionConfig::default();
-
-        // config: { callbacks: { enabled, maxBatch, maxHz } }
-        if !config.is_null() && !config.is_undefined() {
-            let obj = js_sys::Object::from(config);
-            let callbacks = js_sys::Reflect::get(&obj, &JsValue::from_str("callbacks")).ok();
-            if let Some(cbv) = callbacks {
-                if cbv.is_object() {
-                    let cobj = js_sys::Object::from(cbv);
-                    if let Ok(v) = js_sys::Reflect::get(&cobj, &JsValue::from_str("enabled")) {
-                        if let Some(b) = v.as_bool() { cfg.callback.enabled = b; }
-                    }
-                    if let Ok(v) = js_sys::Reflect::get(&cobj, &JsValue::from_str("maxBatch")) {
-                        if let Some(n) = v.as_f64() { cfg.callback.max_batch = n.max(1.0) as usize; }
-                    }
-                    if let Ok(v) = js_sys::Reflect::get(&cobj, &JsValue::from_str("maxHz")) {
-                        if let Some(n) = v.as_f64() { cfg.callback.max_hz = n.max(0.1); }
-                    }
-                }
-            }
-        }
-
-        let callback = CallbackSink::new(cfg.callback.clone());
-
-        SolverSession {
-            cfg,
-            state: SessionState::Idle,
+    pub fn new() -> Session {
+        Session {
+            session_id: crate::utils::ids::new_session_id(),
+            model: None,
             analysis: None,
-            runtime: EngineRuntime::default(),
-            dataset: DatasetStore::new(),
-            buffers: BufferStore::new(),
-            callback,
-            runner: None,
-            run_id: 0,
+            last_dataset_json: None,
+            callbacks: CallbackHub::default(),
         }
     }
 
-    pub fn set_callback(&mut self, cb: JsValue) -> JsValue {
-        if cb.is_null() || cb.is_undefined() {
-            self.callback.set(None);
-            return ok(());
-        }
-        let f: Function = match cb.dyn_into() {
-            Ok(f) => f,
-            Err(_) => return err(ErrorReport::new(codes::INPUT_INVALID, "callback must be a function")),
-        };
-        self.callback.set(Some(f));
-        ok(())
+    /// Registra un'unica callback JS: riceve sempre una string JSON Envelope.
+    #[wasm_bindgen]
+    pub fn set_on_message(&mut self, cb: js_sys::Function) {
+        self.callbacks.on_message = Some(cb);
     }
 
-    pub fn set_analysis(&mut self, analysis_json: JsValue) -> JsValue {
-        let analysis: Analysis = match parse(analysis_json) {
-            Ok(v) => v,
-            Err(e) => return err(e),
-        };
-        if let Err(e) = analysis.validate() {
-            return err(e);
-        }
+    #[wasm_bindgen]
+    pub fn set_model_json(&mut self, model_json: &str) -> Result<(), JsValue> {
+        let model: Model = parse_json(model_json).map_err(to_js)?;
+        self.model = Some(model);
+        Ok(())
+    }
+
+    #[wasm_bindgen]
+    pub fn set_analysis_json(&mut self, analysis_json: &str) -> Result<(), JsValue> {
+        let analysis: Analysis = parse_json(analysis_json).map_err(to_js)?;
         self.analysis = Some(analysis);
-        self.state = SessionState::Ready;
-        ok(())
+        Ok(())
     }
 
-    pub fn start(&mut self) -> JsValue {
-        if self.state != SessionState::Ready && self.state != SessionState::Paused {
-            return err(ErrorReport::new(codes::STATE_INVALID, "start allowed only in Ready/Paused"));
-        }
-        let analysis = match self.analysis.clone() {
-            Some(a) => a,
-            None => return err(ErrorReport::new(codes::NOT_READY, "analysis not set")),
-        };
+    /// Esegue una run. Ritorna subito al JS (non blocca UI se chiamato da Worker).
+    /// Per ora è sincrona lato wasm, ma dentro un Web Worker non blocca il main thread.
+    #[wasm_bindgen]
+    pub fn run(&mut self, run_id: &str) -> Result<(), JsValue> {
+        let model = self.model.clone().ok_or_else(|| to_js(error::err(crate::error::codes::ErrorCode::ModelInvalid, "Model not set")))?;
+        let analysis = self.analysis.clone().ok_or_else(|| to_js(error::err(crate::error::codes::ErrorCode::AnalysisInvalid, "Analysis not set")))?;
 
-        // select runner
-        let runner: Box<dyn AnalysisRunner> = match analysis.kind {
-            AnalysisKind::TLineMicrostrip(spec) => Box::new(MicrostripRunner::new(spec)),
-            _ => return err(ErrorReport::new(codes::NOT_READY, "analysis kind not implemented yet")),
-        };
+        let mut ctx = SolverContext::new(run_id.to_string(), model, analysis);
 
-        self.run_id = self.run_id.wrapping_add(1).max(1);
-        self.dataset.reset_for_run(self.run_id);
-        self.runtime.reset();
-        self.runtime.request_resume();
-
-        self.runner = Some(runner);
-
-        // emit state event
-        self.dataset.events.push(Event::state(self.run_id, "running"));
-
-        self.state = SessionState::Running;
-        ok(())
-    }
-
-    pub fn pause(&mut self) -> JsValue {
-        if self.state != SessionState::Running {
-            return err(ErrorReport::new(codes::STATE_INVALID, "pause only in Running"));
-        }
-        self.runtime.request_pause();
-        self.dataset.events.push(Event::state(self.run_id, "pausing"));
-        ok(())
-    }
-
-    pub fn resume(&mut self) -> JsValue {
-        if self.state != SessionState::Paused {
-            return err(ErrorReport::new(codes::STATE_INVALID, "resume only in Paused"));
-        }
-        self.runtime.request_resume();
-        self.dataset.events.push(Event::state(self.run_id, "running"));
-        self.state = SessionState::Running;
-        ok(())
-    }
-
-    pub fn stop(&mut self) -> JsValue {
-        if self.state != SessionState::Running && self.state != SessionState::Paused {
-            return err(ErrorReport::new(codes::STATE_INVALID, "stop only in Running/Paused"));
-        }
-        self.runtime.request_stop_graceful();
-        self.dataset.events.push(Event::state(self.run_id, "stopping"));
-        ok(())
-    }
-
-    /// FE calls this in a RAF loop (or timer) to progress computation in chunks.
-    pub fn tick(&mut self, budget_json: JsValue) -> JsValue {
-        if self.state != SessionState::Running {
-            // allow tick in Paused to complete graceful transitions if needed
-            if self.state != SessionState::Paused {
-                return err(ErrorReport::new(codes::STATE_INVALID, "tick only in Running/Paused"));
+        // progress emitter
+        let emit_progress = |pct: f64, msg: &str| {
+            let env = Envelope {
+                r#type: MsgType::Progress,
+                id: run_id.to_string(),
+                payload: serde_json::json!({ "pct": pct, "message": msg, "stage": "solve" }),
+            };
+            if let Ok(s) = to_json(&env) {
+                self.callbacks.emit(&s);
             }
-        }
-
-        let budget: Budget = match parse(budget_json) {
-            Ok(v) => v,
-            Err(_) => Budget::default(),
         };
 
-        let mut ctx = EngineContext {
-            run_id: self.run_id,
-            runtime: &mut self.runtime,
-            dataset: &mut self.dataset,
-            buffers: &mut self.buffers,
-        };
-
-        let Some(runner) = self.runner.as_mut() else {
-            return err(ErrorReport::new(codes::NOT_READY, "runner not created; call start()"));
-        };
-
-        let status = match runner.tick(&mut ctx, budget) {
-            Ok(s) => s,
+        // run solver
+        match crate::solver::engine::dispatcher::run(&mut ctx, emit_progress) {
+            Ok(()) => {
+                let dataset = ctx.dataset.expect("dataset must exist on success");
+                let done_env = Envelope {
+                    r#type: MsgType::Done,
+                    id: run_id.to_string(),
+                    payload: serde_json::json!({ "dataset": dataset }),
+                };
+                let done_json = to_json(&done_env).map_err(to_js)?;
+                self.last_dataset_json = Some(done_json.clone());
+                self.callbacks.emit(&done_json);
+                Ok(())
+            }
             Err(e) => {
-                self.dataset.events.push(Event::error(self.run_id, &e.code, &e.message, e.details));
-                self.state = SessionState::Errored;
-                return ok(self.get_state_view());
+                let err_env = Envelope {
+                    r#type: MsgType::Error,
+                    id: run_id.to_string(),
+                    payload: serde_json::to_value(e).unwrap_or_else(|_| serde_json::json!({"code":"INTERNAL","message":"Error serialization failed"})),
+                };
+                let err_json = to_json(&err_env).map_err(to_js)?;
+                self.callbacks.emit(&err_json);
+                Err(JsValue::from_str("run failed"))
             }
-        };
-
-        // update state from runtime/status
-        match status.as_str() {
-            "paused" => self.state = SessionState::Paused,
-            "stopped" => self.state = SessionState::Stopped,
-            "done" => self.state = SessionState::Done,
-            _ => {}
-        }
-
-        // flush callback if enabled and enough events accumulated
-        if self.callback.is_active() && self.dataset.events.len() >= self.callback.cfg.max_batch {
-            let batch = self.dataset.events.drain_batch(self.run_id);
-            let _ = self.callback.try_flush(&batch); // swallow callback errors for now
-        }
-
-        ok(self.get_state_view())
-    }
-
-    pub fn drain_events(&mut self) -> JsValue {
-        let batch = self.dataset.events.drain_batch(self.run_id);
-        ok(batch)
-    }
-
-    pub fn get_state(&self) -> JsValue {
-        ok(self.get_state_view())
-    }
-
-    pub fn take_metrics(&mut self, handle: u32) -> JsValue {
-        match self.dataset.take_metrics(handle) {
-            Ok(payload) => ok(payload),
-            Err(e) => err(e),
         }
     }
 
-    // buffer bridge for TypedArray
-    pub fn buffer_ptr(&self, handle: u32) -> JsValue {
-        match self.buffers.ptr_len(crate::utils::ids::BufferHandle(handle)) {
-            Ok((ptr, _)) => ok(ptr as u32),
-            Err(e) => err(e),
-        }
-    }
-    pub fn buffer_len(&self, handle: u32) -> JsValue {
-        match self.buffers.ptr_len(crate::utils::ids::BufferHandle(handle)) {
-            Ok((_, len)) => ok(len as u32),
-            Err(e) => err(e),
-        }
-    }
-    pub fn free_buffer(&mut self, handle: u32) -> JsValue {
-        ok(self.buffers.free(crate::utils::ids::BufferHandle(handle)))
+    #[wasm_bindgen]
+    pub fn get_last_dataset_envelope_json(&self) -> Option<String> {
+        self.last_dataset_json.clone()
     }
 
-    fn get_state_view(&self) -> SessionStateView {
-        SessionStateView {
-            run_id: self.run_id,
-            state: self.state.as_str().to_string(),
-            progress: self.runtime.progress,
-        }
+    #[wasm_bindgen(getter)]
+    pub fn session_id(&self) -> String {
+        self.session_id.clone()
     }
+}
+
+fn to_js(e: crate::error::types::ErrorMessage) -> JsValue {
+    // per semplicità: stringa json dell'errore
+    JsValue::from_str(&serde_json::to_string(&e).unwrap_or_else(|_| "{\"code\":\"INTERNAL\",\"message\":\"to_js failed\"}".to_string()))
 }

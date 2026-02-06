@@ -1,3 +1,3 @@
 pub mod session;
-pub mod bridge;
+pub mod json_bridge;
 pub mod callback;

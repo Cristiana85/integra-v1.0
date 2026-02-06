@@ -1,6 +1,20 @@
-pub const INPUT_INVALID: &str = "INPUT_INVALID";
-pub const OUT_OF_RANGE: &str = "OUT_OF_RANGE";
-pub const STATE_INVALID: &str = "STATE_INVALID";
-pub const NOT_READY: &str = "NOT_READY";
-pub const NUMERIC_FAILURE: &str = "NUMERIC_FAILURE";
-pub const INTERNAL: &str = "INTERNAL";
+#[derive(Debug, Clone)]
+pub enum ErrorCode {
+    JsonInvalid,
+    ModelInvalid,
+    AnalysisInvalid,
+    SolverNotFound,
+    Internal,
+}
+
+impl ErrorCode {
+    pub fn as_str(&self) -> &'static str {
+        match self {
+            ErrorCode::JsonInvalid => "JSON_INVALID",
+            ErrorCode::ModelInvalid => "MODEL_INVALID",
+            ErrorCode::AnalysisInvalid => "ANALYSIS_INVALID",
+            ErrorCode::SolverNotFound => "SOLVER_NOT_FOUND",
+            ErrorCode::Internal => "INTERNAL",
+        }
+    }
+}
