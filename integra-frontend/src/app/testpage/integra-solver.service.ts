@@ -14,8 +14,12 @@ export class IntegraSolverService {
   public stream(): Observable<SolverEvent> {
     return this.events$.asObservable();
   }
+  private inited = false;
 
   init() {
+    if (this.inited) return;
+    this.inited = true;
+    console.log('[IntegraSolverService] init() called');
     if (this.worker) return;
 
     this.worker = new Worker(new URL('./integra-solver.worker', import.meta.url), {
@@ -50,4 +54,24 @@ export class IntegraSolverService {
   run(runId: string) {
     this.worker?.postMessage({ type: 'run', runId });
   }
+  configureAndRun(model: any, analysis: any, runId: string) {
+    this.worker?.postMessage({
+      type: 'configure_and_run',
+      modelJson: JSON.stringify(model),
+      analysisJson: JSON.stringify(analysis),
+      runId,
+    });
+  }
+}
+
+if (typeof Worker !== 'undefined') {
+  // Create a new
+  const worker = new Worker(new URL('./integra-solver.worker', import.meta.url));
+  worker.onmessage = ({ data }) => {
+    console.log(`page got message: ${data}`);
+  };
+  worker.postMessage('hello');
+} else {
+  // Web Workers are not supported in this environment.
+  // You should add a fallback so that your program still executes correctly.
 }

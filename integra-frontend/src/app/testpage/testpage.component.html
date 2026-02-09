@@ -1,1 +1,18 @@
-<p>testpage works!</p>
+<div class="solver-page">
+  <div class="solver-header">
+    <h2>INTEGRA Solver – Demo</h2>
+
+    <button (click)="runDemo()" [disabled]="running" class="run-btn">▶ Run demo</button>
+
+    <div *ngIf="running" class="status">
+      <div class="progress">
+        <div class="progress-bar" [style.width.%]="progress"></div>
+      </div>
+      <span>{{ progress | number: '1.0-0' }} %</span>
+      <div class="message">{{ progressMsg }}</div>
+    </div>
+  </div>
+
+  <!-- LOG -->
+  <pre class="log">{{ log }}</pre>
+</div>

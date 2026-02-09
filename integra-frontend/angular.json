@@ -28,8 +28,8 @@
               "src/assets",
               {
                 "glob": "**/*",
-                "input": "wasm/integra_solver",
-                "output": "/wasm/integra_solver"
+                "input": "src/assets/wasm",
+                "output": "/assets/wasm"
               }
             ],
             "styles": [
@@ -38,7 +38,8 @@
               "node_modules/primeicons/primeicons.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "webWorkerTsConfig": "tsconfig.worker.json"
           },
           "configurations": {
             "production": {
@@ -102,7 +103,8 @@
               "node_modules/primeicons/primeicons.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "webWorkerTsConfig": "tsconfig.worker.json"
           }
         }
       }
