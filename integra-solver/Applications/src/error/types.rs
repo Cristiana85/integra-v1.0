@@ -12,7 +12,12 @@ pub struct ErrorMessage {
 
 impl ErrorMessage {
     pub fn new(code: &str, message: impl Into<String>) -> Self {
-        Self { code: code.to_string(), message: message.into(), path: None, details: None }
+        Self {
+            code: code.to_string(),
+            message: message.into(),
+            path: None,
+            details: None,
+        }
     }
 
     pub fn with_path(mut self, path: impl Into<String>) -> Self {

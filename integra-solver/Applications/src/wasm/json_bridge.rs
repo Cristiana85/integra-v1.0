@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::error::{self, Result};
+use crate::error::{self, ErrorCode, Result};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "lowercase")]
@@ -20,9 +20,11 @@ pub struct Envelope<T = serde_json::Value> {
 }
 
 pub fn parse_json<T: for<'de> Deserialize<'de>>(s: &str) -> Result<T> {
-    serde_json::from_str(s).map_err(|e| error::err(crate::error::codes::ErrorCode::JsonInvalid, e.to_string()))
+    serde_json::from_str(s).map_err(|e| {
+        error::err(ErrorCode::JsonInvalid, format!("Invalid JSON: {}", e))
+    })
 }
 
 pub fn to_json<T: Serialize>(v: &T) -> Result<String> {
-    serde_json::to_string(v).map_err(|e| error::err(crate::error::codes::ErrorCode::Internal, e.to_string()))
+    serde_json::to_string(v).map_err(|e| error::err(ErrorCode::Internal, e.to_string()))
 }
