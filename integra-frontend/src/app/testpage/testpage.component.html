@@ -1,18 +1,37 @@
-<div class="solver-page">
-  <div class="solver-header">
-    <h2>INTEGRA Solver – Demo</h2>
-
-    <button (click)="runDemo()" [disabled]="running" class="run-btn">▶ Run demo</button>
-
-    <div *ngIf="running" class="status">
-      <div class="progress">
-        <div class="progress-bar" [style.width.%]="progress"></div>
-      </div>
-      <span>{{ progress | number: '1.0-0' }} %</span>
-      <div class="message">{{ progressMsg }}</div>
-    </div>
+<div class="inputs">
+  <div class="input-block">
+    <div class="label">Touchstone (.s2p/.sNp)</div>
+    <input type="file" accept=".s1p,.s2p,.s3p,.s4p,.snp,.ts" (change)="onFile($event)" />
+    <div class="hint" *ngIf="loadedFileName">Loaded: {{ loadedFileName }}</div>
   </div>
 
-  <!-- LOG -->
-  <pre class="log">{{ log }}</pre>
+  <div class="input-block">
+    <div class="label">Parametro 1</div>
+    <select [(ngModel)]="expr1">
+      <option *ngFor="let e of exprOptions" [ngValue]="e">{{ e }}</option>
+    </select>
+  </div>
+
+  <div class="input-block">
+    <div class="label">Parametro 2 (opzionale)</div>
+    <select [(ngModel)]="expr2">
+      <option [ngValue]="''">—</option>
+      <option *ngFor="let e of exprOptions" [ngValue]="e">{{ e }}</option>
+    </select>
+  </div>
+</div>
+
+<div class="actions">
+  <button class="run-btn" (click)="runUploadedTouchstone()" [disabled]="!tsText || running">
+    {{ running ? 'Running...' : 'Run S-Parameter' }}
+  </button>
+</div>
+
+<div class="plot-area">
+  <canvas #plotCanvas width="900" height="360"></canvas>
+  <div class="plot-hint">
+    Plot: {{ expr1 }}
+    <span *ngIf="expr2">+ {{ expr2 }}</span>
+    vs freq (Hz)
+  </div>
 </div>

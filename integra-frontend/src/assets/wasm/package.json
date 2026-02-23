@@ -10,7 +10,9 @@
   "files": [
     "integra_solver_wasm_bg.wasm",
     "integra_solver_wasm.js",
-    "integra_solver_wasm.d.ts"
+    "integra_solver_wasm.d.ts",
+    "LICENSE_APACHE",
+    "LICENSE_MIT"
   ],
   "main": "integra_solver_wasm.js",
   "types": "integra_solver_wasm.d.ts",
