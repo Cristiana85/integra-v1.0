@@ -2,9 +2,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 pub struct Sweep {
-    pub name: String,
-    pub unit: String,
-    pub values: Vec<f64>,
+    pub start: u32,
+    pub stop: u32,
+    pub points: u32,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]

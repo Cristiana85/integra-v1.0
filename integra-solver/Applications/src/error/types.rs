@@ -1,19 +1,30 @@
 use serde::{Deserialize, Serialize};
 
+use crate::error::codes::ErrorCode;
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ErrorMessage {
     pub code: String,
     pub message: String,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub path: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub details: Option<serde_json::Value>,
 }
 
 impl ErrorMessage {
-    pub fn new(code: &str, message: impl Into<String>) -> Self {
+    /// COSTRUTTORE ESISTENTE (string)
+    pub fn new(code: &str, message: &str) -> Self {
         Self {
             code: code.to_string(),
+            message: message.to_string(),
+            path: None,
+            details: None,
+        }
+    }
+
+    /// NUOVO: accetta l'enum ErrorCode
+    pub fn from_code(code: ErrorCode, message: impl Into<String>) -> Self {
+        Self {
+            code: code.as_str().to_string(),
             message: message.into(),
             path: None,
             details: None,

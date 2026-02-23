@@ -19,7 +19,8 @@ function ensureReady(): Promise<void> {
     console.log('[worker] created session', session.session_id);
 
     session.set_on_message((jsonMsg: string) => {
-      postMessage({ type: 'wasm_message', json: jsonMsg });
+      const json_1 = typeof jsonMsg === 'string' ? jsonMsg : String(jsonMsg);
+      postMessage({ type: 'wasm_message', json: json_1 });
     });
 
     postMessage({ type: 'worker_ready', sessionId: session.session_id });
@@ -34,9 +35,44 @@ addEventListener('message', async ({ data }) => {
 
   switch (data.type) {
     case 'configure_and_run':
-      session.set_model(data.modelJson);
-      session.set_analysis(data.analysisJson);
+      try {
+        // IMPORTANT: nomi corretti
+        session.set_model_json(data.modelJson);
+        session.set_analysis_json(data.analysisJson);
+
+        // run emette progress/done/error via callback
+        session.run(data.runId);
+      } catch (e: any) {
+        postMessage({ type: 'worker_error', message: String(e?.message ?? e) });
+      }
+      break;
+
+    case 'set_model':
+      session.set_model_json(data.modelJson);
+      break;
+
+    case 'push_model':
+      session.push_model_json(data.modelJson);
+      break;
+
+    case 'set_analysis':
+      session.set_analysis_json(data.analysisJson);
+      break;
+
+    case 'run':
       session.run(data.runId);
+      break;
+
+    case 'cleanup_after_read':
+      session.cleanup_after_read();
+      break;
+
+    case 'clear_dataset':
+      session.clear_dataset();
+      break;
+
+    case 'clear_models':
+      session.clear_models();
       break;
   }
 });

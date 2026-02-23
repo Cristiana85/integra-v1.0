@@ -7,7 +7,8 @@ pub use types::ErrorMessage;
 pub type Result<T> = std::result::Result<T, ErrorMessage>;
 
 pub fn err(code: ErrorCode, message: impl Into<String>) -> ErrorMessage {
-    ErrorMessage::new(code.as_str(), message)
+    let msg: String = message.into();
+    ErrorMessage::new(code.as_str(), msg.as_str())
 }
 
 /// Helper: errore "invalid field value" con path + details

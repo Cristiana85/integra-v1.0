@@ -8,16 +8,19 @@ export class Session {
   free(): void;
   dispose(): void;
   constructor();
-  /**
-   * Registra un'unica callback JS: riceve sempre una string JSON Envelope.
-   */
   set_on_message(cb: Function): void;
-  set_model(model: string): void;
-  set_analysis(analysis: string): void;
   /**
-   * Esegue una run. Ritorna subito al JS (non blocca UI se chiamato da Worker).
-   * Per ora è sincrona lato wasm, ma dentro un Web Worker non blocca il main thread.
+   * Backward-compatible: reset e inserisce un solo modello.
    */
+  set_model_json(model_json: string): void;
+  /**
+   * Multi: aggiunge un modello macro.
+   */
+  push_model_json(model_json: string): void;
+  clear_models(): void;
+  set_analysis_json(analysis_json: string): void;
+  clear_dataset(): void;
+  cleanup_after_read(): void;
   run(run_id: string): void;
   get_last_dataset_envelope_json(): string | undefined;
   readonly session_id: string;
@@ -31,8 +34,12 @@ export interface InitOutput {
   readonly __wbg_session_free: (a: number, b: number) => void;
   readonly session_new: () => number;
   readonly session_set_on_message: (a: number, b: any) => void;
-  readonly session_set_model: (a: number, b: number, c: number) => [number, number];
-  readonly session_set_analysis: (a: number, b: number, c: number) => [number, number];
+  readonly session_set_model_json: (a: number, b: number, c: number) => [number, number];
+  readonly session_push_model_json: (a: number, b: number, c: number) => [number, number];
+  readonly session_clear_models: (a: number) => void;
+  readonly session_set_analysis_json: (a: number, b: number, c: number) => [number, number];
+  readonly session_clear_dataset: (a: number) => void;
+  readonly session_cleanup_after_read: (a: number) => void;
   readonly session_run: (a: number, b: number, c: number) => [number, number];
   readonly session_get_last_dataset_envelope_json: (a: number) => [number, number];
   readonly session_session_id: (a: number) => [number, number];

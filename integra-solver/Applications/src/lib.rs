@@ -1,6 +1,6 @@
 pub mod wasm;
 pub mod core;
-pub mod solver;
+pub mod simulator;
 pub mod error;
 pub mod utils;
 

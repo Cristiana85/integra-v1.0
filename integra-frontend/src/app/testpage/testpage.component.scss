@@ -22,6 +22,43 @@
   cursor: pointer;
 }
 
+.inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.input-block .label {
+  font-size: 12px;
+  opacity: 0.8;
+  margin-bottom: 6px;
+}
+
+textarea {
+  width: 100%;
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+    monospace;
+  font-size: 12px;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.plot-area {
+  padding: 0.75rem;
+  border-bottom: 1px solid #ccc;
+  background: #fff;
+}
+
+.plot-hint {
+  font-size: 12px;
+  opacity: 0.7;
+  margin-top: 6px;
+}
+
 .status {
   margin-top: 0.5rem;
 }
@@ -57,4 +94,23 @@
 
   overflow-y: auto;
   white-space: pre-wrap;
+}
+
+.actions {
+  margin-top: 16px;
+}
+
+.run-btn {
+  padding: 8px 16px;
+  background: #0066cc;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.run-btn:disabled {
+  background: #999;
+  cursor: not-allowed;
 }

@@ -135,37 +135,56 @@ export class Session {
         return this;
     }
     /**
-     * Registra un'unica callback JS: riceve sempre una string JSON Envelope.
      * @param {Function} cb
      */
     set_on_message(cb) {
         wasm.session_set_on_message(this.__wbg_ptr, cb);
     }
     /**
-     * @param {string} model
+     * Backward-compatible: reset e inserisce un solo modello.
+     * @param {string} model_json
      */
-    set_model(model) {
-        const ptr0 = passStringToWasm0(model, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+    set_model_json(model_json) {
+        const ptr0 = passStringToWasm0(model_json, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
         const len0 = WASM_VECTOR_LEN;
-        const ret = wasm.session_set_model(this.__wbg_ptr, ptr0, len0);
+        const ret = wasm.session_set_model_json(this.__wbg_ptr, ptr0, len0);
         if (ret[1]) {
             throw takeFromExternrefTable0(ret[0]);
         }
     }
     /**
-     * @param {string} analysis
+     * Multi: aggiunge un modello macro.
+     * @param {string} model_json
      */
-    set_analysis(analysis) {
-        const ptr0 = passStringToWasm0(analysis, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+    push_model_json(model_json) {
+        const ptr0 = passStringToWasm0(model_json, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
         const len0 = WASM_VECTOR_LEN;
-        const ret = wasm.session_set_analysis(this.__wbg_ptr, ptr0, len0);
+        const ret = wasm.session_push_model_json(this.__wbg_ptr, ptr0, len0);
         if (ret[1]) {
             throw takeFromExternrefTable0(ret[0]);
         }
     }
+    clear_models() {
+        wasm.session_clear_models(this.__wbg_ptr);
+    }
     /**
-     * Esegue una run. Ritorna subito al JS (non blocca UI se chiamato da Worker).
-     * Per ora è sincrona lato wasm, ma dentro un Web Worker non blocca il main thread.
+     * @param {string} analysis_json
+     */
+    set_analysis_json(analysis_json) {
+        const ptr0 = passStringToWasm0(analysis_json, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.session_set_analysis_json(this.__wbg_ptr, ptr0, len0);
+        if (ret[1]) {
+            throw takeFromExternrefTable0(ret[0]);
+        }
+    }
+    clear_dataset() {
+        wasm.session_clear_dataset(this.__wbg_ptr);
+    }
+    cleanup_after_read() {
+        wasm.session_cleanup_after_read(this.__wbg_ptr);
+    }
+    /**
      * @param {string} run_id
      */
     run(run_id) {
